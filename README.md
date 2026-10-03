@@ -149,9 +149,17 @@ wget https://download.blender.org/durian/movies/sintel-m+e-st.flac
 python eval/overlap.py out/Sintel.2010.1080p_1.35-3.35 --video Sintel.2010.1080p.mkv --me sintel-m+e-st.flac --start 1:35 --end 3:35
 ```
 
+**Version française** (doublage de Touhoppai, même extrait) :
+
+- 13 descriptions placées sur 13, couverture de 68 %, 4,7 min de calcul pour les 2 min.
+- La vérité terrain y est plus nette : la musique est atténuée de 15,8 dB dans le résidu.
+- 12 descriptions sur 13 évitent les paroles repérées par Silero.
+- Mais la détection de parole a manqué les répliques chuchotées de la fin (« C'est bientôt fini », « Ne bouge pas »), que Whisper a pourtant transcrites. En les comptant, 10 descriptions sur 13 évitent tout dialogue, et 6 sur 13 toute voix, souffles et cris compris.
+
 **Limites observées :**
 
-- Les deux chevauchements tombent sur de brefs éclats de voix, probablement un cri et un gémissement, que la détection de parole laisse passer. La Charte demande de ne pas couvrir ces sons.
+- Les répliques chuchotées échappent à la détection de parole : c'est la priorité suivante.
+- Des éclats de voix brefs (cris, gémissements, souffles) passent aussi entre les mailles. La Charte demande de ne pas couvrir ces sons.
 - Sur les plans vérifiés à l'image, le modèle de vision a inventé un objet : un « livre » près du petit dragon blessé, qui est en fait son aile ensanglantée.
 - Les personnages ne sont pas encore désignés de façon stable.
 

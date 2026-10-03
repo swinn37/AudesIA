@@ -263,6 +263,7 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026 ; versions plus réce
 - [ ] Envoyer aux organisateurs les questions du §2 (pilote, sudo, internet, disque, durée).
 - [ ] Pipeline modulaire (`pipeline/*`) : un fichier JSON par étape, reprise sur erreur (une étape est sautée si sa sortie existe).
 - [ ] Parole = VAD seule, seuil et marge réglés contre la vérité terrain ; même ASR sur les deux profils pour le texte, sans compiler CTranslate2 (Whisper large-v3 via transformers, ou Qwen3-ASR-1.7B).
+- [ ] Détecter les chuchotements et les sons vocaux, que la VAD manque (mesuré sur le doublage français) : segments Whisper au débit plausible, ou énergie de la voix isolée par Demucs.
 - [ ] Rédaction en 3 variantes + `fit_loop.py` + tests unitaires de l'invariant « aucun chevauchement avec la parole détectée ».
 - [ ] Vérification visuelle (`verify.py`, `prompts/verify.fr.md`) : faits élémentaires validés un par un sur les images clés par le second modèle.
 - [ ] Comparatif de voix sur ~30 phrases d'audiodescription :
@@ -326,6 +327,13 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026 ; versions plus réce
 - 14 sur 16 sans chevauchement d'aucune voix (deux éclats vocaux de moins de 0,7 s) ;
 - couverture des silences de 64 % ;
 - environ 3 min de calcul par minute de vidéo.
+
+Même extrait en version française (doublage de Touhoppai, vérité terrain plus nette : musique atténuée de 15,8 dB) :
+- 12 descriptions sur 13 sans chevauchement des paroles repérées par Silero ;
+- mais la VAD a manqué les répliques chuchotées de la fin, que Whisper a transcrites : en les comptant, 10 sur 13 sans chevauchement de dialogue ;
+- 6 sur 13 sans chevauchement d'aucune voix.
+
+Priorité P1 : détecter les chuchotements, par exemple avec les segments Whisper au débit plausible, ou l'énergie de la voix isolée par Demucs.
 
 ### Corpus et vérité terrain
 
