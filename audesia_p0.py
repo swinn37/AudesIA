@@ -9,7 +9,7 @@ ne demande que --base-url et --model.
 Installation (WSL2, RTX 5080) :
   sudo apt install ffmpeg sox
   pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu128
-  pip install qwen-tts silero-vad "scenedetect[opencv-headless]" openai
+  pip install qwen-tts silero-vad scenedetect openai
   curl -fsSL https://ollama.com/install.sh | sh
   OLLAMA_CONTEXT_LENGTH=8192 ollama serve &    # le contexte par défaut est trop court pour 4 images
   ollama pull gemma4:12b-it-qat
@@ -40,7 +40,9 @@ from pathlib import Path
 
 os.environ.setdefault("HF_HUB_DISABLE_TELEMETRY", "1")  # contrainte n° 1 : aucune télémétrie
 
-MIN_SILENCE = 1.5   # s : silence utilisable minimal
+VAD_THRESHOLD = 0.35  # Silero plus sensible que par défaut (0,5) : dans le doute, c'est de la parole
+VAD_PAD_MS = 200      # marge autour de chaque segment de parole
+MIN_SILENCE = 2.0   # s : silence utilisable minimal (à 1,5 s, des descriptions d'un mot)
 MARGIN = 0.2        # s : marge avant et après chaque description
 WINDOW = 5.0        # s : durée visée d'une fenêtre dans un long silence (coupée aux changements de plan)
 MAX_WINDOW = 10.0   # s
@@ -84,6 +86,8 @@ def merge(intervals):
     """Fusionne les intervalles [début, fin] qui se chevauchent."""
     out = []
     for s, e in sorted(intervals):
+        if e <= s:  # intervalle vide ou inversé (Whisper en produit) : il casserait silences()
+            continue
         if out and s <= out[-1][1]:
             out[-1][1] = max(out[-1][1], e)
         else:
@@ -159,14 +163,14 @@ def duck_envelope(n, sr, spans):
 
 
 def parse_variants(raw):
-    """Variantes du JSON du rédacteur, dédoublonnées, de la plus longue à la plus courte."""
+    """Variantes du JSON du rédacteur, dédoublonnées, d'au moins deux mots, de la plus longue à la plus courte."""
     try:
         v = json.loads(raw[raw.find("{"): raw.rfind("}") + 1])["variantes"]
     except (ValueError, KeyError, TypeError):
         return []
     if not isinstance(v, list):
         return []
-    return sorted({s.strip() for s in v if isinstance(s, str) and s.strip()}, key=len, reverse=True)
+    return sorted({s.strip() for s in v if isinstance(s, str) and len(s.split()) >= 2}, key=len, reverse=True)
 
 
 def vtt(items):
@@ -197,8 +201,9 @@ def step(name, fn, cache=None):
     return data
 
 
-def speech_and_silences(wav16):
-    """Parole = VAD ∪ transcription (dans le doute, c'est de la parole) ; silences = le reste."""
+def detect_speech(wav16):
+    """Parole = segments de la VAD. Whisper ne sert qu'au texte des dialogues : sur Sintel, ses
+    horodatages par segment débordaient sur la musique et effaçaient 51 s de silence."""
     import soundfile as sf
     import torch
     from silero_vad import get_speech_timestamps, load_silero_vad
@@ -206,7 +211,8 @@ def speech_and_silences(wav16):
 
     audio, sr = sf.read(wav16, dtype="float32")
     duration = len(audio) / sr
-    vad = get_speech_timestamps(torch.from_numpy(audio), load_silero_vad(), sampling_rate=sr, return_seconds=True)
+    vad = get_speech_timestamps(torch.from_numpy(audio), load_silero_vad(), sampling_rate=sr, threshold=VAD_THRESHOLD,
+                                speech_pad_ms=VAD_PAD_MS, return_seconds=True)
     asr = pipeline("automatic-speech-recognition", model="openai/whisper-large-v3", dtype=torch.float16, device="cuda:0")
     chunks = asr({"raw": audio, "sampling_rate": sr}, return_timestamps=True, chunk_length_s=30, batch_size=8,
                  generate_kwargs={"task": "transcribe"})["chunks"]
@@ -215,18 +221,18 @@ def speech_and_silences(wav16):
     torch.cuda.empty_cache()  # libère la VRAM pour le VLM et la voix
     dialogues = [{"start": c["timestamp"][0], "end": c["timestamp"][1] or duration, "text": c["text"].strip()}
                  for c in chunks]
-    speech = merge([[v["start"], v["end"]] for v in vad] + [[d["start"], d["end"]] for d in dialogues])
-    return {"duration": duration, "speech": speech, "dialogues": dialogues, "silences": silences(speech, duration)}
+    return {"duration": duration, "speech": merge([[v["start"], v["end"]] for v in vad]), "dialogues": dialogues}
 
 
 def detect_shots(clip):
     from scenedetect import AdaptiveDetector, detect
-    return [[s.get_seconds(), e.get_seconds()] for s, e in detect(str(clip), AdaptiveDetector())]
+    return [[s.seconds, e.seconds] for s, e in detect(str(clip), AdaptiveDetector())]
 
 
 def chat(llm, model, system, content, json_mode=False):
     extra = {"response_format": {"type": "json_object"}} if json_mode else {}
-    r = llm.chat.completions.create(model=model, temperature=0.3, messages=[
+    # Sans reasoning_effort="none", Gemma 4 sous Ollama « réfléchit » 2 à 3 min et rend un contenu vide.
+    r = llm.chat.completions.create(model=model, temperature=0.3, reasoning_effort="none", messages=[
         {"role": "system", "content": system}, {"role": "user", "content": content}], **extra)
     return (r.choices[0].message.content or "").strip()
 
@@ -250,9 +256,9 @@ def describe(clip, segs, shots, a, out):
         context = f"Déjà décrit : {' '.join(said[-3:]) or 'rien'}\nDialogues entendus jusqu'ici : {heard}"
         desc = chat(llm, a.model, DESCRIBE, [{"type": "text", "text": context}, *images])
         b = budget(w, a.cps)
-        variants = parse_variants(chat(llm, a.model, WRITE,
-                                       f"Description : {desc}\n{context}\nLongueur maximale : {b} caractères.",
-                                       json_mode=True))
+        limits = "\n".join(f"Variante {i + 1} : au plus {n} caractères (environ {max(n // 6, 1)} mots)."
+                           for i, n in enumerate((b, b * 2 // 3, b // 2)))
+        variants = parse_variants(chat(llm, a.model, WRITE, f"Description : {desc}\n{context}\n{limits}", json_mode=True))
         items.append({"id": f"d_{k:04d}", "window": w, "frames": times, "description": desc,
                       "budget_chars": b, "variants": variants})
         said += variants[:1]
@@ -327,12 +333,14 @@ def selftest():
     import numpy as np
     assert secs("1:35") == 95 and secs("0:01:35.5") == 95.5 and secs(12) == 12
     assert merge([[3, 4], [0, 1], [0.5, 2]]) == [[0, 2], [3, 4]]
+    assert merge([[0, 2], [29.8, 27.9], [5, 6]]) == [[0, 2], [5, 6]]  # intervalle inversé ignoré
+    assert silences([[0, 2], [29.8, 27.9], [30.1, 31]], 40) == [[2, 30.1], [31, 40]]  # plus de silences qui se chevauchent
     speech = [[2, 4], [4.5, 6], [9, 10]]
     sil = silences(speech, 12)
     assert sil == [[0, 2], [6, 9], [10, 12]]                      # 4–4,5 s : trop court
     shots = [[0, 2], [2, 6], [6, 9], [9, 15], [15, 40]]
     assert windows([0, 17], shots) == [[0, 6], [6, 15], [15, 17]]
-    assert windows([0, 7], [[0, 5.8], [5.8, 7]]) == [[0, 7]]      # reliquat < 1,5 s fusionné
+    assert windows([0, 7], [[0, 5.8], [5.8, 7]]) == [[0, 7]]      # reliquat < MIN_SILENCE fusionné
     assert len(windows([20, 71], [[0, 100]])) == 6                # 51 s d'un seul plan → 6 × 8,5 s
     for w in (w for s in sil for w in windows(s, shots)):         # invariant : jamais sur la parole
         assert not any(a < w[1] - MARGIN and w[0] + MARGIN < b for a, b in speech)
@@ -347,6 +355,7 @@ def selftest():
     assert parse_variants('Voici : {"variantes": ["Elle court.", "Elle court vers la porte.", "Elle court."]}') \
         == ["Elle court vers la porte.", "Elle court."]
     assert parse_variants("pas de JSON") == []
+    assert parse_variants('{"variantes": ["Bol.", "Elle tient un bol."]}') == ["Elle tient un bol."]  # un mot : refusé
     assert vtt([{"start": 3725.5, "end": 3727.25, "text": "Elle sourit."}]) \
         == "WEBVTT\n\n01:02:05.500 --> 01:02:07.250\nElle sourit.\n\n"
     print("selftest OK")
@@ -358,9 +367,10 @@ def main():
     p.add_argument("--start", default="0", help="début de l'extrait (s ou mm:ss)")
     p.add_argument("--end", help="fin de l'extrait (par défaut : fin de la vidéo)")
     p.add_argument("--out", help="dossier de sortie (par défaut : out/<vidéo>_<début>-<fin>)")
-    p.add_argument("--base-url", default="http://localhost:11434/v1", help="API compatible OpenAI (Ollama, llama.cpp, vLLM)")
+    # 127.0.0.1 plutôt que localhost : sous Windows, localhost part d'abord en IPv6 et peut joindre un autre serveur.
+    p.add_argument("--base-url", default="http://127.0.0.1:11434/v1", help="API compatible OpenAI (Ollama, llama.cpp, vLLM)")
     p.add_argument("--model", default="gemma4:12b-it-qat")
-    p.add_argument("--cps", type=float, default=14.0, help="débit de la voix en caractères/s ; à recaler sur metrics.json")
+    p.add_argument("--cps", type=float, default=13.0, help="débit de la voix en caractères/s (mesuré : 13 pour Vivian)")
     p.add_argument("--tts-model", default="Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice", help="…-0.6B-CustomVoice si la VRAM manque")
     p.add_argument("--voice", default="Vivian", help="Vivian, Serena, Uncle_Fu, Dylan, Eric, Ryan, Aiden, Ono_Anna, Sohee")
     p.add_argument("--selftest", action="store_true", help="vérifie la logique de calage, sans GPU")
@@ -381,7 +391,8 @@ def main():
     if not a48.exists():
         ff("-i", clip, "-ac", 1, "-ar", 16000, a16, "-ac", 2, "-ar", 48000, a48)
 
-    segs = step("parole", lambda: speech_and_silences(a16), out / "segments.json")
+    segs = step("parole", lambda: detect_speech(a16), out / "segments.json")
+    segs["silences"] = silences(segs["speech"], segs["duration"])  # recalculé : changer MIN_SILENCE ne refait pas l'ASR
     shots = step("plans", lambda: detect_shots(clip), out / "shots.json")
     descs = step("description", lambda: describe(clip, segs, shots, a, out), out / "descriptions.json")
     placed, dropped = step("voix", lambda: voice(descs, segs, a, out))

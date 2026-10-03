@@ -17,7 +17,7 @@ Audesia s'adresse aux médiathèques, universités, collectivités, entreprises 
 
 ## Comment ça marche
 
-1. **Parole** : Silero VAD et Whisper large-v3 repèrent les dialogues ; le reste forme les silences utilisables.
+1. **Parole** : Silero VAD repère la parole ; le reste forme les silences utilisables. Whisper large-v3 transcrit les dialogues, que le rédacteur reçoit en contexte.
 2. **Plans** : PySceneDetect découpe la vidéo aux changements de plan.
 3. **Fenêtres** : chaque silence long est découpé en fenêtres de 5 à 10 s, coupées aux changements de plan. Chaque fenêtre reçoit une description.
 4. **Description** : un modèle de vision décrit les images de la fenêtre.
@@ -39,7 +39,7 @@ flowchart LR
 
 Quatre principes :
 
-- **Jamais sur un dialogue.** La parole est l'union des deux détecteurs : dans le doute, c'est de la parole. Une assertion fait échouer le traitement si une description chevauche une parole détectée.
+- **Jamais sur un dialogue.** La détection de parole est réglée pour être sensible, avec une marge autour de chaque réplique : dans le doute, c'est de la parole. Une assertion fait échouer le traitement si une description chevauche une parole détectée.
 - **Calage sur la durée réelle de la voix**, pas sur une estimation du débit. Si aucune variante ne tient, la plus courte peut être accélérée de 10 % au plus ; sinon la description est abandonnée et signalée.
 - **Règles de l'audiodescription française.** Les consignes suivent la *Charte de l'audiodescription* (2008) : présent, troisième personne, uniquement ce qui est visible, pas d'interprétation, un personnage n'est nommé qu'une fois son nom prononcé ou affiché.
 - **Mesurer chaque exécution.** Durée par étape, couverture des silences, débit de la voix et mémoire sont enregistrés dans `metrics.json`.
@@ -51,7 +51,7 @@ Prérequis : Linux ou WSL2, GPU NVIDIA (prévu pour une RTX 5080 16 Go), Python 
 ```bash
 sudo apt install ffmpeg sox
 pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu128
-pip install qwen-tts silero-vad "scenedetect[opencv-headless]" openai
+pip install qwen-tts silero-vad scenedetect openai
 curl -fsSL https://ollama.com/install.sh | sh
 ```
 

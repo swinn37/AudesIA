@@ -142,7 +142,7 @@ flowchart TD
 | # | Étape | Entrée | Sortie (fichier du job) |
 | --- | --- | --- | --- |
 | 1 | Extraction | vidéo | `audio.wav` (16 kHz mono pour la VAD et l'ASR + piste originale), images |
-| 2 | Analyse audio | `audio.wav` | `segments.json` : parole (VAD ∪ ASR), dialogues (début, fin, texte, locuteur si diarisation), silences utilisables |
+| 2 | Analyse audio | `audio.wav` | `segments.json` : parole (VAD), dialogues (texte Whisper, locuteur si diarisation), silences utilisables |
 | 3 | Plans | vidéo | `shots.json` : plans (début, fin), 3 à 8 images clés par plan. Seuls les plans qui recouvrent un silence utilisable (± une fenêtre) sont décrits |
 | 4 | Personnages | images clés | `characters.json` : groupes de visages (prises de vues réelles) ou marquage visuel (animation) ; noms saisis dans l'éditeur |
 | 5 | Description | plans + contexte | `raw_descriptions.json` : description factuelle par plan |
@@ -156,7 +156,7 @@ flowchart TD
 
 ```json
 // segments.json
-{ "speech":    [{"start": 12.30, "end": 15.20, "source": "vad+asr"}],
+{ "speech":    [{"start": 12.30, "end": 15.20, "source": "vad"}],
   "dialogues": [{"start": 12.40, "end": 15.10, "speaker": "S1", "text": "..."}],
   "silences":  [{"start": 15.20, "end": 19.80, "usable": true}] }
 
@@ -174,7 +174,7 @@ flowchart TD
 
 ### Règles de calage
 
-- Parole = union des segments de la VAD (Silero) et des segments de transcription : dans le doute, c'est de la parole.
+- Parole = segments de la VAD (Silero, seuil 0,35, marge de 200 ms) : dans le doute, c'est de la parole. Whisper ne fournit que le texte : sur Sintel, ses horodatages par segment débordaient sur la musique et effaçaient un silence de 51 s (mesuré le 4 octobre 2026).
 - Silence utilisable : durée ≥ seuil configurable (par défaut 1,5 s), sans parole.
 - Budget = (durée du silence − marges début/fin, par défaut 0,2 s chacune) × débit cible en **caractères par seconde**, à **calibrer sur la voix choisie** (plus fiable que le nombre de mots en français).
 - Le rédacteur produit **3 variantes** (longue, moyenne, courte) en un seul appel. Les trois sont synthétisées en lot ; on garde la plus longue qui tient.
@@ -262,7 +262,7 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026 ; versions plus réce
 
 - [ ] Envoyer aux organisateurs les questions du §2 (pilote, sudo, internet, disque, durée).
 - [ ] Pipeline modulaire (`pipeline/*`) : un fichier JSON par étape, reprise sur erreur (une étape est sautée si sa sortie existe).
-- [ ] Parole = VAD ∪ transcription ; même ASR sur les deux profils, sans compiler CTranslate2 (Whisper large-v3 via transformers, ou Qwen3-ASR-1.7B).
+- [ ] Parole = VAD seule, seuil et marge réglés contre la vérité terrain ; même ASR sur les deux profils pour le texte, sans compiler CTranslate2 (Whisper large-v3 via transformers, ou Qwen3-ASR-1.7B).
 - [ ] Rédaction en 3 variantes + `fit_loop.py` + tests unitaires de l'invariant « aucun chevauchement avec la parole détectée ».
 - [ ] Vérification visuelle (`verify.py`, `prompts/verify.fr.md`) : faits élémentaires validés un par un sur les images clés par le second modèle.
 - [ ] Comparatif de voix sur ~30 phrases d'audiodescription :
@@ -531,7 +531,7 @@ Aucune offre française d'audiodescription par IA en local ou sur site n'a été
 | Personnages confondus ou mal nommés | Visages regroupés sur toute la vidéo (prises de vues réelles), marquage visuel pour l'animation, noms seulement s'ils sont prononcés ou affichés, correction dans l'éditeur |
 | Mémoire insuffisante | Configuration principale estimée à ~75 GiB ; versions NVFP4 ; contexte réduit |
 | Incompatibilités ARM64 | Image vLLM officielle CUDA 13.0 (compatible pilote R580), workers construits nativement en arm64, roues vérifiées avant l'accès |
-| Détection de parole imparfaite (musique, chants) | Union VAD ∪ ASR, mesure contre une vérité terrain (pistes musique + effets) |
+| Détection de parole imparfaite (musique, chants) | VAD sensible avec marge, réglée et mesurée contre une vérité terrain (pistes musique + effets) |
 | Voix peu naturelle ou qui saute des mots | Comparatif de 3 moteurs, retranscription de contrôle de chaque clip |
 | Licences incompatibles | Apache 2.0 / MIT en priorité ; aligneur non commercial de WhisperX évité ; attribution CC-BY (pyannote community-1, films Blender) |
 | Télémétrie cachée | Variables d'environnement + run complet dans un réseau Docker sans sortie |
