@@ -5,7 +5,7 @@
 Audesia ajoute une piste d'audiodescription française à une vidéo. Il repère les silences entre les dialogues, décrit ce qui se passe à l'écran avec un modèle de vision, réécrit chaque description pour qu'elle tienne dans le silence, puis la fait lire par une voix de synthèse mixée à la bande-son. Une fois les modèles téléchargés, tout tourne hors ligne : aucune vidéo ne quitte la machine.
 
 > Projet candidat au **ASUS Ascent GX10 – Local AI Developer Challenge**.
-> État : prototype initial, un script de bout en bout ([`audesia_p0.py`](audesia_p0.py)). Les résultats mesurés seront publiés dans ce README.
+> État : prototype initial, un script de bout en bout ([`audesia_p0.py`](audesia_p0.py)), testé sur RTX 5080. Premiers résultats mesurés : voir [Résultats](#résultats).
 
 ## Pourquoi
 
@@ -46,7 +46,9 @@ Quatre principes :
 
 ## Démarrage rapide
 
-Prérequis : Linux ou WSL2, GPU NVIDIA (prévu pour une RTX 5080 16 Go), Python 3.12, ffmpeg. Environ 15 Go de modèles sont téléchargés au premier lancement.
+Prérequis : Linux, WSL2 ou Windows, GPU NVIDIA (testé sur une RTX 5080 16 Go sous Windows), Python 3.12, ffmpeg. Environ 15 Go de modèles sont téléchargés au premier lancement.
+
+Les commandes ci-dessous sont pour Linux. Sous Windows, installez ffmpeg (winget ou scoop) et l'application Ollama, avec un contexte d'au moins 8 192 jetons dans ses réglages, puis les mêmes paquets pip dans un environnement virtuel.
 
 ```bash
 sudo apt install ffmpeg sox
@@ -129,7 +131,31 @@ Corpus (environ 42 min, dont 71 % en français) : *Tears of Steel*, *Sprite Frig
 
 ## Résultats
 
-À venir : un premier run de référence sur RTX 5080, puis les runs sur GX10.
+Premier run du prototype, le 4 octobre 2026, sur RTX 5080 (16 Go) : *Sintel*, de 1:35 à 3:35. L'extrait contient 12 répliques séparées de silences courts, puis 51 s sans dialogue.
+
+| Mesure | Résultat |
+| --- | --- |
+| Descriptions placées | 16 sur 16 fenêtres ; aucune abandonnée ni accélérée |
+| Sans chevauchement des paroles | **16 sur 16 (100 %)** |
+| Sans chevauchement d'aucune voix (paroles, cris, souffles) | 14 sur 16 (88 %), au plus 0,66 s |
+| Couverture des silences utilisables | 64 % |
+| Temps de calcul | Environ 6 min pour 2 min de vidéo, soit 3 min par minute (objectif : moins de 5), hors téléchargement des modèles |
+| Mémoire GPU | Pic de 10,3 Gio dans le processus Python, plus 8 Go pour Gemma 4 dans Ollama |
+
+**Vérité terrain.** La piste musique + effets officielle de *Sintel* est soustraite du mixage, après calage par corrélation (à 5 ms près) et ajustement du gain. La parole est détectée dans ce résidu par Silero VAD, puis recoupée par l'énergie de la bande vocale. Les sous-titres restent affichés jusqu'à 2 s après la fin de la parole : mesurées contre eux, les mêmes descriptions ne passaient qu'à 56 %.
+
+```bash
+wget https://download.blender.org/durian/movies/sintel-m+e-st.flac
+python eval/overlap.py out/Sintel.2010.1080p_1.35-3.35 --video Sintel.2010.1080p.mkv --me sintel-m+e-st.flac --start 1:35 --end 3:35
+```
+
+**Limites observées :**
+
+- Les deux chevauchements tombent sur de brefs éclats de voix, probablement un cri et un gémissement, que la détection de parole laisse passer. La Charte demande de ne pas couvrir ces sons.
+- Sur les plans vérifiés à l'image, le modèle de vision a inventé un objet : un « livre » près du petit dragon blessé, qui est en fait son aile ensanglantée.
+- Les personnages ne sont pas encore désignés de façon stable.
+
+Ces défauts sont les cibles de la vérification visuelle (P1) et des modèles plus grands du GX10.
 
 ## Feuille de route
 
