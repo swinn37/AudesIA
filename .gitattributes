@@ -1,0 +1,2 @@
+# Fins de ligne LF partout : les scripts tournent sous WSL2 et sur le GX10 (Linux).
+* text=auto eol=lf
