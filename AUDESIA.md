@@ -251,11 +251,11 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026 ; versions plus réce
 ### P0 — Avant l'envoi de la candidature (4 octobre, 23h59)
 
 - [ ] Reporter dans Gleam les réponses corrigées de l'annexe A10 ; tourner la vidéo selon A11.
-- [ ] Créer le dépôt public `audesia` avec README (pitch, schéma, plan de test, crédits CC-BY).
-- [ ] Script CLI minimal, **en un seul fichier** (`audesia_p0.py`, écrit, à lancer sur la 5080), sur un extrait de 1 à 2 min de Sintel ou Sprite Fright en version française, profil `small` :
+- [x] Dépôt `swinn37/AudesIA` créé avec README, licence et premiers résultats. Privé pour l'instant : à rendre public pour que le lien du formulaire s'ouvre.
+- [x] Script CLI minimal, **en un seul fichier** (`audesia_p0.py`, lancé le 4 octobre sur la 5080, résultats au §7), sur un extrait de 1 à 2 min de Sintel ou Sprite Fright en version française, profil `small` :
   - Silero VAD → Whisper large-v3 (transformers, même code que sur le GX10) → PySceneDetect → VLM via un serveur compatible OpenAI (Ollama `gemma4:12b-it-qat`, llama.cpp ou vLLM) → réécriture en 3 variantes avec budget → Qwen3-TTS → mixage ffmpeg ;
   - coder contre l'API OpenAI : passer au GX10 ne doit demander qu'un changement de configuration.
-- [ ] Exporter l'extrait avec et sans audiodescription pour la vidéo de présentation.
+- [x] Exporter l'extrait avec et sans audiodescription pour la vidéo de présentation (`clip.mp4`, `clip_ad.mp4`).
 - [ ] (Optionnel) Maquette statique de la page de relecture.
 
 ### P1 — Après la sélection, avant l'accès au GX10
@@ -321,6 +321,12 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026 ; versions plus réce
 
 **Livrables pour l'organisateur :** rapport chiffré, journaux et relevés mémoire, extraits avant/après, comparaison GX10 vs 5080, courbe taille de modèle / qualité, log du run hors ligne, dépôt GitHub public.
 
+**Premier résultat** (4 octobre 2026, RTX 5080, Sintel 1:35–3:35, mesuré avec `eval/overlap.py`) :
+- 16 descriptions sur 16 sans chevauchement des paroles ;
+- 14 sur 16 sans chevauchement d'aucune voix (deux éclats vocaux de moins de 0,7 s) ;
+- couverture des silences de 64 % ;
+- environ 3 min de calcul par minute de vidéo.
+
 ### Corpus et vérité terrain
 
 Le corpus initial (Sintel, Tears of Steel, Spring) ne contenait qu'environ 3,5 min de dialogue, tout en anglais, et Spring n'en a aucun. Corpus retenu (~42 min, 71 % en français, ~13,6 min de parole, sous-titres horodatés pour tout) :
@@ -350,6 +356,7 @@ Audesia génère automatiquement une piste d'audiodescription en français pour 
 - **Pourquoi en local :** les vidéos traitées (formations internes, archives, contenus non publiés) ne quittent jamais la machine, et le coût par heure de vidéo devient quasi nul.
 - **Pourquoi le GX10 :** la chaîne complète (vision, rédaction, parole, voix) reste chargée en mémoire en permanence, avec de la place pour plusieurs vidéos en parallèle et pour comparer des modèles de classe 120B. Sur une carte grand public de 16 Go, il faut des modèles nettement plus petits, en partie chargés l'un après l'autre.
 - **Ce qui sera validé sur le GX10 :** la mémoire réellement utilisée, la qualité des descriptions avec de grands modèles face à la version 16 Go, le respect des silences mesuré contre une vérité terrain (objectif : plus de 95 % des descriptions sans chevauchement de dialogue), la part des silences couverte et le temps de traitement par minute de vidéo.
+- **Où en est le projet :** un prototype complet tourne sur RTX 5080. Sur un extrait de Sintel, ses 16 descriptions sont toutes placées sans chevaucher les paroles, mesuré contre la piste musique + effets officielle du film.
 - **Livrable :** un dépôt open source, une démo web et des vidéos libres audiodécrites automatiquement.
 
 ## A2. Problème et contexte
@@ -555,10 +562,10 @@ Audesia génère automatiquement une audiodescription en français pour n'import
 **Modèles, frameworks ou technologies IA utilisées :**
 Qwen3.6-35B-A3B (modèle de vision MoE) pour la compréhension des plans ; Gemma 4 26B-A4B pour la rédaction et la vérification visuelle des descriptions ; comparaison sur le GX10 avec des modèles de classe 120B (Qwen3.5-122B-A10B, gpt-oss-120b, Mistral Small 4) ; Silero VAD et Whisper large-v3 pour la parole et les silences ; PySceneDetect et embeddings de visages pour les plans et les personnages ; voix française open source choisie par comparatif (Qwen3-TTS, Chatterbox, VoxCPM2) ; vLLM et PyTorch pour le service des modèles ; Docker sur ARM64 ; ffmpeg pour les médias ; FastAPI pour l'application.
 
-**État d'avancement :** « Prototype initial » si une démo tourne sur la 5080 au moment d'envoyer, sinon « Idée / Concept ».
+**État d'avancement :** « Prototype initial » : la chaîne complète tourne sur la RTX 5080 depuis le 4 octobre 2026.
 
 **Test & validation sur ASUS Ascent GX10 :**
-Je veux valider que la chaîne complète d'audiodescription tourne en local avec tous ses modèles chargés en même temps : modèle de vision MoE de 35B, rédacteur de 26B qui vérifie aussi chaque fait sur l'image, détection de parole, transcription et synthèse vocale, avec plusieurs vidéos en parallèle. Le GX10 me permettra aussi de comparer des modèles de classe 120B, impossibles à charger sur 16 Go, pour choisir les modèles par la mesure. Le code, les conteneurs ARM64 et le corpus de test (films libres Blender et vidéos françaises avec dialogues) seront prêts avant l'accès. Sur le GX10, je mesurerai : la mémoire réellement utilisée par étape, le taux de descriptions placées sans chevaucher les dialogues, vérifié contre une vérité terrain (objectif supérieur à 95 %), la part des silences couverte, la qualité des descriptions notée à l'aveugle et comparée à la même chaîne limitée à 16 Go sur ma RTX 5080, le taux d'hallucinations sur un échantillon, le temps de traitement par minute de vidéo et le nombre de vidéos traitables en parallèle. Livrables : rapport chiffré, extraits avant/après, dépôt open source.
+Je veux valider que la chaîne complète d'audiodescription tourne en local avec tous ses modèles chargés en même temps : modèle de vision MoE de 35B, rédacteur de 26B qui vérifie aussi chaque fait sur l'image, détection de parole, transcription et synthèse vocale, avec plusieurs vidéos en parallèle. Le GX10 me permettra aussi de comparer des modèles de classe 120B, impossibles à charger sur 16 Go, pour choisir les modèles par la mesure. Un premier prototype tourne déjà sur ma RTX 5080 : sur un extrait de Sintel, ses 16 descriptions sont placées sans chevaucher les paroles, mesuré contre la piste musique + effets officielle du film. Le code, les conteneurs ARM64 et le corpus de test (films libres Blender et vidéos françaises avec dialogues) seront prêts avant l'accès. Sur le GX10, je mesurerai : la mémoire réellement utilisée par étape, le taux de descriptions placées sans chevaucher les dialogues, vérifié contre une vérité terrain (objectif supérieur à 95 %), la part des silences couverte, la qualité des descriptions notée à l'aveugle et comparée à la même chaîne limitée à 16 Go sur ma RTX 5080, le taux d'hallucinations sur un échantillon, le temps de traitement par minute de vidéo et le nombre de vidéos traitables en parallèle. Livrables : rapport chiffré, extraits avant/après, dépôt open source.
 
 **Pertinence de l'exécution sur ASUS Ascent GX10 :**
 L'exécution locale est une condition, pas un confort : les vidéos à audiodécrire sont souvent internes, non publiées ou contiennent des personnes identifiables (formations, archives, cours avec des mineurs), et ne peuvent pas partir dans un cloud. Le local supprime aussi le coût à la minute, ce qui rend possible l'audiodescription de catalogues entiers. Le GX10 est une des rares machines de bureau à réunir 128 Go de mémoire unifiée et toute la pile CUDA : la chaîne complète y reste chargée en permanence, avec de la place pour plusieurs vidéos en parallèle et pour des modèles de classe 120B. Sur une carte de 16 Go, il faut des modèles nettement plus petits, en partie chargés l'un après l'autre ; je mesurerai l'effet sur la qualité des descriptions et la cohérence des personnages. Je tire parti des points forts de la machine : modèles MoE (peu de paramètres actifs, adaptés à sa bande passante), formats FP4 de Blackwell et traitement des plans en lot avec vLLM. À terme, un GX10 installé dans une médiathèque ou une université peut audiodécrire tout son catalogue sans qu'aucune vidéo ne quitte le bâtiment.
@@ -576,10 +583,10 @@ L'exécution locale est une condition, pas un confort : les vidéos à audiodéc
 | 0:30–0:55 | Démo : même extrait avec la piste générée | « Voici Audesia. Il repère les silences entre les dialogues, décrit chaque plan avec un modèle de vision, vérifie chaque détail sur l'image, réécrit chaque phrase pour qu'elle tienne dans le silence, puis la lit avec une voix française. Le tout, 100 % en local. » |
 | 0:55–1:10 | Schéma d'architecture, puis l'éditeur | « Un éditeur accessible permet de relire et corriger chaque description avant l'export. Pour une médiathèque, une université ou une association, c'est la possibilité d'audiodécrire tout un catalogue, sans qu'aucune vidéo ne quitte le bâtiment. » |
 | 1:10–1:35 | Schéma mémoire : chaîne complète résidente, vidéos en parallèle, balayage jusqu'à 120B ; comparaison 5080 / GX10 | « Pourquoi le GX10 ? Vision, rédaction, transcription et voix y restent en mémoire en même temps, avec de la place pour plusieurs vidéos à la fois et pour tester des modèles de 120 milliards de paramètres. Sur ma carte de 16 gigas, je dois me contenter de modèles bien plus petits. Le test dira ce que la taille apporte à la qualité. » |
-| 1:35–1:55 | Tableau des mesures | « Pendant le test, je mesurerai la mémoire utilisée, le taux de descriptions placées sans couvrir les dialogues, vérifié contre une vérité terrain, avec un objectif de 95 %, la qualité face à la version 16 gigas, et le temps de traitement. Le tout sera publié en open source. » |
+| 1:35–1:55 | Premiers résultats sur la 5080, puis plan de test GX10 | « Sur ma carte, le prototype place déjà ses 16 descriptions sans couvrir une seule parole, mesuré contre la piste sans dialogues du film. Sur le GX10, je mesurerai la mémoire utilisée, la qualité face à la version 16 gigas et le temps de traitement. Le tout sera publié en open source. » |
 | 1:55–2:00 | Logo, lien GitHub | « Audesia : rendre chaque vidéo visible, à l'oreille. » |
 
-**Tournage :** OBS + micro-casque. Créditer la Blender Foundation (Sintel, CC BY) et Touhoppai (version française, CC BY). Si la démo n'est pas prête, montrer une maquette et la version 5080 en le disant clairement.
+**Tournage :** OBS + micro-casque. Créditer la Blender Foundation (Sintel, CC BY) et Touhoppai (version française, CC BY). La démo tourne : utiliser `clip.mp4` (sans audiodescription) et `clip_ad.mp4` (avec), produits par `audesia_p0.py` sur la 5080, et l'indiquer à l'écran.
 
 ## A12. Sources
 
