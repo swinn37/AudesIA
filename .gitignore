@@ -1,2 +1,5 @@
 # graft's local graph cache — regenerable, not committed (run `graft build`).
 /graft/
+
+# Sorties de audesia_p0.py (vidéos, audio, images) : régénérables.
+/out/

@@ -223,7 +223,7 @@ parallel_jobs: 2
 # configs/profile.small.yaml (RTX 5080, baseline)
 profile: small
 resident_models: false         # ASR déchargé avant la description ; rédacteur + voix chargés ensemble (~12 Go)
-vlm:    { model: google/gemma-4-12B-it-qat-q4_0-gguf, server: llama.cpp, max_images_per_shot: 4, context_shots: 2 }  # repli : Qwen/Qwen3.5-9B
+vlm:    { model: gemma4:12b-it-qat, server: ollama, max_images_per_shot: 4, context_shots: 2 }  # ou llama.cpp : ggml-org/gemma-4-12B-it-GGUF ; repli : Qwen/Qwen3.5-9B
 writer: { model: même modèle que le VLM }
 asr:    { vad: silero, model: whisper-large-v3 }       # identique au profil large
 tts:    { même moteur et même voix que le profil large }
@@ -242,7 +242,7 @@ parallel_jobs: 1
 
 Juge de qualité : un VLM absent des chaînes comparées (par défaut Qwen3.5-122B-A10B, lancé après les runs).
 
-Identifiants vérifiés sur Hugging Face le 3 octobre 2026 ; versions plus récentes acceptées si elles tiennent dans le même budget mémoire. Le support de la vision de Gemma 4 par llama.cpp reste à vérifier (repli : Qwen3.5-9B).
+Identifiants vérifiés sur Hugging Face le 3 octobre 2026 ; versions plus récentes acceptées si elles tiennent dans le même budget mémoire. Gemma 4 12B est servi avec la vision par Ollama (`gemma4:12b-it-qat`) et par llama.cpp (`ggml-org/gemma-4-12B-it-GGUF`, fichier `mmproj` inclus).
 
 ---
 
@@ -252,8 +252,8 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026 ; versions plus réce
 
 - [ ] Reporter dans Gleam les réponses corrigées de l'annexe A10 ; tourner la vidéo selon A11.
 - [ ] Créer le dépôt public `audesia` avec README (pitch, schéma, plan de test, crédits CC-BY).
-- [ ] Script CLI minimal, **en un seul fichier**, sur un extrait de 1 à 2 min de Sintel ou Sprite Fright en version française, profil `small` :
-  - Silero VAD → faster-whisper (float16) → PySceneDetect → VLM via un serveur compatible OpenAI (llama.cpp, Ollama ou vLLM) → réécriture avec budget → voix (le moteur qui s'installe le plus vite) → mixage ffmpeg ;
+- [ ] Script CLI minimal, **en un seul fichier** (`audesia_p0.py`, écrit, à lancer sur la 5080), sur un extrait de 1 à 2 min de Sintel ou Sprite Fright en version française, profil `small` :
+  - Silero VAD → Whisper large-v3 (transformers, même code que sur le GX10) → PySceneDetect → VLM via un serveur compatible OpenAI (Ollama `gemma4:12b-it-qat`, llama.cpp ou vLLM) → réécriture en 3 variantes avec budget → Qwen3-TTS → mixage ffmpeg ;
   - coder contre l'API OpenAI : passer au GX10 ne doit demander qu'un changement de configuration.
 - [ ] Exporter l'extrait avec et sans audiodescription pour la vidéo de présentation.
 - [ ] (Optionnel) Maquette statique de la page de relecture.
