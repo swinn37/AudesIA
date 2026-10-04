@@ -606,7 +606,7 @@ L'exécution locale est une condition, pas un confort : les vidéos à audiodéc
 
 **Vidéo de présentation :** lien YouTube non répertorié (vérifier en navigation privée avant d'envoyer).
 
-**Lien GitHub / démo / portfolio :** dépôt public `audesia` avec README (résumé, schéma, plan de test, crédits).
+**Lien GitHub / démo / portfolio :** https://github.com/swinn37/AudesIA (README : résumé, schéma, résultats, capture de la page de relecture, crédits). À rendre public avant d'envoyer, puis vérifier le lien en navigation privée.
 
 ## A11. Script de la vidéo (2 minutes, ~280 mots)
 
