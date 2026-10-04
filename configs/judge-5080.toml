@@ -1,0 +1,9 @@
+# Juge sur la RTX 5080 (eval/judge.py --judge configs/judge-5080.toml) : Qwen3.6 sous Ollama, absent du profil small
+# (tout en Gemma). Il sert à noter les runs small seuls. Qwen3.6 étant le modèle de vision du profil large, il ne juge
+# pas small contre large : sur le GX10, c'est configs/judge.toml.
+
+[judge]
+base_url = "http://127.0.0.1:11434/v1"
+model = "qwen3.6:35b-a3b"
+extra_body = { reasoning_effort = "none" }
+parallel = 2
