@@ -12,7 +12,7 @@ Installation (WSL2, RTX 5080) :
   pip install qwen-tts silero-vad scenedetect openai
   curl -fsSL https://ollama.com/install.sh | sh
   OLLAMA_CONTEXT_LENGTH=8192 ollama serve &    # le contexte par défaut est trop court pour 4 images
-  ollama pull gemma4:12b-it-qat
+  ollama pull gemma4:26b-a4b-it-qat
 
 Sintel (Blender Foundation, CC BY 3.0) : https://download.blender.org/durian/movies/
 De 1:35 à 3:35 (version originale) : la scène du gardien, 12 répliques séparées
@@ -60,12 +60,19 @@ DESCRIBE = (
     "gestes, expressions), actions, lieu, moment, textes lisibles. N'interprète pas les intentions et "
     "n'invente rien : omets ce qui est incertain. Réponds en français, en 2 à 4 phrases factuelles."
 )
+VERIFY = (
+    "Voici des images extraites d'un film et une description de ces images. Vérifie chaque élément de la "
+    "description sur les images : supprime tout personnage, objet, arme, blessure ou action qui n'y est pas "
+    "clairement visible, et corrige les identifications fausses (une créature, un animal, un objet). "
+    "Réponds uniquement par la description corrigée, en français."
+)
 WRITE = """Tu es audiodescripteur. À partir de la description factuelle d'un passage, écris \
 l'audiodescription qui sera lue par une voix de synthèse dans un silence entre deux dialogues.
 Règles (Charte de l'audiodescription) :
 - présent de l'indicatif, troisième personne, phrases courtes, mots simples et précis ;
 - jamais « on voit » ni « nous voyons » ;
 - uniquement ce qui est visible : qui, quoi, où ; ni interprétation ni anticipation ;
+- n'ajoute rien qui ne figure pas dans la description ;
 - ne répète ni les dialogues ni ce qui a déjà été décrit ;
 - ne nomme un personnage que si son nom a été prononcé ou affiché ; sinon, une désignation \
 stable (« la jeune femme au manteau rouge ») ;
@@ -240,14 +247,15 @@ def detect_shots(clip):
 def chat(llm, model, system, content, json_mode=False):
     extra = {"response_format": {"type": "json_object"}} if json_mode else {}
     # Sans reasoning_effort="none", Gemma 4 sous Ollama « réfléchit » 2 à 3 min et rend un contenu vide.
-    r = llm.chat.completions.create(model=model, temperature=0.3, reasoning_effort="none", messages=[
+    r = llm.chat.completions.create(model=model, temperature=0, reasoning_effort="none", messages=[
         {"role": "system", "content": system}, {"role": "user", "content": content}], **extra)
     return (r.choices[0].message.content or "").strip()
 
 
 def describe(clip, segs, shots, a, out):
-    """Pour chaque fenêtre : description factuelle des images (VLM), puis 3 variantes calées (rédacteur)."""
-    # ponytail: pas de vérification visuelle fait par fait en P0 (verify.py en P1).
+    """Pour chaque fenêtre : description des images seules (VLM), vérification sur les mêmes images,
+    puis 3 variantes calées (rédacteur)."""
+    # ponytail: vérification en un appel par le même modèle ; vérification fait par fait en P1 si besoin.
     from openai import OpenAI
     llm = OpenAI(base_url=a.base_url, api_key="local")
     (out / "frames").mkdir(exist_ok=True)
@@ -257,21 +265,36 @@ def describe(clip, segs, shots, a, out):
         times, images = frame_times(w, shots), []
         for t in times:
             f = out / "frames" / f"{t:08.2f}.jpg"
-            ff("-ss", t, "-i", clip, "-frames:v", 1, "-vf", "scale=768:-2", "-q:v", 3, f)
+            ff("-ss", t, "-i", clip, "-frames:v", 1, "-vf", "scale=1024:-2", "-q:v", 3, f)
             images.append({"type": "image_url",
                            "image_url": {"url": "data:image/jpeg;base64," + base64.b64encode(f.read_bytes()).decode()}})
+        # Images seules : en contexte, les répliques (« Cette lame… ») et les descriptions précédentes
+        # amorçaient des inventions qui se propageaient d'une fenêtre à l'autre.
+        raw = chat(llm, a.model, DESCRIBE, [{"type": "text", "text": "Décris ces images."}, *images])
+        desc = chat(llm, a.model, VERIFY, [{"type": "text", "text": f"Description : {raw}"}, *images])
         heard = " / ".join(d["text"] for d in segs["dialogues"] if d["end"] <= w[1])[-600:] or "aucun"
         context = f"Déjà décrit : {' '.join(said[-3:]) or 'rien'}\nDialogues entendus jusqu'ici : {heard}"
-        desc = chat(llm, a.model, DESCRIBE, [{"type": "text", "text": context}, *images])
         b = budget(w, a.cps)
         limits = "\n".join(f"Variante {i + 1} : au plus {n} caractères (environ {max(n // 6, 1)} mots)."
                            for i, n in enumerate((b, b * 2 // 3, b // 2)))
         variants = parse_variants(chat(llm, a.model, WRITE, f"Description : {desc}\n{context}\n{limits}", json_mode=True))
-        items.append({"id": f"d_{k:04d}", "window": w, "frames": times, "description": desc,
+        items.append({"id": f"d_{k:04d}", "window": w, "frames": times, "raw_description": raw, "description": desc,
                       "budget_chars": b, "variants": variants})
         said += variants[:1]
         print(f"  {k + 1}/{len(wins)}  {w[0]:6.1f}–{w[1]:6.1f} s  {variants[:1]}", flush=True)
     return items
+
+
+def unload_ollama(base_url, model):
+    """Ollama garde le modèle en VRAM 5 min : on le libère pour la voix. Sans effet sur vLLM ou llama.cpp."""
+    import urllib.request
+    req = urllib.request.Request(base_url.rsplit("/v1", 1)[0] + "/api/generate", method="POST",
+                                 data=json.dumps({"model": model, "keep_alive": 0}).encode(),
+                                 headers={"Content-Type": "application/json"})
+    try:
+        urllib.request.urlopen(req, timeout=60).read()
+    except OSError:
+        pass
 
 
 def voice(descs, segs, a, out):
@@ -382,7 +405,9 @@ def main():
     p.add_argument("--out", help="dossier de sortie (par défaut : out/<vidéo>_<début>-<fin>)")
     # 127.0.0.1 plutôt que localhost : sous Windows, localhost part d'abord en IPv6 et peut joindre un autre serveur.
     p.add_argument("--base-url", default="http://127.0.0.1:11434/v1", help="API compatible OpenAI (Ollama, llama.cpp, vLLM)")
-    p.add_argument("--model", default="gemma4:12b-it-qat")
+    # 26B plutôt que 12B : sur Sintel, le 12B inventait un homme, un livre, une hache ; le 26B, non.
+    # Sur 16 Go, Ollama en place une partie sur le CPU (environ 35 s par fenêtre).
+    p.add_argument("--model", default="gemma4:26b-a4b-it-qat")
     p.add_argument("--cps", type=float, default=13.0, help="débit de la voix en caractères/s (mesuré : 13 pour Vivian)")
     p.add_argument("--tts-model", default="Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice", help="…-0.6B-CustomVoice si la VRAM manque")
     p.add_argument("--voice", default="Vivian", help="Vivian, Serena, Uncle_Fu, Dylan, Eric, Ryan, Aiden, Ono_Anna, Sohee")
@@ -410,6 +435,7 @@ def main():
     segs["silences"] = silences(segs["speech"], segs["duration"])
     shots = step("plans", lambda: detect_shots(clip), out / "shots.json")
     descs = step("description", lambda: describe(clip, segs, shots, a, out), out / "descriptions.json")
+    unload_ollama(a.base_url, a.model)
     placed, dropped = step("voix", lambda: voice(descs, segs, a, out))
     step("mixage", lambda: mix_and_export(placed, out))
 
