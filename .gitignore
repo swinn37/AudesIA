@@ -6,3 +6,6 @@
 
 # Corpus d'évaluation téléchargé par corpus/download.py : vidéos sous licences diverses, non redistribuées.
 /corpus/media/
+
+# Bytecode Python (eval/hallucination_sample.py importe eval/judge.py).
+__pycache__/

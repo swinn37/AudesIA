@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Rapport chiffré du corpus : un tableau par profil (out/corpus/<profil>/), écrit dans out/corpus/rapport.md.
+"""Rapport chiffré du corpus : un tableau par profil (out/corpus/<profil>/), puis ceux du juge et de la vérification
+des hallucinations s'ils existent, écrit dans out/corpus/rapport.md.
 
   python eval/report.py
 """
@@ -71,6 +72,10 @@ def main():
         lines, models = table(folder)
         if len(lines) > 2:
             out += [f"## Profil {folder.name} : {', '.join(sorted(models))}", "", *lines, ""]
+    # Qualité : tableaux écrits par eval/judge.py et eval/hallucination_sample.py --score, s'ils existent.
+    for extra in [*sorted(CORPUS.glob("juge_*.md")), CORPUS / "hallucinations.md"] if CORPUS.exists() else []:
+        if extra.exists():
+            out += [extra.read_text(encoding="utf-8").strip(), ""]
     report = "\n".join(out)
     CORPUS.mkdir(parents=True, exist_ok=True)
     (CORPUS / "rapport.md").write_text(report, encoding="utf-8")

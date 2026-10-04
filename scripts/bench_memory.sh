@@ -3,7 +3,7 @@
 # ne voit pas les allocations CUDA : on lit /proc/meminfo, plus la mémoire par processus que donne nvidia-smi.
 # Si la mémoire disponible passe sous FLOOR_GIB (8 Gio par défaut), les serveurs vLLM sont tués avant que la
 # machine ne gèle.
-#   scripts/bench_memory.sh [fichier.csv]     (lancé par scripts/vllm.sh start gx10)
+#   scripts/bench_memory.sh [fichier.csv]     (lancé par scripts/docker.sh start gx10 et start juge)
 set -u
 out=${1:-out/memoire.csv}
 floor_kib=$((${FLOOR_GIB:-8} * 1024 * 1024))
@@ -17,7 +17,7 @@ while true; do
   echo "${line%,*},\"$apps\"" >> "$out"
   if [ "${line##*,}" -lt "$floor_kib" ]; then
     echo "$(date -Iseconds) mémoire disponible sous ${FLOOR_GIB:-8} Gio : serveurs vLLM tués" >&2
-    docker kill audesia-writer audesia-vision >/dev/null 2>&1
+    docker kill audesia-writer audesia-vision audesia-judge >/dev/null 2>&1
   fi
   sleep 1
 done

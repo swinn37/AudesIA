@@ -81,7 +81,8 @@ audesia/
 ├── configs/
 │   ├── small.toml             # RTX 5080 (16 Go), Ollama
 │   ├── large.toml             # GX10 (128 Go), deux serveurs vLLM
-│   └── test-vllm.toml         # chemin vLLM testé sur la RTX 5080
+│   ├── test-vllm.toml         # chemin vLLM testé sur la RTX 5080
+│   └── judge.toml             # juge de qualité (eval/judge.py), absent des chaînes comparées
 ├── prompts/
 │   ├── describe.fr.md         # consigne VLM (description d'un plan)
 │   ├── write.fr.md            # consigne rédacteur (Charte AD, 3 variantes, budget)
@@ -106,8 +107,9 @@ audesia/
 │   ├── overlap.py             # chevauchement : parole détectée et vérité terrain
 │   ├── run_corpus.py          # tout le corpus avec un profil : précalcul partagé, reprise, chevauchement mesuré
 │   ├── report.py              # rapport Markdown, un tableau par profil (couverture dans metrics.json)
-│   ├── judge.py               # à venir : juge VLM extérieur, comparaison par paires à l'aveugle
-│   └── hallucination_sample.py# à venir : mêmes 100 silences pour les deux profils, vérification humaine
+│   ├── judge.py               # juge VLM extérieur, comparaison par paires à l'aveugle sur 6 images par silence
+│   ├── hallucination_sample.py# mêmes 100 silences pour les deux profils : page de vérification, puis comptage
+│   └── hallucinations.html    # modèle de la page de vérification, à l'aveugle (HTML natif, hors ligne)
 ├── corpus/
 │   ├── corpus.toml            # vidéos, sous-titres, pistes musique + effets, licences
 │   └── download.py            # téléchargement dans corpus/media/, ignoré par git
@@ -238,7 +240,7 @@ Les profils sont des fichiers TOML dans `configs/`, choisis par `--profile`. Cha
 | Rédaction | Mistral Small 4 NVFP4 (`mistralai/Mistral-Small-4-119B-2603-NVFP4`) | ~66 GiB |
 | Rédaction | Gemma 4 31B (`google/gemma-4-31B-it-qat-w4a16-ct`) | ~17 GiB (estimé) |
 
-Juge de qualité : un VLM absent des chaînes comparées (par défaut Qwen3.5-122B-A10B, lancé après les runs).
+Juge de qualité : un VLM absent des chaînes comparées (`configs/judge.toml` : Qwen3.5-122B-A10B NVFP4). Il est lancé seul, une fois les runs finis, par `scripts/docker.sh start juge` : 0,80 de la mémoire, même garde-fou, réglages pas encore essayés sur GB10.
 
 Identifiants vérifiés sur Hugging Face le 3 octobre 2026, puis le 4 octobre pour les deux modèles du profil large : Qwen3.6-35B-A3B-FP8 (34,9 GiB, vision comprise) et Gemma-4-26B-A4B-NVFP4 (17,5 GiB, version instruct) ; versions plus récentes acceptées si elles tiennent dans le même budget mémoire. Gemma 4 12B est servi avec la vision par Ollama (`gemma4:12b-it-qat`) et par llama.cpp (`ggml-org/gemma-4-12B-it-GGUF`, fichier `mmproj` inclus). Mais sur Sintel, il inventait des personnages et des objets : le profil small utilise Gemma 4 26B-A4B (`gemma4:26b-a4b-it-qat`), qu'Ollama place en partie sur le CPU.
 
@@ -295,7 +297,10 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026, puis le 4 octobre po
 - [ ] Marqueurs d'étape dans le relevé mémoire, pour attribuer la mémoire à chaque étape du pipeline.
 - [x] Preuve hors ligne : serveurs et pipeline sur un réseau Docker interne, vérification de l'accès sortant dans `metrics.json`. Run complet testé sur la 5080 le 4 octobre : 2 min 37 s pour 25 s de vidéo, `outbound_network: false`.
 - [x] `eval/run_corpus.py` (tout le corpus avec un profil, précalcul partagé, reprise après arrêt, chevauchement mesuré) et `eval/report.py` (un tableau par profil).
-- [ ] Juge VLM extérieur (`eval/judge.py`) et échantillon de 100 silences pour la vérification humaine des hallucinations.
+- [x] Juge VLM extérieur (`eval/judge.py`) et échantillon de 100 silences pour la vérification humaine des hallucinations (`eval/hallucination_sample.py`).
+  - Juge : 6 images par silence, extraites pour lui, et les deux descriptions dans un ordre tiré au sort ; notes de 1 à 5 sur quatre critères et meilleure description. Requêtes en parallèle (`parallel`), traitées en lot par vLLM.
+  - Échantillon : mêmes silences pour les deux profils (tirage fixe), page `hallucinations.html` avec la vidéo de chaque silence. Le nom des profils n'est pas dans la page, mais dans `hallucinations.json`, que `--score` rapproche des réponses.
+  - Essai sur le doublage, version relue contre version automatique, avec Qwen3.6 35B en juge (absent de ces runs en Gemma) : il donne raison à la relecture sur l'invention nette (« se cache derrière un bois sombre », 2 sur 5 en exactitude), mais préfère les formulations prudentes (« sphère épineuse » plutôt que « fruit », pas de couteau peu net). Il mesure ce qui se vérifie sur 6 images, pas ce que sait un spectateur : l'échantillon humain reste nécessaire.
 - [x] Corpus et vérité terrain (§7) téléchargés ; précalcul sur la 5080 de l'extrait, de la parole et des plans (`eval/run_corpus.py --precompute`, 51 min pour les 74 min du corpus). Les images clés sont extraites à la description, en quelques secondes.
   - Sur les films entiers, Whisper hallucine pendant la musique : « I'm sorry » en boucle sur 131 s de Sintel, « DECO DECO… » et du chinois sur la VF. Ces boucles passaient le filtre de débit et auraient effacé des silences. Elles sont écartées par le critère de Whisper lui-même (texte qui se compresse plus de 2,4 fois).
   - Elles ralentissent aussi la transcription : 22 min pour les 15 min de Sintel VO. À faire : ne transcrire que les segments de parole de la VAD, ou plafonner les jetons par tranche de 30 s.
@@ -310,6 +315,8 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026, puis le 4 octobre po
   - A/B rapide du rédacteur sur 20 à 30 silences.
 - [ ] Jour 2 : plusieurs vidéos en parallèle (débit).
 - [ ] Jour 3 : balayage de modèles de classe 120B (§5), juge VLM extérieur, ablations (sans contexte, sans personnages, avec la vérification fait par fait).
+  - Juge : copier `out/corpus/small` (résultats de la 5080) sur le GX10, `scripts/docker.sh stop`, `fetch juge`, `start juge`, puis `py eval/judge.py out/corpus/small out/corpus/large`.
+  - La vérification humaine des hallucinations se fait ensuite sur la 5080, avec les résultats `large` rapatriés.
 - [ ] Jour 4 : rapport, vidéo de démo, publication.
 - [ ] Plan B si mémoire insuffisante : versions NVFP4, contexte réduit, `--max-num-seqs` plus bas.
 

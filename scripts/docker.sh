@@ -2,11 +2,13 @@
 # Audesia sous Docker : serveurs vLLM et pipeline sur un réseau sans accès sortant, preuve du 100 % local.
 #   scripts/docker.sh fetch gx10     modèles du GX10, une seule fois, avec internet (environ 64 Go)
 #   scripts/docker.sh fetch 5080     Qwen3.5-2B (4,6 Go), pour tester sur la RTX 5080
+#   scripts/docker.sh fetch juge     juge de qualité, Qwen3.5-122B-A10B NVFP4 (environ 78 Gio)
 #   scripts/docker.sh build          image du pipeline (audesia-worker), construite sur la machine qui l'utilise
 #   scripts/docker.sh start gx10     vision (Qwen3.6) puis rédacteur (Gemma 4), l'un après l'autre
 #   scripts/docker.sh start 5080     un seul serveur (Qwen3.5-2B) qui joue les deux rôles
+#   scripts/docker.sh start juge     le juge seul, une fois les runs finis et les serveurs arrêtés
 #   scripts/docker.sh run ARGS...    pipeline, par exemple : run film.mkv --start 1:35 --end 3:35 --profile large
-#   scripts/docker.sh py SCRIPT ...  un script Python du dépôt dans la même image, par exemple eval/overlap.py
+#   scripts/docker.sh py SCRIPT ...  un script Python du dépôt dans la même image, par exemple eval/judge.py
 #   scripts/docker.sh stop           arrête les serveurs
 # À lancer depuis la racine du dépôt : run monte ce dossier, les vidéos et out/ s'y trouvent.
 # Sur le GX10, start lance aussi scripts/bench_memory.sh : relevé mémoire à 1 Hz et garde-fou.
@@ -62,6 +64,8 @@ case "${1:-} ${2:-}" in
       --entrypoint python3 "$IMG" -c "import torchaudio; torchaudio.pipelines.HDEMUCS_HIGH_MUSDB_PLUS.get_model()" ;;
   "fetch 5080")
     hf Qwen/Qwen3.5-2B ;;
+  "fetch juge")
+    hf nvidia/Qwen3.5-122B-A10B-NVFP4 ;;
   "build "*)
     docker build -t audesia-worker -f docker/Dockerfile . ;;
   "start gx10")
@@ -96,6 +100,23 @@ case "${1:-} ${2:-}" in
       --limit-mm-per-prompt '{"image": 10, "video": 0}' --mm-processor-cache-gb 0 \
       --reasoning-parser qwen3 --default-chat-template-kwargs '{"enable_thinking": false}'
     wait_ready audesia-vision 8000 ;;
+  "start juge")
+    # Seul sur la machine : ~78 Gio de poids. 0,80 de la mémoire (~96 Gio) reste sous le plafond réaliste de ~105 Gio,
+    # avec la même prudence qu'au démarrage des deux serveurs (cache vidé, relevé mémoire et garde-fou).
+    # Réglages pas encore essayés sur GB10 : surveiller out/memoire.csv au premier démarrage.
+    if [ -n "$(docker ps -aq -f name=audesia-vision -f name=audesia-writer)" ]; then
+      echo "arrêter d'abord les serveurs du pipeline : scripts/docker.sh stop" >&2; exit 1
+    fi
+    network
+    mkdir -p out
+    nohup "$(dirname "$0")/bench_memory.sh" out/memoire.csv >> out/memoire.log 2>&1 &
+    drop_caches
+    docker run -d --name audesia-judge "${SERVER[@]}" "$IMG" \
+      nvidia/Qwen3.5-122B-A10B-NVFP4 --host 0.0.0.0 --port 8000 \
+      --gpu-memory-utilization 0.80 --max-model-len 16384 --max-num-seqs 4 \
+      --limit-mm-per-prompt '{"image": 6, "video": 0}' --mm-processor-cache-gb 0 \
+      --reasoning-parser qwen3 --default-chat-template-kwargs '{"enable_thinking": false}'
+    wait_ready audesia-judge 8000 ;;
   "run "*)
     shift
     network
@@ -106,10 +127,10 @@ case "${1:-} ${2:-}" in
   "py "*)  # un script Python du dépôt dans l'image du pipeline, par exemple : py eval/overlap.py ...
     shift
     network
-    docker run "${WORKER[@]}" --entrypoint python3 audesia-worker "$@" ;;
+    docker run "${WORKER[@]}" -e AUDESIA_JUDGE_URL=http://audesia-judge:8000/v1 --entrypoint python3 audesia-worker "$@" ;;
   "stop "*)
-    docker rm -f audesia-writer audesia-vision 2>/dev/null || true
+    docker rm -f audesia-writer audesia-vision audesia-judge 2>/dev/null || true
     pkill -f bench_memory.sh 2>/dev/null || true ;;
   *)
-    sed -n '2,12p' "$0"; exit 2 ;;
+    sed -n '2,14p' "$0"; exit 2 ;;
 esac

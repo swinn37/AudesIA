@@ -828,6 +828,8 @@ def selftest():
     assert frame_times([0, 3], 4) == [0.375, 1.125, 1.875, 2.625]  # 4 images réparties sur la fenêtre
     assert len(frame_times([0, 17], 4)) == 4 and len(frame_times([0, 17], 8)) == 8 and len(frame_times([0, 1], 8)) == 3
     for path in sorted(CONFIGS.glob("*.toml")):                  # profils livrés : lisibles et complets
+        if "[vlm]" not in path.read_text(encoding="utf-8"):      # configs/judge.toml n'est pas un profil
+            continue
         prof = load_profile(str(path))
         assert prof["run"]["parallel"] >= 1 and prof["run"]["max_images"] >= 3, path.name
     fake = lambda text: (np.zeros(len(text) * 10), 100)           # voix factice : 10 caractères/s

@@ -213,6 +213,18 @@ python eval/report.py                        # rapport chiffré, un tableau par 
 
 Une étape déjà faite est sautée : un traitement interrompu reprend là où il s'était arrêté.
 
+La qualité se compare sur les mêmes silences, à l'aveugle, une fois les deux profils passés :
+
+```bash
+python eval/judge.py out/corpus/small out/corpus/large                 # juge VLM : notes et meilleure description
+python eval/hallucination_sample.py out/corpus/small out/corpus/large  # 100 silences à vérifier à la main
+python eval/hallucination_sample.py --score out/corpus/reponses.json   # taux d'hallucinations par profil
+```
+
+- **Juge :** un VLM absent des deux chaînes comparées (sur le GX10, Qwen3.5-122B-A10B : `scripts/docker.sh start juge`, puis `scripts/docker.sh py eval/judge.py …`). Pour chaque silence, il voit 6 images du plan et les deux descriptions, dans un ordre tiré au sort. Il note chacune de 1 à 5 (exactitude, pertinence, cohérence des personnages, concision) et désigne la meilleure.
+- **Hallucinations :** `hallucinations.html` montre chaque silence tiré au sort en vidéo, avec ses deux descriptions : fidèle, invente ou se trompe, ou je ne sais pas. La page ne contient pas le nom des profils ; la correspondance reste dans un fichier à part jusqu'au comptage.
+- `report.py` reprend les tableaux du juge et des hallucinations.
+
 ## Résultats
 
 Mesures du prototype sur RTX 5080 (16 Go), le 4 octobre 2026 : *Sintel*, de 1:35 à 3:35, en version originale et dans le doublage français de Touhoppai. L'extrait contient 12 répliques séparées de silences courts, un long passage musical, puis des répliques chuchotées.
@@ -270,6 +282,12 @@ python eval/overlap.py out/Sintel.2010.1080p_1.35-3.35 --video Sintel.2010.1080p
 - Une vérification fait par fait sur les images existe en option (`verify` dans le profil). Sur l'extrait VF, elle a écarté 19 faits sur 117 : à raison la jeune fille d'un plan où seul le dragon est visible, mais à tort la main gantée tendue vers le dragon, action clé du plan, tout en gardant un « sol pavé » sur un toit. Elle reste désactivée en attendant un A/B sur le GX10, avec un juge.
 - Avec 8 images par plan, la suite des actions était mieux suivie (« elle brandit un couteau »), mais la description prenait 50 min sur la 5080.
 - La voix de synthèse précipite parfois une phrase : 19 à 20 caractères par seconde au lieu de 10 à 15, et un mot avalé (« sur un toit » retranscrit « sur un C »). Le script retranscrit désormais chaque phrase, et la refait, jusqu'à 3 essais, si elle est dite à plus de 16 caractères par seconde ou qu'un mot de plus de 3 lettres manque à sa retranscription. Sur les 10 phrases de la VF, ce contrôle n'a rejeté aucune phrase à tort et ajoute environ 40 s à la voix.
+
+**Essai du juge** sur le doublage, version relue contre version automatique, avec Qwen3.6 35B, absent de ces deux runs en Gemma, sur 10 silences :
+
+- il donne raison à la relecture sur l'invention nette : « elle se cache derrière un bois sombre » obtient 2 sur 5 en exactitude, et la correction « elle regarde sous les débris », 4 ;
+- mais il préfère les formulations prudentes : « une sphère épineuse » plutôt que « un fruit », et la version sans le couteau, peu net sur ses 6 images ;
+- sa note d'exactitude mesure donc ce qui se vérifie sur les images, pas ce que sait un spectateur du film. D'où l'échantillon vérifié à la main, à côté.
 
 Ces défauts sont les cibles des modèles plus grands du GX10, où le modèle tient en entier en mémoire et où 8 images par plan restent abordables. En attendant, la relecture humaine les corrige : sur le doublage, quatre phrases corrigées (débris, fruit, couteau, main) ont été resynthétisées et remixées en 1 min 15 s environ. Mesurée contre la piste musique + effets, cette version relue ne chevauche aucune réplique. Au critère strict (cris, souffles), elle fait comme la version automatique : 5 sur 10.
 
