@@ -134,7 +134,8 @@ flowchart TD
   E --> F[Fluidité et voix française<br/>durée réelle + retranscription]
   F -- aucune variante ne tient --> E
   F -- variante retenue --> G[Éditeur de relecture<br/>HTML natif, clavier et lecteur d'écran]
-  G -- corriger ou régénérer --> E
+  G -- corriger ou supprimer --> F
+  G -- régénérer --> E
   G --> H[Mixage et export<br/>ffmpeg → MKV/MP4 · piste audio · WebVTT · script]
 ```
 
@@ -151,7 +152,7 @@ flowchart TD
 | 6 bis | Registre et révision | une image par plan, puis les images de chaque plan + registre + plans voisins | `personnages.json` (désignation stable et traits de chaque personnage) ; descriptions révisées : même désignation pour une même personne, actions rattachées au bon personnage, rien de non visible |
 | 7 | Rédaction | faits validés + silences | `descriptions.json` : 3 variantes par silence, budget en caractères |
 | 8 | Voix + calage | variantes | `tts/*.wav`, durée réelle, retranscription ; variante retenue, sinon retour à 7 |
-| 9 | Relecture | `descriptions.json` | versions corrigées (dans `descriptions.json`) |
+| 9 | Relecture (facultative) | `relecture.json` : horaire, place disponible, texte lu, statut et description de chaque fenêtre | `corrections.json` : textes relus (vide : fenêtre silencieuse), jamais écrasé par le pipeline ; seules les phrases changées sont resynthétisées, puis tout est remixé |
 | 10 | Export | tout | `out.mkv` (piste « fra – audiodescription » marquée `visual_impaired`), `out.mp4` et `out_ad.mp4` (lecteur web), `ad.mp3`, `ad.vtt`, `script.txt` |
 
 ### Schémas JSON (indicatifs)
@@ -260,6 +261,7 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026 ; versions plus réce
   - Silero VAD → Whisper large-v3 (transformers, même code que sur le GX10) → PySceneDetect → VLM via un serveur compatible OpenAI (Ollama `gemma4:26b-a4b-it-qat`, llama.cpp ou vLLM) → réécriture en 3 variantes avec budget → Qwen3-TTS → mixage ffmpeg ;
   - coder contre l'API OpenAI : passer au GX10 ne doit demander qu'un changement de configuration.
 - [x] Exporter l'extrait avec et sans audiodescription pour la vidéo de présentation (`clip.mp4`, `clip_ad.mp4`).
+- [x] Relecture humaine facultative par fichier : `relecture.json` → `corrections.json` → même commande. Voix en cache par phrase : une correction ne resynthétise que ses phrases.
 - [ ] (Optionnel) Maquette statique de la page de relecture.
 
 ### P1 — Après la sélection, avant l'accès au GX10
@@ -275,7 +277,11 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026 ; versions plus réce
   - critères : erreur de retranscription, écoute, vitesse ;
   - Chatterbox 0.1.7 est à éviter : torch 2.6 sans support RTX 50xx, plantage sur les textes ≤ 5 tokens.
 - [ ] Personnages, au-delà du registre fait en P0 (désignations stables, attribution d'une main) : YuNet + SFace sur les prises de vues réelles, marquage visuel (un cercle de couleur par personnage) pour l'animation, personnages secondaires que le registre oublie, noms saisis dans l'éditeur.
-- [ ] Page de relecture en HTML natif servie par FastAPI : tableau accessible (horodatage, texte modifiable, durée voix / durée silence, Écouter, Régénérer), lecteur avec/sans AD qui bascule entre deux MP4.
+- [ ] Une page web pour tout faire sans ligne de commande, en HTML natif servie par FastAPI :
+  - dépôt de la vidéo (voix, niveau de détail), puis avancement étape par étape ;
+  - relecture : tableau accessible (horodatage, texte modifiable, place disponible en secondes et en caractères, statut, description factuelle, Écouter, Supprimer, Régénérer) ;
+  - lecteur avec/sans AD qui bascule entre deux MP4, puis export ;
+  - elle écrit le même `corrections.json` que la relecture par fichier du P0 et relance la voix et le mixage : un seul mécanisme, testé dès le P0.
 - [ ] Profils `small` / `large` ; serveurs vLLM via compose (image `vllm/vllm-openai:v0.29.0` épinglée par digest).
 - [ ] Images worker arm64 construites nativement (runners GitHub `ubuntu-24.04-arm`) ; roues vérifiées avec `pip download --platform`.
 - [ ] Instrumentation : `metrics.py` + `scripts/bench_memory.sh` (relevé à 1 Hz sur l'hôte, marqueurs d'étape).
@@ -328,7 +334,7 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026 ; versions plus réce
 
 **Premiers résultats** (4 octobre 2026, RTX 5080, Sintel 1:35–3:35, mesurés avec `eval/overlap.py`) :
 - version originale : 13 descriptions sur 13 sans chevauchement des répliques, 10 sur 13 sans chevauchement d'aucune voix (éclats vocaux de moins de 0,7 s), couverture de 68 % ;
-- doublage français (vérité terrain plus nette, musique atténuée de 15,8 dB) : 10 sur 10 sans chevauchement des répliques, chuchotements compris, 6 sur 10 sans chevauchement d'aucune voix, couverture de 73 % ;
+- doublage français (vérité terrain plus nette, musique atténuée de 15,8 dB) : 10 sur 10 sans chevauchement des répliques, chuchotements compris, 6 sur 10 sans chevauchement d'aucune voix, couverture de 76 % ;
 - 15 à 27 min de calcul pour 2 min de vidéo selon la charge du GPU (objectif : moins de 5 min par minute), parce que Gemma 4 26B déborde sur le CPU. Avec 8 images par plan, la suite des actions était mieux suivie, mais la description prenait 50 min : c'est un réglage pour le GX10.
 
 Premier choix de modèle par la mesure, sur les 7 plans de la seconde partie vérifiés à l'image :
@@ -347,6 +353,8 @@ Deux techniques visent les objets mal reconnus :
 - une question directe sur trois détails agrandis en pleine résolution reconnaît le fruit sur la bonne image.
 
 Mais sur la 5080 la reconnaissance reste fragile. Sur trois images du même plan, le modèle répond « fruit épineux », « gant à pointes » ou « rien d'identifiable ». La posture est lue comme « se cache derrière » au lieu de « regarde dessous », et des « elle » restent ambigus quand deux personnages ont le même genre. Ces cas sont à remesurer sur le GX10, avec des modèles plus grands, une entrée haute résolution native et la vidéo.
+
+En attendant, la relecture humaine facultative les corrige sans relancer les modèles de vision. Sur le doublage, quatre phrases corrigées (débris, fruit, couteau, main) ont été placées sans chevaucher de réplique. La relance a pris environ 1 min 15 s, et 10 s sans changement, car seules les phrases nouvelles sont synthétisées.
 
 Les chuchotements, d'abord manqués par la VAD, sont rattrapés par les segments Whisper au débit plausible. Priorité P1 : les sons vocaux brefs (cris, gémissements, souffles), par l'énergie de la voix isolée avec Demucs.
 
@@ -435,20 +443,20 @@ Pas de Redis, de WebSocket ni de base de données pour le challenge : ils n'appo
 **Modèle de données :**
 - Un *Job* est un dossier (vidéo, paramètres, état) avec un fichier JSON par étape.
 - Les *Segments* (parole, silence, plan) sont dans `segments.json` et `shots.json`.
-- Chaque silence utilisable peut porter une *Description* versionnée dans `descriptions.json` : variantes, texte retenu, durée réelle de la voix, statut de relecture.
+- Chaque silence utilisable porte une *Description* : variantes des modèles dans `descriptions.json`, texte relu dans `corrections.json` (jamais écrasé par le pipeline), texte retenu, place disponible et statut dans `relecture.json`.
 
 | Méthode | Route | Usage |
 | --- | --- | --- |
 | POST | `/jobs` | Déposer une vidéo, choisir la voix et le niveau de détail |
 | GET | `/jobs/{id}` | État et progression (sondage) |
 | GET | `/jobs/{id}/descriptions` | Descriptions et horodatages |
-| PATCH | `/descriptions/{id}` | Corriger un texte |
+| PATCH | `/descriptions/{id}` | Corriger ou supprimer un texte (écrit `corrections.json`) |
 | POST | `/descriptions/{id}/regenerate` | Régénérer une description |
 | GET | `/jobs/{id}/export?format=mkv\|mp4\|mp3\|vtt\|txt` | Télécharger le résultat |
 
 **Front-end :** une page HTML native servie par l'API, sans framework.
 - **Dépôt :** voix, niveau de détail.
-- **Relecture :** tableau accessible avec horodatage, texte modifiable, durée voix / durée silence écrite en clair, boutons Écouter et Régénérer, raccourcis clavier.
+- **Relecture :** tableau accessible avec horodatage, texte modifiable, durée voix / durée silence écrite en clair, boutons Écouter, Supprimer et Régénérer, raccourcis clavier. Elle écrit `corrections.json`, comme la relecture par fichier.
 - **Démonstration :** lecteur avec/sans AD qui bascule entre deux fichiers MP4 en conservant la position, car les navigateurs ne savent pas changer de piste audio.
 
 L'interface est utilisable au clavier et au lecteur d'écran, pour que des créateurs aveugles puissent valider leurs descriptions. Une frise visuelle (forme d'onde) pourra s'ajouter plus tard pour les utilisateurs voyants.

@@ -24,12 +24,19 @@ Usage :
 
 Chaque étape coûteuse écrit un JSON dans le dossier de sortie et n'est pas refaite
 s'il existe : supprimer descriptions.json pour relancer la rédaction. La voix et le
-mixage sont refaits à chaque lancement (changer --voice ou --cps ne coûte que ça).
+mixage sont refaits à chaque lancement ; les phrases déjà synthétisées sont en cache.
+
+Relecture humaine (facultative) : relecture.json donne, pour chaque fenêtre, l'horaire,
+la place disponible, le texte lu et son statut. Écrire les textes à changer dans
+corrections.json, dans le même dossier, puis relancer la même commande :
+  {"d_0004": "Elle regarde sous les débris.", "d_0007": ""}    (texte vide : fenêtre silencieuse)
+Seules les phrases modifiées sont synthétisées, puis tout est remixé (1 min 15 s pour 4 phrases sur la 5080).
 """
 import argparse
 import base64
 import difflib
 import gc
+import hashlib
 import json
 import math
 import os
@@ -237,9 +244,28 @@ def mentioned(text, names, recent):
     return found
 
 
+def cut_hint(text, dur, avail):
+    """Caractères à retirer d'un texte relu dont la voix dure dur s pour avail s disponibles (accélération comprise)."""
+    return max(1, math.ceil(len(text) * (1 - avail * MAX_SPEEDUP / dur)))
+
+
 def repeats(text, previous):
     """Vrai si text redit presque la description précédente (similarité des caractères ≥ REPEAT_RATIO)."""
     return difflib.SequenceMatcher(None, text.lower(), previous.lower()).ratio() >= REPEAT_RATIO
+
+
+def candidates(d, corrections, names, recent, gap, last_text):
+    """Textes à essayer pour la fenêtre d, et s'ils viennent de la relecture. Le texte relu fait foi : ni allègement
+    ni filtre des redites ; vide, il laisse la fenêtre silencieuse."""
+    if d["id"] in corrections:
+        text = corrections[d["id"]].strip()
+        return ([text] if text else []), True
+    # Fluidité : « elle » ou forme courte plutôt que la désignation complète répétée d'un plan à l'autre,
+    # et pas de redite de la description qui vient d'être lue (le plan reste alors silencieux).
+    variants = [lighten(v, names, recent, gap) for v in d["variants"]]
+    if gap <= REMENTION_S:
+        variants = [v for v in variants if not repeats(v, last_text)]
+    return variants, False
 
 
 def duck_envelope(n, sr, spans):
@@ -446,36 +472,68 @@ def unload_ollama(base_url, model):
 
 
 def voice(descs, segs, a, out):
-    """Synthétise la variante la plus longue qui tient dans chaque fenêtre et la place sur une piste."""
+    """Synthétise la variante la plus longue qui tient dans chaque fenêtre, la place sur une piste et écrit la fiche
+    de relecture. Un texte de corrections.json remplace les variantes de sa fenêtre."""
     import numpy as np
     import soundfile as sf
-    import torch
-    from qwen_tts import Qwen3TTSModel
 
-    tts = Qwen3TTSModel.from_pretrained(a.tts_model, device_map="cuda:0", dtype=torch.bfloat16)
+    cache, tts = out / "tts" / "cache", None
+    cache.mkdir(parents=True, exist_ok=True)
 
     def synth(text):
+        # Cache par phrase : après une correction, seules les phrases nouvelles sont synthétisées, et le modèle
+        # n'est chargé que s'il en manque une.
+        nonlocal tts
+        f = cache / (hashlib.sha1(f"{a.tts_model}|{a.voice}|{TTS_INSTRUCT}|{text}".encode()).hexdigest()[:16] + ".wav")
+        if f.exists():
+            return sf.read(f, dtype="float32")
+        if tts is None:
+            import torch
+            from qwen_tts import Qwen3TTSModel
+            tts = Qwen3TTSModel.from_pretrained(a.tts_model, device_map="cuda:0", dtype=torch.bfloat16)
         wavs, sr = tts.generate_custom_voice(text=text, language="French", speaker=a.voice, instruct=TTS_INSTRUCT)
-        return np.asarray(wavs[0], dtype=np.float32), sr
+        wav = np.asarray(wavs[0], dtype=np.float32)
+        sf.write(f, wav, sr, subtype="FLOAT")
+        return wav, sr
 
-    (out / "tts").mkdir(exist_ok=True)
+    fixes = out / "corrections.json"
+    try:  # utf-8-sig : le Bloc-notes peut enregistrer avec un BOM
+        corrections = json.loads(fixes.read_text(encoding="utf-8-sig")) if fixes.exists() else {}
+    except ValueError as e:
+        sys.exit(f"{fixes} illisible : {e}")
+    if not isinstance(corrections, dict) or not all(isinstance(v, str) for v in corrections.values()):
+        sys.exit(f'{fixes} : attendu {{"d_0004": "texte relu", "d_0007": ""}} (texte vide : fenêtre silencieuse)')
+    unknown = sorted(set(corrections) - {d["id"] for d in descs})
+    if unknown:
+        print(f"  corrections ignorées, identifiants inconnus : {unknown}", flush=True)
+
     info = sf.info(out / "audio48k.wav")
     sr, n = info.samplerate, info.frames
     track = np.zeros(n, dtype=np.float32)
     registry = out / "personnages.json"
     names = [c["designation"].strip() for c in (json.loads(registry.read_text(encoding="utf-8")) if registry.exists() else [])
              if isinstance(c, dict) and c.get("designation")]
-    placed, dropped, recent, last_end, last_text = [], [], set(), -REMENTION_S, ""
+    review, placed, dropped, recent, last_end, last_text = [], [], [], set(), -REMENTION_S, ""
     for d in descs:
         (w0, w1), start = d["window"], d["window"][0] + MARGIN
-        # Fluidité : « elle » ou forme courte plutôt que la désignation complète répétée d'un plan à l'autre,
-        # et pas de redite de la description qui vient d'être lue (le plan reste alors silencieux).
-        variants = [lighten(v, names, recent, start - last_end) for v in d["variants"]]
-        if start - last_end <= REMENTION_S:
-            variants = [v for v in variants if not repeats(v, last_text)]
-        got = fit(variants, w1 - w0 - 2 * MARGIN, synth)
+        avail = w1 - w0 - 2 * MARGIN
+        variants, reviewed = candidates(d, corrections, names, recent, start - last_end, last_text)
+        got = fit(variants, avail, synth)
+        row = {"id": d["id"], "horaire": f"{int(w0 // 60)}:{w0 % 60:04.1f} – {int(w1 // 60)}:{w1 % 60:04.1f}",
+               "debut": round(w0, 2), "fin": round(w1, 2), "place_s": round(avail, 2),
+               "place_caracteres": budget(d["window"], a.cps), "statut": "relu" if reviewed else "automatique",
+               "texte": got[0] if got else None, "description": d.get("description", ""), "variantes": d["variants"]}
+        review.append(row)
         if not got:
             dropped.append(d["id"])
+            if not reviewed:
+                row["statut"] = "sans description : aucune variante ne tient, ou redite de la précédente"
+            elif variants:
+                wav, tsr = synth(variants[0])  # déjà en cache : fit() vient de la synthétiser
+                row["statut"] = f"relu, trop long : retirer au moins {cut_hint(variants[0], len(wav) / tsr, avail)} caractères"
+                print(f"  {d['id']} {row['statut']}", flush=True)
+            else:
+                row["statut"] = "supprimé à la relecture"
             continue
         text, wav, tsr, speed = got
         raw, final = out / "tts" / f"{d['id']}_raw.wav", out / "tts" / f"{d['id']}.wav"
@@ -486,11 +544,13 @@ def voice(descs, segs, a, out):
         clip_audio = clip_audio[: n - i]
         track[i: i + len(clip_audio)] += clip_audio
         placed.append({"id": d["id"], "start": round(start, 3), "end": round(start + len(clip_audio) / sr, 3),
-                       "text": text, "speedup": round(speed, 3), "chars_per_s": round(len(text) * tsr / len(wav), 1)})
+                       "text": text, "speedup": round(speed, 3), "chars_per_s": round(len(text) * tsr / len(wav), 1),
+                       "reviewed": reviewed})
         recent, last_end, last_text = mentioned(text, names, recent), placed[-1]["end"], text
     for p in placed:  # invariant : aucune description ne chevauche la parole détectée
         assert not any(s < p["end"] and p["start"] < e for s, e in segs["speech"]), p
     sf.write(out / "ad_voice.wav", track, sr)
+    (out / "relecture.json").write_text(json.dumps(review, ensure_ascii=False, indent=1), encoding="utf-8")
     return placed, dropped
 
 
@@ -561,6 +621,13 @@ def selftest():
     assert repeats("Elle tend sa main gantée vers le dragon blessé.",
                    "Accroupie sur les pavés, elle tend une main gantée vers le dragon blessé.")
     assert not repeats("Elle grimpe sur les façades.", "Dans une rue à colombages, elle contemple un fruit.")
+    assert cut_hint("x" * 50, 6.0, 4.0) == 14  # 6 s de voix pour 4,4 s au plus (4 s + 10 %) : retirer 27 %
+    d = {"id": "d_0001", "variants": ["La jeune fille aux cheveux roux grimpe."]}
+    assert candidates(d, {}, [girl], {girl}, 4, "") == (["Elle grimpe."], False)
+    assert candidates(d, {}, [girl], {girl}, 4, "Elle grimpe.") == ([], False)       # redite écartée
+    assert candidates(d, {"d_0001": " Elle fouille sous les débris. "}, [girl], {girl}, 4, "Elle grimpe.") \
+        == (["Elle fouille sous les débris."], True)                                 # le texte relu fait foi
+    assert candidates(d, {"d_0001": ""}, [girl], {girl}, 4, "") == ([], True)        # vide : fenêtre silencieuse
     assert parse_variants('{"variantes": ["Bol.", "Elle tient un bol."]}') == ["Elle tient un bol."]  # un mot : refusé
     assert vtt([{"start": 3725.5, "end": 3727.25, "text": "Elle sourit."}]) \
         == "WEBVTT\n\n01:02:05.500 --> 01:02:07.250\nElle sourit.\n\n"
@@ -619,6 +686,7 @@ def main():
         "placed": len(placed),
         "dropped": dropped,
         "sped_up": sum(p["speedup"] > 1 for p in placed),
+        "reviewed": sum(p["reviewed"] for p in placed),
         "coverage": round(sum(p["end"] - p["start"] for p in placed) / usable, 3) if usable else 0,
         "measured_chars_per_s": round(statistics.mean(p["chars_per_s"] for p in placed), 1) if placed else None,
         "peak_gpu_gib_this_process": round(torch.cuda.max_memory_allocated() / 2 ** 30, 2),
@@ -627,6 +695,8 @@ def main():
     (out / "ad.json").write_text(json.dumps(placed, ensure_ascii=False, indent=1), encoding="utf-8")
     print(json.dumps(metrics, ensure_ascii=False, indent=1))
     print(f"Sans AD : {clip}\nAvec AD : {out / 'clip_ad.mp4'}\nMKV deux pistes : {out / 'clip_ad.mkv'}")
+    print(f"Relecture (facultative) : {out / 'relecture.json'} ; textes à changer dans {out / 'corrections.json'}, "
+          "puis relancer la même commande")
 
 
 if __name__ == "__main__":

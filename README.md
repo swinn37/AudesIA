@@ -25,6 +25,7 @@ Audesia s'adresse aux médiathèques, universités, collectivités, entreprises 
 6. **Rédaction** : le même modèle réécrit chaque description en trois variantes de longueurs décroissantes, selon les règles de l'audiodescription.
 7. **Voix** : une passe de fluidité remplace une désignation déjà dite par « elle », « il » ou une forme courte, et écarte les redites. Chaque variante est ensuite synthétisée et mesurée ; la plus longue qui tient dans le silence est retenue.
 8. **Mixage** : la bande-son est atténuée sous la voix, puis exportée.
+9. **Relecture (facultative)** : un humain corrige ou supprime les descriptions de son choix ; seules les phrases changées sont resynthétisées, puis tout est remixé.
 
 ```mermaid
 flowchart LR
@@ -37,14 +38,16 @@ flowchart LR
   R --> F[Rédaction<br/>3 variantes]
   F --> G[Fluidité et voix<br/>durée mesurée]
   G --> H[Mixage et exports<br/>MP4 · MKV · WebVTT]
+  H -.-> I[Relecture humaine<br/>facultative]
+  I -. corrections .-> G
 ```
 
 Cinq principes :
 
 - **Jamais sur un dialogue.** La détection de parole est réglée pour être sensible, avec une marge autour de chaque réplique : dans le doute, c'est de la parole. Une assertion fait échouer le traitement si une description chevauche une parole détectée.
-- **Calage sur la durée réelle de la voix**, pas sur une estimation du débit. Si aucune variante ne tient, la plus courte peut être accélérée de 10 % au plus ; sinon la description est abandonnée et signalée.
+- **Calage sur la durée réelle de la voix**, pas sur une estimation du débit. Si aucune variante ne tient, la plus courte peut être accélérée de 10 % au plus ; sinon la description est abandonnée et signalée dans la fiche de relecture.
 - **Règles de l'audiodescription française.** Les consignes suivent la *Charte de l'audiodescription* (2008) : présent, troisième personne, uniquement ce qui est visible, pas d'interprétation, un personnage n'est nommé qu'une fois son nom prononcé ou affiché.
-- **Ne rien inventer, garder les mêmes personnages.** Le modèle de vision ne voit que les images, et une révision confronte chaque description à ses images. Un registre fixe la désignation de chaque personnage pour toute la vidéo, et une passe de fluidité évite de la répéter.
+- **Ne rien inventer, garder les mêmes personnages.** Le modèle de vision ne voit que les images, et une révision confronte chaque description à ses images. Un registre fixe la désignation de chaque personnage pour toute la vidéo, et une passe de fluidité évite de la répéter. Une relecture humaine, facultative, corrige ce qui reste.
 - **Mesurer chaque exécution.** Durée par étape, couverture des silences, débit de la voix et mémoire sont enregistrés dans `metrics.json`.
 
 ## Démarrage rapide
@@ -91,10 +94,28 @@ Les fichiers sont écrits dans `out/<vidéo>_<début>-<fin>/` :
 | `clip.mp4`, `clip_ad.mp4` | L'extrait sans et avec audiodescription |
 | `clip_ad.mkv` | Deux pistes audio : l'originale et l'audiodescription, marquée pour les personnes malvoyantes ; descriptions en sous-titres WebVTT |
 | `ad.vtt`, `ad.json` | Descriptions retenues, horodatées |
-| `segments.json`, `shots.json`, `descriptions.json` | Étapes intermédiaires, mises en cache |
+| `relecture.json` | Fiche de relecture : horaire, place disponible, texte lu et statut de chaque fenêtre |
+| `segments.json`, `shots.json`, `descriptions.json`, `personnages.json` | Étapes intermédiaires, mises en cache |
 | `metrics.json` | Durée par étape, couverture des silences, débit mesuré de la voix, pic mémoire |
 
-Les étapes coûteuses sont mises en cache. Supprimer `descriptions.json` relance la rédaction ; changer de voix ou de débit ne refait que la voix et le mixage.
+Les étapes coûteuses sont mises en cache. Supprimer `descriptions.json` relance la rédaction ; changer de voix ne refait que la voix et le mixage.
+
+### Relecture (facultative)
+
+`relecture.json` donne, pour chaque fenêtre, l'horaire dans l'extrait, la place disponible (en secondes et en caractères), le texte lu, son statut, et la description factuelle dont il vient. Pour corriger, écrire les seuls textes à changer dans `corrections.json`, dans le même dossier, puis relancer la même commande :
+
+```json
+{
+ "d_0004": "Elle regarde sous les débris.",
+ "d_0007": ""
+}
+```
+
+- Un texte relu est lu tel quel, sans la passe de fluidité. Une chaîne vide laisse la fenêtre silencieuse.
+- Un texte qui ne tient pas dans son silence (accélération de 10 % comprise) n'est pas placé. `relecture.json` indique alors combien de caractères retirer.
+- Seules les phrases modifiées sont synthétisées, car les autres sont en cache. Tout est ensuite remixé. Sur la 5080, une relance prend 10 s sans changement, et environ 1 min 15 s pour quatre phrases corrigées, chargement du modèle de voix compris.
+
+La page de relecture prévue en P1 écrira ce même fichier, sans ligne de commande.
 
 ### Options utiles
 
@@ -184,11 +205,11 @@ python eval/overlap.py out/Sintel.2010.1080p_1.35-3.35 --video Sintel.2010.1080p
 - Le registre oublie les personnages secondaires : le vieil homme de la hutte n'y figure pas.
 - Avec 8 images par plan, la suite des actions était mieux suivie (« elle brandit un couteau »), mais la description prenait 50 min sur la 5080.
 
-Ces défauts sont les cibles de la détection des sons vocaux (P1) et des modèles plus grands du GX10, où le modèle tient en entier en mémoire et où 8 images par plan restent abordables.
+Ces défauts sont les cibles de la détection des sons vocaux (P1) et des modèles plus grands du GX10, où le modèle tient en entier en mémoire et où 8 images par plan restent abordables. En attendant, la relecture humaine les corrige : sur le doublage, quatre phrases corrigées (débris, fruit, couteau, main) ont été resynthétisées et remixées en 1 min 15 s environ, toujours sans chevaucher de réplique.
 
 ## Feuille de route
 
-- **P1** : pipeline modulaire avec reprise, vérification de chaque fait sur l'image, comparatif de voix, page de relecture accessible au clavier et au lecteur d'écran, déploiement Docker ARM64.
+- **P1** : pipeline modulaire avec reprise, vérification de chaque fait sur l'image, comparatif de voix, une page web pour tout faire sans ligne de commande (dépôt, suivi, relecture avec écoute, export) accessible au clavier et au lecteur d'écran, déploiement Docker ARM64.
 - **P2**, sur le GX10 : mesures de mémoire et de débit, comparaison de modèles de classe 120B.
 - **Ensuite** : tests avec des utilisateurs aveugles et malvoyants, mode étendu où la vidéo se met en pause (WCAG 1.2.7), autres langues.
 
