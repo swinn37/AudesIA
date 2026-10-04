@@ -581,21 +581,7 @@ Aucune offre française d'audiodescription par IA en local ou sur site n'a été
 | Télémétrie cachée | Variables d'environnement + run complet dans un réseau Docker sans sortie, qui a déjà révélé un appel caché de transformers au Hub, neutralisé |
 | Phase de test très courte | Tout prêt avant l'accès, plan tenable en une journée, entrées précalculées |
 
-## A10. Script de la vidéo (2 minutes, ~280 mots)
-
-| Temps | À l'écran | Voix off |
-| --- | --- | --- |
-| 0:00–0:15 | Écran noir, bande-son d'un extrait de Sintel (version française) sans image | « Fermez les yeux. Voilà ce que vit une personne aveugle devant la plupart des vidéos. On entend la musique, quelques mots… mais on ne sait pas ce qui se passe. » |
-| 0:15–0:30 | Chiffres : 1,7 million, 4 % (sources à l'écran : DREES, FAF) | « En France, 1,7 million de personnes ont une déficience visuelle. Pourtant, seulement 4 % des programmes télé sont audiodécrits, selon la Fédération des aveugles. En ligne, c'est encore plus rare. L'audiodescription humaine coûte cher, et les outils IA envoient vos vidéos dans le cloud. » |
-| 0:30–0:55 | Démo : même extrait avec la piste générée | « Voici Audesia. Il repère les silences entre les dialogues, décrit chaque plan avec un modèle de vision, vérifie chaque détail sur l'image, réécrit chaque phrase pour qu'elle tienne dans le silence, puis la lit avec une voix française. Le tout, 100 % en local. » |
-| 0:55–1:10 | Schéma d'architecture, puis l'éditeur | « Un éditeur accessible permet de relire et corriger chaque description avant l'export. Pour une médiathèque, une université ou une association, c'est la possibilité d'audiodécrire tout un catalogue, sans qu'aucune vidéo ne quitte le bâtiment. » |
-| 1:10–1:35 | Schéma mémoire : chaîne complète résidente, vidéos en parallèle, balayage jusqu'à 120B ; comparaison 5080 / GX10 | « Pourquoi le GX10 ? Vision, rédaction, transcription et voix y restent en mémoire en même temps, avec de la place pour plusieurs vidéos à la fois et pour tester des modèles de 120 milliards de paramètres. Sur ma carte de 16 gigas, le modèle de 12 milliards invente des détails, et celui de 26 milliards, qui décrit juste, déborde déjà sur le processeur. » |
-| 1:35–1:55 | Premiers résultats sur la 5080, puis plan de test GX10 | « Sur ma carte, le prototype ne couvre déjà aucune réplique, même chuchotée, mesuré contre la piste sans dialogues du film. Sur le GX10, je mesurerai la mémoire utilisée, la qualité face à la version 16 gigas et le temps de traitement. Le tout sera publié en open source. » |
-| 1:55–2:00 | Logo, lien GitHub | « Audesia : rendre chaque vidéo visible, à l'oreille. » |
-
-**Tournage :** OBS + micro-casque. Créditer la Blender Foundation (Sintel, CC BY) et Touhoppai (version française, CC BY). La démo tourne : utiliser `clip.mp4` (sans audiodescription) et `clip_ad.mp4` (avec), produits par `audesia_p0.py` sur la 5080, et l'indiquer à l'écran. Pour l'éditeur, filmer `relecture.html`, ouverte dans le navigateur depuis le même dossier.
-
-## A11. Sources
+## A10. Sources
 
 - Règlement du challenge (Conditions Générales, Gleam / ASUS) — dates, critères, grille de notation. Non publié ailleurs : en garder une copie.
 - [DREES, *Études et Résultats* n° 416 (juillet 2005)](https://drees.solidarites-sante.gouv.fr/publications/etudes-et-resultats/les-personnes-ayant-un-handicap-visuel-les-apports-de-lenquete), d'après l'enquête HID (1998 en institution, 1999-2000 à domicile) — 1,7 million de déficients visuels en France métropolitaine (29 pour 1 000), dont 207 000 aveugles ou malvoyants profonds (61 000 aveugles complets), 932 000 malvoyants moyens et 560 000 malvoyants légers.
