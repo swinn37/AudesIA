@@ -372,9 +372,9 @@ Audesia génère automatiquement une piste d'audiodescription en français pour 
 
 ## A2. Problème et contexte
 
-L'audiodescription reste l'exception. Selon la Fédération des aveugles et amblyopes de France, seulement 4 % des programmes de télévision sont audiodécrits ([chiffre repris dans une question écrite à l'Assemblée nationale, 2024](https://questions.assemblee-nationale.fr/dyn/16/questions/QANR5L16QE14921)). En ligne, elle reste rare : YouTube n'a ouvert le dépôt de pistes d'audiodescription à toutes les chaînes éligibles qu'en septembre 2026.
+L'audiodescription reste l'exception. Selon la Fédération des Aveugles de France, seulement 4 % des émissions de télévision sont audiodécrites ([communiqué de juillet 2019](https://aveuglesdefrance.org/app/uploads/2021/03/CP_Aveugles-de-France-au-festival-off-avignon-11-juillet-2019.pdf), sans source ni méthode ; chiffre repris dans une [question écrite à l'Assemblée nationale en 2024](https://questions.assemblee-nationale.fr/dyn/16/questions/QANR5L16QE14921)). En ligne, elle reste rare : YouTube n'a ouvert le dépôt de pistes d'audiodescription à toutes les chaînes éligibles qu'en septembre 2026.
 
-- **Le public concerné est large.** Près de 1,7 million de personnes ont une déficience visuelle en France, dont 207 000 aveugles ou malvoyants profonds et 932 000 malvoyants moyens (DREES, 2005, d'après l'enquête HID de 1998-2000). Avec le vieillissement de la population, ce chiffre va augmenter.
+- **Le public concerné est large.** Environ 1,7 million de personnes ont une déficience visuelle en France métropolitaine, dont 207 000 aveugles ou malvoyants profonds et 932 000 malvoyants moyens, soit 1,1 million avec une incapacité visuelle sévère (DREES, 2005, d'après l'enquête HID de 1998-2000). Les 560 000 autres, « malvoyants légers », ne seraient souvent pas comptés comme déficients visuels selon les critères médicaux (DREES). Ces données ont plus de 25 ans et la population a vieilli depuis.
 - **La production humaine ne passe pas à l'échelle.** Une audiodescription professionnelle demande un auteur spécialisé, un comédien, un studio et un mixage. C'est justifié pour un film de cinéma, pas pour une vidéo de formation, un cours en ligne ou la chaîne YouTube d'une association.
 - **Le cadre réglementaire se durcit.**
   - Les WCAG (critère 1.2.5, niveau AA) et le RGAA (critère 4.5) demandent une audiodescription synchronisée pour les vidéos préenregistrées, si nécessaire.
@@ -602,8 +602,9 @@ L'exécution locale est une condition, pas un confort : les vidéos à audiodéc
 ## A12. Sources
 
 - Règlement du challenge (Conditions Générales, Gleam / ASUS) — dates, critères, grille de notation. Non publié ailleurs : en garder une copie.
-- DREES, *Études et Résultats* n° 416 (juillet 2005), d'après l'enquête HID (1998-2000) — chiffres de la déficience visuelle.
-- [Question écrite n° 14921, Assemblée nationale (6 février 2024)](https://questions.assemblee-nationale.fr/dyn/16/questions/QANR5L16QE14921) — chiffre de 4 % attribué à la Fédération des aveugles et amblyopes de France.
+- [DREES, *Études et Résultats* n° 416 (juillet 2005)](https://drees.solidarites-sante.gouv.fr/publications/etudes-et-resultats/les-personnes-ayant-un-handicap-visuel-les-apports-de-lenquete), d'après l'enquête HID (1998 en institution, 1999-2000 à domicile) — 1,7 million de déficients visuels en France métropolitaine (29 pour 1 000), dont 207 000 aveugles ou malvoyants profonds (61 000 aveugles complets), 932 000 malvoyants moyens et 560 000 malvoyants légers.
+- [Fédération des Aveugles de France, communiqué du 11 juillet 2019](https://aveuglesdefrance.org/app/uploads/2021/03/CP_Aveugles-de-France-au-festival-off-avignon-11-juillet-2019.pdf) — 4 % des émissions de télévision audiodécrites, 100 films sur 500 au cinéma ; aucune source citée.
+- [Question écrite n° 14921, Assemblée nationale (6 février 2024)](https://questions.assemblee-nationale.fr/dyn/16/questions/QANR5L16QE14921) — reprend le chiffre de 4 %.
 - [Groupe VYV — Manifeste déficience visuelle 2024](https://www.groupe-vyv.fr/wp-content/uploads/2024/12/Manifeste-DV-2024-PDF.pdf)
 - [Charte de l'audiodescription (2008)](https://pedagogie.ac-orleans-tours.fr/documents/pdf/audiodescription_charte_mn37.pdf) · Arcom, *Guide de l'audiodescription* (décembre 2020)
 - [WCAG 2.2 — critère 1.2.5](https://www.w3.org/WAI/WCAG22/Understanding/audio-description-prerecorded.html) · [RGAA 4.1 — critère 4.5](https://accessibilite.numerique.gouv.fr/methode/criteres-et-tests/) · Directive (UE) 2019/882 (European Accessibility Act)
