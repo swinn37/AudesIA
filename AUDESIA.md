@@ -342,7 +342,11 @@ Ce que la relecture des descriptions, plan par plan et image par image, a fait c
 - la consigne demande la suite des actions, des objets nommés précisément et les états visibles, sans aucun exemple concret : l'exemple « une pomme » avait fait écrire « une pomme rouge » à la place d'un fruit à piquants ;
 - une passe de fluidité remplace la désignation déjà dite par « elle » ou une forme courte, et écarte les redites.
 
-Erreurs qui résistent sur la 5080 : un « tissu noir » là où la jeune fille regarde sous des débris, un « objet sphérique et piquant » au lieu d'un fruit, des « elle » ambigus quand deux personnages ont le même genre.
+Deux techniques visent les objets mal reconnus :
+- une copie éclaircie des images à contre-jour fait disparaître le « tissu noir » (le modèle y voit un morceau de bois) ;
+- une question directe sur trois détails agrandis en pleine résolution reconnaît le fruit sur la bonne image.
+
+Mais sur la 5080 la reconnaissance reste fragile. Sur trois images du même plan, le modèle répond « fruit épineux », « gant à pointes » ou « rien d'identifiable ». La posture est lue comme « se cache derrière » au lieu de « regarde dessous », et des « elle » restent ambigus quand deux personnages ont le même genre. Ces cas sont à remesurer sur le GX10, avec des modèles plus grands, une entrée haute résolution native et la vidéo.
 
 Les chuchotements, d'abord manqués par la VAD, sont rattrapés par les segments Whisper au débit plausible. Priorité P1 : les sons vocaux brefs (cris, gémissements, souffles), par l'énergie de la voix isolée avec Demucs.
 

@@ -53,6 +53,12 @@ MAX_WINDOW = 10.0   # s
 MAX_IMAGES = 4      # 8 suivait mieux les actions, mais la description passait de 9 à 50 min sur la 5080
 FRAME_STEP = 0.7    # s : écart visé entre deux images dans les plans courts
 MAX_CAST = 10       # images (une par plan) pour le registre des personnages
+DARK_LEVEL = 40     # luminance sous laquelle un pixel compte comme très sombre (0-255)
+DARK_SHARE = 0.25   # contre-jour : plus de 25 % de pixels très sombres…
+BRIGHT_LEVEL = 170  # …et plus de 5 % de pixels clairs (> BRIGHT_LEVEL) : le modèle reçoit aussi une copie éclaircie
+BRIGHT_SHARE = 0.05  # (mesuré : débris à contre-jour 42-55 % sombres / 9-14 % clairs ; hutte sombre 90-97 % / 0 %)
+GAMMA = 2.2         # éclaircissement de cette copie : à contre-jour, des débris passaient pour un « tissu noir »
+VAGUE = re.compile(r"\b(objets?|sphères?|sphériques?|masses?|formes?|choses?|éléments?)\b", re.I)
 MAX_SPEEDUP = 1.10
 REMENTION_S = 15.0  # s : au-delà, un personnage est redésigné en entier plutôt que par « elle » ou « il »
 REPEAT_RATIO = 0.6  # similarité au-delà de laquelle une description redit la précédente (redite mesurée : 0,75)
@@ -62,7 +68,7 @@ TTS_INSTRUCT = "Voix calme et neutre de narrateur, diction claire, débit régul
 
 DESCRIBE = (
     "Tu prépares l'audiodescription d'un film. Les images sont extraites, dans l'ordre, d'un passage sans "
-    "dialogue. Décris ce qui se passe : la suite des actions d'une "
+    "dialogue ; des versions éclaircies d'images sombres peuvent suivre. Décris ce qui se passe : la suite des actions d'une "
     "image à l'autre (ce que font les personnages, ce qu'ils regardent, ce qu'ils tiennent), le lieu, les "
     "objets et les animaux désignés par leur nom courant quand ils sont reconnaissables, plutôt que par une "
     "catégorie vague, les états visibles (blessé, effrayé, souriant) et les textes lisibles. N'interprète pas "
@@ -76,6 +82,11 @@ Réécris la description de ce plan pour qu'elle soit fidèle aux images et coh�
 - attribue une action, une main ou une silhouette à un personnage du registre quand les images (vêtements, gants, \
 position) et l'enchaînement des plans le montrent ;
 - nomme précisément ce que les images rendent évident, avec les états visibles (blessé, effrayé) ;
+- des versions éclaircies peuvent suivre : ce sont les mêmes images, sers-t'en pour reconnaître ce qui est sombre ; \
+une précision obtenue sur des détails agrandis peut aussi être fournie : reprends-la ;
+- décris les gestes tels qu'ils se voient, sans leur prêter d'intention ;
+- si tu reconnais le type d'un objet ou d'un être vivant mais pas son espèce exacte avec certitude, nomme le type \
+et décris son aspect plutôt que de risquer un nom d'espèce ;
 - retire tout ce que les images ne montrent pas clairement, et n'ajoute rien qui n'y soit visible.
 Réponds uniquement par la description révisée, en français, en 2 à 4 phrases."""
 CAST = (
@@ -85,6 +96,11 @@ CAST = (
     "garçon au chapeau rouge » plutôt qu'« un enfant », « le chien noir » plutôt qu'« un animal »), et ses traits "
     "visuels distinctifs (cheveux, vêtements, accessoires). N'invente aucun personnage. Réponds uniquement en "
     'JSON : {"personnages": [{"designation": "...", "traits": "..."}]}'
+)
+ZOOM = (
+    "La première image est un plan de film, les trois suivantes des détails agrandis de ce plan (gauche, centre, "
+    "droite). Que tiennent ou manipulent les personnages, et quels objets reconnais-tu ? Nomme précisément ce que tu "
+    "reconnais, n'invente rien. Deux phrases. Si tu ne reconnais rien de précis, réponds « inconnu »."
 )
 WRITE = """Tu es audiodescripteur. À partir de la description factuelle d'un passage, écris \
 l'audiodescription qui sera lue par une voix de synthèse dans un silence entre deux dialogues.
@@ -306,6 +322,38 @@ def detect_shots(clip):
     return [[s.seconds, e.seconds] for s, e in detect(str(clip), AdaptiveDetector())]
 
 
+def as_image(path):
+    return {"type": "image_url", "image_url": {"url": "data:image/jpeg;base64," + base64.b64encode(path.read_bytes()).decode()}}
+
+
+def backlit(path):
+    """Contre-jour : une grande zone très sombre et un fond clair. Une scène entièrement sombre ne compte pas :
+    éclaircie, elle ne gagne rien et prête à confusion."""
+    import numpy as np
+    from PIL import Image
+    a = np.asarray(Image.open(path).convert("L"))
+    return bool((a < DARK_LEVEL).mean() > DARK_SHARE and (a > BRIGHT_LEVEL).mean() > BRIGHT_SHARE)
+
+
+def brighten(path):
+    """Copie éclaircie (gamma) d'une image à grande zone sombre."""
+    from PIL import Image
+    bright = path.with_name(path.stem + "_clair.jpg")
+    Image.open(path).point(lambda v: round(255 * (v / 255) ** (1 / GAMMA))).save(bright, quality=90)
+    return bright
+
+
+def tiles(clip, t, folder):
+    """Trois détails en pleine résolution (gauche, centre, droite) de l'image à t, pour nommer un petit objet :
+    réduit, un fruit à piquants n'était qu'un « objet sphérique » ; agrandi, il est reconnu."""
+    paths = []
+    for i in range(3):
+        p = folder / f"{t:08.2f}_tuile{i}.jpg"
+        ff("-ss", t, "-i", clip, "-frames:v", 1, "-vf", f"crop=iw*0.4:ih:iw*0.3*{i}:0", "-q:v", 3, p)
+        paths.append(p)
+    return paths
+
+
 def chat(llm, model, system, content, json_mode=False):
     extra = {"response_format": {"type": "json_object"}} if json_mode else {}
     # Sans reasoning_effort="none", Gemma 4 sous Ollama « réfléchit » 2 à 3 min et rend un contenu vide.
@@ -325,17 +373,21 @@ def describe(clip, segs, shots, a, out):
     wins = [w for sil in segs["silences"] for w in windows(sil, shots)]
     items = []
     for k, w in enumerate(wins):
-        times, images = frame_times(w), []
+        times, images, bright = frame_times(w), [], []
         for t in times:
             f = out / "frames" / f"{t:08.2f}.jpg"
             ff("-ss", t, "-i", clip, "-frames:v", 1, "-vf", "scale=1024:-2", "-q:v", 3, f)
-            images.append({"type": "image_url",
-                           "image_url": {"url": "data:image/jpeg;base64," + base64.b64encode(f.read_bytes()).decode()}})
+            images.append(as_image(f))
+            if backlit(f):
+                bright.append(as_image(brighten(f)))
+        extra = [{"type": "text", "text": "Versions éclaircies des images sombres :"}, *bright] if bright else []
         # Images seules : en contexte, les répliques (« Cette lame… ») et les descriptions précédentes
         # amorçaient des inventions qui se propageaient d'une fenêtre à l'autre.
-        raw = chat(llm, a.model, DESCRIBE, [{"type": "text", "text": "Décris cette suite d'images."}, *images])
-        items.append({"id": f"d_{k:04d}", "window": w, "frames": times, "raw_description": raw, "images": images})
-        print(f"  {k + 1}/{len(wins)}  {w[0]:6.1f}–{w[1]:6.1f} s  décrit ({len(images)} images)", flush=True)
+        raw = chat(llm, a.model, DESCRIBE, [{"type": "text", "text": "Décris cette suite d'images."}, *images, *extra])
+        items.append({"id": f"d_{k:04d}", "window": w, "frames": times, "brightened": len(bright),
+                      "raw_description": raw, "images": images, "extra": extra})
+        print(f"  {k + 1}/{len(wins)}  {w[0]:6.1f}–{w[1]:6.1f} s  décrit ({len(images)} images, "
+              f"{len(bright)} éclaircies)", flush=True)
 
     # Une image par plan, pour que la même personne garde la même désignation tout au long de l'extrait.
     picks = items if len(items) <= MAX_CAST else [items[int(i * len(items) / MAX_CAST)] for i in range(MAX_CAST)]
@@ -349,13 +401,23 @@ def describe(clip, segs, shots, a, out):
     said, previous = [], "aucun"
     for k, x in enumerate(items):
         w = x["window"]
-        images = x.pop("images")  # pas de base64 dans le cache JSON
+        visuals = x.pop("images") + x.pop("extra")  # pas de base64 dans le cache JSON
+        note, x["zoom"] = "", None
+        if VAGUE.search(x["raw_description"]):
+            # Objet nommé vaguement : question directe sur des détails agrandis de l'image centrale, sans la
+            # description (elle ancrait la réponse sur « objet sphérique »). Envoyés en vrac dans la révision,
+            # ces détails ne suffisaient pas à la faire sortir de « objet ».
+            mid = x["frames"][len(x["frames"]) // 2]
+            zoomed = [as_image(out / "frames" / f"{mid:08.2f}.jpg"), *[as_image(p) for p in tiles(clip, mid, out / "frames")]]
+            x["zoom"] = chat(llm, a.model, ZOOM, [{"type": "text", "text": "Plan et détails agrandis :"}, *zoomed])
+            if "inconnu" not in x["zoom"].lower():
+                note = f"\nPrécision sur l'objet, d'après des détails agrandis : {x['zoom']}"
         following = items[k + 1]["raw_description"] if k + 1 < len(items) else "aucun"
         # Révision sur les images, avec le registre et les plans voisins : désignations stables, actions
         # rattachées au bon personnage, rien de ce que les images ne montrent pas.
         desc = chat(llm, a.model, REVISE, [{"type": "text", "text": (
             f"Registre des personnages :\n{registry}\n\nPlan précédent : {previous}\n"
-            f"Ce plan : {x['raw_description']}\nPlan suivant : {following}")}, *images]) or x["raw_description"]
+            f"Ce plan : {x['raw_description']}{note}\nPlan suivant : {following}")}, *visuals]) or x["raw_description"]
         previous = desc
         heard = " / ".join(d["text"] for d in segs["dialogues"] if d["end"] <= w[1])[-600:] or "aucun"
         context = (f"Personnages :\n{registry}\nDéjà décrit : {' '.join(said[-3:]) or 'rien'}\n"
@@ -366,7 +428,8 @@ def describe(clip, segs, shots, a, out):
         variants = parse_variants(chat(llm, a.model, WRITE, f"Description : {desc}\n{context}\n{limits}", json_mode=True))
         x.update(description=desc, budget_chars=b, variants=variants)
         said += variants[:1]
-        print(f"  {w[0]:6.1f}–{w[1]:6.1f} s  {variants[:1]}", flush=True)
+        print(f"  {w[0]:6.1f}–{w[1]:6.1f} s  {'[zoom : ' + x['zoom'][:60] + '] ' if x['zoom'] else ''}{variants[:1]}",
+              flush=True)
     return items
 
 
@@ -485,6 +548,7 @@ def selftest():
     assert parse_variants('Voici : {"variantes": ["Elle court.", "Elle court vers la porte.", "Elle court."]}') \
         == ["Elle court vers la porte.", "Elle court."]
     assert parse_variants("pas de JSON") == []
+    assert VAGUE.search("Elle tient un objet sphérique et piquant.") and not VAGUE.search("Elle tient un fruit épineux.")
     girl, dragon = "la jeune fille aux cheveux roux", "le petit dragon"
     assert short_form(girl) == "la jeune fille" and short_form(dragon) == dragon
     assert lighten("La jeune fille aux cheveux roux grimpe.", [girl, dragon], {girl}, 4) == "Elle grimpe."

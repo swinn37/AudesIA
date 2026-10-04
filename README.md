@@ -141,7 +141,7 @@ Mesures du prototype sur RTX 5080 (16 Go), le 4 octobre 2026 : *Sintel*, de 1:35
 | Descriptions placées | 13 sur 13 | 10 sur 10 |
 | Sans chevauchement des répliques, chuchotements compris | **13 sur 13 (100 %)** | **10 sur 10 (100 %)** |
 | Sans chevauchement d'aucune voix (répliques, cris, souffles) | 10 sur 13 (77 %), au plus 0,66 s | 6 sur 10 (60 %), au plus 1 s |
-| Couverture des silences utilisables | 68 % | 73 % |
+| Couverture des silences utilisables | 68 % | 76 % |
 | Fiabilité de la vérité terrain (musique atténuée dans le résidu) | 6,9 dB | 15,8 dB |
 
 - **Modèle de vision et de rédaction :** Gemma 4 26B-A4B (4 bits). Il ne tient pas en entier dans 16 Go : Ollama en place une partie sur le CPU.
@@ -172,11 +172,14 @@ python eval/overlap.py out/Sintel.2010.1080p_1.35-3.35 --video Sintel.2010.1080p
 - Les actions se perdaient (« accroupie sur un toit »). La consigne demande désormais la suite des actions et des objets nommés précisément : « Elle grimpe sur les façades et s'accroupit sur un toit rouge ».
 - Un exemple concret dans la consigne (« une pomme ») a fait écrire « une pomme rouge » à la place d'un fruit à piquants. La consigne n'a plus d'exemple et demande de ne pas remplacer un objet ambigu par un objet familier.
 - La désignation complète revenait à chaque plan. Une passe de fluidité la remplace par « elle » ou une forme courte, et écarte les redites (« Elle tend sa main gantée vers le dragon blessé », dit deux fois de suite).
+- À contre-jour, des débris passaient pour un « tissu noir ». Une image à grande zone sombre sur fond clair est désormais aussi envoyée éclaircie ; le modèle y voit « un morceau de bois sombre ».
+- Un petit objet restait « un objet sphérique ». Quand la description reste vague, une question directe porte sur trois détails agrandis en pleine résolution ; sur l'image centrale du plan, le modèle reconnaît alors « un fruit épineux ».
 
 **Limites observées :**
 
 - Des éclats de voix brefs (cris, gémissements du dragon, souffles) passent entre les mailles dans le passage musical. La Charte demande de ne pas couvrir ces sons.
-- Le modèle confond encore certains objets : un « tissu noir » là où la jeune fille regarde sous des débris, un « objet sphérique et piquant » au lieu d'un fruit à coque hérissée de piquants.
+- La reconnaissance du fruit reste fragile. Sur trois images agrandies du même plan, le modèle répond « un fruit épineux », « un gant à pointes » ou « rien d'identifiable », et un même run peut basculer vers « une sphère épineuse ». C'est la limite de reconnaissance d'un modèle de 26B en 4 bits.
+- Éclaircie, la masse sombre devient bien un morceau de bois, mais la posture est lue comme « elle se cache derrière » au lieu de « elle regarde dessous ». L'action se lit dans le mouvement, pas sur des images fixes.
 - Quand deux personnages ont le même genre (en VO : « la jeune femme » et « la petite créature ailée »), le rédacteur écrit encore des « elle » ambigus (« Elle sourit, elle crie »).
 - Le registre oublie les personnages secondaires : le vieil homme de la hutte n'y figure pas.
 - Avec 8 images par plan, la suite des actions était mieux suivie (« elle brandit un couteau »), mais la description prenait 50 min sur la 5080.
