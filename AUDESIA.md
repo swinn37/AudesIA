@@ -128,10 +128,10 @@ flowchart TD
   A --> C[Analyse visuelle<br/>PySceneDetect · visages]
   B --> D[Description des plans<br/>Qwen3.6-35B-A3B]
   C --> D
-  D --> V[Vérification visuelle<br/>chaque fait sur l'image]
-  V --> R[Registre des personnages<br/>et cohérence sur tout l'extrait]
-  R --> E[Rédaction en 3 variantes<br/>Gemma 4 26B-A4B]
-  E --> F[Voix française<br/>durée réelle + retranscription]
+  D --> R[Registre des personnages<br/>sur tout l'extrait]
+  R --> V[Révision sur les images<br/>registre et plans voisins]
+  V --> E[Rédaction en 3 variantes<br/>Gemma 4 26B-A4B]
+  E --> F[Fluidité et voix française<br/>durée réelle + retranscription]
   F -- aucune variante ne tient --> E
   F -- variante retenue --> G[Éditeur de relecture<br/>HTML natif, clavier et lecteur d'écran]
   G -- corriger ou régénérer --> E
@@ -148,7 +148,7 @@ flowchart TD
 | 4 | Personnages | images clés | `characters.json` : groupes de visages (prises de vues réelles) ou marquage visuel (animation) ; noms saisis dans l'éditeur |
 | 5 | Description | plans + contexte | `raw_descriptions.json` : description factuelle par plan |
 | 6 | Vérification | descriptions brutes + images clés | `facts.json` : faits élémentaires, validés ou rejetés sur les images |
-| 6 bis | Registre et cohérence | descriptions vérifiées + une image par plan | `personnages.json` (désignation stable et traits de chaque personnage) ; descriptions harmonisées, sans fait ajouté |
+| 6 bis | Registre et révision | une image par plan, puis les images de chaque plan + registre + plans voisins | `personnages.json` (désignation stable et traits de chaque personnage) ; descriptions révisées : même désignation pour une même personne, actions rattachées au bon personnage, rien de non visible |
 | 7 | Rédaction | faits validés + silences | `descriptions.json` : 3 variantes par silence, budget en caractères |
 | 8 | Voix + calage | variantes | `tts/*.wav`, durée réelle, retranscription ; variante retenue, sinon retour à 7 |
 | 9 | Relecture | `descriptions.json` | versions corrigées (dans `descriptions.json`) |
@@ -196,7 +196,7 @@ Dérivées de la *Charte de l'audiodescription* (2008) et du *Guide de l'audiode
 - Ne pas répéter ce que les dialogues ou les sons disent déjà.
 - Nommer un personnage seulement si son nom a été prononcé ou affiché (ne pas anticiper) ; sinon une désignation stable (« la jeune femme au manteau rouge »).
 - Lire les textes importants à l'écran (titres, panneaux, génériques).
-- Tenir compte de ce qui a déjà été décrit pour éviter les répétitions.
+- Tenir compte de ce qui a déjà été décrit pour éviter les répétitions : après la première mention, « elle », « il » ou une forme courte ; la désignation complète revient après plus de 15 s sans description. Une redite de la description précédente est écartée (passe de fluidité, avant la voix).
 - Terminer toute description commencée.
 - Respecter strictement le budget fourni, en 3 variantes de longueurs différentes.
 - Limite connue : la Charte demande aussi de ne jamais couvrir un son ou une musique signifiants. Pour l'instant, seule la parole est détectée.
@@ -327,16 +327,22 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026 ; versions plus réce
 **Livrables pour l'organisateur :** rapport chiffré, journaux et relevés mémoire, extraits avant/après, comparaison GX10 vs 5080, courbe taille de modèle / qualité, log du run hors ligne, dépôt GitHub public.
 
 **Premiers résultats** (4 octobre 2026, RTX 5080, Sintel 1:35–3:35, mesurés avec `eval/overlap.py`) :
-- version originale : 13 descriptions sur 13 sans chevauchement des répliques, 10 sur 13 sans chevauchement d'aucune voix (éclats vocaux de moins de 0,7 s), couverture de 76 % ;
-- doublage français (vérité terrain plus nette, musique atténuée de 15,8 dB) : 10 sur 10 sans chevauchement des répliques, chuchotements compris, 6 sur 10 sans chevauchement d'aucune voix, couverture de 69 % ;
-- 12 à 13 min de calcul pour 2 min de vidéo (au-dessus de l'objectif de 5 min par minute), parce que Gemma 4 26B déborde sur le CPU.
+- version originale : 13 descriptions sur 13 sans chevauchement des répliques, 10 sur 13 sans chevauchement d'aucune voix (éclats vocaux de moins de 0,7 s), couverture de 68 % ;
+- doublage français (vérité terrain plus nette, musique atténuée de 15,8 dB) : 10 sur 10 sans chevauchement des répliques, chuchotements compris, 6 sur 10 sans chevauchement d'aucune voix, couverture de 73 % ;
+- 15 à 27 min de calcul pour 2 min de vidéo selon la charge du GPU (objectif : moins de 5 min par minute), parce que Gemma 4 26B déborde sur le CPU. Avec 8 images par plan, la suite des actions était mieux suivie, mais la description prenait 50 min : c'est un réglage pour le GX10.
 
 Premier choix de modèle par la mesure, sur les 7 plans de la seconde partie vérifiés à l'image :
 - Gemma 4 12B inventait un homme, un « livre taché de sang » (les ailes du dragon) et une hache ;
 - Qwen3.6 35B-A3B décrivait juste 6 plans sur 7, mais inventait une personne ;
 - Gemma 4 26B-A4B décrivait juste 6 plans sur 7 sans rien inventer.
 
-Le modèle de vision ne reçoit plus que les images, puis une passe de vérification confronte sa description aux images : les répliques et les descriptions précédentes, en contexte, amorçaient des inventions. Un registre des personnages et une passe de cohérence sur tout l'extrait gardent ensuite les mêmes désignations : « la jeune femme rousse » et « la petite créature ailée », identiques dans les deux versions, alors qu'une même personne devenait auparavant deux ou trois personnages.
+Ce que la relecture des descriptions, plan par plan et image par image, a fait changer :
+- le modèle de vision ne reçoit plus que les images : les répliques et les descriptions précédentes, en contexte, amorçaient des inventions ;
+- un registre des personnages, puis une révision de chaque description sur ses images avec les plans voisins, gardent une même désignation et rattachent les actions au bon personnage : en VF, « la jeune fille aux cheveux roux » et « le petit dragon », et « elle tend une main gantée vers le dragon blessé » ;
+- la consigne demande la suite des actions, des objets nommés précisément et les états visibles, sans aucun exemple concret : l'exemple « une pomme » avait fait écrire « une pomme rouge » à la place d'un fruit à piquants ;
+- une passe de fluidité remplace la désignation déjà dite par « elle » ou une forme courte, et écarte les redites.
+
+Erreurs qui résistent sur la 5080 : un « tissu noir » là où la jeune fille regarde sous des débris, un « objet sphérique et piquant » au lieu d'un fruit, des « elle » ambigus quand deux personnages ont le même genre.
 
 Les chuchotements, d'abord manqués par la VAD, sont rattrapés par les segments Whisper au débit plausible. Priorité P1 : les sons vocaux brefs (cris, gémissements, souffles), par l'énergie de la voix isolée avec Demucs.
 

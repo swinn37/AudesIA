@@ -15,7 +15,7 @@ Installation (WSL2, RTX 5080) :
   ollama pull gemma4:26b-a4b-it-qat
 
 Sintel (Blender Foundation, CC BY 3.0) : https://download.blender.org/durian/movies/
-De 1:35 à 3:35 (version originale) : la scène du gardien, 12 répliques séparées
+De 1:35 à 3:35 (version originale) : la scène de la hutte, 12 répliques séparées
 de silences courts, puis 51 s sans dialogue.
 
 Usage :
@@ -28,6 +28,7 @@ mixage sont refaits à chaque lancement (changer --voice ou --cps ne coûte que 
 """
 import argparse
 import base64
+import difflib
 import gc
 import json
 import math
@@ -49,51 +50,56 @@ MIN_SILENCE = 2.0   # s : silence utilisable minimal (à 1,5 s, des descriptions
 MARGIN = 0.2        # s : marge avant et après chaque description
 WINDOW = 5.0        # s : durée visée d'une fenêtre dans un long silence (coupée aux changements de plan)
 MAX_WINDOW = 10.0   # s
-MAX_IMAGES = 4
+MAX_IMAGES = 4      # 8 suivait mieux les actions, mais la description passait de 9 à 50 min sur la 5080
+FRAME_STEP = 0.7    # s : écart visé entre deux images dans les plans courts
 MAX_CAST = 10       # images (une par plan) pour le registre des personnages
 MAX_SPEEDUP = 1.10
+REMENTION_S = 15.0  # s : au-delà, un personnage est redésigné en entier plutôt que par « elle » ou « il »
+REPEAT_RATIO = 0.6  # similarité au-delà de laquelle une description redit la précédente (redite mesurée : 0,75)
 DUCK = 0.3          # gain de la bande-son sous la voix
 RAMP = 0.25         # s : rampe d'atténuation
 TTS_INSTRUCT = "Voix calme et neutre de narrateur, diction claire, débit régulier."
 
 DESCRIBE = (
-    "Tu prépares l'audiodescription d'un film. Les images sont extraites, dans l'ordre, d'un passage "
-    "sans dialogue. Décris uniquement ce qui est visible : personnages (apparence, vêtements, position, "
-    "gestes, expressions), actions, lieu, moment, textes lisibles. N'interprète pas les intentions et "
-    "n'invente rien : omets ce qui est incertain. Réponds en français, en 2 à 4 phrases factuelles."
+    "Tu prépares l'audiodescription d'un film. Les images sont extraites, dans l'ordre, d'un passage sans "
+    "dialogue. Décris ce qui se passe : la suite des actions d'une "
+    "image à l'autre (ce que font les personnages, ce qu'ils regardent, ce qu'ils tiennent), le lieu, les "
+    "objets et les animaux désignés par leur nom courant quand ils sont reconnaissables, plutôt que par une "
+    "catégorie vague, les états visibles (blessé, effrayé, souriant) et les textes lisibles. N'interprète pas "
+    "les intentions et n'invente rien : ce qui est trop flou pour être reconnu, ne le mentionne pas, et ne "
+    "remplace pas un objet ambigu par un objet familier. Réponds en français, en 3 à 5 phrases factuelles."
 )
-VERIFY = (
-    "Voici des images extraites d'un film et une description de ces images. Vérifie chaque élément de la "
-    "description sur les images : supprime tout personnage, objet, arme, blessure ou action qui n'y est pas "
-    "clairement visible, et corrige les identifications fausses (une créature, un animal, un objet). "
-    "Réponds uniquement par la description corrigée, en français."
-)
+REVISE = """Tu révises la description d'un plan de film pour une audiodescription. Tu reçois les images du \
+plan, le registre des personnages et les descriptions du plan précédent, de ce plan et du plan suivant. \
+Réécris la description de ce plan pour qu'elle soit fidèle aux images et cohérente avec le reste du film :
+- désigne chaque personnage avec la désignation du registre, toujours la même ;
+- attribue une action, une main ou une silhouette à un personnage du registre quand les images (vêtements, gants, \
+position) et l'enchaînement des plans le montrent ;
+- nomme précisément ce que les images rendent évident, avec les états visibles (blessé, effrayé) ;
+- retire tout ce que les images ne montrent pas clairement, et n'ajoute rien qui n'y soit visible.
+Réponds uniquement par la description révisée, en français, en 2 à 4 phrases."""
 CAST = (
     "Ces images viennent, dans l'ordre, d'un même extrait de film. Repère les personnages visibles (humains, "
-    "animaux, créatures) et regroupe ceux qui sont la même personne d'une image à l'autre. Pour chacun, donne une "
-    "désignation courte et stable pour une audiodescription (par exemple « la jeune femme rousse ») et ses traits "
+    "animaux, créatures) et regroupe ceux qui sont la même personne d'une image à l'autre. Pour chacun, donne la "
+    "désignation la plus précise que les images permettent, courte et stable pour une audiodescription (« le "
+    "garçon au chapeau rouge » plutôt qu'« un enfant », « le chien noir » plutôt qu'« un animal »), et ses traits "
     "visuels distinctifs (cheveux, vêtements, accessoires). N'invente aucun personnage. Réponds uniquement en "
     'JSON : {"personnages": [{"designation": "...", "traits": "..."}]}'
 )
-COHERE = """Tu révises une audiodescription. Tu reçois le registre des personnages et les descriptions \
-vérifiées de chaque plan, dans l'ordre. Réécris chaque description pour que l'ensemble soit fidèle, cohérent et fluide :
-- désigne chaque personnage avec la désignation du registre : une même personne ne doit jamais devenir plusieurs personnages ;
-- corrige les contradictions entre descriptions (cheveux, vêtements) en suivant le registre ;
-- attribue une main ou une silhouette à un personnage du registre seulement si ses traits et l'enchaînement des plans le rendent évident ;
-- n'ajoute aucun fait, objet ou action absent des descriptions ; retire ce qui est douteux ou contradictoire ;
-- garde l'ordre et le nombre de descriptions.
-Réponds uniquement en JSON : {"descriptions": ["...", "..."]}, une par plan."""
 WRITE = """Tu es audiodescripteur. À partir de la description factuelle d'un passage, écris \
 l'audiodescription qui sera lue par une voix de synthèse dans un silence entre deux dialogues.
 Règles (Charte de l'audiodescription) :
 - présent de l'indicatif, troisième personne, phrases courtes, mots simples et précis ;
 - jamais « on voit » ni « nous voyons » ;
 - uniquement ce qui est visible : qui, quoi, où ; ni interprétation ni anticipation ;
+- privilégie l'action principale du plan et les états visibles des personnages (blessé, effrayé) ;
 - n'ajoute rien qui ne figure pas dans la description ;
 - ne répète ni les dialogues ni ce qui a déjà été décrit ;
 - ne nomme un personnage que si son nom a été prononcé ou affiché ; sinon, sa désignation \
 dans la liste des personnages, toujours la même ;
-- si le personnage est le même que dans la description précédente, tu peux écrire « elle » ou « il » ;
+- ne répète pas la désignation complète d'un personnage déjà désigné juste avant : écris « elle », « il » \
+ou une forme courte de sa désignation ; si deux personnages du même genre sont en jeu, garde leurs formes \
+courtes plutôt que « elle » ou « il » ;
 - lis les textes importants à l'écran ;
 - chaque variante est complète et se termine par un point.
 Réponds uniquement en JSON : {"variantes": ["...", "...", "..."]}, trois variantes de longueur \
@@ -159,13 +165,11 @@ def windows(silence, shots):
     return split
 
 
-def frame_times(win, shots):
-    """Milieu de chaque plan visible dans la fenêtre (au plus MAX_IMAGES) ; 3 images si un seul plan."""
+def frame_times(win):
+    """De 3 à MAX_IMAGES images réparties sur la fenêtre, environ FRAME_STEP s d'écart dans les plans courts."""
     a, b = win
-    mids = [(max(a, s) + min(b, e)) / 2 for s, e in shots if s < b and e > a]
-    if len(mids) < 2:
-        mids = [a + (b - a) * k / 4 for k in (1, 2, 3)]
-    return mids if len(mids) <= MAX_IMAGES else [mids[int(i * len(mids) / MAX_IMAGES)] for i in range(MAX_IMAGES)]
+    n = min(MAX_IMAGES, max(3, round((b - a) / FRAME_STEP)))
+    return [a + (b - a) * (i + 0.5) / n for i in range(n)]
 
 
 def budget(win, cps):
@@ -184,6 +188,42 @@ def fit(variants, avail, synth):
             return text, wav, sr, 1.0
         got = text, wav, sr, len(wav) / sr / avail
     return got if got and got[3] <= MAX_SPEEDUP else None
+
+
+def short_form(name):
+    """« la jeune fille aux cheveux roux » → « la jeune fille » : la désignation sans ses compléments."""
+    return re.split(r" (?:aux?|à|en|avec|vêtue?s?|portant|dont) ", name, maxsplit=1)[0]
+
+
+def lighten(text, names, recent, gap):
+    """Évite de redire la désignation complète d'un personnage désigné à la description précédente : « elle » ou
+    « il » en tête de phrase (si aucun autre personnage récent n'a le même genre), forme courte ailleurs."""
+    if gap > REMENTION_S:
+        return text
+    for name in names:
+        if name not in recent:
+            continue
+        article = name.split()[0].lower()
+        pronoun = {"la": "Elle", "le": "Il"}.get(article)
+        if pronoun and not any(n != name and n.split()[0].lower() == article for n in recent):
+            text = re.sub(r"(^|[.!?]\s+)" + re.escape(name), lambda m: m.group(1) + pronoun, text, flags=re.I)
+        text = re.sub(re.escape(name), short_form(name), text, flags=re.I)
+    return re.sub(r"(^|[.!?]\s+)([a-zà-ÿ])", lambda m: m.group(1) + m.group(2).upper(), text)
+
+
+def mentioned(text, names, recent):
+    """Personnages désignés dans text, plus ceux de recent qu'un « elle » ou « il » initial continue de désigner."""
+    low = text.lower()
+    found = {n for n in names if n.lower() in low or short_form(n).lower() in low}
+    lead = re.match(r"(elle|il)\b", low)
+    if lead:
+        found |= {n for n in recent if n.split()[0].lower() == {"elle": "la", "il": "le"}[lead.group(1)]}
+    return found
+
+
+def repeats(text, previous):
+    """Vrai si text redit presque la description précédente (similarité des caractères ≥ REPEAT_RATIO)."""
+    return difflib.SequenceMatcher(None, text.lower(), previous.lower()).ratio() >= REPEAT_RATIO
 
 
 def duck_envelope(n, sr, spans):
@@ -209,13 +249,6 @@ def parse_variants(raw):
     """Variantes du JSON du rédacteur, dédoublonnées, d'au moins deux mots, de la plus longue à la plus courte."""
     return sorted({s.strip() for s in json_list(raw, "variantes") if isinstance(s, str) and len(s.split()) >= 2},
                   key=len, reverse=True)
-
-
-def keep_if_complete(revised, original):
-    """Révision de la passe de cohérence si elle couvre chaque plan ; sinon les descriptions d'origine."""
-    ok = len(revised) == len(original) and all(isinstance(r, str) and r.strip() for r in revised)
-    # Le modèle recopie parfois l'horodatage reçu en tête de description : « [58.1–67.1 s] … ».
-    return [re.sub(r"^\s*\[[^\]]*\]\s*", "", r).strip() for r in revised] if ok else original
 
 
 def vtt(items):
@@ -282,17 +315,17 @@ def chat(llm, model, system, content, json_mode=False):
 
 
 def describe(clip, segs, shots, a, out):
-    """1. Par fenêtre : description des images seules (VLM), vérifiée sur les mêmes images.
-    2. Sur l'ensemble : registre des personnages, puis passe de cohérence (désignations stables, contradictions).
-    3. Par fenêtre : 3 variantes calées (rédacteur)."""
-    # ponytail: vérification en un appel par le même modèle ; vérification fait par fait en P1 si besoin.
+    """1. Par fenêtre : description de la suite d'images seule (VLM).
+    2. Sur l'ensemble : registre des personnages.
+    3. Par fenêtre : révision sur les mêmes images avec le registre et les plans voisins, puis 3 variantes calées."""
+    # ponytail: révision en un appel par le même modèle ; vérification fait par fait en P1 si besoin.
     from openai import OpenAI
     llm = OpenAI(base_url=a.base_url, api_key="local")
     (out / "frames").mkdir(exist_ok=True)
     wins = [w for sil in segs["silences"] for w in windows(sil, shots)]
     items = []
     for k, w in enumerate(wins):
-        times, images = frame_times(w, shots), []
+        times, images = frame_times(w), []
         for t in times:
             f = out / "frames" / f"{t:08.2f}.jpg"
             ff("-ss", t, "-i", clip, "-frames:v", 1, "-vf", "scale=1024:-2", "-q:v", 3, f)
@@ -300,11 +333,9 @@ def describe(clip, segs, shots, a, out):
                            "image_url": {"url": "data:image/jpeg;base64," + base64.b64encode(f.read_bytes()).decode()}})
         # Images seules : en contexte, les répliques (« Cette lame… ») et les descriptions précédentes
         # amorçaient des inventions qui se propageaient d'une fenêtre à l'autre.
-        raw = chat(llm, a.model, DESCRIBE, [{"type": "text", "text": "Décris ces images."}, *images])
-        verified = chat(llm, a.model, VERIFY, [{"type": "text", "text": f"Description : {raw}"}, *images])
-        items.append({"id": f"d_{k:04d}", "window": w, "frames": times, "raw_description": raw,
-                      "verified": verified, "images": images})
-        print(f"  {k + 1}/{len(wins)}  {w[0]:6.1f}–{w[1]:6.1f} s  décrit et vérifié", flush=True)
+        raw = chat(llm, a.model, DESCRIBE, [{"type": "text", "text": "Décris cette suite d'images."}, *images])
+        items.append({"id": f"d_{k:04d}", "window": w, "frames": times, "raw_description": raw, "images": images})
+        print(f"  {k + 1}/{len(wins)}  {w[0]:6.1f}–{w[1]:6.1f} s  décrit ({len(images)} images)", flush=True)
 
     # Une image par plan, pour que la même personne garde la même désignation tout au long de l'extrait.
     picks = items if len(items) <= MAX_CAST else [items[int(i * len(items) / MAX_CAST)] for i in range(MAX_CAST)]
@@ -312,18 +343,20 @@ def describe(clip, segs, shots, a, out):
                                                           *[x["images"][len(x["images"]) // 2] for x in picks]],
                                       json_mode=True), "personnages") if isinstance(c, dict)]
     registry = "\n".join(f"- {c.get('designation', '')} : {c.get('traits', '')}" for c in cast) or "aucun"
-    plans = "\n".join(f"{i + 1}. [{x['window'][0]:.1f}–{x['window'][1]:.1f} s] {x['verified']}" for i, x in enumerate(items))
-    coherent = keep_if_complete(
-        json_list(chat(llm, a.model, COHERE, f"Registre des personnages :\n{registry}\n\nDescriptions :\n{plans}",
-                       json_mode=True), "descriptions"),
-        [x["verified"] for x in items])
     (out / "personnages.json").write_text(json.dumps(cast, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"  registre : {[c.get('designation') for c in cast]}", flush=True)
 
-    said = []
-    for x, desc in zip(items, coherent):
-        del x["images"]  # pas de base64 dans le cache JSON
+    said, previous = [], "aucun"
+    for k, x in enumerate(items):
         w = x["window"]
+        images = x.pop("images")  # pas de base64 dans le cache JSON
+        following = items[k + 1]["raw_description"] if k + 1 < len(items) else "aucun"
+        # Révision sur les images, avec le registre et les plans voisins : désignations stables, actions
+        # rattachées au bon personnage, rien de ce que les images ne montrent pas.
+        desc = chat(llm, a.model, REVISE, [{"type": "text", "text": (
+            f"Registre des personnages :\n{registry}\n\nPlan précédent : {previous}\n"
+            f"Ce plan : {x['raw_description']}\nPlan suivant : {following}")}, *images]) or x["raw_description"]
+        previous = desc
         heard = " / ".join(d["text"] for d in segs["dialogues"] if d["end"] <= w[1])[-600:] or "aucun"
         context = (f"Personnages :\n{registry}\nDéjà décrit : {' '.join(said[-3:]) or 'rien'}\n"
                    f"Dialogues entendus jusqu'ici : {heard}")
@@ -366,10 +399,18 @@ def voice(descs, segs, a, out):
     info = sf.info(out / "audio48k.wav")
     sr, n = info.samplerate, info.frames
     track = np.zeros(n, dtype=np.float32)
-    placed, dropped = [], []
+    registry = out / "personnages.json"
+    names = [c["designation"].strip() for c in (json.loads(registry.read_text(encoding="utf-8")) if registry.exists() else [])
+             if isinstance(c, dict) and c.get("designation")]
+    placed, dropped, recent, last_end, last_text = [], [], set(), -REMENTION_S, ""
     for d in descs:
         (w0, w1), start = d["window"], d["window"][0] + MARGIN
-        got = fit(d["variants"], w1 - w0 - 2 * MARGIN, synth)
+        # Fluidité : « elle » ou forme courte plutôt que la désignation complète répétée d'un plan à l'autre,
+        # et pas de redite de la description qui vient d'être lue (le plan reste alors silencieux).
+        variants = [lighten(v, names, recent, start - last_end) for v in d["variants"]]
+        if start - last_end <= REMENTION_S:
+            variants = [v for v in variants if not repeats(v, last_text)]
+        got = fit(variants, w1 - w0 - 2 * MARGIN, synth)
         if not got:
             dropped.append(d["id"])
             continue
@@ -383,6 +424,7 @@ def voice(descs, segs, a, out):
         track[i: i + len(clip_audio)] += clip_audio
         placed.append({"id": d["id"], "start": round(start, 3), "end": round(start + len(clip_audio) / sr, 3),
                        "text": text, "speedup": round(speed, 3), "chars_per_s": round(len(text) * tsr / len(wav), 1)})
+        recent, last_end, last_text = mentioned(text, names, recent), placed[-1]["end"], text
     for p in placed:  # invariant : aucune description ne chevauche la parole détectée
         assert not any(s < p["end"] and p["start"] < e for s, e in segs["speech"]), p
     sf.write(out / "ad_voice.wav", track, sr)
@@ -432,8 +474,8 @@ def selftest():
         {"start": 58.1, "end": 111.0, "text": "I've been alone for as long as I can remember. Oh, my God."},  # 53 s : ignoré
         {"start": 29.8, "end": 27.9, "text": ""},                          # vide : ignoré
     ]) == [[113.7 - WHISPER_PAD, 115.3 + WHISPER_PAD]]
-    assert frame_times([0, 4], []) == [1, 2, 3]
-    assert len(frame_times([0, 17], shots)) == MAX_IMAGES
+    assert frame_times([0, 3]) == [0.375, 1.125, 1.875, 2.625]  # 4 images réparties sur la fenêtre
+    assert len(frame_times([0, 17])) == MAX_IMAGES and len(frame_times([0, 1])) == 3
     fake = lambda text: (np.zeros(len(text) * 10), 100)           # voix factice : 10 caractères/s
     assert fit(["x" * 30, "x" * 20], 2.5, fake)[0] == "x" * 20    # 3 s ne tient pas, 2 s oui
     assert fit(["x" * 30], 2.8, fake)[3] == 3.0 / 2.8             # accélération ≤ 10 %
@@ -443,9 +485,19 @@ def selftest():
     assert parse_variants('Voici : {"variantes": ["Elle court.", "Elle court vers la porte.", "Elle court."]}') \
         == ["Elle court vers la porte.", "Elle court."]
     assert parse_variants("pas de JSON") == []
+    girl, dragon = "la jeune fille aux cheveux roux", "le petit dragon"
+    assert short_form(girl) == "la jeune fille" and short_form(dragon) == dragon
+    assert lighten("La jeune fille aux cheveux roux grimpe.", [girl, dragon], {girl}, 4) == "Elle grimpe."
+    assert lighten("Le petit dragon est blessé. La jeune fille aux cheveux roux regarde.", [girl, dragon], {girl}, 4) \
+        == "Le petit dragon est blessé. Elle regarde."
+    assert lighten("Le petit dragon regarde la jeune fille aux cheveux roux.", [girl, dragon], {girl, dragon}, 4) \
+        == "Il regarde la jeune fille."
+    assert lighten("La jeune fille aux cheveux roux grimpe.", [girl, dragon], {girl}, 20) == "La jeune fille aux cheveux roux grimpe."
+    assert mentioned("Elle grimpe.", [girl, dragon], {girl, dragon}) == {girl}
+    assert repeats("Elle tend sa main gantée vers le dragon blessé.",
+                   "Accroupie sur les pavés, elle tend une main gantée vers le dragon blessé.")
+    assert not repeats("Elle grimpe sur les façades.", "Dans une rue à colombages, elle contemple un fruit.")
     assert parse_variants('{"variantes": ["Bol.", "Elle tient un bol."]}') == ["Elle tient un bol."]  # un mot : refusé
-    assert keep_if_complete(["[58.1–67.1 s] La jeune femme.", "b"], ["x", "y"]) == ["La jeune femme.", "b"]
-    assert keep_if_complete(["a"], ["x", "y"]) == ["x", "y"] and keep_if_complete(["a", " "], ["x", "y"]) == ["x", "y"]
     assert vtt([{"start": 3725.5, "end": 3727.25, "text": "Elle sourit."}]) \
         == "WEBVTT\n\n01:02:05.500 --> 01:02:07.250\nElle sourit.\n\n"
     print("selftest OK")

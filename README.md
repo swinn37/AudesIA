@@ -20,10 +20,10 @@ Audesia s'adresse aux médiathèques, universités, collectivités, entreprises 
 1. **Parole** : Silero VAD repère la parole. Les segments de Whisper large-v3 au débit plausible s'y ajoutent, ce qui rattrape les répliques chuchotées. Le reste forme les silences utilisables. La transcription sert aussi de contexte au rédacteur.
 2. **Plans** : PySceneDetect découpe la vidéo aux changements de plan.
 3. **Fenêtres** : chaque silence long est découpé en fenêtres de 5 à 10 s, coupées aux changements de plan. Chaque fenêtre reçoit une description.
-4. **Description et vérification** : un modèle de vision décrit les images de la fenêtre, sans autre contexte, puis confronte sa description aux images pour retirer ce qui n'y est pas.
-5. **Registre et cohérence** : sur l'ensemble de l'extrait, le modèle établit un registre des personnages (une désignation stable et des traits visuels pour chacun), puis harmonise toutes les descriptions. Une même personne garde la même désignation, les contradictions sont corrigées, et rien n'est ajouté.
+4. **Description** : un modèle de vision décrit la suite d'images de la fenêtre (jusqu'à 4), sans autre contexte. Il dit les actions, nomme les objets quand ils sont reconnaissables et décrit les états visibles.
+5. **Registre et révision** : sur l'ensemble de l'extrait, le modèle établit un registre des personnages (une désignation stable et des traits visuels pour chacun). Il révise ensuite chaque description sur ses images, avec le registre et les plans voisins : une même personne garde la même désignation, chaque action est rattachée au bon personnage, et rien de ce que les images ne montrent pas n'est gardé.
 6. **Rédaction** : le même modèle réécrit chaque description en trois variantes de longueurs décroissantes, selon les règles de l'audiodescription.
-7. **Voix** : chaque variante est synthétisée et mesurée ; la plus longue qui tient dans le silence est retenue.
+7. **Voix** : une passe de fluidité remplace une désignation déjà dite par « elle », « il » ou une forme courte, et écarte les redites. Chaque variante est ensuite synthétisée et mesurée ; la plus longue qui tient dans le silence est retenue.
 8. **Mixage** : la bande-son est atténuée sous la voix, puis exportée.
 
 ```mermaid
@@ -32,10 +32,10 @@ flowchart LR
   A --> C[Plans<br/>PySceneDetect]
   B --> D[Silences découpés<br/>en fenêtres]
   C --> D
-  D --> E[Description vérifiée<br/>modèle de vision]
-  E --> R[Registre des personnages<br/>et cohérence]
+  D --> E[Description<br/>suite d'images]
+  E --> R[Registre et révision<br/>sur les images]
   R --> F[Rédaction<br/>3 variantes]
-  F --> G[Voix française<br/>durée mesurée]
+  F --> G[Fluidité et voix<br/>durée mesurée]
   G --> H[Mixage et exports<br/>MP4 · MKV · WebVTT]
 ```
 
@@ -44,7 +44,7 @@ Cinq principes :
 - **Jamais sur un dialogue.** La détection de parole est réglée pour être sensible, avec une marge autour de chaque réplique : dans le doute, c'est de la parole. Une assertion fait échouer le traitement si une description chevauche une parole détectée.
 - **Calage sur la durée réelle de la voix**, pas sur une estimation du débit. Si aucune variante ne tient, la plus courte peut être accélérée de 10 % au plus ; sinon la description est abandonnée et signalée.
 - **Règles de l'audiodescription française.** Les consignes suivent la *Charte de l'audiodescription* (2008) : présent, troisième personne, uniquement ce qui est visible, pas d'interprétation, un personnage n'est nommé qu'une fois son nom prononcé ou affiché.
-- **Ne rien inventer, garder les mêmes personnages.** Le modèle de vision ne voit que les images, une vérification retire ce qui n'y est pas, et un registre fixe la désignation de chaque personnage pour toute la vidéo.
+- **Ne rien inventer, garder les mêmes personnages.** Le modèle de vision ne voit que les images, et une révision confronte chaque description à ses images. Un registre fixe la désignation de chaque personnage pour toute la vidéo, et une passe de fluidité évite de la répéter.
 - **Mesurer chaque exécution.** Durée par étape, couverture des silences, débit de la voix et mémoire sont enregistrés dans `metrics.json`.
 
 ## Démarrage rapide
@@ -141,11 +141,11 @@ Mesures du prototype sur RTX 5080 (16 Go), le 4 octobre 2026 : *Sintel*, de 1:35
 | Descriptions placées | 13 sur 13 | 10 sur 10 |
 | Sans chevauchement des répliques, chuchotements compris | **13 sur 13 (100 %)** | **10 sur 10 (100 %)** |
 | Sans chevauchement d'aucune voix (répliques, cris, souffles) | 10 sur 13 (77 %), au plus 0,66 s | 6 sur 10 (60 %), au plus 1 s |
-| Couverture des silences utilisables | 76 % | 69 % |
+| Couverture des silences utilisables | 68 % | 73 % |
 | Fiabilité de la vérité terrain (musique atténuée dans le résidu) | 6,9 dB | 15,8 dB |
 
 - **Modèle de vision et de rédaction :** Gemma 4 26B-A4B (4 bits). Il ne tient pas en entier dans 16 Go : Ollama en place une partie sur le CPU.
-- **Temps de calcul :** 12 à 13 min pour 2 min de vidéo, soit environ 6 min par minute (objectif : moins de 5), dont 9 à 10 min pour la description, la vérification, le registre et la cohérence. Ce dépassement vient de la partie du modèle placée sur le CPU.
+- **Temps de calcul :** 15 à 27 min pour 2 min de vidéo selon la charge du GPU (objectif : moins de 5 min par minute). La description, le registre et la révision en prennent 11 à 23 ; ce dépassement vient de la partie du modèle placée sur le CPU.
 - **Mémoire GPU :** pic de 10,5 Gio dans le processus Python pendant la transcription ; le modèle de vision est libéré avant la voix.
 
 **Choix du modèle, mesuré sur les mêmes images.** Sur les 7 plans de la seconde partie, vérifiés un à un à l'image :
@@ -168,15 +168,20 @@ python eval/overlap.py out/Sintel.2010.1080p_1.35-3.35 --video Sintel.2010.1080p
 - Les horodatages de Whisper débordaient sur la musique et effaçaient le passage de 51 s sans dialogue : seuls ses segments au débit plausible sont gardés.
 - La VAD manquait les répliques chuchotées du doublage (« C'est bientôt fini », « Ne bouge pas ») : ces segments Whisper, élargis de 0,5 s, les protègent désormais.
 - Le modèle de vision recevait en contexte les répliques (« Cette lame… ») et les descriptions précédentes, ce qui amorçait des inventions. Il ne voit plus que les images, et une passe de vérification confronte sa description aux images.
-- Une même personne devenait deux ou trois personnages (« rousse », « cheveux roses », « cheveux longs et clairs »), et une main restait « sombre » et anonyme. Un registre des personnages et une passe de cohérence sur tout l'extrait fixent désormais une désignation unique : « la jeune femme rousse » et « la petite créature ailée », identiques dans les deux versions. La main est attribuée quand l'enchaînement des plans le montre.
+- Une même personne devenait deux ou trois personnages (« rousse », « cheveux roses », « cheveux longs et clairs »), et une main restait « sombre » et anonyme. Un registre des personnages, puis une révision de chaque description sur ses images avec les plans voisins, fixent désormais une désignation unique. En VF : « la jeune fille aux cheveux roux » et « le petit dragon », et « elle tend une main gantée vers le dragon blessé ».
+- Les actions se perdaient (« accroupie sur un toit »). La consigne demande désormais la suite des actions et des objets nommés précisément : « Elle grimpe sur les façades et s'accroupit sur un toit rouge ».
+- Un exemple concret dans la consigne (« une pomme ») a fait écrire « une pomme rouge » à la place d'un fruit à piquants. La consigne n'a plus d'exemple et demande de ne pas remplacer un objet ambigu par un objet familier.
+- La désignation complète revenait à chaque plan. Une passe de fluidité la remplace par « elle » ou une forme courte, et écarte les redites (« Elle tend sa main gantée vers le dragon blessé », dit deux fois de suite).
 
 **Limites observées :**
 
 - Des éclats de voix brefs (cris, gémissements du dragon, souffles) passent entre les mailles dans le passage musical. La Charte demande de ne pas couvrir ces sons.
-- Dans les silences très courts, certaines descriptions restent maigres ou approximatives (« L'homme est debout. », alors que le vieil homme est accroupi près du feu).
-- Le registre oublie les personnages secondaires (le vieil homme de la hutte n'y figure pas), et une main reste anonyme quand l'enchaînement des plans ne suffit pas à l'attribuer.
+- Le modèle confond encore certains objets : un « tissu noir » là où la jeune fille regarde sous des débris, un « objet sphérique et piquant » au lieu d'un fruit à coque hérissée de piquants.
+- Quand deux personnages ont le même genre (en VO : « la jeune femme » et « la petite créature ailée »), le rédacteur écrit encore des « elle » ambigus (« Elle sourit, elle crie »).
+- Le registre oublie les personnages secondaires : le vieil homme de la hutte n'y figure pas.
+- Avec 8 images par plan, la suite des actions était mieux suivie (« elle brandit un couteau »), mais la description prenait 50 min sur la 5080.
 
-Ces défauts sont les cibles de la détection des sons vocaux et de la vérification visuelle (P1), puis des modèles plus grands du GX10.
+Ces défauts sont les cibles de la détection des sons vocaux (P1) et des modèles plus grands du GX10, où le modèle tient en entier en mémoire et où 8 images par plan restent abordables.
 
 ## Feuille de route
 
