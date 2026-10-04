@@ -163,6 +163,8 @@ scripts/vllm.sh fetch 5080 && scripts/vllm.sh start 5080
 python audesia_p0.py Sintel.2010.1080p.mkv --start 1:35 --end 2:00 --profile test-vllm
 ```
 
+Testé sur la 5080 le 4 octobre : les images, le JSON, la réflexion coupée et les lots de requêtes fonctionnent (4 requêtes simultanées en 0,8 s, contre 2,3 s en série). Qwen3.5-2B est en revanche trop petit pour bien décrire : ce test valide le chemin, pas la qualité.
+
 ## Pourquoi le GX10
 
 | | RTX 5080 (16 Go) | ASUS Ascent GX10 (128 Go unifiés) |

@@ -273,6 +273,11 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026, puis le 4 octobre po
   - lecteur avec/sans AD qui bascule entre deux MP4, puis export ;
   - le serveur écrit le même `corrections.json` que la maquette et relance lui-même la voix et le mixage : un seul mécanisme, testé dès le P0 ; il ajoute Régénérer et l'écoute d'un texte modifié.
 - [x] Profils `small`, `large` et `test-vllm` (`configs/*.toml`) : deux rôles, réflexion coupée, requêtes en parallèle, requêtes et jetons par modèle dans `metrics.json`. Serveurs vLLM lancés par `scripts/vllm.sh` (image v0.30.0 épinglée par digest). Le compose viendra avec l'image du pipeline.
+  - Chemin vLLM testé le 4 octobre sur la 5080 (image v0.30.0, Qwen3.5-2B) :
+    - l'image démarre sur sm_120 et hors ligne ;
+    - les images sont bien comptées (environ 465 jetons chacune), la réflexion est coupée et le JSON est lu ;
+    - 4 requêtes simultanées prennent 0,8 s, contre 2,3 s en série, grâce aux lots de vLLM.
+  - Le modèle de 2B est trop petit pour la tâche : il invente un nom et ignore les longueurs, si bien que le calage n'a placé aucune de ses descriptions. Le test valide le chemin, pas la qualité.
 - [ ] Images worker arm64 construites nativement (runners GitHub `ubuntu-24.04-arm`) ; roues vérifiées avec `pip download --platform`.
 - [x] `scripts/bench_memory.sh` : relevé mémoire à 1 Hz sur l'hôte et garde-fou qui tue les serveurs vLLM sous 8 Gio disponibles.
 - [ ] Marqueurs d'étape dans le relevé mémoire, pour attribuer la mémoire à chaque étape du pipeline.
