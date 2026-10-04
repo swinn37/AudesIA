@@ -36,6 +36,9 @@ def main():
     p.add_argument("--docker", action="store_true", help="passer par scripts/docker.sh (GX10)")
     a = p.parse_args()
     os.chdir(Path(__file__).resolve().parent.parent)  # chemins relatifs à la racine, comme sous Docker
+    # Sous Windows, un sous-processus dont la sortie est redirigée (journal) écrit en cp1252 et plante sur un caractère
+    # absent de cp1252 (Whisper hallucine du chinois) : mode UTF-8 pour tous.
+    os.environ["PYTHONUTF8"] = "1"
     pipeline = ["bash", "scripts/docker.sh", "run"] if a.docker else [sys.executable, "audesia_p0.py"]
     python = ["bash", "scripts/docker.sh", "py"] if a.docker else [sys.executable]
     failed = []
