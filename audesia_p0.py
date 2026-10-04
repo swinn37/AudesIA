@@ -32,6 +32,7 @@ import gc
 import json
 import math
 import os
+import re
 import statistics
 import subprocess
 import sys
@@ -49,6 +50,7 @@ MARGIN = 0.2        # s : marge avant et après chaque description
 WINDOW = 5.0        # s : durée visée d'une fenêtre dans un long silence (coupée aux changements de plan)
 MAX_WINDOW = 10.0   # s
 MAX_IMAGES = 4
+MAX_CAST = 10       # images (une par plan) pour le registre des personnages
 MAX_SPEEDUP = 1.10
 DUCK = 0.3          # gain de la bande-son sous la voix
 RAMP = 0.25         # s : rampe d'atténuation
@@ -66,6 +68,21 @@ VERIFY = (
     "clairement visible, et corrige les identifications fausses (une créature, un animal, un objet). "
     "Réponds uniquement par la description corrigée, en français."
 )
+CAST = (
+    "Ces images viennent, dans l'ordre, d'un même extrait de film. Repère les personnages visibles (humains, "
+    "animaux, créatures) et regroupe ceux qui sont la même personne d'une image à l'autre. Pour chacun, donne une "
+    "désignation courte et stable pour une audiodescription (par exemple « la jeune femme rousse ») et ses traits "
+    "visuels distinctifs (cheveux, vêtements, accessoires). N'invente aucun personnage. Réponds uniquement en "
+    'JSON : {"personnages": [{"designation": "...", "traits": "..."}]}'
+)
+COHERE = """Tu révises une audiodescription. Tu reçois le registre des personnages et les descriptions \
+vérifiées de chaque plan, dans l'ordre. Réécris chaque description pour que l'ensemble soit fidèle, cohérent et fluide :
+- désigne chaque personnage avec la désignation du registre : une même personne ne doit jamais devenir plusieurs personnages ;
+- corrige les contradictions entre descriptions (cheveux, vêtements) en suivant le registre ;
+- attribue une main ou une silhouette à un personnage du registre seulement si ses traits et l'enchaînement des plans le rendent évident ;
+- n'ajoute aucun fait, objet ou action absent des descriptions ; retire ce qui est douteux ou contradictoire ;
+- garde l'ordre et le nombre de descriptions.
+Réponds uniquement en JSON : {"descriptions": ["...", "..."]}, une par plan."""
 WRITE = """Tu es audiodescripteur. À partir de la description factuelle d'un passage, écris \
 l'audiodescription qui sera lue par une voix de synthèse dans un silence entre deux dialogues.
 Règles (Charte de l'audiodescription) :
@@ -74,8 +91,9 @@ Règles (Charte de l'audiodescription) :
 - uniquement ce qui est visible : qui, quoi, où ; ni interprétation ni anticipation ;
 - n'ajoute rien qui ne figure pas dans la description ;
 - ne répète ni les dialogues ni ce qui a déjà été décrit ;
-- ne nomme un personnage que si son nom a été prononcé ou affiché ; sinon, une désignation \
-stable (« la jeune femme au manteau rouge ») ;
+- ne nomme un personnage que si son nom a été prononcé ou affiché ; sinon, sa désignation \
+dans la liste des personnages, toujours la même ;
+- si le personnage est le même que dans la description précédente, tu peux écrire « elle » ou « il » ;
 - lis les textes importants à l'écran ;
 - chaque variante est complète et se termine par un point.
 Réponds uniquement en JSON : {"variantes": ["...", "...", "..."]}, trois variantes de longueur \
@@ -178,15 +196,26 @@ def duck_envelope(n, sr, spans):
     return env
 
 
-def parse_variants(raw):
-    """Variantes du JSON du rédacteur, dédoublonnées, d'au moins deux mots, de la plus longue à la plus courte."""
+def json_list(raw, key):
+    """Liste rangée sous key dans le premier objet JSON de raw ; [] si elle manque ou est illisible."""
     try:
-        v = json.loads(raw[raw.find("{"): raw.rfind("}") + 1])["variantes"]
+        v = json.loads(raw[raw.find("{"): raw.rfind("}") + 1])[key]
     except (ValueError, KeyError, TypeError):
         return []
-    if not isinstance(v, list):
-        return []
-    return sorted({s.strip() for s in v if isinstance(s, str) and len(s.split()) >= 2}, key=len, reverse=True)
+    return v if isinstance(v, list) else []
+
+
+def parse_variants(raw):
+    """Variantes du JSON du rédacteur, dédoublonnées, d'au moins deux mots, de la plus longue à la plus courte."""
+    return sorted({s.strip() for s in json_list(raw, "variantes") if isinstance(s, str) and len(s.split()) >= 2},
+                  key=len, reverse=True)
+
+
+def keep_if_complete(revised, original):
+    """Révision de la passe de cohérence si elle couvre chaque plan ; sinon les descriptions d'origine."""
+    ok = len(revised) == len(original) and all(isinstance(r, str) and r.strip() for r in revised)
+    # Le modèle recopie parfois l'horodatage reçu en tête de description : « [58.1–67.1 s] … ».
+    return [re.sub(r"^\s*\[[^\]]*\]\s*", "", r).strip() for r in revised] if ok else original
 
 
 def vtt(items):
@@ -253,14 +282,15 @@ def chat(llm, model, system, content, json_mode=False):
 
 
 def describe(clip, segs, shots, a, out):
-    """Pour chaque fenêtre : description des images seules (VLM), vérification sur les mêmes images,
-    puis 3 variantes calées (rédacteur)."""
+    """1. Par fenêtre : description des images seules (VLM), vérifiée sur les mêmes images.
+    2. Sur l'ensemble : registre des personnages, puis passe de cohérence (désignations stables, contradictions).
+    3. Par fenêtre : 3 variantes calées (rédacteur)."""
     # ponytail: vérification en un appel par le même modèle ; vérification fait par fait en P1 si besoin.
     from openai import OpenAI
     llm = OpenAI(base_url=a.base_url, api_key="local")
     (out / "frames").mkdir(exist_ok=True)
     wins = [w for sil in segs["silences"] for w in windows(sil, shots)]
-    items, said = [], []
+    items = []
     for k, w in enumerate(wins):
         times, images = frame_times(w, shots), []
         for t in times:
@@ -271,17 +301,39 @@ def describe(clip, segs, shots, a, out):
         # Images seules : en contexte, les répliques (« Cette lame… ») et les descriptions précédentes
         # amorçaient des inventions qui se propageaient d'une fenêtre à l'autre.
         raw = chat(llm, a.model, DESCRIBE, [{"type": "text", "text": "Décris ces images."}, *images])
-        desc = chat(llm, a.model, VERIFY, [{"type": "text", "text": f"Description : {raw}"}, *images])
+        verified = chat(llm, a.model, VERIFY, [{"type": "text", "text": f"Description : {raw}"}, *images])
+        items.append({"id": f"d_{k:04d}", "window": w, "frames": times, "raw_description": raw,
+                      "verified": verified, "images": images})
+        print(f"  {k + 1}/{len(wins)}  {w[0]:6.1f}–{w[1]:6.1f} s  décrit et vérifié", flush=True)
+
+    # Une image par plan, pour que la même personne garde la même désignation tout au long de l'extrait.
+    picks = items if len(items) <= MAX_CAST else [items[int(i * len(items) / MAX_CAST)] for i in range(MAX_CAST)]
+    cast = [c for c in json_list(chat(llm, a.model, CAST, [{"type": "text", "text": "Images, dans l'ordre :"},
+                                                          *[x["images"][len(x["images"]) // 2] for x in picks]],
+                                      json_mode=True), "personnages") if isinstance(c, dict)]
+    registry = "\n".join(f"- {c.get('designation', '')} : {c.get('traits', '')}" for c in cast) or "aucun"
+    plans = "\n".join(f"{i + 1}. [{x['window'][0]:.1f}–{x['window'][1]:.1f} s] {x['verified']}" for i, x in enumerate(items))
+    coherent = keep_if_complete(
+        json_list(chat(llm, a.model, COHERE, f"Registre des personnages :\n{registry}\n\nDescriptions :\n{plans}",
+                       json_mode=True), "descriptions"),
+        [x["verified"] for x in items])
+    (out / "personnages.json").write_text(json.dumps(cast, ensure_ascii=False, indent=1), encoding="utf-8")
+    print(f"  registre : {[c.get('designation') for c in cast]}", flush=True)
+
+    said = []
+    for x, desc in zip(items, coherent):
+        del x["images"]  # pas de base64 dans le cache JSON
+        w = x["window"]
         heard = " / ".join(d["text"] for d in segs["dialogues"] if d["end"] <= w[1])[-600:] or "aucun"
-        context = f"Déjà décrit : {' '.join(said[-3:]) or 'rien'}\nDialogues entendus jusqu'ici : {heard}"
+        context = (f"Personnages :\n{registry}\nDéjà décrit : {' '.join(said[-3:]) or 'rien'}\n"
+                   f"Dialogues entendus jusqu'ici : {heard}")
         b = budget(w, a.cps)
         limits = "\n".join(f"Variante {i + 1} : au plus {n} caractères (environ {max(n // 6, 1)} mots)."
                            for i, n in enumerate((b, b * 2 // 3, b // 2)))
         variants = parse_variants(chat(llm, a.model, WRITE, f"Description : {desc}\n{context}\n{limits}", json_mode=True))
-        items.append({"id": f"d_{k:04d}", "window": w, "frames": times, "raw_description": raw, "description": desc,
-                      "budget_chars": b, "variants": variants})
+        x.update(description=desc, budget_chars=b, variants=variants)
         said += variants[:1]
-        print(f"  {k + 1}/{len(wins)}  {w[0]:6.1f}–{w[1]:6.1f} s  {variants[:1]}", flush=True)
+        print(f"  {w[0]:6.1f}–{w[1]:6.1f} s  {variants[:1]}", flush=True)
     return items
 
 
@@ -392,6 +444,8 @@ def selftest():
         == ["Elle court vers la porte.", "Elle court."]
     assert parse_variants("pas de JSON") == []
     assert parse_variants('{"variantes": ["Bol.", "Elle tient un bol."]}') == ["Elle tient un bol."]  # un mot : refusé
+    assert keep_if_complete(["[58.1–67.1 s] La jeune femme.", "b"], ["x", "y"]) == ["La jeune femme.", "b"]
+    assert keep_if_complete(["a"], ["x", "y"]) == ["x", "y"] and keep_if_complete(["a", " "], ["x", "y"]) == ["x", "y"]
     assert vtt([{"start": 3725.5, "end": 3727.25, "text": "Elle sourit."}]) \
         == "WEBVTT\n\n01:02:05.500 --> 01:02:07.250\nElle sourit.\n\n"
     print("selftest OK")

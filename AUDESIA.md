@@ -128,8 +128,9 @@ flowchart TD
   A --> C[Analyse visuelle<br/>PySceneDetect · visages]
   B --> D[Description des plans<br/>Qwen3.6-35B-A3B]
   C --> D
-  D --> V[Vérification visuelle<br/>Gemma 4 : chaque fait sur l'image]
-  V --> E[Rédaction en 3 variantes<br/>Gemma 4 26B-A4B]
+  D --> V[Vérification visuelle<br/>chaque fait sur l'image]
+  V --> R[Registre des personnages<br/>et cohérence sur tout l'extrait]
+  R --> E[Rédaction en 3 variantes<br/>Gemma 4 26B-A4B]
   E --> F[Voix française<br/>durée réelle + retranscription]
   F -- aucune variante ne tient --> E
   F -- variante retenue --> G[Éditeur de relecture<br/>HTML natif, clavier et lecteur d'écran]
@@ -147,6 +148,7 @@ flowchart TD
 | 4 | Personnages | images clés | `characters.json` : groupes de visages (prises de vues réelles) ou marquage visuel (animation) ; noms saisis dans l'éditeur |
 | 5 | Description | plans + contexte | `raw_descriptions.json` : description factuelle par plan |
 | 6 | Vérification | descriptions brutes + images clés | `facts.json` : faits élémentaires, validés ou rejetés sur les images |
+| 6 bis | Registre et cohérence | descriptions vérifiées + une image par plan | `personnages.json` (désignation stable et traits de chaque personnage) ; descriptions harmonisées, sans fait ajouté |
 | 7 | Rédaction | faits validés + silences | `descriptions.json` : 3 variantes par silence, budget en caractères |
 | 8 | Voix + calage | variantes | `tts/*.wav`, durée réelle, retranscription ; variante retenue, sinon retour à 7 |
 | 9 | Relecture | `descriptions.json` | versions corrigées (dans `descriptions.json`) |
@@ -272,7 +274,7 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026 ; versions plus réce
   - candidats : Qwen3-TTS-1.7B, Chatterbox V3 (commit épinglé), VoxCPM2 ;
   - critères : erreur de retranscription, écoute, vitesse ;
   - Chatterbox 0.1.7 est à éviter : torch 2.6 sans support RTX 50xx, plantage sur les textes ≤ 5 tokens.
-- [ ] Personnages : YuNet + SFace sur les prises de vues réelles ; pour l'animation, marquage visuel (un cercle de couleur par personnage) avant la description ; noms saisis dans l'éditeur.
+- [ ] Personnages, au-delà du registre fait en P0 (désignations stables, attribution d'une main) : YuNet + SFace sur les prises de vues réelles, marquage visuel (un cercle de couleur par personnage) pour l'animation, personnages secondaires que le registre oublie, noms saisis dans l'éditeur.
 - [ ] Page de relecture en HTML natif servie par FastAPI : tableau accessible (horodatage, texte modifiable, durée voix / durée silence, Écouter, Régénérer), lecteur avec/sans AD qui bascule entre deux MP4.
 - [ ] Profils `small` / `large` ; serveurs vLLM via compose (image `vllm/vllm-openai:v0.29.0` épinglée par digest).
 - [ ] Images worker arm64 construites nativement (runners GitHub `ubuntu-24.04-arm`) ; roues vérifiées avec `pip download --platform`.
@@ -325,16 +327,16 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026 ; versions plus réce
 **Livrables pour l'organisateur :** rapport chiffré, journaux et relevés mémoire, extraits avant/après, comparaison GX10 vs 5080, courbe taille de modèle / qualité, log du run hors ligne, dépôt GitHub public.
 
 **Premiers résultats** (4 octobre 2026, RTX 5080, Sintel 1:35–3:35, mesurés avec `eval/overlap.py`) :
-- version originale : 13 descriptions sur 13 sans chevauchement des répliques, 9 sur 13 sans chevauchement d'aucune voix (éclats vocaux de moins de 0,7 s), couverture de 71 % ;
-- doublage français (vérité terrain plus nette, musique atténuée de 15,8 dB) : 10 sur 10 sans chevauchement des répliques, chuchotements compris, 7 sur 10 sans chevauchement d'aucune voix, couverture de 56 % ;
-- 11 à 13 min de calcul pour 2 min de vidéo (au-dessus de l'objectif de 5 min par minute), parce que Gemma 4 26B déborde sur le CPU.
+- version originale : 13 descriptions sur 13 sans chevauchement des répliques, 10 sur 13 sans chevauchement d'aucune voix (éclats vocaux de moins de 0,7 s), couverture de 76 % ;
+- doublage français (vérité terrain plus nette, musique atténuée de 15,8 dB) : 10 sur 10 sans chevauchement des répliques, chuchotements compris, 6 sur 10 sans chevauchement d'aucune voix, couverture de 69 % ;
+- 12 à 13 min de calcul pour 2 min de vidéo (au-dessus de l'objectif de 5 min par minute), parce que Gemma 4 26B déborde sur le CPU.
 
 Premier choix de modèle par la mesure, sur les 7 plans de la seconde partie vérifiés à l'image :
 - Gemma 4 12B inventait un homme, un « livre taché de sang » (les ailes du dragon) et une hache ;
 - Qwen3.6 35B-A3B décrivait juste 6 plans sur 7, mais inventait une personne ;
 - Gemma 4 26B-A4B décrivait juste 6 plans sur 7 sans rien inventer.
 
-Le modèle de vision ne reçoit plus que les images, puis une passe de vérification confronte sa description aux images : les répliques et les descriptions précédentes, en contexte, amorçaient des inventions.
+Le modèle de vision ne reçoit plus que les images, puis une passe de vérification confronte sa description aux images : les répliques et les descriptions précédentes, en contexte, amorçaient des inventions. Un registre des personnages et une passe de cohérence sur tout l'extrait gardent ensuite les mêmes désignations : « la jeune femme rousse » et « la petite créature ailée », identiques dans les deux versions, alors qu'une même personne devenait auparavant deux ou trois personnages.
 
 Les chuchotements, d'abord manqués par la VAD, sont rattrapés par les segments Whisper au débit plausible. Priorité P1 : les sons vocaux brefs (cris, gémissements, souffles), par l'énergie de la voix isolée avec Demucs.
 

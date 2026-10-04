@@ -20,10 +20,11 @@ Audesia s'adresse aux médiathèques, universités, collectivités, entreprises 
 1. **Parole** : Silero VAD repère la parole. Les segments de Whisper large-v3 au débit plausible s'y ajoutent, ce qui rattrape les répliques chuchotées. Le reste forme les silences utilisables. La transcription sert aussi de contexte au rédacteur.
 2. **Plans** : PySceneDetect découpe la vidéo aux changements de plan.
 3. **Fenêtres** : chaque silence long est découpé en fenêtres de 5 à 10 s, coupées aux changements de plan. Chaque fenêtre reçoit une description.
-4. **Description** : un modèle de vision décrit les images de la fenêtre.
-5. **Rédaction** : le même modèle réécrit la description en trois variantes de longueurs décroissantes, selon les règles de l'audiodescription.
-6. **Voix** : chaque variante est synthétisée et mesurée ; la plus longue qui tient dans le silence est retenue.
-7. **Mixage** : la bande-son est atténuée sous la voix, puis exportée.
+4. **Description et vérification** : un modèle de vision décrit les images de la fenêtre, sans autre contexte, puis confronte sa description aux images pour retirer ce qui n'y est pas.
+5. **Registre et cohérence** : sur l'ensemble de l'extrait, le modèle établit un registre des personnages (une désignation stable et des traits visuels pour chacun), puis harmonise toutes les descriptions. Une même personne garde la même désignation, les contradictions sont corrigées, et rien n'est ajouté.
+6. **Rédaction** : le même modèle réécrit chaque description en trois variantes de longueurs décroissantes, selon les règles de l'audiodescription.
+7. **Voix** : chaque variante est synthétisée et mesurée ; la plus longue qui tient dans le silence est retenue.
+8. **Mixage** : la bande-son est atténuée sous la voix, puis exportée.
 
 ```mermaid
 flowchart LR
@@ -31,22 +32,24 @@ flowchart LR
   A --> C[Plans<br/>PySceneDetect]
   B --> D[Silences découpés<br/>en fenêtres]
   C --> D
-  D --> E[Description<br/>modèle de vision]
-  E --> F[Rédaction<br/>3 variantes]
+  D --> E[Description vérifiée<br/>modèle de vision]
+  E --> R[Registre des personnages<br/>et cohérence]
+  R --> F[Rédaction<br/>3 variantes]
   F --> G[Voix française<br/>durée mesurée]
   G --> H[Mixage et exports<br/>MP4 · MKV · WebVTT]
 ```
 
-Quatre principes :
+Cinq principes :
 
 - **Jamais sur un dialogue.** La détection de parole est réglée pour être sensible, avec une marge autour de chaque réplique : dans le doute, c'est de la parole. Une assertion fait échouer le traitement si une description chevauche une parole détectée.
 - **Calage sur la durée réelle de la voix**, pas sur une estimation du débit. Si aucune variante ne tient, la plus courte peut être accélérée de 10 % au plus ; sinon la description est abandonnée et signalée.
 - **Règles de l'audiodescription française.** Les consignes suivent la *Charte de l'audiodescription* (2008) : présent, troisième personne, uniquement ce qui est visible, pas d'interprétation, un personnage n'est nommé qu'une fois son nom prononcé ou affiché.
+- **Ne rien inventer, garder les mêmes personnages.** Le modèle de vision ne voit que les images, une vérification retire ce qui n'y est pas, et un registre fixe la désignation de chaque personnage pour toute la vidéo.
 - **Mesurer chaque exécution.** Durée par étape, couverture des silences, débit de la voix et mémoire sont enregistrés dans `metrics.json`.
 
 ## Démarrage rapide
 
-Prérequis : Linux, WSL2 ou Windows, GPU NVIDIA (testé sur une RTX 5080 16 Go sous Windows), Python 3.12, ffmpeg. Environ 15 Go de modèles sont téléchargés au premier lancement.
+Prérequis : Linux, WSL2 ou Windows, GPU NVIDIA (testé sur une RTX 5080 16 Go sous Windows), Python 3.12, ffmpeg. Environ 25 Go de modèles sont téléchargés au premier lancement.
 
 Les commandes ci-dessous sont pour Linux. Sous Windows, installez ffmpeg (winget ou scoop) et l'application Ollama, avec un contexte d'au moins 8 192 jetons dans ses réglages, puis les mêmes paquets pip dans un environnement virtuel.
 
@@ -137,12 +140,12 @@ Mesures du prototype sur RTX 5080 (16 Go), le 4 octobre 2026 : *Sintel*, de 1:35
 | --- | --- | --- |
 | Descriptions placées | 13 sur 13 | 10 sur 10 |
 | Sans chevauchement des répliques, chuchotements compris | **13 sur 13 (100 %)** | **10 sur 10 (100 %)** |
-| Sans chevauchement d'aucune voix (répliques, cris, souffles) | 9 sur 13 (69 %), au plus 0,66 s | 7 sur 10 (70 %), au plus 1 s |
-| Couverture des silences utilisables | 71 % | 56 % |
+| Sans chevauchement d'aucune voix (répliques, cris, souffles) | 10 sur 13 (77 %), au plus 0,66 s | 6 sur 10 (60 %), au plus 1 s |
+| Couverture des silences utilisables | 76 % | 69 % |
 | Fiabilité de la vérité terrain (musique atténuée dans le résidu) | 6,9 dB | 15,8 dB |
 
 - **Modèle de vision et de rédaction :** Gemma 4 26B-A4B (4 bits). Il ne tient pas en entier dans 16 Go : Ollama en place une partie sur le CPU.
-- **Temps de calcul :** 11 à 13 min pour 2 min de vidéo, soit 5,5 à 6,5 min par minute (objectif : moins de 5), dont 6 à 8 min pour la description. Ce dépassement vient de la partie du modèle placée sur le CPU.
+- **Temps de calcul :** 12 à 13 min pour 2 min de vidéo, soit environ 6 min par minute (objectif : moins de 5), dont 9 à 10 min pour la description, la vérification, le registre et la cohérence. Ce dépassement vient de la partie du modèle placée sur le CPU.
 - **Mémoire GPU :** pic de 10,5 Gio dans le processus Python pendant la transcription ; le modèle de vision est libéré avant la voix.
 
 **Choix du modèle, mesuré sur les mêmes images.** Sur les 7 plans de la seconde partie, vérifiés un à un à l'image :
@@ -165,12 +168,13 @@ python eval/overlap.py out/Sintel.2010.1080p_1.35-3.35 --video Sintel.2010.1080p
 - Les horodatages de Whisper débordaient sur la musique et effaçaient le passage de 51 s sans dialogue : seuls ses segments au débit plausible sont gardés.
 - La VAD manquait les répliques chuchotées du doublage (« C'est bientôt fini », « Ne bouge pas ») : ces segments Whisper, élargis de 0,5 s, les protègent désormais.
 - Le modèle de vision recevait en contexte les répliques (« Cette lame… ») et les descriptions précédentes, ce qui amorçait des inventions. Il ne voit plus que les images, et une passe de vérification confronte sa description aux images.
+- Une même personne devenait deux ou trois personnages (« rousse », « cheveux roses », « cheveux longs et clairs »), et une main restait « sombre » et anonyme. Un registre des personnages et une passe de cohérence sur tout l'extrait fixent désormais une désignation unique : « la jeune femme rousse » et « la petite créature ailée », identiques dans les deux versions. La main est attribuée quand l'enchaînement des plans le montre.
 
 **Limites observées :**
 
 - Des éclats de voix brefs (cris, gémissements du dragon, souffles) passent entre les mailles dans le passage musical. La Charte demande de ne pas couvrir ces sons.
-- Certaines descriptions restent maigres (« Feu de camp. » dans un silence de 2,4 s) ou se trompent de genre (« L'homme roux » pour Sintel, en version originale).
-- Les personnages ne sont pas encore désignés de façon stable.
+- Dans les silences très courts, certaines descriptions restent maigres ou approximatives (« L'homme est debout. », alors que le gardien est accroupi).
+- Le registre oublie les personnages secondaires (le gardien n'y figure pas), et une main reste anonyme quand l'enchaînement des plans ne suffit pas à l'attribuer.
 
 Ces défauts sont les cibles de la détection des sons vocaux et de la vérification visuelle (P1), puis des modèles plus grands du GX10.
 
