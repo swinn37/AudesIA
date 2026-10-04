@@ -184,6 +184,7 @@ flowchart TD
 - Budget = (durée du silence − marges début/fin, par défaut 0,2 s chacune) × débit cible en **caractères par seconde**, à **calibrer sur la voix choisie** (plus fiable que le nombre de mots en français).
 - Le rédacteur produit **3 variantes** (longue, moyenne, courte) en un seul appel. Les trois sont synthétisées en lot ; on garde la plus longue qui tient.
 - Si aucune ne tient : nouvel appel avec la consigne de raccourcir (max N itérations), puis accélération légère de la voix (≤ 10 %, `atempo`), puis abandon de la description et signalement dans l'éditeur.
+- En P0 : un clip dit à plus de 16 caractères par seconde (voix précipitée, mots avalés) est refait, jusqu'à 3 essais ; le nombre de synthèses refaites va dans `metrics.json`.
 - Chaque clip est retranscrit par l'ASR déjà chargé ; un clip où des mots manquent ou se répètent est rejeté.
 - Mode étendu (pause vidéo, WCAG 1.2.7) : après le challenge.
 
@@ -356,7 +357,7 @@ Mais sur la 5080 la reconnaissance reste fragile. Sur trois images du même plan
 
 En attendant, la relecture humaine facultative les corrige sans relancer les modèles de vision. Sur le doublage, quatre phrases corrigées (débris, fruit, couteau, main) ont été placées sans chevaucher de réplique, mesuré contre la piste musique + effets ; au critère strict, la version relue fait comme la version automatique (5 sur 10). La relance a pris environ 1 min 15 s, et 10 s sans changement, car seules les phrases nouvelles sont synthétisées.
 
-Qwen3-TTS précipite parfois une phrase (19 à 20 caractères par seconde au lieu de 10 à 15) et avale un mot : « sur un toit » est retranscrit « sur un C ». C'est le cas que la retranscription de contrôle (§4, règles de calage) doit rejeter. Pour retranscrire un clip, rééchantillonner d'abord à 16 kHz : à 48 kHz, le pipeline Whisper rend du charabia.
+Qwen3-TTS précipite parfois une phrase (19 à 20 caractères par seconde au lieu de 10 à 15) et avale un mot : « sur un toit » est retranscrit « sur un C ». Le P0 refait désormais tout clip dit à plus de 16 caractères par seconde, jusqu'à 3 essais ; la retranscription de contrôle (§4, règles de calage) attrapera aussi les mots avalés à débit normal. Pour retranscrire un clip, rééchantillonner d'abord à 16 kHz : à 48 kHz, le pipeline Whisper rend du charabia.
 
 Les chuchotements, d'abord manqués par la VAD, sont rattrapés par les segments Whisper au débit plausible. Priorité P1 : les sons vocaux brefs (cris, gémissements, souffles), par l'énergie de la voix isolée avec Demucs.
 

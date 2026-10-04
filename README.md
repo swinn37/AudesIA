@@ -23,7 +23,7 @@ Audesia s'adresse aux médiathèques, universités, collectivités, entreprises 
 4. **Description** : un modèle de vision décrit la suite d'images de la fenêtre (jusqu'à 4), sans autre contexte. Il dit les actions, nomme les objets quand ils sont reconnaissables et décrit les états visibles.
 5. **Registre et révision** : sur l'ensemble de l'extrait, le modèle établit un registre des personnages (une désignation stable et des traits visuels pour chacun). Il révise ensuite chaque description sur ses images, avec le registre et les plans voisins : une même personne garde la même désignation, chaque action est rattachée au bon personnage, et rien de ce que les images ne montrent pas n'est gardé.
 6. **Rédaction** : le même modèle réécrit chaque description en trois variantes de longueurs décroissantes, selon les règles de l'audiodescription.
-7. **Voix** : une passe de fluidité remplace une désignation déjà dite par « elle », « il » ou une forme courte, et écarte les redites. Chaque variante est ensuite synthétisée et mesurée ; la plus longue qui tient dans le silence est retenue.
+7. **Voix** : une passe de fluidité remplace une désignation déjà dite par « elle », « il » ou une forme courte, et écarte les redites. Chaque variante est ensuite synthétisée et mesurée ; la plus longue qui tient dans le silence est retenue. Une phrase dite à plus de 16 caractères par seconde, signe de mots avalés, est resynthétisée (jusqu'à 3 essais).
 8. **Mixage** : la bande-son est atténuée sous la voix, puis exportée.
 9. **Relecture (facultative)** : dans une page web locale, un humain écoute, corrige ou supprime les descriptions de son choix ; seules les phrases changées sont resynthétisées, puis tout est remixé.
 
@@ -97,7 +97,7 @@ Les fichiers sont écrits dans `out/<vidéo>_<début>-<fin>/` :
 | `relecture.html` | Page de relecture, à ouvrir dans un navigateur, hors ligne |
 | `relecture.json` | Fiche de relecture : horaire, place disponible, texte lu, durée de la voix et statut de chaque fenêtre |
 | `segments.json`, `shots.json`, `descriptions.json`, `personnages.json` | Étapes intermédiaires, mises en cache |
-| `metrics.json` | Durée par étape, couverture des silences, débit mesuré de la voix, pic mémoire |
+| `metrics.json` | Durée par étape, couverture des silences, débit mesuré de la voix, synthèses refaites, pic mémoire |
 
 Les étapes coûteuses sont mises en cache. Supprimer `descriptions.json` relance la rédaction ; changer de voix ne refait que la voix et le mixage.
 
@@ -214,7 +214,7 @@ python eval/overlap.py out/Sintel.2010.1080p_1.35-3.35 --video Sintel.2010.1080p
 - Quand deux personnages ont le même genre (en VO : « la jeune femme » et « la petite créature ailée »), le rédacteur écrit encore des « elle » ambigus (« Elle sourit, elle crie »).
 - Le registre oublie les personnages secondaires : le vieil homme de la hutte n'y figure pas.
 - Avec 8 images par plan, la suite des actions était mieux suivie (« elle brandit un couteau »), mais la description prenait 50 min sur la 5080.
-- La voix de synthèse précipite parfois une phrase : 19 à 20 caractères par seconde au lieu de 10 à 15, et un mot avalé (« sur un toit » retranscrit « sur un C »). Une nouvelle synthèse suffit ; la retranscription de contrôle prévue en P1 le fera automatiquement.
+- La voix de synthèse précipite parfois une phrase : 19 à 20 caractères par seconde au lieu de 10 à 15, et un mot avalé (« sur un toit » retranscrit « sur un C »). Le script refait désormais toute phrase dite à plus de 16 caractères par seconde, jusqu'à 3 essais. La retranscription de contrôle prévue en P1 attrapera aussi les mots avalés à débit normal.
 
 Ces défauts sont les cibles de la détection des sons vocaux (P1) et des modèles plus grands du GX10, où le modèle tient en entier en mémoire et où 8 images par plan restent abordables. En attendant, la relecture humaine les corrige : sur le doublage, quatre phrases corrigées (débris, fruit, couteau, main) ont été resynthétisées et remixées en 1 min 15 s environ. Mesurée contre la piste musique + effets, cette version relue ne chevauche aucune réplique. Au critère strict (cris, souffles), elle fait comme la version automatique : 5 sur 10.
 

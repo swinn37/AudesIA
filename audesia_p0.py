@@ -37,9 +37,11 @@ remixé (1 min 15 s pour 4 phrases sur la 5080).
 """
 import argparse
 import base64
+import contextlib
 import difflib
 import gc
 import hashlib
+import io
 import json
 import math
 import os
@@ -70,6 +72,8 @@ BRIGHT_SHARE = 0.05  # (mesuré : débris à contre-jour 42-55 % sombres / 9-14 
 GAMMA = 2.2         # éclaircissement de cette copie : à contre-jour, des débris passaient pour un « tissu noir »
 VAGUE = re.compile(r"\b(objets?|sphères?|sphériques?|masses?|formes?|choses?|éléments?)\b", re.I)
 MAX_SPEEDUP = 1.10
+MAX_CPS = 16.0      # car./s : au-delà, Qwen3-TTS a précipité la phrase et avalé un mot (mesuré : 19 à 20, contre 10 à 15)
+TTS_TRIES = 3       # synthèses au plus par phrase ; si toutes sont précipitées, la plus lente est gardée
 REMENTION_S = 15.0  # s : au-delà, un personnage est redésigné en entier plutôt que par « elle » ou « il »
 REPEAT_RATIO = 0.6  # similarité au-delà de laquelle une description redit la précédente (redite mesurée : 0,75)
 DUCK = 0.3          # gain de la bande-son sous la voix
@@ -216,6 +220,23 @@ def fit(variants, avail, synth):
             return text, wav, sr, 1.0
         got = text, wav, sr, len(wav) / sr / avail
     return got if got and got[3] <= MAX_SPEEDUP else None
+
+
+def steady(text, generate):
+    """Synthèse au débit normal : refaite jusqu'à TTS_TRIES fois quand la voix précipite la phrase (plus de MAX_CPS
+    caractères par seconde : « sur un toit » devenait « sur un C »), sinon la plus lente. Rend aussi le nombre d'essais."""
+    # ponytail: le débit trahit les mots avalés sans charger d'ASR ; la retranscription de contrôle (P1) attrapera
+    # aussi ceux qui sont avalés à débit normal.
+    best = None
+    for tries in range(1, TTS_TRIES + 1):
+        wav, sr = generate(text)
+        if best is None or len(wav) > len(best[0]) * sr / best[1]:
+            best = wav, sr
+        if len(text) * sr <= MAX_CPS * len(wav):
+            break
+        print(f"  voix précipitée ({len(text) * sr / max(len(wav), 1):.1f} car./s, essai {tries}/{TTS_TRIES}) : {text}",
+              flush=True)
+    return (*best, tries)
 
 
 def short_form(name):
@@ -482,22 +503,26 @@ def voice(descs, segs, a, out):
     import numpy as np
     import soundfile as sf
 
-    cache, tts = out / "tts" / "cache", None
+    cache, tts, retries = out / "tts" / "cache", None, 0
     cache.mkdir(parents=True, exist_ok=True)
 
-    def synth(text):
-        # Cache par phrase : après une correction, seules les phrases nouvelles sont synthétisées, et le modèle
-        # n'est chargé que s'il en manque une.
+    def generate(text):
         nonlocal tts
-        f = cache / (hashlib.sha1(f"{a.tts_model}|{a.voice}|{TTS_INSTRUCT}|{text}".encode()).hexdigest()[:16] + ".wav")
-        if f.exists():
-            return sf.read(f, dtype="float32")
-        if tts is None:
+        if tts is None:  # chargé seulement s'il manque une phrase au cache
             import torch
             from qwen_tts import Qwen3TTSModel
             tts = Qwen3TTSModel.from_pretrained(a.tts_model, device_map="cuda:0", dtype=torch.bfloat16)
         wavs, sr = tts.generate_custom_voice(text=text, language="French", speaker=a.voice, instruct=TTS_INSTRUCT)
-        wav = np.asarray(wavs[0], dtype=np.float32)
+        return np.asarray(wavs[0], dtype=np.float32), sr
+
+    def synth(text):
+        # Cache par phrase : après une correction, seules les phrases nouvelles sont synthétisées.
+        nonlocal retries
+        f = cache / (hashlib.sha1(f"{a.tts_model}|{a.voice}|{TTS_INSTRUCT}|{text}".encode()).hexdigest()[:16] + ".wav")
+        if f.exists():
+            return sf.read(f, dtype="float32")
+        wav, sr, tries = steady(text, generate)
+        retries += tries - 1
         sf.write(f, wav, sr, subtype="FLOAT")
         return wav, sr
 
@@ -558,7 +583,7 @@ def voice(descs, segs, a, out):
         assert not any(s < p["end"] and p["start"] < e for s, e in segs["speech"]), p
     sf.write(out / "ad_voice.wav", track, sr)
     (out / "relecture.json").write_text(json.dumps(review, ensure_ascii=False, indent=1), encoding="utf-8")
-    return placed, dropped
+    return placed, dropped, retries
 
 
 def mix_and_export(placed, out):
@@ -624,6 +649,14 @@ def selftest():
     assert fit(["x" * 30, "x" * 20], 2.5, fake)[0] == "x" * 20    # 3 s ne tient pas, 2 s oui
     assert fit(["x" * 30], 2.8, fake)[3] == 3.0 / 2.8             # accélération ≤ 10 %
     assert fit(["x" * 40], 3.0, fake) is None and fit([], 3.0, fake) is None
+    gen = lambda text: (np.zeros(int(next(durations) * 100)), 100)
+    with contextlib.redirect_stdout(io.StringIO()):               # sans l'affichage des essais rejetés
+        durations = iter([2.4, 3.2])                              # 46 caractères : 19,2 puis 14,4 car./s
+        wav, _, tries = steady("x" * 46, gen)
+        assert (len(wav), tries) == (320, 2)                      # phrase précipitée refaite
+        durations = iter([2.4, 2.5, 2.3])                         # toujours précipitée : la plus lente est gardée
+        wav, _, tries = steady("x" * 46, gen)
+        assert (len(wav), tries) == (250, 3)
     env = duck_envelope(1000, 100, [(2.0, 5.0)])
     assert env[350] == np.float32(DUCK) and env[0] == env[999] == 1 and DUCK < env[190] < 1
     assert parse_variants('Voici : {"variantes": ["Elle court.", "Elle court vers la porte.", "Elle court."]}') \
@@ -695,7 +728,7 @@ def main():
     shots = step("plans", lambda: detect_shots(clip), out / "shots.json")
     descs = step("description", lambda: describe(clip, segs, shots, a, out), out / "descriptions.json")
     unload_ollama(a.base_url, a.model)
-    placed, dropped = step("voix", lambda: voice(descs, segs, a, out))
+    placed, dropped, retries = step("voix", lambda: voice(descs, segs, a, out))
     step("mixage", lambda: mix_and_export(placed, out))
 
     import torch
@@ -709,6 +742,7 @@ def main():
         "dropped": dropped,
         "sped_up": sum(p["speedup"] > 1 for p in placed),
         "reviewed": sum(p["reviewed"] for p in placed),
+        "tts_retries": retries,  # synthèses refaites parce que la voix précipitait la phrase
         "coverage": round(sum(p["end"] - p["start"] for p in placed) / usable, 3) if usable else 0,
         "measured_chars_per_s": round(statistics.mean(p["chars_per_s"] for p in placed), 1) if placed else None,
         "peak_gpu_gib_this_process": round(torch.cuda.max_memory_allocated() / 2 ** 30, 2),
