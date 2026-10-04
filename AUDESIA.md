@@ -262,7 +262,7 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026 ; versions plus réce
   - coder contre l'API OpenAI : passer au GX10 ne doit demander qu'un changement de configuration.
 - [x] Exporter l'extrait avec et sans audiodescription pour la vidéo de présentation (`clip.mp4`, `clip_ad.mp4`).
 - [x] Relecture humaine facultative par fichier : `relecture.json` → `corrections.json` → même commande. Voix en cache par phrase : une correction ne resynthétise que ses phrases.
-- [ ] (Optionnel) Maquette statique de la page de relecture.
+- [x] Maquette de la page de relecture (`relecture.html`, HTML natif), écrite dans chaque dossier de sortie avec les données du run. Elle fonctionne hors ligne : vidéo avec/sans AD, écoute de chaque phrase, correction et suppression avec durée estimée, enregistrement de `corrections.json`. Régénérer attend le serveur du P1.
 
 ### P1 — Après la sélection, avant l'accès au GX10
 
@@ -277,11 +277,11 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026 ; versions plus réce
   - critères : erreur de retranscription, écoute, vitesse ;
   - Chatterbox 0.1.7 est à éviter : torch 2.6 sans support RTX 50xx, plantage sur les textes ≤ 5 tokens.
 - [ ] Personnages, au-delà du registre fait en P0 (désignations stables, attribution d'une main) : YuNet + SFace sur les prises de vues réelles, marquage visuel (un cercle de couleur par personnage) pour l'animation, personnages secondaires que le registre oublie, noms saisis dans l'éditeur.
-- [ ] Une page web pour tout faire sans ligne de commande, en HTML natif servie par FastAPI :
+- [ ] Une page web pour tout faire sans ligne de commande, à partir de la maquette `relecture.html` du P0, servie par FastAPI :
   - dépôt de la vidéo (voix, niveau de détail), puis avancement étape par étape ;
   - relecture : tableau accessible (horodatage, texte modifiable, place disponible en secondes et en caractères, statut, description factuelle, Écouter, Supprimer, Régénérer) ;
   - lecteur avec/sans AD qui bascule entre deux MP4, puis export ;
-  - elle écrit le même `corrections.json` que la relecture par fichier du P0 et relance la voix et le mixage : un seul mécanisme, testé dès le P0.
+  - le serveur écrit le même `corrections.json` que la maquette et relance lui-même la voix et le mixage : un seul mécanisme, testé dès le P0 ; il ajoute Régénérer et l'écoute d'un texte modifié.
 - [ ] Profils `small` / `large` ; serveurs vLLM via compose (image `vllm/vllm-openai:v0.29.0` épinglée par digest).
 - [ ] Images worker arm64 construites nativement (runners GitHub `ubuntu-24.04-arm`) ; roues vérifiées avec `pip download --platform`.
 - [ ] Instrumentation : `metrics.py` + `scripts/bench_memory.sh` (relevé à 1 Hz sur l'hôte, marqueurs d'étape).
@@ -456,7 +456,7 @@ Pas de Redis, de WebSocket ni de base de données pour le challenge : ils n'appo
 
 **Front-end :** une page HTML native servie par l'API, sans framework.
 - **Dépôt :** voix, niveau de détail.
-- **Relecture :** tableau accessible avec horodatage, texte modifiable, durée voix / durée silence écrite en clair, boutons Écouter, Supprimer et Régénérer, raccourcis clavier. Elle écrit `corrections.json`, comme la relecture par fichier.
+- **Relecture :** tableau accessible avec horodatage, texte modifiable, durée voix / durée silence écrite en clair, boutons Écouter, Supprimer et Régénérer, raccourcis clavier. Elle écrit `corrections.json`, comme la relecture par fichier. Sa maquette, `relecture.html`, tourne déjà hors ligne sur les sorties du P0.
 - **Démonstration :** lecteur avec/sans AD qui bascule entre deux fichiers MP4 en conservant la position, car les navigateurs ne savent pas changer de piste audio.
 
 L'interface est utilisable au clavier et au lecteur d'écran, pour que des créateurs aveugles puissent valider leurs descriptions. Une frise visuelle (forme d'onde) pourra s'ajouter plus tard pour les utilisateurs voyants.
@@ -617,7 +617,7 @@ L'exécution locale est une condition, pas un confort : les vidéos à audiodéc
 | 1:35–1:55 | Premiers résultats sur la 5080, puis plan de test GX10 | « Sur ma carte, le prototype ne couvre déjà aucune réplique, même chuchotée, mesuré contre la piste sans dialogues du film. Sur le GX10, je mesurerai la mémoire utilisée, la qualité face à la version 16 gigas et le temps de traitement. Le tout sera publié en open source. » |
 | 1:55–2:00 | Logo, lien GitHub | « Audesia : rendre chaque vidéo visible, à l'oreille. » |
 
-**Tournage :** OBS + micro-casque. Créditer la Blender Foundation (Sintel, CC BY) et Touhoppai (version française, CC BY). La démo tourne : utiliser `clip.mp4` (sans audiodescription) et `clip_ad.mp4` (avec), produits par `audesia_p0.py` sur la 5080, et l'indiquer à l'écran.
+**Tournage :** OBS + micro-casque. Créditer la Blender Foundation (Sintel, CC BY) et Touhoppai (version française, CC BY). La démo tourne : utiliser `clip.mp4` (sans audiodescription) et `clip_ad.mp4` (avec), produits par `audesia_p0.py` sur la 5080, et l'indiquer à l'écran. Pour l'éditeur, filmer `relecture.html`, ouverte dans le navigateur depuis le même dossier.
 
 ## A12. Sources
 

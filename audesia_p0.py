@@ -26,11 +26,14 @@ Chaque étape coûteuse écrit un JSON dans le dossier de sortie et n'est pas re
 s'il existe : supprimer descriptions.json pour relancer la rédaction. La voix et le
 mixage sont refaits à chaque lancement ; les phrases déjà synthétisées sont en cache.
 
-Relecture humaine (facultative) : relecture.json donne, pour chaque fenêtre, l'horaire,
-la place disponible, le texte lu et son statut. Écrire les textes à changer dans
-corrections.json, dans le même dossier, puis relancer la même commande :
+Relecture humaine (facultative) : ouvrir dans un navigateur relecture.html, écrite dans le
+dossier de sortie. La page montre la vidéo avec ou sans audiodescription, fait écouter chaque
+phrase et enregistre les textes corrigés dans corrections.json. Sans navigateur, relecture.json
+donne l'horaire, la place disponible, le texte lu et le statut de chaque fenêtre, et l'on écrit
+soi-même corrections.json, dans le même dossier :
   {"d_0004": "Elle regarde sous les débris.", "d_0007": ""}    (texte vide : fenêtre silencieuse)
-Seules les phrases modifiées sont synthétisées, puis tout est remixé (1 min 15 s pour 4 phrases sur la 5080).
+Puis relancer la même commande : seules les phrases modifiées sont synthétisées, et tout est
+remixé (1 min 15 s pour 4 phrases sur la 5080).
 """
 import argparse
 import base64
@@ -72,6 +75,8 @@ REPEAT_RATIO = 0.6  # similarité au-delà de laquelle une description redit la 
 DUCK = 0.3          # gain de la bande-son sous la voix
 RAMP = 0.25         # s : rampe d'atténuation
 TTS_INSTRUCT = "Voix calme et neutre de narrateur, diction claire, débit régulier."
+PAGE = Path(__file__).with_name("relecture.html")  # modèle de la page de relecture
+PAGE_DATA = '<script id="donnees" type="application/json">null</script>'  # remplacé par les données du run
 
 DESCRIBE = (
     "Tu prépares l'audiodescription d'un film. Les images sont extraites, dans l'ordre, d'un passage sans "
@@ -519,10 +524,11 @@ def voice(descs, segs, a, out):
         avail = w1 - w0 - 2 * MARGIN
         variants, reviewed = candidates(d, corrections, names, recent, start - last_end, last_text)
         got = fit(variants, avail, synth)
-        row = {"id": d["id"], "horaire": f"{int(w0 // 60)}:{w0 % 60:04.1f} – {int(w1 // 60)}:{w1 % 60:04.1f}",
-               "debut": round(w0, 2), "fin": round(w1, 2), "place_s": round(avail, 2),
+        horaire = f"{int(w0 // 60)}:{w0 % 60:04.1f} – {int(w1 // 60)}:{w1 % 60:04.1f}".replace(".", ",")
+        row = {"id": d["id"], "horaire": horaire, "debut": round(w0, 2), "fin": round(w1, 2), "place_s": round(avail, 2),
                "place_caracteres": budget(d["window"], a.cps), "statut": "relu" if reviewed else "automatique",
-               "texte": got[0] if got else None, "description": d.get("description", ""), "variantes": d["variants"]}
+               "texte": got[0] if got else None, "voix_s": None, "acceleration": None,
+               "description": d.get("description", ""), "variantes": d["variants"]}
         review.append(row)
         if not got:
             dropped.append(d["id"])
@@ -543,6 +549,7 @@ def voice(descs, segs, a, out):
         i = int(start * sr)
         clip_audio = clip_audio[: n - i]
         track[i: i + len(clip_audio)] += clip_audio
+        row.update(voix_s=round(len(clip_audio) / sr, 2), acceleration=round(speed, 3))
         placed.append({"id": d["id"], "start": round(start, 3), "end": round(start + len(clip_audio) / sr, 3),
                        "text": text, "speedup": round(speed, 3), "chars_per_s": round(len(text) * tsr / len(wav), 1),
                        "reviewed": reviewed})
@@ -575,6 +582,20 @@ def mix_and_export(placed, out):
        "-metadata:s:s:0", "language=fra",
        "-disposition:a:0", "default", "-disposition:a:1", "visual_impaired", "-disposition:s:0", "descriptions",
        out / "clip_ad.mkv")
+
+
+def review_page(out, a, metrics):
+    """relecture.html : la page de relecture remplie avec les données du run, lisible hors ligne à côté des vidéos."""
+    fixes = out / "corrections.json"
+    data = {"titre": Path(a.video).stem, "cps": metrics["measured_chars_per_s"] or a.cps, "accel_max": MAX_SPEEDUP,
+            "couverture": metrics["coverage"],
+            "commande": f'python audesia_p0.py "{Path(a.video).as_posix()}" --start {a.start}'
+                        + (f" --end {a.end}" if a.end else "") + f' --out "{out.as_posix()}"',
+            "corrections": json.loads(fixes.read_text(encoding="utf-8-sig")) if fixes.exists() else {},
+            "lignes": json.loads((out / "relecture.json").read_text(encoding="utf-8"))}
+    blob = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")  # un « </script> » dans un texte fermerait la balise
+    (out / "relecture.html").write_text(PAGE.read_text(encoding="utf-8").replace(PAGE_DATA, PAGE_DATA.replace("null", blob)),
+                                        encoding="utf-8")
 
 
 def selftest():
@@ -631,6 +652,7 @@ def selftest():
     assert parse_variants('{"variantes": ["Bol.", "Elle tient un bol."]}') == ["Elle tient un bol."]  # un mot : refusé
     assert vtt([{"start": 3725.5, "end": 3727.25, "text": "Elle sourit."}]) \
         == "WEBVTT\n\n01:02:05.500 --> 01:02:07.250\nElle sourit.\n\n"
+    assert not PAGE.exists() or PAGE.read_text(encoding="utf-8").count(PAGE_DATA) == 1  # emplacement des données
     print("selftest OK")
 
 
@@ -694,9 +716,11 @@ def main():
     (out / "metrics.json").write_text(json.dumps(metrics, ensure_ascii=False, indent=1), encoding="utf-8")
     (out / "ad.json").write_text(json.dumps(placed, ensure_ascii=False, indent=1), encoding="utf-8")
     print(json.dumps(metrics, ensure_ascii=False, indent=1))
+    if PAGE.exists():  # absente si audesia_p0.py a été copié seul
+        review_page(out, a, metrics)
     print(f"Sans AD : {clip}\nAvec AD : {out / 'clip_ad.mp4'}\nMKV deux pistes : {out / 'clip_ad.mkv'}")
-    print(f"Relecture (facultative) : {out / 'relecture.json'} ; textes à changer dans {out / 'corrections.json'}, "
-          "puis relancer la même commande")
+    print(f"Relecture (facultative) : ouvrir {out / 'relecture.html'} dans un navigateur, ou écrire les textes à "
+          f"changer dans {out / 'corrections.json'}, puis relancer la même commande")
 
 
 if __name__ == "__main__":

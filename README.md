@@ -25,7 +25,7 @@ Audesia s'adresse aux médiathèques, universités, collectivités, entreprises 
 6. **Rédaction** : le même modèle réécrit chaque description en trois variantes de longueurs décroissantes, selon les règles de l'audiodescription.
 7. **Voix** : une passe de fluidité remplace une désignation déjà dite par « elle », « il » ou une forme courte, et écarte les redites. Chaque variante est ensuite synthétisée et mesurée ; la plus longue qui tient dans le silence est retenue.
 8. **Mixage** : la bande-son est atténuée sous la voix, puis exportée.
-9. **Relecture (facultative)** : un humain corrige ou supprime les descriptions de son choix ; seules les phrases changées sont resynthétisées, puis tout est remixé.
+9. **Relecture (facultative)** : dans une page web locale, un humain écoute, corrige ou supprime les descriptions de son choix ; seules les phrases changées sont resynthétisées, puis tout est remixé.
 
 ```mermaid
 flowchart LR
@@ -94,7 +94,8 @@ Les fichiers sont écrits dans `out/<vidéo>_<début>-<fin>/` :
 | `clip.mp4`, `clip_ad.mp4` | L'extrait sans et avec audiodescription |
 | `clip_ad.mkv` | Deux pistes audio : l'originale et l'audiodescription, marquée pour les personnes malvoyantes ; descriptions en sous-titres WebVTT |
 | `ad.vtt`, `ad.json` | Descriptions retenues, horodatées |
-| `relecture.json` | Fiche de relecture : horaire, place disponible, texte lu et statut de chaque fenêtre |
+| `relecture.html` | Page de relecture, à ouvrir dans un navigateur, hors ligne |
+| `relecture.json` | Fiche de relecture : horaire, place disponible, texte lu, durée de la voix et statut de chaque fenêtre |
 | `segments.json`, `shots.json`, `descriptions.json`, `personnages.json` | Étapes intermédiaires, mises en cache |
 | `metrics.json` | Durée par étape, couverture des silences, débit mesuré de la voix, pic mémoire |
 
@@ -102,7 +103,16 @@ Les étapes coûteuses sont mises en cache. Supprimer `descriptions.json` relanc
 
 ### Relecture (facultative)
 
-`relecture.json` donne, pour chaque fenêtre, l'horaire dans l'extrait, la place disponible (en secondes et en caractères), le texte lu, son statut, et la description factuelle dont il vient. Pour corriger, écrire les seuls textes à changer dans `corrections.json`, dans le même dossier, puis relancer la même commande :
+Ouvrir `relecture.html`, dans le dossier de sortie, avec un navigateur. La page fonctionne hors ligne, sans serveur :
+
+- la vidéo avec ou sans audiodescription, en gardant la position ; la description en cours s'affiche sous l'image ;
+- pour chaque silence : l'horaire (un clic lance la scène), le texte lu, modifiable, la durée de la voix sur la place disponible, le statut, la description factuelle et les variantes du modèle ;
+- Écouter, Supprimer, Rétablir. Pendant la saisie, la durée de la voix est estimée, et un texte trop long est signalé avec le nombre de caractères à retirer ;
+- utilisable au clavier et au lecteur d'écran, avec des raccourcis affichés sur la page.
+
+« Enregistrer les corrections » écrit `corrections.json` : directement dans le dossier choisi sous Chrome et Edge, sinon dans les téléchargements. Il reste à relancer la commande affichée sur la page. « Régénérer » attend le serveur local du P1.
+
+Sans navigateur, `relecture.json` donne les mêmes informations, et l'on écrit soi-même dans `corrections.json` les seuls textes à changer, avant de relancer la même commande :
 
 ```json
 {
@@ -115,7 +125,7 @@ Les étapes coûteuses sont mises en cache. Supprimer `descriptions.json` relanc
 - Un texte qui ne tient pas dans son silence (accélération de 10 % comprise) n'est pas placé. `relecture.json` indique alors combien de caractères retirer.
 - Seules les phrases modifiées sont synthétisées, car les autres sont en cache. Tout est ensuite remixé. Sur la 5080, une relance prend 10 s sans changement, et environ 1 min 15 s pour quatre phrases corrigées, chargement du modèle de voix compris.
 
-La page de relecture prévue en P1 écrira ce même fichier, sans ligne de commande.
+En P1, un serveur local servira la même page, relancera lui-même la voix et le mixage, et régénérera une description à la demande.
 
 ### Options utiles
 
@@ -209,7 +219,7 @@ Ces défauts sont les cibles de la détection des sons vocaux (P1) et des modèl
 
 ## Feuille de route
 
-- **P1** : pipeline modulaire avec reprise, vérification de chaque fait sur l'image, comparatif de voix, une page web pour tout faire sans ligne de commande (dépôt, suivi, relecture avec écoute, export) accessible au clavier et au lecteur d'écran, déploiement Docker ARM64.
+- **P1** : pipeline modulaire avec reprise, vérification de chaque fait sur l'image, comparatif de voix, une page web pour tout faire sans ligne de commande (dépôt, suivi, relecture, export), à partir de la page de relecture du P0, déploiement Docker ARM64.
 - **P2**, sur le GX10 : mesures de mémoire et de débit, comparaison de modèles de classe 120B.
 - **Ensuite** : tests avec des utilisateurs aveugles et malvoyants, mode étendu où la vidéo se met en pause (WCAG 1.2.7), autres langues.
 
