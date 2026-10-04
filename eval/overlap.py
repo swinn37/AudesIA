@@ -31,14 +31,17 @@ def pcm(path, start, dur):
     return np.frombuffer(subprocess.run(cmd, capture_output=True, check=True).stdout, dtype=np.float32).copy()
 
 
-def residual(film, me):
-    """Cale me (lu avec SEARCH s de marge de chaque côté) sur film, ajuste le gain, renvoie film − g·me."""
+def residual(film, me, pad=0.0):
+    """Cale me sur film (me lu avec SEARCH s de marge de chaque côté, dont pad s de zéros quand la marge tombe avant le
+    début de la piste), ajuste le gain, renvoie film − g·me, le décalage, le gain et les échantillons du film que la
+    piste couvre : elle peut finir avant le film (générique ajouté au doublage)."""
     size = 2 * len(me)
     corr = np.fft.irfft(np.fft.rfft(me, size) * np.conj(np.fft.rfft(film, size)))[: int(2 * SEARCH * SR) + 1]
     lag = int(np.argmax(np.abs(corr)))
-    me = me[lag: lag + len(film)]
+    covered = max(0, int(pad * SR) - lag), min(len(film), len(me) - lag)
+    me = np.pad(me, (0, max(0, lag + len(film) - len(me))))[lag: lag + len(film)]
     g = float(np.dot(film, me) / np.dot(me, me))
-    return film - g * me, lag / SR - SEARCH, g
+    return film - g * me, lag / SR - SEARCH, g, covered
 
 
 def overlap(a, b):
@@ -60,17 +63,23 @@ def main():
     out, start = Path(a.out), secs(a.start)
     dur = secs(a.end) - start
     film = pcm(a.video, start, dur)
-    res, lag, gain = residual(film, pcm(a.me, start - SEARCH, dur + 2 * SEARCH))
-    vad = merge([[t["start"], t["end"]] for t in get_speech_timestamps(
-        torch.from_numpy(res), load_silero_vad(), sampling_rate=SR, return_seconds=True)])
-    truth = merge(vad + energy_speech(res, vad))
+    pad = max(0.0, SEARCH - start)  # au début du film, la marge de recherche tombe avant la piste : des zéros
+    me = np.concatenate([np.zeros(int(pad * SR), dtype=np.float32), pcm(a.me, start - SEARCH + pad, dur + 2 * SEARCH - pad)])
+    res, lag, gain, (c0, c1) = residual(film, me, pad)
+    # Vérité terrain sur la seule partie couverte par la piste : ailleurs, le résidu est le film, musique comprise.
+    part, t0, t1 = res[c0:c1], c0 / SR, c1 / SR
+    vad = merge([[t["start"] + t0, t["end"] + t0] for t in get_speech_timestamps(
+        torch.from_numpy(part), load_silero_vad(), sampling_rate=SR, return_seconds=True)])
+    truth = merge(vad + [[s + t0, e + t0] for s, e in energy_speech(part, [[s - t0, e - t0] for s, e in vad])])
 
-    calm = np.ones(len(film), dtype=bool)
+    calm = np.zeros(len(film), dtype=bool)
+    calm[c0:c1] = True
     for s, e in truth:
         calm[int(s * SR): int(e * SR)] = False
     attenuation = 10 * np.log10(np.mean(film[calm] ** 2) / np.mean(res[calm] ** 2))
 
-    placed = json.loads((out / "ad.json").read_text(encoding="utf-8"))
+    everything = json.loads((out / "ad.json").read_text(encoding="utf-8"))
+    placed = [d for d in everything if t0 <= d["start"] and d["end"] <= t1]  # mesurables contre la vérité terrain
     per = [{"id": d["id"], "start": d["start"], "end": d["end"], "text": d["text"],
             "overlap_s": round(overlap([[d["start"], d["end"]]], truth), 2),
             "overlap_words_s": round(overlap([[d["start"], d["end"]]], vad), 2)} for d in placed]
@@ -83,6 +92,7 @@ def main():
     truth_s = sum(e - s for s, e in truth)
     result = {
         "lag_s": round(lag, 4), "gain": round(gain, 3), "music_attenuation_db": round(float(attenuation), 1),
+        "truth_span_s": [round(t0, 2), round(t1, 2)], "outside_truth": len(everything) - len(placed),
         "truth_speech_s": round(truth_s, 1), "truth": [[round(s, 2), round(e, 2)] for s, e in truth],
         "descriptions": len(per), "clean": clean, "clean_rate": round(clean / len(per), 3) if per else None,
         "clean_words": clean_words, "clean_words_rate": round(clean_words / len(per), 3) if per else None,
@@ -94,6 +104,9 @@ def main():
     for d in per:
         print(f"{d['start']:6.1f}–{d['end']:6.1f}  {'ok' if not d['overlap_s'] else 'CHEVAUCHE ' + str(d['overlap_s']) + ' s':16} {d['text']}")
     print(f"\nCalage {lag:+.4f} s, gain {gain:.3f}, musique atténuée de {attenuation:.1f} dB dans le résidu")
+    if result["outside_truth"]:
+        print(f"Piste musique + effets de {t0:.1f} à {t1:.1f} s : {result['outside_truth']} descriptions hors de cette "
+              f"partie, non mesurées")
     print(f"Parole réelle : {truth_s:.1f} s ; parole détectée par audesia_p0 qui la couvre : {result['detector_recall']:.0%}")
     print(f"Sans chevauchement des paroles (Silero sur le résidu) : {clean_words}/{len(per)} ({result['clean_words_rate']:.0%})")
     print(f"Sans chevauchement d'aucune voix (paroles + énergie vocale) : {clean}/{len(per)} ({result['clean_rate']:.0%}), "

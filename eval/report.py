@@ -42,7 +42,9 @@ def table(folder):
         offline = {True: "non", False: "oui"}.get(m.get("outbound_network"), "—")
         lines.append(
             f"| {d.name} | {mmss(m['duration_s'])} | {m['placed']} sur {m['windows']} | {m['coverage'] * 100:.0f} % "
-            f"| {ratio(o['clean_words'], o['descriptions']) if o else '—'} | {ratio(o['clean'], o['descriptions']) if o else '—'} "
+            f"| {ratio(o['clean_words'], o['descriptions']) if o else '—'}"
+            f"{f', {n} hors piste musique + effets' if o and (n := o.get('outside_truth')) else ''} "
+            f"| {ratio(o['clean'], o['descriptions']) if o else '—'} "
             f"| {num(compute / m['duration_s'])} min | {tokens[0] / 1000:.0f} k / {tokens[1] / 1000:.0f} k "
             f"| {num(m['peak_gpu_gib_this_process'])} Gio | {offline} |")
         t["duration"] += m["duration_s"]
