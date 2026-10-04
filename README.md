@@ -171,7 +171,7 @@ Mesures du prototype sur RTX 5080 (16 Go), le 4 octobre 2026 : *Sintel*, de 1:35
 | --- | --- | --- |
 | Descriptions placées | 13 sur 13 | 10 sur 10 |
 | Sans chevauchement des répliques, chuchotements compris | **13 sur 13 (100 %)** | **10 sur 10 (100 %)** |
-| Sans chevauchement d'aucune voix (répliques, cris, souffles) | 10 sur 13 (77 %), au plus 0,66 s | 6 sur 10 (60 %), au plus 1 s |
+| Sans chevauchement d'aucune voix (répliques, cris, souffles) | 10 sur 13 (77 %), au plus 0,66 s | 5 à 6 sur 10 selon les runs, au plus 1 s |
 | Couverture des silences utilisables | 68 % | 76 % |
 | Fiabilité de la vérité terrain (musique atténuée dans le résidu) | 6,9 dB | 15,8 dB |
 
@@ -215,7 +215,7 @@ python eval/overlap.py out/Sintel.2010.1080p_1.35-3.35 --video Sintel.2010.1080p
 - Le registre oublie les personnages secondaires : le vieil homme de la hutte n'y figure pas.
 - Avec 8 images par plan, la suite des actions était mieux suivie (« elle brandit un couteau »), mais la description prenait 50 min sur la 5080.
 
-Ces défauts sont les cibles de la détection des sons vocaux (P1) et des modèles plus grands du GX10, où le modèle tient en entier en mémoire et où 8 images par plan restent abordables. En attendant, la relecture humaine les corrige : sur le doublage, quatre phrases corrigées (débris, fruit, couteau, main) ont été resynthétisées et remixées en 1 min 15 s environ, toujours sans chevaucher de réplique.
+Ces défauts sont les cibles de la détection des sons vocaux (P1) et des modèles plus grands du GX10, où le modèle tient en entier en mémoire et où 8 images par plan restent abordables. En attendant, la relecture humaine les corrige : sur le doublage, quatre phrases corrigées (débris, fruit, couteau, main) ont été resynthétisées et remixées en 1 min 15 s environ. Mesurée contre la piste musique + effets, cette version relue ne chevauche toujours aucune réplique, mais la phrase allongée du couteau touche 0,16 s d'un son vocal bref.
 
 ## Feuille de route
 

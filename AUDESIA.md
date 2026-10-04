@@ -334,7 +334,7 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026 ; versions plus réce
 
 **Premiers résultats** (4 octobre 2026, RTX 5080, Sintel 1:35–3:35, mesurés avec `eval/overlap.py`) :
 - version originale : 13 descriptions sur 13 sans chevauchement des répliques, 10 sur 13 sans chevauchement d'aucune voix (éclats vocaux de moins de 0,7 s), couverture de 68 % ;
-- doublage français (vérité terrain plus nette, musique atténuée de 15,8 dB) : 10 sur 10 sans chevauchement des répliques, chuchotements compris, 6 sur 10 sans chevauchement d'aucune voix, couverture de 76 % ;
+- doublage français (vérité terrain plus nette, musique atténuée de 15,8 dB) : 10 sur 10 sans chevauchement des répliques, chuchotements compris, 5 à 6 sur 10 sans chevauchement d'aucune voix selon les runs, couverture de 76 % ;
 - 15 à 27 min de calcul pour 2 min de vidéo selon la charge du GPU (objectif : moins de 5 min par minute), parce que Gemma 4 26B déborde sur le CPU. Avec 8 images par plan, la suite des actions était mieux suivie, mais la description prenait 50 min : c'est un réglage pour le GX10.
 
 Premier choix de modèle par la mesure, sur les 7 plans de la seconde partie vérifiés à l'image :
@@ -354,7 +354,7 @@ Deux techniques visent les objets mal reconnus :
 
 Mais sur la 5080 la reconnaissance reste fragile. Sur trois images du même plan, le modèle répond « fruit épineux », « gant à pointes » ou « rien d'identifiable ». La posture est lue comme « se cache derrière » au lieu de « regarde dessous », et des « elle » restent ambigus quand deux personnages ont le même genre. Ces cas sont à remesurer sur le GX10, avec des modèles plus grands, une entrée haute résolution native et la vidéo.
 
-En attendant, la relecture humaine facultative les corrige sans relancer les modèles de vision. Sur le doublage, quatre phrases corrigées (débris, fruit, couteau, main) ont été placées sans chevaucher de réplique. La relance a pris environ 1 min 15 s, et 10 s sans changement, car seules les phrases nouvelles sont synthétisées.
+En attendant, la relecture humaine facultative les corrige sans relancer les modèles de vision. Sur le doublage, quatre phrases corrigées (débris, fruit, couteau, main) ont été placées sans chevaucher de réplique, mesuré contre la piste musique + effets ; la phrase allongée du couteau touche toutefois 0,16 s d'un son vocal bref. La relance a pris environ 1 min 15 s, et 10 s sans changement, car seules les phrases nouvelles sont synthétisées.
 
 Les chuchotements, d'abord manqués par la VAD, sont rattrapés par les segments Whisper au débit plausible. Priorité P1 : les sons vocaux brefs (cris, gémissements, souffles), par l'énergie de la voix isolée avec Demucs.
 
