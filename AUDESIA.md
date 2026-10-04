@@ -52,7 +52,7 @@ Source : règlement du challenge (Conditions Générales Gleam / ASUS). Ces moda
    - Vérifier les roues aarch64 avant l'accès : `pip download -r requirements.txt --only-binary=:all: --platform manylinux_2_28_aarch64 --python-version 3.12`. Fait le 4 octobre : les 23 paquets ajoutés à l'image vLLM ont une roue aarch64, sauf `sox`, du Python pur distribué en source.
    - Éviter toute dépendance sans roue aarch64. CTranslate2 (faster-whisper, WhisperX) n'a pas de roue CUDA pour aarch64 : sur le GX10, il tourne sur le CPU sans prévenir.
 4. **Tout mesurer.** Mémoire unifiée par étape, durée par étape, nombre de requêtes, tailles de batch. Logs JSON horodatés. Sur GB10, `nvidia-smi` affiche « Memory-Usage: Not Supported » et `docker stats` ne voit pas la mémoire CUDA : relever `/proc/meminfo`, `nvidia-smi --query-compute-apps` et les métriques vLLM (voir `scripts/bench_memory.sh`).
-5. **Licences libres en priorité** (Apache 2.0, MIT, BSD). Signaler tout modèle non commercial (modèles InsightFace, XTTS-v2, poids F5-TTS, aligneur français par défaut de WhisperX) et créditer les contenus CC-BY (films Blender, doublages Touhoppai, modèle pyannote community-1).
+5. **Licences libres en priorité** (Apache 2.0, MIT, BSD). Signaler tout modèle non commercial (modèles InsightFace, XTTS-v2, poids F5-TTS, aligneur français par défaut de WhisperX, poids Hybrid Demucs entraînés sur MUSDB18-HQ, réservé à la recherche) et créditer les contenus CC-BY (films Blender, doublages Touhoppai, modèle pyannote community-1).
 6. **Jamais de description qui couvre un dialogue en mode standard.** Invariant testé automatiquement : 100 % contre la parole détectée (vrai par construction, test unitaire). La qualité de la détection se mesure à part, contre une vérité terrain (objectif > 95 %).
 7. **Honnêteté technique :**
    - La bande passante du GX10 (~273 Go/s) est inférieure à celle de la 5080 (~960 Go/s). L'argument du projet est la **capacité mémoire**, pas la vitesse. Privilégier modèles MoE et traitement en lot (vLLM batching).
@@ -180,6 +180,7 @@ flowchart TD
 
 - Parole = segments de la VAD (Silero, seuil 0,35, marge de 200 ms) : dans le doute, c'est de la parole.
 - S'y ajoutent les segments Whisper au débit plausible (au plus 0,8 s par mot + 1 s, élargis de 0,5 s), qui rattrapent les chuchotements manqués par la VAD.
+- Et les éclats vocaux (cris, souffles) : énergie 300–3400 Hz de la voix isolée par Hybrid Demucs (torchaudio), à plus de 8 dB au-dessus de la fuite de musique (`vocal.json`, précalculé). Une fenêtre décrite avant leur détection se réduit à sa plus grande place libre.
 - Les autres segments Whisper sont écartés : sur Sintel, l'un étirait une phrase de 15 mots sur 53 s de musique et effaçait un silence de 51 s (mesuré le 4 octobre 2026).
 - Silence utilisable : durée ≥ seuil configurable (par défaut 1,5 s), sans parole.
 - Budget = (durée du silence − marges début/fin, par défaut 0,2 s chacune) × débit cible en **caractères par seconde**, à **calibrer sur la voix choisie** (plus fiable que le nombre de mots en français).
@@ -261,7 +262,11 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026, puis le 4 octobre po
 - [ ] Envoyer aux organisateurs les questions du §2 (pilote, sudo, internet, disque, durée).
 - [ ] Pipeline modulaire (`pipeline/*`) : un fichier JSON par étape, reprise sur erreur (une étape est sautée si sa sortie existe).
 - [ ] Parole = VAD seule, seuil et marge réglés contre la vérité terrain ; même ASR sur les deux profils pour le texte, sans compiler CTranslate2 (Whisper large-v3 via transformers, ou Qwen3-ASR-1.7B).
-- [ ] Détecter les sons vocaux brefs (cris, gémissements, souffles), que ni la VAD ni Whisper ne repèrent : énergie de la voix isolée par Demucs. Les chuchotements sont déjà rattrapés par les segments Whisper plausibles.
+- [x] Détecter les sons vocaux brefs (cris, gémissements, souffles) que ni la VAD ni Whisper ne repèrent : énergie de la voix isolée par Hybrid Demucs (torchaudio, pas de nouvelle dépendance). Mesuré sur l'extrait VF de bout en bout :
+  - 7 descriptions sur 9 sans chevauchement d'aucune voix, contre 5 sur 10 ;
+  - chevauchement maximal 0,68 s au lieu de 1 s ; voix réelle couverte par la parole détectée : 90 % au lieu de 83 % ;
+  - en contrepartie, couverture de 64 % au lieu de 76 % (un run). Le seuil (`BURST_DB`, +8 dB) a été choisi entre +6 et +10 dB sur les extraits VO et VF ;
+  - séparation en 6 s pour 2 min de film, 86 s pour les 74 min du corpus.
 - [ ] Rédaction en 3 variantes + `fit_loop.py` + tests unitaires de l'invariant « aucun chevauchement avec la parole détectée ».
 - [ ] Vérification visuelle (`verify.py`, `prompts/verify.fr.md`) : faits élémentaires validés un par un sur les images clés par le second modèle.
 - [ ] Comparatif de voix sur ~30 phrases d'audiodescription :
@@ -359,7 +364,7 @@ En attendant, la relecture humaine facultative les corrige sans relancer les mod
 
 Qwen3-TTS précipite parfois une phrase (19 à 20 caractères par seconde au lieu de 10 à 15) et avale un mot : « sur un toit » est retranscrit « sur un C ». Le P0 retranscrit désormais chaque clip et le refait, jusqu'à 3 essais, s'il est dit trop vite ou qu'un mot y manque (§4, règles de calage). Pour retranscrire un clip, rééchantillonner d'abord à 16 kHz : à 48 kHz, le pipeline Whisper rend du charabia.
 
-Les chuchotements, d'abord manqués par la VAD, sont rattrapés par les segments Whisper au débit plausible. Priorité P1 : les sons vocaux brefs (cris, gémissements, souffles), par l'énergie de la voix isolée avec Demucs.
+Les chuchotements, d'abord manqués par la VAD, sont rattrapés par les segments Whisper au débit plausible. Les sons vocaux brefs (cris, gémissements, souffles) le sont par l'énergie de la voix isolée avec Demucs : sur l'extrait VF, 7 descriptions sur 9 ne touchent plus aucune voix, contre 5 sur 10, pour une couverture de 64 % au lieu de 76 %.
 
 ### Corpus et vérité terrain
 
@@ -474,6 +479,7 @@ L'interface est utilisable au clavier et au lecteur d'écran, pour que des créa
 | Rédaction et vérification visuelle | Gemma 4 26B-A4B (MoE, NVFP4) | Apache 2.0 | gpt-oss-120b, Mistral Small 4, Gemma 4 31B (balayage GX10) |
 | Vision + rédaction, profil 16 Go | Gemma 4 26B-A4B (QAT 4 bits, en partie sur le CPU) | Apache 2.0 | Gemma 4 12B (plus rapide, mais invente des détails) |
 | Détection de parole | Silero VAD (paquet `silero-vad`) | MIT | pyannote segmentation |
+| Cris et souffles | Voix isolée par Hybrid Demucs (`torchaudio`, HDEMUCS_HIGH_MUSDB_PLUS) | Code MIT ; poids entraînés sur MUSDB18-HQ (recherche) | Démixage par la piste musique + effets quand elle existe |
 | Transcription | Whisper large-v3 (transformers ; faster-whisper sur x86) | MIT | Qwen3-ASR-1.7B (Apache 2.0) |
 | Diarisation (optionnelle) | pyannote community-1 | CC-BY-4.0 (attribution ; télémétrie à couper) | — |
 | Découpage en plans | PySceneDetect | BSD-3 | TransNetV2 (MIT) |

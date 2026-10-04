@@ -3,7 +3,7 @@
 
 Vérité terrain : mixage original − piste musique + effets officielle, calée par corrélation croisée
 et ajustée en gain. Compte comme parole ce que Silero VAD détecte dans ce résidu, plus toute énergie
-de la bande vocale (300–3400 Hz) à plus de ENERGY_DB au-dessus de la fuite de musique : ce second
+de la bande vocale (300–3400 Hz) à plus de VOCAL_DB au-dessus de la fuite de musique : ce second
 critère attrape les chuchotements et les vocalises, au prix de quelques bruitages mal annulés.
 
 Usage :
@@ -19,11 +19,10 @@ from pathlib import Path
 import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from audesia_p0 import merge, secs  # noqa: E402
+from audesia_p0 import energy_speech, merge, plausible_segments, secs  # noqa: E402
 
 SR = 16000
 SEARCH = 2.0      # s : décalage maximal cherché entre le film et la piste musique + effets
-ENERGY_DB = 10.0  # dB au-dessus de la fuite de musique (90e centile hors parole) dans le résidu
 
 
 def pcm(path, start, dur):
@@ -40,20 +39,6 @@ def residual(film, me):
     me = me[lag: lag + len(film)]
     g = float(np.dot(film, me) / np.dot(me, me))
     return film - g * me, lag / SR - SEARCH, g
-
-
-def energy_speech(res, vad):
-    """Trames de 20 ms dont l'énergie 300–3400 Hz dépasse de ENERGY_DB la fuite de musique."""
-    hop, win = 320, 512
-    frames = np.lib.stride_tricks.sliding_window_view(res, win)[::hop] * np.hanning(win)
-    f = np.fft.rfftfreq(win, 1 / SR)
-    band = 10 * np.log10((np.abs(np.fft.rfft(frames, axis=1)) ** 2)[:, (f >= 300) & (f <= 3400)].sum(axis=1) + 1e-12)
-    t = np.arange(len(band)) * hop / SR
-    in_vad = np.zeros(len(t), dtype=bool)
-    for s, e in vad:
-        in_vad |= (t >= s) & (t < e)
-    on = band > np.percentile(band[~in_vad], 90) + ENERGY_DB
-    return [iv for iv in merge([[x - 0.1, x + 0.12] for x in t[on].tolist()]) if iv[1] - iv[0] >= 0.25]
 
 
 def overlap(a, b):
@@ -91,7 +76,10 @@ def main():
             "overlap_words_s": round(overlap([[d["start"], d["end"]]], vad), 2)} for d in placed]
     clean = sum(d["overlap_s"] == 0 for d in per)
     clean_words = sum(d["overlap_words_s"] == 0 for d in per)
-    detected = json.loads((out / "segments.json").read_text(encoding="utf-8"))["speech"]
+    # La parole que le pipeline évite : VAD, segments Whisper crédibles et éclats de la voix isolée (vocal.json).
+    segs = json.loads((out / "segments.json").read_text(encoding="utf-8"))
+    vocal = json.loads((out / "vocal.json").read_text(encoding="utf-8")) if (out / "vocal.json").exists() else []
+    detected = merge(segs["speech"] + plausible_segments(segs["dialogues"]) + vocal)
     truth_s = sum(e - s for s, e in truth)
     result = {
         "lag_s": round(lag, 4), "gain": round(gain, 3), "music_attenuation_db": round(float(attenuation), 1),

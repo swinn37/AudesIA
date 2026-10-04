@@ -17,7 +17,7 @@ Audesia s'adresse aux médiathèques, universités, collectivités, entreprises 
 
 ## Comment ça marche
 
-1. **Parole** : Silero VAD repère la parole. Les segments de Whisper large-v3 au débit plausible s'y ajoutent, ce qui rattrape les répliques chuchotées. Le reste forme les silences utilisables. La transcription sert aussi de contexte au rédacteur.
+1. **Parole** : Silero VAD repère la parole. Les segments de Whisper large-v3 au débit plausible s'y ajoutent, ce qui rattrape les répliques chuchotées. La voix, isolée de la musique par Demucs, ajoute les cris et les souffles brefs. Le reste forme les silences utilisables. La transcription sert aussi de contexte au rédacteur.
 2. **Plans** : PySceneDetect découpe la vidéo aux changements de plan.
 3. **Fenêtres** : chaque silence long est découpé en fenêtres de 5 à 10 s, coupées aux changements de plan. Chaque fenêtre reçoit une description.
 4. **Description** : un modèle de vision décrit la suite d'images de la fenêtre (jusqu'à 4), sans autre contexte. Il dit les actions, nomme les objets quand ils sont reconnaissables et décrit les états visibles.
@@ -29,7 +29,7 @@ Audesia s'adresse aux médiathèques, universités, collectivités, entreprises 
 
 ```mermaid
 flowchart LR
-  A[Vidéo] --> B[Parole<br/>Silero VAD + Whisper]
+  A[Vidéo] --> B[Parole<br/>Silero VAD + Whisper + Demucs]
   A --> C[Plans<br/>PySceneDetect]
   B --> D[Silences découpés<br/>en fenêtres]
   C --> D
@@ -225,6 +225,8 @@ Mesures du prototype sur RTX 5080 (16 Go), le 4 octobre 2026 : *Sintel*, de 1:35
 | Couverture des silences utilisables | 68 % | 76 % |
 | Fiabilité de la vérité terrain (musique atténuée dans le résidu) | 6,9 dB | 15,8 dB |
 
+Avec les cris et les souffles détectés par Demucs, activés depuis, la VF passe à 7 descriptions sur 9 sans chevauchement d'aucune voix (chevauchement maximal : 0,68 s), pour une couverture de 64 % au lieu de 76 % (un run).
+
 - **Modèle de vision et de rédaction :** Gemma 4 26B-A4B (4 bits). Il ne tient pas en entier dans 16 Go : Ollama en place une partie sur le CPU.
 - **Temps de calcul :** 15 à 27 min pour 2 min de vidéo selon la charge du GPU (objectif : moins de 5 min par minute). La description, le registre et la révision en prennent 11 à 23 ; ce dépassement vient de la partie du modèle placée sur le CPU.
 - **Mémoire GPU :** pic de 10,5 Gio dans le processus Python pendant la transcription ; le modèle de vision est libéré avant la voix.
@@ -247,6 +249,7 @@ python eval/overlap.py out/Sintel.2010.1080p_1.35-3.35 --video Sintel.2010.1080p
 **Ce que les mesures ont corrigé :**
 
 - Les horodatages de Whisper débordaient sur la musique et effaçaient le passage de 51 s sans dialogue : seuls ses segments au débit plausible sont gardés.
+- Les cris et les souffles passaient entre les mailles. La voix isolée par Demucs en repère désormais l'énergie : sur l'extrait VF, 7 descriptions sur 9 ne touchent plus aucune voix, contre 5 sur 10, au prix de 12 points de couverture.
 - La VAD manquait les répliques chuchotées du doublage (« C'est bientôt fini », « Ne bouge pas ») : ces segments Whisper, élargis de 0,5 s, les protègent désormais.
 - Sur les films entiers, Whisper hallucine pendant la musique (« I'm sorry » en boucle sur 131 s de Sintel) : ces boucles auraient effacé des silences. Un texte qui se compresse plus de 2,4 fois, critère de Whisper lui-même, est désormais écarté.
 - Le modèle de vision recevait en contexte les répliques (« Cette lame… ») et les descriptions précédentes, ce qui amorçait des inventions. Il ne voit plus que les images, et une passe de vérification confronte sa description aux images.
@@ -259,7 +262,7 @@ python eval/overlap.py out/Sintel.2010.1080p_1.35-3.35 --video Sintel.2010.1080p
 
 **Limites observées :**
 
-- Des éclats de voix brefs (cris, gémissements du dragon, souffles) passent entre les mailles dans le passage musical. La Charte demande de ne pas couvrir ces sons.
+- Des éclats de voix brefs passent encore entre les mailles, moins souvent : sur l'extrait VF, 2 descriptions sur 9 en touchent un, 0,68 s au plus. La Charte demande de ne pas couvrir ces sons. Les repérer coûte de la couverture : 64 % au lieu de 76 %.
 - La reconnaissance du fruit reste fragile. Sur trois images agrandies du même plan, le modèle répond « un fruit épineux », « un gant à pointes » ou « rien d'identifiable », et un même run peut basculer vers « une sphère épineuse ». C'est la limite de reconnaissance d'un modèle de 26B en 4 bits.
 - Éclaircie, la masse sombre devient bien un morceau de bois, mais la posture est lue comme « elle se cache derrière » au lieu de « elle regarde dessous ». L'action se lit dans le mouvement, pas sur des images fixes.
 - Quand deux personnages ont le même genre (en VO : « la jeune femme » et « la petite créature ailée »), le rédacteur écrit encore des « elle » ambigus (« Elle sourit, elle crie »).
@@ -267,7 +270,7 @@ python eval/overlap.py out/Sintel.2010.1080p_1.35-3.35 --video Sintel.2010.1080p
 - Avec 8 images par plan, la suite des actions était mieux suivie (« elle brandit un couteau »), mais la description prenait 50 min sur la 5080.
 - La voix de synthèse précipite parfois une phrase : 19 à 20 caractères par seconde au lieu de 10 à 15, et un mot avalé (« sur un toit » retranscrit « sur un C »). Le script retranscrit désormais chaque phrase, et la refait, jusqu'à 3 essais, si elle est dite à plus de 16 caractères par seconde ou qu'un mot de plus de 3 lettres manque à sa retranscription. Sur les 10 phrases de la VF, ce contrôle n'a rejeté aucune phrase à tort et ajoute environ 40 s à la voix.
 
-Ces défauts sont les cibles de la détection des sons vocaux (P1) et des modèles plus grands du GX10, où le modèle tient en entier en mémoire et où 8 images par plan restent abordables. En attendant, la relecture humaine les corrige : sur le doublage, quatre phrases corrigées (débris, fruit, couteau, main) ont été resynthétisées et remixées en 1 min 15 s environ. Mesurée contre la piste musique + effets, cette version relue ne chevauche aucune réplique. Au critère strict (cris, souffles), elle fait comme la version automatique : 5 sur 10.
+Ces défauts sont les cibles des modèles plus grands du GX10, où le modèle tient en entier en mémoire et où 8 images par plan restent abordables. En attendant, la relecture humaine les corrige : sur le doublage, quatre phrases corrigées (débris, fruit, couteau, main) ont été resynthétisées et remixées en 1 min 15 s environ. Mesurée contre la piste musique + effets, cette version relue ne chevauche aucune réplique. Au critère strict (cris, souffles), elle fait comme la version automatique : 5 sur 10.
 
 ## Feuille de route
 
@@ -281,5 +284,6 @@ Le brief complet (contraintes, architecture, choix techniques, risques) est dans
 
 - Code : Apache-2.0, voir [LICENSE](LICENSE).
 - Modèles et outils, téléchargés au premier lancement et non redistribués : Gemma 4, Qwen3-TTS (Apache-2.0) ; Whisper, Silero VAD (MIT) ; PySceneDetect (BSD-3) ; ffmpeg (LGPL/GPL).
+- Hybrid Demucs (torchaudio) : code MIT ; ses poids ont été entraînés sur MUSDB18-HQ, un jeu de données réservé à la recherche, plus 150 morceaux internes de Meta. À vérifier avant tout usage commercial.
 - *Sintel* © Blender Foundation, [durian.blender.org](https://durian.blender.org), CC BY 3.0. Doublage français : Touhoppai, CC BY.
 - Aucune vidéo générée n'est versionnée dans ce dépôt.

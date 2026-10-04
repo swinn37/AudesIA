@@ -18,7 +18,8 @@ COPY audesia_p0.py relecture.html /app/
 COPY configs/ /app/configs/
 COPY eval/ /app/eval/
 
-# 100 % local : aucun téléchargement ni télémétrie à l'exécution. Les modèles sont dans le cache monté.
-ENV HF_HUB_OFFLINE=1 HF_HUB_DISABLE_TELEMETRY=1 DO_NOT_TRACK=1 PYTHONUNBUFFERED=1
+# 100 % local : aucun téléchargement ni télémétrie à l'exécution. Les modèles sont dans le cache monté, poids de
+# Demucs (torchaudio) compris, grâce à TORCH_HOME.
+ENV HF_HUB_OFFLINE=1 HF_HUB_DISABLE_TELEMETRY=1 DO_NOT_TRACK=1 PYTHONUNBUFFERED=1 TORCH_HOME=/root/.cache/huggingface/torch
 WORKDIR /work
 ENTRYPOINT ["python3", "/app/audesia_p0.py"]

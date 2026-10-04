@@ -75,6 +75,10 @@ BRIGHT_SHARE = 0.05  # (mesuré : débris à contre-jour 42-55 % sombres / 9-14 
 GAMMA = 2.2         # éclaircissement de cette copie : à contre-jour, des débris passaient pour un « tissu noir »
 VAGUE = re.compile(r"\b(objets?|sphères?|sphériques?|masses?|formes?|choses?|éléments?)\b", re.I)
 MAX_SPEEDUP = 1.10
+VOCAL_DB = 10.0     # dB au-dessus de la fuite de musique (90e centile hors parole) : vérité terrain de l'évaluation
+BURST_DB = 8.0      # même critère sur la voix isolée par Demucs, pour le pipeline. Mesuré sur Sintel : à +8 dB,
+                    # 2 descriptions sur 3 (VO) et 2 sur 5 (VF) qui touchaient un cri ou un souffle en sont protégées,
+                    # pour 11 % et 4 % du silence utilisable ; à +10 dB, 2 sur 3 et 1 sur 5
 MAX_CPS = 16.0      # car./s : au-delà, Qwen3-TTS a précipité la phrase et avalé un mot (mesuré : 19 à 20, contre 10 à 15)
 TTS_TRIES = 3       # synthèses au plus par phrase ; si toutes sont précipitées, la plus lente est gardée
 REMENTION_S = 15.0  # s : au-delà, un personnage est redésigné en entier plutôt que par « elle » ou « il »
@@ -306,6 +310,20 @@ def repeats(text, previous):
     return difflib.SequenceMatcher(None, text.lower(), previous.lower()).ratio() >= REPEAT_RATIO
 
 
+def free_span(win, speech):
+    """Plus grand intervalle de la fenêtre sans parole. Une fenêtre décrite avant un changement de la détection (cris
+    et souffles ajoutés, par exemple) peut en contenir : la description se cale alors dans la plus grande place libre."""
+    a, b = win
+    spans, t = [], a
+    for s, e in merge([[max(s, a), min(e, b)] for s, e in speech if s < b and e > a]):
+        if s > t:
+            spans.append([t, s])
+        t = max(t, e)
+    if b > t:
+        spans.append([t, b])
+    return max(spans, key=lambda x: x[1] - x[0], default=[a, a])
+
+
 def candidates(d, corrections, names, recent, gap, last_text):
     """Textes à essayer pour la fenêtre d, et s'ils viennent de la relecture. Le texte relu fait foi : ni allègement
     ni filtre des redites ; vide, il laisse la fenêtre silencieuse."""
@@ -393,6 +411,48 @@ def detect_speech(wav16):
     dialogues = [{"start": c["timestamp"][0], "end": c["timestamp"][1] or duration, "text": c["text"].strip()}
                  for c in chunks]
     return {"duration": duration, "speech": merge([[v["start"], v["end"]] for v in vad]), "dialogues": dialogues}
+
+
+def energy_speech(audio, speech, db=VOCAL_DB, sr=16000):
+    """Intervalles où l'énergie 300–3400 Hz d'une voix isolée dépasse de db la fuite de musique, mesurée au 90e
+    centile hors parole : cris, souffles, chuchotements. Trames de 20 ms ; intervalles d'au moins 0,25 s. Sert au
+    pipeline (voix isolée par Demucs) et à l'évaluation (résidu de la piste musique + effets)."""
+    import numpy as np
+    hop, win = 320, 512
+    frames = np.lib.stride_tricks.sliding_window_view(audio, win)[::hop] * np.hanning(win)
+    f = np.fft.rfftfreq(win, 1 / sr)
+    band = 10 * np.log10((np.abs(np.fft.rfft(frames, axis=1)) ** 2)[:, (f >= 300) & (f <= 3400)].sum(axis=1) + 1e-12)
+    t = np.arange(len(band)) * hop / sr
+    calm = np.ones(len(t), dtype=bool)
+    for s, e in speech:
+        calm &= (t < s) | (t >= e)
+    if not calm.any():
+        return []
+    on = band > np.percentile(band[calm], 90) + db
+    return [iv for iv in merge([[x - 0.1, x + 0.12] for x in t[on].tolist()]) if iv[1] - iv[0] >= 0.25]
+
+
+def separate_voice(wav48):
+    """Voix isolée du mélange par Hybrid Demucs (torchaudio), en mono à 16 kHz."""
+    import soundfile as sf
+    import torch
+    import torchaudio
+    bundle = torchaudio.pipelines.HDEMUCS_HIGH_MUSDB_PLUS
+    model = bundle.get_model().to("cuda").eval()
+    mix, sr = sf.read(wav48, dtype="float32", always_2d=True)
+    mix = torchaudio.functional.resample(torch.from_numpy(mix.T.copy()), sr, bundle.sample_rate).to("cuda")
+    ref = mix.mean(0)
+    mix = (mix - ref.mean()) / ref.std()
+    n, seg, pad = mix.shape[1], 10 * bundle.sample_rate, bundle.sample_rate
+    voice, vocals = torch.zeros(n, device="cuda"), model.sources.index("vocals")
+    with torch.no_grad():  # tranches de 10 s avec 1 s de contexte jetée de chaque côté : pas de clic aux raccords
+        for i in range(0, n, seg):
+            a, b = max(0, i - pad), min(n, i + seg + pad)
+            voice[i: min(n, i + seg)] = model(mix[None, :, a:b])[0, vocals].mean(0)[i - a: i - a + min(seg, n - i)]
+    voice16 = torchaudio.functional.resample(voice * ref.std() + ref.mean(), bundle.sample_rate, 16000).cpu().numpy()
+    del model
+    torch.cuda.empty_cache()
+    return voice16
 
 
 def detect_shots(clip):
@@ -645,13 +705,13 @@ def voice(descs, segs, a, out):
              if isinstance(c, dict) and c.get("designation")]
     review, placed, dropped, recent, last_end, last_text = [], [], [], set(), -REMENTION_S, ""
     for d in descs:
-        (w0, w1), start = d["window"], d["window"][0] + MARGIN
-        avail = w1 - w0 - 2 * MARGIN
+        w0, w1 = free_span(d["window"], segs["speech"])
+        start, avail = w0 + MARGIN, w1 - w0 - 2 * MARGIN
         variants, reviewed = candidates(d, corrections, names, recent, start - last_end, last_text)
-        got = fit(variants, avail, synth)
+        got = fit(variants, avail, synth) if avail > 0 else None
         horaire = f"{int(w0 // 60)}:{w0 % 60:04.1f} – {int(w1 // 60)}:{w1 % 60:04.1f}".replace(".", ",")
         row = {"id": d["id"], "horaire": horaire, "debut": round(w0, 2), "fin": round(w1, 2), "place_s": round(avail, 2),
-               "place_caracteres": budget(d["window"], a.cps), "statut": "relu" if reviewed else "automatique",
+               "place_caracteres": budget([w0, w1], a.cps), "statut": "relu" if reviewed else "automatique",
                "texte": got[0] if got else None, "voix_s": None, "acceleration": None,
                "description": d.get("description", ""), "variantes": d["variants"]}
         review.append(row)
@@ -770,6 +830,14 @@ def selftest():
     assert missing_words("Elle grimpe sur un toit, un couteau à la main.",
                          "Elle grimpe sur un C, un couteau à la main.") == ["toit"]  # mot avalé
     assert missing_words("Le dragon gît, les ailes ouvertes.", "Le dragon gît, les ailes ouverte.") == []  # finale muette
+    assert free_span([10, 20], [[0, 9]]) == [10, 20]                  # fenêtre libre
+    assert free_span([10, 20], [[12, 13], [18, 30]]) == [13, 18]      # éclat ajouté : la plus grande place libre
+    assert free_span([10, 20], [[5, 25]]) == [10, 10]                 # plus de place
+    rng = np.random.default_rng(0)                    # 10 s de bruit de fond et un « cri » rare : 0,4 s à 1 kHz
+    sound = rng.normal(0, 0.001, 16000 * 10)
+    sound[80000:86400] += 0.1 * np.sin(2 * np.pi * 1000 * np.arange(6400) / 16000)
+    bursts = energy_speech(sound, [])
+    assert len(bursts) == 1 and 4.8 < bursts[0][0] < 5.0 and 5.4 < bursts[0][1] < 5.65, bursts
     assert missing_words("SINTEL s'affiche.", "Sintel s'affiche.") == []
     env = duck_envelope(1000, 100, [(2.0, 5.0)])
     assert env[350] == np.float32(DUCK) and env[0] == env[999] == 1 and DUCK < env[190] < 1
@@ -836,8 +904,11 @@ def main():
         ff("-i", clip, "-ac", 1, "-ar", 16000, a16, "-ac", 2, "-ar", 48000, a48)
 
     segs = step("parole", lambda: detect_speech(a16), out / "segments.json")
-    # Recalculés à chaque lancement : changer ces réglages ne refait pas l'ASR.
-    segs["speech"] = merge(segs["speech"] + plausible_segments(segs["dialogues"]))
+    # Cris, souffles, chuchotements : énergie de la voix isolée par Demucs, au-delà de la parole de la VAD.
+    vocal = step("voix isolée", lambda: energy_speech(separate_voice(a48), segs["speech"], db=BURST_DB),
+                 out / "vocal.json")
+    # Recalculés à chaque lancement : changer ces réglages ne refait ni l'ASR ni la séparation.
+    segs["speech"] = merge(segs["speech"] + plausible_segments(segs["dialogues"]) + vocal)
     segs["silences"] = silences(segs["speech"], segs["duration"])
     shots = step("plans", lambda: detect_shots(clip), out / "shots.json")
     if a.precompute:

@@ -20,7 +20,7 @@ import tomllib
 from pathlib import Path
 
 MEDIA = Path("corpus/media")
-SHARED = ("clip.mp4", "audio16k.wav", "audio48k.wav", "segments.json", "shots.json")  # indépendants du profil
+SHARED = ("clip.mp4", "audio16k.wav", "audio48k.wav", "segments.json", "vocal.json", "shots.json")  # communs aux profils
 
 
 def run(cmd):
@@ -48,7 +48,8 @@ def main():
             failed.append(v["id"])
             continue
         if a.precompute:
-            if not (shared / "shots.json").exists() and not run(pipeline + [str(video), "--precompute", "--out", str(shared)]):
+            done = all((shared / f).exists() for f in SHARED)
+            if not done and not run(pipeline + [str(video), "--precompute", "--out", str(shared)]):
                 failed.append(v["id"])
             continue
         out = Path("out/corpus") / a.profile / v["id"]

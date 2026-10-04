@@ -56,7 +56,10 @@ case "${1:-} ${2:-}" in
     # Le modèle NVFP4 livre un ancien modèle de conversation, qui ne reconnaît pas les images en image_url.
     hf google/gemma-4-26B-A4B-it chat_template.jinja --local-dir "$TEMPLATE"
     hf openai/whisper-large-v3 --include "*.json" "*.txt" "model.safetensors"  # pas les copies .bin et flax
-    hf Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice ;;
+    hf Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice
+    # Poids Hybrid Demucs (335 Mo) pour les cris et souffles, dans le cache que monte le pipeline.
+    docker run --rm -v audesia-hf:/root/.cache/huggingface -e TORCH_HOME=/root/.cache/huggingface/torch \
+      --entrypoint python3 "$IMG" -c "import torchaudio; torchaudio.pipelines.HDEMUCS_HIGH_MUSDB_PLUS.get_model()" ;;
   "fetch 5080")
     hf Qwen/Qwen3.5-2B ;;
   "build "*)
