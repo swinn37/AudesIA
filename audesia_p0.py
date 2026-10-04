@@ -51,6 +51,7 @@ import subprocess
 import sys
 import threading
 import time
+import unicodedata
 import zlib
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -81,6 +82,7 @@ REPEAT_RATIO = 0.6  # similarité au-delà de laquelle une description redit la 
 DUCK = 0.3          # gain de la bande-son sous la voix
 RAMP = 0.25         # s : rampe d'atténuation
 TTS_INSTRUCT = "Voix calme et neutre de narrateur, diction claire, débit régulier."
+ASR_MODEL = "openai/whisper-large-v3"  # transcription des dialogues et retranscription de contrôle de la voix
 PAGE = Path(__file__).with_name("relecture.html")  # modèle de la page de relecture
 PAGE_DATA = '<script id="donnees" type="application/json">null</script>'  # remplacé par les données du run
 
@@ -234,20 +236,32 @@ def fit(variants, avail, synth):
     return got if got and got[3] <= MAX_SPEEDUP else None
 
 
-def steady(text, generate):
-    """Synthèse au débit normal : refaite jusqu'à TTS_TRIES fois quand la voix précipite la phrase (plus de MAX_CPS
-    caractères par seconde : « sur un toit » devenait « sur un C »), sinon la plus lente. Rend aussi le nombre d'essais."""
-    # ponytail: le débit trahit les mots avalés sans charger d'ASR ; la retranscription de contrôle (P1) attrapera
-    # aussi ceux qui sont avalés à débit normal.
-    best = None
+def missing_words(expected, heard):
+    """Mots de plus de 3 lettres du texte que la retranscription de la voix ne contient pas, même à peu près : les
+    mots avalés. « À peu près » (similarité ≥ 0,75) tolère les finales muettes du français : ouverte, ouvertes."""
+    def words(text):
+        return re.findall(r"[a-z]+", unicodedata.normalize("NFKD", text.lower()).encode("ascii", "ignore").decode())
+    got = words(heard)
+    return [w for w in words(expected)
+            if len(w) > 3 and not any(difflib.SequenceMatcher(None, w, g).ratio() >= 0.75 for g in got)]
+
+
+def steady(text, generate, missing=lambda text, wav, sr: []):
+    """Synthèse acceptable : refaite jusqu'à TTS_TRIES fois quand la voix précipite la phrase (plus de MAX_CPS
+    caractères par seconde) ou avale des mots (absents de sa retranscription : « sur un toit » devenait « sur un C ») ;
+    sinon la meilleure tentative, la moins incomplète puis la plus lente. Rend aussi le nombre d'essais."""
+    best = key = None
     for tries in range(1, TTS_TRIES + 1):
         wav, sr = generate(text)
-        if best is None or len(wav) > len(best[0]) * sr / best[1]:
-            best = wav, sr
-        if len(text) * sr <= MAX_CPS * len(wav):
+        rushed = len(text) * sr > MAX_CPS * len(wav)
+        lost = [] if rushed else missing(text, wav, sr)  # une voix précipitée est refaite sans être retranscrite
+        if best is None or (rushed, len(lost), -len(wav) / sr) < key:
+            best, key = (wav, sr), (rushed, len(lost), -len(wav) / sr)
+        if not rushed and not lost:
             break
-        print(f"  voix précipitée ({len(text) * sr / max(len(wav), 1):.1f} car./s, essai {tries}/{TTS_TRIES}) : {text}",
-              flush=True)
+        why = (f"précipitée ({len(text) * sr / max(len(wav), 1):.1f} car./s)" if rushed
+               else f"incomplète (manque : {', '.join(lost)})")
+        print(f"  voix {why}, essai {tries}/{TTS_TRIES} : {text}", flush=True)
     return (*best, tries)
 
 
@@ -370,7 +384,7 @@ def detect_speech(wav16):
     duration = len(audio) / sr
     vad = get_speech_timestamps(torch.from_numpy(audio), load_silero_vad(), sampling_rate=sr, threshold=VAD_THRESHOLD,
                                 speech_pad_ms=VAD_PAD_MS, return_seconds=True)
-    asr = pipeline("automatic-speech-recognition", model="openai/whisper-large-v3", dtype=torch.float16, device="cuda:0")
+    asr = pipeline("automatic-speech-recognition", model=ASR_MODEL, dtype=torch.float16, device="cuda:0")
     chunks = asr({"raw": audio, "sampling_rate": sr}, return_timestamps=True, chunk_length_s=30, batch_size=8,
                  generate_kwargs={"task": "transcribe"})["chunks"]
     del asr
@@ -569,7 +583,7 @@ def voice(descs, segs, a, out):
     import numpy as np
     import soundfile as sf
 
-    cache, tts, retries = out / "tts" / "cache", None, 0
+    cache, tts, asr, retries = out / "tts" / "cache", None, None, 0
     cache.mkdir(parents=True, exist_ok=True)
 
     def generate(text):
@@ -588,13 +602,26 @@ def voice(descs, segs, a, out):
         wavs, sr = tts.generate_custom_voice(text=text, language="French", speaker=a.voice, instruct=TTS_INSTRUCT)
         return np.asarray(wavs[0], dtype=np.float32), sr
 
+    def heard_missing(text, wav, sr):
+        # Retranscription de contrôle par Whisper, chargé seulement s'il y a une phrase à synthétiser. Voix
+        # rééchantillonnée à 16 kHz : à 24 ou 48 kHz, le pipeline Whisper rend du charabia.
+        nonlocal asr
+        import torch
+        import torchaudio
+        if asr is None:
+            from transformers import pipeline
+            asr = pipeline("automatic-speech-recognition", model=ASR_MODEL, dtype=torch.float16, device="cuda:0")
+        audio = torchaudio.functional.resample(torch.from_numpy(wav), sr, 16000).numpy()
+        heard = asr({"raw": audio, "sampling_rate": 16000}, generate_kwargs={"language": "french", "task": "transcribe"})
+        return missing_words(text, heard["text"])
+
     def synth(text):
         # Cache par phrase : après une correction, seules les phrases nouvelles sont synthétisées.
         nonlocal retries
         f = cache / (hashlib.sha1(f"{a.tts_model}|{a.voice}|{TTS_INSTRUCT}|{text}".encode()).hexdigest()[:16] + ".wav")
         if f.exists():
             return sf.read(f, dtype="float32")
-        wav, sr, tries = steady(text, generate)
+        wav, sr, tries = steady(text, generate, heard_missing)
         retries += tries - 1
         sf.write(f, wav, sr, subtype="FLOAT")
         return wav, sr
@@ -734,6 +761,16 @@ def selftest():
         durations = iter([2.4, 2.5, 2.3])                         # toujours précipitée : la plus lente est gardée
         wav, _, tries = steady("x" * 46, gen)
         assert (len(wav), tries) == (250, 3)
+        durations, lost = iter([3.0, 3.1]), iter([["toit"], []])  # débit normal, mais un mot avalé au 1er essai
+        wav, _, tries = steady("x" * 46, gen, lambda text, w, sr: next(lost))
+        assert (len(wav), tries) == (310, 2)
+        durations, lost = iter([3.0, 3.1, 3.2]), iter([["a", "b"], ["a"], ["a", "b"]])  # la moins incomplète
+        wav, _, tries = steady("x" * 46, gen, lambda text, w, sr: next(lost))
+        assert (len(wav), tries) == (310, 3)
+    assert missing_words("Elle grimpe sur un toit, un couteau à la main.",
+                         "Elle grimpe sur un C, un couteau à la main.") == ["toit"]  # mot avalé
+    assert missing_words("Le dragon gît, les ailes ouvertes.", "Le dragon gît, les ailes ouverte.") == []  # finale muette
+    assert missing_words("SINTEL s'affiche.", "Sintel s'affiche.") == []
     env = duck_envelope(1000, 100, [(2.0, 5.0)])
     assert env[350] == np.float32(DUCK) and env[0] == env[999] == 1 and DUCK < env[190] < 1
     assert parse_variants('Voici : {"variantes": ["Elle court.", "Elle court vers la porte.", "Elle court."]}') \
