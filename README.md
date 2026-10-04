@@ -67,7 +67,7 @@ OLLAMA_CONTEXT_LENGTH=8192 ollama serve &
 ollama pull gemma4:26b-a4b-it-qat
 ```
 
-Audiodescription de la scène du gardien dans *Sintel* :
+Audiodescription de la scène de la hutte dans *Sintel*, où un vieil homme recueille la jeune femme :
 
 ```bash
 wget https://download.blender.org/durian/movies/Sintel.2010.1080p.mkv
@@ -173,8 +173,8 @@ python eval/overlap.py out/Sintel.2010.1080p_1.35-3.35 --video Sintel.2010.1080p
 **Limites observées :**
 
 - Des éclats de voix brefs (cris, gémissements du dragon, souffles) passent entre les mailles dans le passage musical. La Charte demande de ne pas couvrir ces sons.
-- Dans les silences très courts, certaines descriptions restent maigres ou approximatives (« L'homme est debout. », alors que le gardien est accroupi).
-- Le registre oublie les personnages secondaires (le gardien n'y figure pas), et une main reste anonyme quand l'enchaînement des plans ne suffit pas à l'attribuer.
+- Dans les silences très courts, certaines descriptions restent maigres ou approximatives (« L'homme est debout. », alors que le vieil homme est accroupi près du feu).
+- Le registre oublie les personnages secondaires (le vieil homme de la hutte n'y figure pas), et une main reste anonyme quand l'enchaînement des plans ne suffit pas à l'attribuer.
 
 Ces défauts sont les cibles de la détection des sons vocaux et de la vérification visuelle (P1), puis des modèles plus grands du GX10.
 
