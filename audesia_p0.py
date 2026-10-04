@@ -422,6 +422,8 @@ def load_profile(name):
     for role in ("vlm", "writer"):
         if not {"base_url", "model"} <= profile.get(role, {}).keys():
             sys.exit(f"profil {path} : la section [{role}] doit donner base_url et model")
+        # Sous Docker (scripts/docker.sh), les serveurs se joignent par leur nom sur le réseau interne.
+        profile[role]["base_url"] = os.environ.get(f"AUDESIA_{role.upper()}_URL", profile[role]["base_url"])
     profile["name"] = path.stem
     profile.setdefault("run", {})
     return profile
@@ -530,6 +532,17 @@ def describe(clip, segs, shots, profile, cps, out):
     return items
 
 
+def outbound():
+    """Vrai si une connexion sortante aboutit. Sous Docker, le réseau interne la refuse : metrics.json garde ainsi
+    la preuve que le traitement est resté local."""
+    import socket
+    try:
+        socket.create_connection(("huggingface.co", 443), timeout=3).close()
+        return True
+    except OSError:
+        return False
+
+
 def unload_ollama(base_url, model):
     """Ollama garde le modèle en VRAM 5 min : on le libère pour la voix. Sans effet sur vLLM ou llama.cpp."""
     import urllib.request
@@ -554,8 +567,15 @@ def voice(descs, segs, a, out):
     def generate(text):
         nonlocal tts
         if tts is None:  # chargé seulement s'il manque une phrase au cache
+            from types import SimpleNamespace
+            import huggingface_hub
             import torch
             from qwen_tts import Qwen3TTSModel
+            # transformers 4.57 demande à l'API du Hub (model_info), à chaque chargement du tokenizer de qwen-tts, si le
+            # modèle dérive d'un Mistral : un appel réseau caché, que le réseau Docker sans sortie a révélé. On répond
+            # localement ce que dirait le Hub (non), ce qui laisse la tokenisation inchangée.
+            # ponytail: rustine sur cette version ; le run Docker hors ligne dira si une mise à jour la rend inutile.
+            huggingface_hub.model_info = lambda *args, **kwargs: SimpleNamespace(tags=[])
             tts = Qwen3TTSModel.from_pretrained(a.tts_model, device_map="cuda:0", dtype=torch.bfloat16)
         wavs, sr = tts.generate_custom_voice(text=text, language="French", speaker=a.voice, instruct=TTS_INSTRUCT)
         return np.asarray(wavs[0], dtype=np.float32), sr
@@ -794,6 +814,7 @@ def main():
         "models": {r: profile[r]["model"] for r in ("vlm", "writer")},
         "parallel_requests": profile["run"].get("parallel", 1),
         "llm_usage": USAGE,  # requêtes et jetons par rôle ; 0 si les descriptions venaient du cache
+        "outbound_network": outbound(),  # False : aucun accès sortant possible pendant le traitement
         "coverage": round(sum(p["end"] - p["start"] for p in placed) / usable, 3) if usable else 0,
         "measured_chars_per_s": round(statistics.mean(p["chars_per_s"] for p in placed), 1) if placed else None,
         "peak_gpu_gib_this_process": round(torch.cuda.max_memory_allocated() / 2 ** 30, 2),

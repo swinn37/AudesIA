@@ -52,7 +52,7 @@ Cinq principes :
 
 ## Démarrage rapide
 
-Prérequis : Linux, WSL2 ou Windows, GPU NVIDIA (testé sur une RTX 5080 16 Go sous Windows), Python 3.12, ffmpeg. Environ 25 Go de modèles sont téléchargés au premier lancement.
+Prérequis : Linux, WSL2 ou Windows, GPU NVIDIA (testé sur une RTX 5080 16 Go sous Windows), Python 3.12, ffmpeg. Environ 25 Go de modèles sont téléchargés au premier lancement ; ensuite, `HF_HUB_OFFLINE=1` interdit tout appel au Hub, ce qui est le cas d'office sous Docker.
 
 Les commandes ci-dessous sont pour Linux. Sous Windows, installez ffmpeg (winget ou scoop) et l'application Ollama, avec un contexte d'au moins 8 192 jetons dans ses réglages, puis les mêmes paquets pip dans un environnement virtuel.
 
@@ -145,25 +145,38 @@ En P1, un serveur local servira la même page, relancera lui-même la voix et le
 
 ### Sur le GX10 (profil `large`)
 
-Deux serveurs vLLM tournent dans l'image officielle : Qwen3.6-35B-A3B (FP8) décrit les plans, et Gemma 4 26B-A4B (NVFP4) relit chaque description sur les images puis rédige. Les descriptions partent en parallèle (8 requêtes à la fois), et vLLM les regroupe en lots.
+Tout tourne sous Docker, sur un réseau interne sans accès sortant :
+
+- deux serveurs vLLM : Qwen3.6-35B-A3B (FP8) décrit les plans, Gemma 4 26B-A4B (NVFP4) relit chaque description sur les images puis rédige ;
+- l'image du pipeline (transcription, voix, mixage), construite sur l'image vLLM. Elle en hérite CUDA 13 et PyTorch, pour arm64 comme pour amd64, et partage ses couches avec elle.
+
+Les descriptions partent en parallèle, 8 requêtes à la fois, et vLLM les regroupe en lots.
 
 ```bash
-scripts/vllm.sh fetch gx10   # une fois, avec internet : environ 56 Go de modèles
-scripts/vllm.sh start gx10   # vision puis rédacteur, l'un après l'autre
-python audesia_p0.py Sintel.2010.1080p.mkv --start 1:35 --end 3:35 --profile large
-scripts/vllm.sh stop
+scripts/docker.sh fetch gx10   # une fois, avec internet : environ 64 Go de modèles
+scripts/docker.sh build        # image du pipeline, construite sur place en arm64
+scripts/docker.sh start gx10   # vision puis rédacteur, l'un après l'autre
+scripts/docker.sh run Sintel.2010.1080p.mkv --start 1:35 --end 3:35 --profile large
+scripts/docker.sh stop
 ```
+
+Chaque run vérifie qu'aucune connexion sortante n'aboutit, et le note dans `metrics.json` (`"outbound_network": false`) : c'est la preuve du 100 % local. Ce réseau fermé a déjà servi. Il a révélé un appel caché à l'API de Hugging Face, que transformers faisait à chaque chargement de la voix ; cet appel est désormais neutralisé.
 
 `start gx10` lance aussi `scripts/bench_memory.sh`, qui relève la mémoire de l'hôte chaque seconde dans `out/memoire.csv` : sur le GB10, `nvidia-smi` n'affiche pas la mémoire. C'est aussi un garde-fou. Deux serveurs sur la mémoire unifiée ont déjà fait geler un GB10 au démarrage, et une machine gelée ne se redémarre pas à distance. Le script arrête donc les serveurs si la mémoire disponible passe sous 8 Gio.
 
-Le chemin vLLM se teste avant sur une carte de 16 Go, avec Qwen3.5-2B, de la même famille que Qwen3.6 :
+Le tout se teste avant sur une carte de 16 Go, avec Qwen3.5-2B, de la même famille que Qwen3.6. `HF_CACHE` monte un cache Hugging Face qui contient déjà la transcription et la voix (sous Windows, un chemin du type `C:/Users/<vous>/.cache/huggingface`) :
 
 ```bash
-scripts/vllm.sh fetch 5080 && scripts/vllm.sh start 5080
-python audesia_p0.py Sintel.2010.1080p.mkv --start 1:35 --end 2:00 --profile test-vllm
+scripts/docker.sh fetch 5080 && scripts/docker.sh build && scripts/docker.sh start 5080
+HF_CACHE=~/.cache/huggingface scripts/docker.sh run Sintel.2010.1080p.mkv --start 1:35 --end 2:00 --profile test-vllm
 ```
 
-Testé sur la 5080 le 4 octobre : les images, le JSON, la réflexion coupée et les lots de requêtes fonctionnent (4 requêtes simultanées en 0,8 s, contre 2,3 s en série). Qwen3.5-2B est en revanche trop petit pour bien décrire : ce test valide le chemin, pas la qualité.
+Testé sur la 5080 le 4 octobre :
+
+- le pipeline complet tourne hors ligne dans son conteneur, en 2 min 37 s pour 25 s de vidéo, dont 46 s de transcription et 86 s de voix ;
+- les images, le JSON, la réflexion coupée et les lots de requêtes fonctionnent : 4 requêtes simultanées prennent 0,8 s, contre 2,3 s en série.
+
+Qwen3.5-2B est en revanche trop petit pour bien décrire : ce test valide le chemin, pas la qualité.
 
 ## Pourquoi le GX10
 

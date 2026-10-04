@@ -40,15 +40,16 @@ Source : règlement du challenge (Conditions Générales Gleam / ASUS). Ces moda
 
 1. **100 % local.** Aucun appel réseau sortant à l'exécution (pas d'API cloud, pas de télémétrie). Les poids sont téléchargés une fois, puis tout tourne hors ligne.
    - pyannote 4 et vLLM envoient de la télémétrie par défaut. Toujours définir `PYANNOTE_METRICS_ENABLED=0 VLLM_NO_USAGE_STATS=1 DO_NOT_TRACK=1 HF_HUB_OFFLINE=1 HF_HUB_DISABLE_TELEMETRY=1`.
-   - Preuve : la chaîne complète tourne dans un réseau Docker `internal: true` (aucune sortie possible) ; le log va dans le rapport.
+   - Preuve : la chaîne complète tourne dans un réseau Docker `internal: true` (aucune sortie possible), et chaque run note dans `metrics.json` qu'aucune connexion sortante n'aboutit (`outbound_network`).
+   - Ce réseau a déjà révélé un appel caché : transformers 4.57 interroge l'API du Hub (`model_info`) à chaque chargement du tokenizer de qwen-tts. La réponse est désormais donnée localement, sans changer la tokenisation.
 2. **Deux profils matériels, même code :**
    - `small` : développement sur RTX 5080 (16 Go VRAM, x86_64, WSL2). Sert aussi de **baseline de comparaison** pour le dossier.
    - `large` : ASUS Ascent GX10 (GB10, 128 Go de mémoire unifiée, **ARM64 / aarch64**). Tous les modèles restent chargés en même temps.
    - Les deux profils partagent la même partie audio (VAD, transcription, voix) et les mêmes entrées précalculées. Seuls le modèle de vision, le rédacteur et le contexte changent.
 3. **ARM64 dès le départ** (vérifié le 3 octobre 2026) :
    - Serveurs de modèles : image officielle `vllm/vllm-openai:v0.30.0` (arm64, CUDA 13.0), épinglée par digest, avec la v0.29.0 en repli. Les images NGC vLLM à partir de 26.04 ne démarrent pas sur le pilote R580 du GX10 ; NGC 26.02 en secours.
-   - Workers : images construites nativement en arm64 (runners GitHub `ubuntu-24.04-arm`, gratuits pour un dépôt public, ou directement sur le GX10). Pas de test sous QEMU : l'émulation n'a pas de GPU.
-   - Vérifier les roues aarch64 avant l'accès : `pip download -r requirements.txt --only-binary=:all: --platform manylinux_2_28_aarch64 --python-version 3.12`.
+   - Pipeline : image construite sur l'image vLLM (`docker/Dockerfile`), qui apporte CUDA 13 et PyTorch pour arm64 comme pour amd64. Elle est construite sur place sur le GX10 (`scripts/docker.sh build`), où ses couches sont déjà présentes pour les serveurs. Pas de test sous QEMU : l'émulation n'a pas de GPU.
+   - Vérifier les roues aarch64 avant l'accès : `pip download -r requirements.txt --only-binary=:all: --platform manylinux_2_28_aarch64 --python-version 3.12`. Fait le 4 octobre : les 23 paquets ajoutés à l'image vLLM ont une roue aarch64, sauf `sox`, du Python pur distribué en source.
    - Éviter toute dépendance sans roue aarch64. CTranslate2 (faster-whisper, WhisperX) n'a pas de roue CUDA pour aarch64 : sur le GX10, il tourne sur le CPU sans prévenir.
 4. **Tout mesurer.** Mémoire unifiée par étape, durée par étape, nombre de requêtes, tailles de batch. Logs JSON horodatés. Sur GB10, `nvidia-smi` affiche « Memory-Usage: Not Supported » et `docker stats` ne voit pas la mémoire CUDA : relever `/proc/meminfo`, `nvidia-smi --query-compute-apps` et les métriques vLLM (voir `scripts/bench_memory.sh`).
 5. **Licences libres en priorité** (Apache 2.0, MIT, BSD). Signaler tout modèle non commercial (modèles InsightFace, XTTS-v2, poids F5-TTS, aligneur français par défaut de WhisperX) et créditer les contenus CC-BY (films Blender, doublages Touhoppai, modèle pyannote community-1).
@@ -64,7 +65,7 @@ Source : règlement du challenge (Conditions Générales Gleam / ASUS). Ces moda
 
 - Machine de dev : Windows + **WSL2 (bash)**, GPU **RTX 5080 16 Go**. Homebrew (linuxbrew) disponible.
 - Docker avec support GPU sous WSL2 (NVIDIA Container Toolkit). Sur la 5080 (sm_120) : torch compilé pour CUDA 12.8 ou plus ; CTranslate2 en float16 (INT8 désactivé sur sm_120).
-- Cible : GX10 accessible à distance (modalités communiquées par l'organisateur après sélection). Déploiement en une commande (`docker compose -f docker/compose.gx10.yml up`).
+- Cible : GX10 accessible à distance (modalités communiquées par l'organisateur après sélection). Déploiement par `scripts/docker.sh` (fetch, build, start, run) plutôt que par compose : compose ne sait pas vider le cache de pages entre les démarrages des deux serveurs, que le risque de gel impose.
 - Python 3.12. Pas de Node : la page de relecture est en HTML natif.
 - **À demander aux organisateurs dès la sélection :** sortie de `nvidia-smi`, `/etc/dgx-release` et `df -h` ; accès sudo (nécessaire pour vider le cache de pages) ; accès internet pour télécharger les modèles ; durée de l'accès.
 
@@ -111,12 +112,11 @@ audesia/
 │   └── download.sh            # vidéos, sous-titres, pistes musique + effets (vérité terrain)
 ├── scripts/
 │   ├── bench_memory.sh        # relevé à 1 Hz sur l'hôte (/proc/meminfo, nvidia-smi --query-compute-apps) et garde-fou
-│   ├── vllm.sh                # téléchargement des modèles et serveurs vLLM (GX10, test 5080), puis HF_HUB_OFFLINE=1
+│   ├── docker.sh              # modèles, image du pipeline, serveurs vLLM et runs sur un réseau sans sortie
 │   └── run_corpus.sh          # traite tout le corpus avec un profil
 └── docker/
-    ├── Dockerfile.worker      # une image par pile de dépendances incompatible si besoin
-    ├── compose.dev.yml        # 5080 / WSL2
-    └── compose.gx10.yml       # GX10 arm64 : serveurs vLLM + worker, réseau internal: true
+    ├── Dockerfile             # pipeline, sur l'image vLLM (arm64 et amd64)
+    └── requirements.txt       # paquets ajoutés, aux versions validées sur la 5080
 ```
 
 ---
@@ -220,7 +220,7 @@ Les profils sont des fichiers TOML dans `configs/`, choisis par `--profile`. Cha
 
 - Sur le GX10, le rédacteur est d'une autre famille que le modèle de vision : il relit sur les images ce que celui-ci a décrit.
 - Les descriptions et les détails agrandis partent en parallèle. La révision et la rédaction restent en série, car chacune reprend la précédente.
-- Les serveurs vLLM sont lancés par `scripts/vllm.sh` dans l'image `vllm/vllm-openai:v0.30.0`, épinglée par digest, avec la v0.29.0 en repli. La v0.30.0 corrige des lenteurs sur GB10 : les prompts avec images de Gemma 4 étaient jusqu'à 3 à 4 fois plus lents, et le préremplissage de Qwen3.6 n'utilisait pas le bon noyau.
+- Les serveurs vLLM sont lancés par `scripts/docker.sh` dans l'image `vllm/vllm-openai:v0.30.0`, épinglée par digest, avec la v0.29.0 en repli. La v0.30.0 corrige des lenteurs sur GB10 : les prompts avec images de Gemma 4 étaient jusqu'à 3 à 4 fois plus lents, et le préremplissage de Qwen3.6 n'utilisait pas le bon noyau.
 - Réglages de serveur imposés par des problèmes connus de vLLM :
   - Qwen3.6 : DeepGEMM dégrade sa précision sur Blackwell (#50332), d'où `--moe-backend triton` et `VLLM_USE_DEEP_GEMM=0`. Cache KV en BF16 : en FP8, il a déjà planté sur GB10 (#50331).
   - Gemma 4 NVFP4 : le dépôt livre un ancien modèle de conversation qui ne reconnaît pas les images envoyées en `image_url`. On lui donne celui de Google (`--chat-template`).
@@ -272,16 +272,16 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026, puis le 4 octobre po
   - relecture : tableau accessible (horodatage, texte modifiable, place disponible en secondes et en caractères, statut, description factuelle, Écouter, Supprimer, Régénérer) ;
   - lecteur avec/sans AD qui bascule entre deux MP4, puis export ;
   - le serveur écrit le même `corrections.json` que la maquette et relance lui-même la voix et le mixage : un seul mécanisme, testé dès le P0 ; il ajoute Régénérer et l'écoute d'un texte modifié.
-- [x] Profils `small`, `large` et `test-vllm` (`configs/*.toml`) : deux rôles, réflexion coupée, requêtes en parallèle, requêtes et jetons par modèle dans `metrics.json`. Serveurs vLLM lancés par `scripts/vllm.sh` (image v0.30.0 épinglée par digest). Le compose viendra avec l'image du pipeline.
+- [x] Profils `small`, `large` et `test-vllm` (`configs/*.toml`) : deux rôles, réflexion coupée, requêtes en parallèle, requêtes et jetons par modèle dans `metrics.json`. Serveurs vLLM lancés par `scripts/docker.sh` (image v0.30.0 épinglée par digest).
   - Chemin vLLM testé le 4 octobre sur la 5080 (image v0.30.0, Qwen3.5-2B) :
     - l'image démarre sur sm_120 et hors ligne ;
     - les images sont bien comptées (environ 465 jetons chacune), la réflexion est coupée et le JSON est lu ;
     - 4 requêtes simultanées prennent 0,8 s, contre 2,3 s en série, grâce aux lots de vLLM.
   - Le modèle de 2B est trop petit pour la tâche : il invente un nom et ignore les longueurs, si bien que le calage n'a placé aucune de ses descriptions. Le test valide le chemin, pas la qualité.
-- [ ] Images worker arm64 construites nativement (runners GitHub `ubuntu-24.04-arm`) ; roues vérifiées avec `pip download --platform`.
+- [x] Image du pipeline (`docker/Dockerfile`) sur l'image vLLM, pour arm64 et amd64 : construite et testée sur la 5080 (amd64), roues aarch64 vérifiées. Sur le GX10, elle se construit sur place.
 - [x] `scripts/bench_memory.sh` : relevé mémoire à 1 Hz sur l'hôte et garde-fou qui tue les serveurs vLLM sous 8 Gio disponibles.
 - [ ] Marqueurs d'étape dans le relevé mémoire, pour attribuer la mémoire à chaque étape du pipeline.
-- [ ] Preuve hors ligne : run complet dans un réseau Docker `internal: true`, variables anti-télémétrie actives.
+- [x] Preuve hors ligne : serveurs et pipeline sur un réseau Docker interne, vérification de l'accès sortant dans `metrics.json`. Run complet testé sur la 5080 le 4 octobre : 2 min 37 s pour 25 s de vidéo, `outbound_network: false`.
 - [ ] Scripts d'évaluation (`eval/*`) et génération du rapport.
 - [ ] Corpus et vérité terrain (§7) ; précalcul sur la 5080 de la VAD, de la transcription, des plans et des images clés.
 - [ ] Run complet du corpus en profil `small` → résultats de référence archivés.
@@ -289,7 +289,7 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026, puis le 4 octobre po
 ### P2 — Pendant l'accès au GX10
 
 - [ ] Jour 1 (doit suffire à lui seul) :
-  - `scripts/vllm.sh fetch gx10` puis `start gx10` (cache de pages vidé, serveurs démarrés un par un, relevé mémoire et garde-fou) ;
+  - `scripts/docker.sh fetch gx10`, `build` puis `start gx10` (cache de pages vidé, serveurs démarrés un par un, relevé mémoire et garde-fou) ;
   - run complet du corpus avec la configuration principale ;
   - mesures clés : chevauchement contre vérité terrain, couverture, temps, mémoire ;
   - A/B rapide du rédacteur sur 20 à 30 silences.
@@ -434,7 +434,7 @@ On dépose une vidéo dans l'interface web ; quelques minutes plus tard, on réc
 | Médias | ffmpeg | Extraction, découpe, mixage avec atténuation, encodage, multiplexage |
 | Données | Un dossier par job, un fichier JSON par étape | Jobs, segments, descriptions et versions |
 | Supervision | Logs JSON + relevé mémoire à 1 Hz sur l'hôte | Mémoire et charge par étape |
-| Déploiement | Docker Compose, image vLLM officielle arm64 (CUDA 13.0), workers construits nativement en arm64 | Installation en une commande sur un GX10 |
+| Déploiement | `scripts/docker.sh`, image vLLM officielle arm64 (CUDA 13.0) pour les serveurs et, augmentée, pour le pipeline | Installation en quatre commandes sur un GX10 |
 
 Pas de Redis, de WebSocket ni de base de données pour le challenge : ils n'apportent rien à la preuve. À ajouter seulement si l'outil devient multi-utilisateur.
 
@@ -567,11 +567,11 @@ Aucune offre française d'audiodescription par IA en local ou sur site n'a été
 | Personnages confondus ou mal nommés | Visages regroupés sur toute la vidéo (prises de vues réelles), marquage visuel pour l'animation, noms seulement s'ils sont prononcés ou affichés, correction dans l'éditeur |
 | Mémoire insuffisante | Configuration principale estimée à ~76 GiB ; versions NVFP4 ; contexte réduit |
 | Gel de la machine au démarrage des serveurs (mémoire unifiée, vLLM #46307), sans redémarrage possible à distance | 0,40 + 0,25 de la mémoire réservés au plus ; serveurs démarrés l'un après l'autre, cache de pages vidé avant chacun ; garde-fou qui les tue sous 8 Gio disponibles |
-| Incompatibilités ARM64 | Image vLLM officielle CUDA 13.0 (compatible pilote R580), workers construits nativement en arm64, roues vérifiées avant l'accès |
+| Incompatibilités ARM64 | Image vLLM officielle CUDA 13.0 (compatible pilote R580) pour les serveurs et le pipeline, roues aarch64 vérifiées le 4 octobre |
 | Détection de parole imparfaite (musique, chants) | VAD sensible avec marge, réglée et mesurée contre une vérité terrain (pistes musique + effets) |
 | Voix peu naturelle ou qui saute des mots | Comparatif de 3 moteurs, retranscription de contrôle de chaque clip |
 | Licences incompatibles | Apache 2.0 / MIT en priorité ; aligneur non commercial de WhisperX évité ; attribution CC-BY (pyannote community-1, films Blender) |
-| Télémétrie cachée | Variables d'environnement + run complet dans un réseau Docker sans sortie |
+| Télémétrie cachée | Variables d'environnement + run complet dans un réseau Docker sans sortie, qui a déjà révélé un appel caché de transformers au Hub, neutralisé |
 | Phase de test très courte | Tout prêt avant l'accès, plan tenable en une journée, entrées précalculées |
 
 ## A10. Réponses au formulaire Gleam

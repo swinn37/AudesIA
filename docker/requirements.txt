@@ -1,0 +1,10 @@
+# Paquets du pipeline absents de l'image vLLM, aux versions validées sur la RTX 5080.
+# qwen-tts et scenedetect s'installent à part, sans dépendances (voir le Dockerfile).
+transformers==4.57.3  # qwen-tts 0.1.1 l'exige ; l'image vLLM a la 5.x, utile à vLLM mais pas au pipeline
+accelerate==1.12.0    # idem
+silero-vad==6.2.3
+soundfile==0.14.0
+librosa==1.0.0
+onnxruntime==1.30.0
+sox==1.5.0
+platformdirs==4.12.2
