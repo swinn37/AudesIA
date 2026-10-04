@@ -214,8 +214,9 @@ python eval/overlap.py out/Sintel.2010.1080p_1.35-3.35 --video Sintel.2010.1080p
 - Quand deux personnages ont le même genre (en VO : « la jeune femme » et « la petite créature ailée »), le rédacteur écrit encore des « elle » ambigus (« Elle sourit, elle crie »).
 - Le registre oublie les personnages secondaires : le vieil homme de la hutte n'y figure pas.
 - Avec 8 images par plan, la suite des actions était mieux suivie (« elle brandit un couteau »), mais la description prenait 50 min sur la 5080.
+- La voix de synthèse précipite parfois une phrase : 19 à 20 caractères par seconde au lieu de 10 à 15, et un mot avalé (« sur un toit » retranscrit « sur un C »). Une nouvelle synthèse suffit ; la retranscription de contrôle prévue en P1 le fera automatiquement.
 
-Ces défauts sont les cibles de la détection des sons vocaux (P1) et des modèles plus grands du GX10, où le modèle tient en entier en mémoire et où 8 images par plan restent abordables. En attendant, la relecture humaine les corrige : sur le doublage, quatre phrases corrigées (débris, fruit, couteau, main) ont été resynthétisées et remixées en 1 min 15 s environ. Mesurée contre la piste musique + effets, cette version relue ne chevauche toujours aucune réplique, mais la phrase allongée du couteau touche 0,16 s d'un son vocal bref.
+Ces défauts sont les cibles de la détection des sons vocaux (P1) et des modèles plus grands du GX10, où le modèle tient en entier en mémoire et où 8 images par plan restent abordables. En attendant, la relecture humaine les corrige : sur le doublage, quatre phrases corrigées (débris, fruit, couteau, main) ont été resynthétisées et remixées en 1 min 15 s environ. Mesurée contre la piste musique + effets, cette version relue ne chevauche aucune réplique. Au critère strict (cris, souffles), elle fait comme la version automatique : 5 sur 10.
 
 ## Feuille de route
 

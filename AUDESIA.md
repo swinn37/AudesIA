@@ -354,7 +354,9 @@ Deux techniques visent les objets mal reconnus :
 
 Mais sur la 5080 la reconnaissance reste fragile. Sur trois images du même plan, le modèle répond « fruit épineux », « gant à pointes » ou « rien d'identifiable ». La posture est lue comme « se cache derrière » au lieu de « regarde dessous », et des « elle » restent ambigus quand deux personnages ont le même genre. Ces cas sont à remesurer sur le GX10, avec des modèles plus grands, une entrée haute résolution native et la vidéo.
 
-En attendant, la relecture humaine facultative les corrige sans relancer les modèles de vision. Sur le doublage, quatre phrases corrigées (débris, fruit, couteau, main) ont été placées sans chevaucher de réplique, mesuré contre la piste musique + effets ; la phrase allongée du couteau touche toutefois 0,16 s d'un son vocal bref. La relance a pris environ 1 min 15 s, et 10 s sans changement, car seules les phrases nouvelles sont synthétisées.
+En attendant, la relecture humaine facultative les corrige sans relancer les modèles de vision. Sur le doublage, quatre phrases corrigées (débris, fruit, couteau, main) ont été placées sans chevaucher de réplique, mesuré contre la piste musique + effets ; au critère strict, la version relue fait comme la version automatique (5 sur 10). La relance a pris environ 1 min 15 s, et 10 s sans changement, car seules les phrases nouvelles sont synthétisées.
+
+Qwen3-TTS précipite parfois une phrase (19 à 20 caractères par seconde au lieu de 10 à 15) et avale un mot : « sur un toit » est retranscrit « sur un C ». C'est le cas que la retranscription de contrôle (§4, règles de calage) doit rejeter. Pour retranscrire un clip, rééchantillonner d'abord à 16 kHz : à 48 kHz, le pipeline Whisper rend du charabia.
 
 Les chuchotements, d'abord manqués par la VAD, sont rattrapés par les segments Whisper au débit plausible. Priorité P1 : les sons vocaux brefs (cris, gémissements, souffles), par l'énergie de la voix isolée avec Demucs.
 
