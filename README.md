@@ -17,7 +17,7 @@ Audesia s'adresse aux médiathèques, universités, collectivités, entreprises 
 
 ## Comment ça marche
 
-1. **Parole** : Silero VAD repère la parole ; le reste forme les silences utilisables. Whisper large-v3 transcrit les dialogues, que le rédacteur reçoit en contexte.
+1. **Parole** : Silero VAD repère la parole. Les segments de Whisper large-v3 au débit plausible s'y ajoutent, ce qui rattrape les répliques chuchotées. Le reste forme les silences utilisables. La transcription sert aussi de contexte au rédacteur.
 2. **Plans** : PySceneDetect découpe la vidéo aux changements de plan.
 3. **Fenêtres** : chaque silence long est découpé en fenêtres de 5 à 10 s, coupées aux changements de plan. Chaque fenêtre reçoit une description.
 4. **Description** : un modèle de vision décrit les images de la fenêtre.
@@ -131,39 +131,38 @@ Corpus (environ 42 min, dont 71 % en français) : *Tears of Steel*, *Sprite Frig
 
 ## Résultats
 
-Premier run du prototype, le 4 octobre 2026, sur RTX 5080 (16 Go) : *Sintel*, de 1:35 à 3:35. L'extrait contient 12 répliques séparées de silences courts, puis 51 s sans dialogue.
+Mesures du prototype sur RTX 5080 (16 Go), le 4 octobre 2026 : *Sintel*, de 1:35 à 3:35, en version originale et dans le doublage français de Touhoppai. L'extrait contient 12 répliques séparées de silences courts, un long passage musical, puis des répliques chuchotées.
 
-| Mesure | Résultat |
-| --- | --- |
-| Descriptions placées | 16 sur 16 fenêtres ; aucune abandonnée ni accélérée |
-| Sans chevauchement des paroles | **16 sur 16 (100 %)** |
-| Sans chevauchement d'aucune voix (paroles, cris, souffles) | 14 sur 16 (88 %), au plus 0,66 s |
-| Couverture des silences utilisables | 64 % |
-| Temps de calcul | Environ 6 min pour 2 min de vidéo, soit 3 min par minute (objectif : moins de 5), hors téléchargement des modèles |
-| Mémoire GPU | Pic de 10,3 Gio dans le processus Python, plus 8 Go pour Gemma 4 dans Ollama |
+| Mesure | Version originale | Doublage français |
+| --- | --- | --- |
+| Descriptions placées | 13 sur 13 | 10 sur 10 |
+| Sans chevauchement des répliques, chuchotements compris | **13 sur 13 (100 %)** | **10 sur 10 (100 %)** |
+| Sans chevauchement d'aucune voix (répliques, cris, souffles) | 10 sur 13 (77 %), au plus 0,66 s | 5 sur 10 (50 %), au plus 1 s |
+| Couverture des silences utilisables | 69 % | 72 % |
+| Fiabilité de la vérité terrain (musique atténuée dans le résidu) | 6,9 dB | 15,8 dB |
 
-**Vérité terrain.** La piste musique + effets officielle de *Sintel* est soustraite du mixage, après calage par corrélation (à 5 ms près) et ajustement du gain. La parole est détectée dans ce résidu par Silero VAD, puis recoupée par l'énergie de la bande vocale. Les sous-titres restent affichés jusqu'à 2 s après la fin de la parole : mesurées contre eux, les mêmes descriptions ne passaient qu'à 56 %.
+- **Temps de calcul :** environ 4 à 5 min pour 2 min de vidéo (objectif : moins de 5 min par minute), hors téléchargement des modèles.
+- **Mémoire GPU :** pic de 10,5 Gio dans le processus Python, plus 8 Go pour Gemma 4 dans Ollama.
+
+**Vérité terrain.** La piste musique + effets officielle de *Sintel* est soustraite du mixage, après calage par corrélation (à 5 ms près) et ajustement du gain. La parole est détectée dans ce résidu par Silero VAD, puis recoupée par l'énergie de la bande vocale. Les sous-titres restent affichés jusqu'à 2 s après la fin de la parole : mesuré contre eux, un premier jeu de descriptions ne passait qu'à 56 %.
 
 ```bash
 wget https://download.blender.org/durian/movies/sintel-m+e-st.flac
 python eval/overlap.py out/Sintel.2010.1080p_1.35-3.35 --video Sintel.2010.1080p.mkv --me sintel-m+e-st.flac --start 1:35 --end 3:35
 ```
 
-**Version française** (doublage de Touhoppai, même extrait) :
+**Ce que les mesures ont corrigé :**
 
-- 13 descriptions placées sur 13, couverture de 68 %, 4,7 min de calcul pour les 2 min.
-- La vérité terrain y est plus nette : la musique est atténuée de 15,8 dB dans le résidu.
-- 12 descriptions sur 13 évitent les paroles repérées par Silero.
-- Mais la détection de parole a manqué les répliques chuchotées de la fin (« C'est bientôt fini », « Ne bouge pas »), que Whisper a pourtant transcrites. En les comptant, 10 descriptions sur 13 évitent tout dialogue, et 6 sur 13 toute voix, souffles et cris compris.
+- Les horodatages de Whisper débordaient sur la musique et effaçaient le passage de 51 s sans dialogue : seuls ses segments au débit plausible sont gardés.
+- La VAD manquait les répliques chuchotées du doublage (« C'est bientôt fini », « Ne bouge pas ») : ces segments Whisper, élargis de 0,5 s, les protègent désormais.
 
 **Limites observées :**
 
-- Les répliques chuchotées échappent à la détection de parole : c'est la priorité suivante.
-- Des éclats de voix brefs (cris, gémissements, souffles) passent aussi entre les mailles. La Charte demande de ne pas couvrir ces sons.
-- Sur les plans vérifiés à l'image, le modèle de vision a inventé un objet : un « livre » près du petit dragon blessé, qui est en fait son aile ensanglantée.
+- Des éclats de voix brefs (cris, gémissements du dragon, souffles) passent entre les mailles dans le passage musical. La Charte demande de ne pas couvrir ces sons.
+- Le modèle de vision invente parfois un objet : une épée ou un « livre » près du petit dragon blessé, qui est en fait son aile ensanglantée.
 - Les personnages ne sont pas encore désignés de façon stable.
 
-Ces défauts sont les cibles de la vérification visuelle (P1) et des modèles plus grands du GX10.
+Ces défauts sont les cibles de la détection des sons vocaux et de la vérification visuelle (P1), puis des modèles plus grands du GX10.
 
 ## Feuille de route
 

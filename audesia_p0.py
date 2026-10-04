@@ -42,6 +42,8 @@ os.environ.setdefault("HF_HUB_DISABLE_TELEMETRY", "1")  # contrainte n° 1 : auc
 
 VAD_THRESHOLD = 0.35  # Silero plus sensible que par défaut (0,5) : dans le doute, c'est de la parole
 VAD_PAD_MS = 200      # marge autour de chaque segment de parole
+WHISPER_S_PER_WORD = 0.8  # s : un segment Whisper plus lent (+ 1 s) déborde sur la musique et est ignoré
+WHISPER_PAD = 0.5         # s : Whisper fait commencer les chuchotements trop tard (« Hé… », « Chut »)
 MIN_SILENCE = 2.0   # s : silence utilisable minimal (à 1,5 s, des descriptions d'un mot)
 MARGIN = 0.2        # s : marge avant et après chaque description
 WINDOW = 5.0        # s : durée visée d'une fenêtre dans un long silence (coupée aux changements de plan)
@@ -105,6 +107,13 @@ def silences(speech, duration, min_len=MIN_SILENCE):
     if duration - t >= min_len:
         out.append([t, duration])
     return out
+
+
+def plausible_segments(dialogues):
+    """Segments Whisper au débit plausible : ils rattrapent les chuchotements que la VAD manque,
+    sans les segments étirés sur la musique (une phrase de 15 mots sur 53 s, sur Sintel)."""
+    return [[d["start"] - WHISPER_PAD, d["end"] + WHISPER_PAD] for d in dialogues
+            if d["text"] and d["end"] - d["start"] <= WHISPER_S_PER_WORD * len(d["text"].split()) + 1.0]
 
 
 def windows(silence, shots):
@@ -202,8 +211,7 @@ def step(name, fn, cache=None):
 
 
 def detect_speech(wav16):
-    """Parole = segments de la VAD. Whisper ne sert qu'au texte des dialogues : sur Sintel, ses
-    horodatages par segment débordaient sur la musique et effaçaient 51 s de silence."""
+    """Segments de la VAD et transcription Whisper ; main() y ajoute les segments Whisper plausibles."""
     import soundfile as sf
     import torch
     from silero_vad import get_speech_timestamps, load_silero_vad
@@ -344,6 +352,11 @@ def selftest():
     assert len(windows([20, 71], [[0, 100]])) == 6                # 51 s d'un seul plan → 6 × 8,5 s
     for w in (w for s in sil for w in windows(s, shots)):         # invariant : jamais sur la parole
         assert not any(a < w[1] - MARGIN and w[0] + MARGIN < b for a, b in speech)
+    assert plausible_segments([
+        {"start": 113.7, "end": 115.3, "text": "Hé, c'est bientôt fini."},   # chuchotement : gardé
+        {"start": 58.1, "end": 111.0, "text": "I've been alone for as long as I can remember. Oh, my God."},  # 53 s : ignoré
+        {"start": 29.8, "end": 27.9, "text": ""},                          # vide : ignoré
+    ]) == [[113.7 - WHISPER_PAD, 115.3 + WHISPER_PAD]]
     assert frame_times([0, 4], []) == [1, 2, 3]
     assert len(frame_times([0, 17], shots)) == MAX_IMAGES
     fake = lambda text: (np.zeros(len(text) * 10), 100)           # voix factice : 10 caractères/s
@@ -392,7 +405,9 @@ def main():
         ff("-i", clip, "-ac", 1, "-ar", 16000, a16, "-ac", 2, "-ar", 48000, a48)
 
     segs = step("parole", lambda: detect_speech(a16), out / "segments.json")
-    segs["silences"] = silences(segs["speech"], segs["duration"])  # recalculé : changer MIN_SILENCE ne refait pas l'ASR
+    # Recalculés à chaque lancement : changer ces réglages ne refait pas l'ASR.
+    segs["speech"] = merge(segs["speech"] + plausible_segments(segs["dialogues"]))
+    segs["silences"] = silences(segs["speech"], segs["duration"])
     shots = step("plans", lambda: detect_shots(clip), out / "shots.json")
     descs = step("description", lambda: describe(clip, segs, shots, a, out), out / "descriptions.json")
     placed, dropped = step("voix", lambda: voice(descs, segs, a, out))

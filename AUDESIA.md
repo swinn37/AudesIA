@@ -142,7 +142,7 @@ flowchart TD
 | # | Étape | Entrée | Sortie (fichier du job) |
 | --- | --- | --- | --- |
 | 1 | Extraction | vidéo | `audio.wav` (16 kHz mono pour la VAD et l'ASR + piste originale), images |
-| 2 | Analyse audio | `audio.wav` | `segments.json` : parole (VAD), dialogues (texte Whisper, locuteur si diarisation), silences utilisables |
+| 2 | Analyse audio | `audio.wav` | `segments.json` : parole (VAD + segments Whisper au débit plausible), dialogues (texte Whisper, locuteur si diarisation), silences utilisables |
 | 3 | Plans | vidéo | `shots.json` : plans (début, fin), 3 à 8 images clés par plan. Seuls les plans qui recouvrent un silence utilisable (± une fenêtre) sont décrits |
 | 4 | Personnages | images clés | `characters.json` : groupes de visages (prises de vues réelles) ou marquage visuel (animation) ; noms saisis dans l'éditeur |
 | 5 | Description | plans + contexte | `raw_descriptions.json` : description factuelle par plan |
@@ -174,7 +174,9 @@ flowchart TD
 
 ### Règles de calage
 
-- Parole = segments de la VAD (Silero, seuil 0,35, marge de 200 ms) : dans le doute, c'est de la parole. Whisper ne fournit que le texte : sur Sintel, ses horodatages par segment débordaient sur la musique et effaçaient un silence de 51 s (mesuré le 4 octobre 2026).
+- Parole = segments de la VAD (Silero, seuil 0,35, marge de 200 ms) : dans le doute, c'est de la parole.
+- S'y ajoutent les segments Whisper au débit plausible (au plus 0,8 s par mot + 1 s, élargis de 0,5 s), qui rattrapent les chuchotements manqués par la VAD.
+- Les autres segments Whisper sont écartés : sur Sintel, l'un étirait une phrase de 15 mots sur 53 s de musique et effaçait un silence de 51 s (mesuré le 4 octobre 2026).
 - Silence utilisable : durée ≥ seuil configurable (par défaut 1,5 s), sans parole.
 - Budget = (durée du silence − marges début/fin, par défaut 0,2 s chacune) × débit cible en **caractères par seconde**, à **calibrer sur la voix choisie** (plus fiable que le nombre de mots en français).
 - Le rédacteur produit **3 variantes** (longue, moyenne, courte) en un seul appel. Les trois sont synthétisées en lot ; on garde la plus longue qui tient.
@@ -263,7 +265,7 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026 ; versions plus réce
 - [ ] Envoyer aux organisateurs les questions du §2 (pilote, sudo, internet, disque, durée).
 - [ ] Pipeline modulaire (`pipeline/*`) : un fichier JSON par étape, reprise sur erreur (une étape est sautée si sa sortie existe).
 - [ ] Parole = VAD seule, seuil et marge réglés contre la vérité terrain ; même ASR sur les deux profils pour le texte, sans compiler CTranslate2 (Whisper large-v3 via transformers, ou Qwen3-ASR-1.7B).
-- [ ] Détecter les chuchotements et les sons vocaux, que la VAD manque (mesuré sur le doublage français) : segments Whisper au débit plausible, ou énergie de la voix isolée par Demucs.
+- [ ] Détecter les sons vocaux brefs (cris, gémissements, souffles), que ni la VAD ni Whisper ne repèrent : énergie de la voix isolée par Demucs. Les chuchotements sont déjà rattrapés par les segments Whisper plausibles.
 - [ ] Rédaction en 3 variantes + `fit_loop.py` + tests unitaires de l'invariant « aucun chevauchement avec la parole détectée ».
 - [ ] Vérification visuelle (`verify.py`, `prompts/verify.fr.md`) : faits élémentaires validés un par un sur les images clés par le second modèle.
 - [ ] Comparatif de voix sur ~30 phrases d'audiodescription :
@@ -322,18 +324,12 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026 ; versions plus réce
 
 **Livrables pour l'organisateur :** rapport chiffré, journaux et relevés mémoire, extraits avant/après, comparaison GX10 vs 5080, courbe taille de modèle / qualité, log du run hors ligne, dépôt GitHub public.
 
-**Premier résultat** (4 octobre 2026, RTX 5080, Sintel 1:35–3:35, mesuré avec `eval/overlap.py`) :
-- 16 descriptions sur 16 sans chevauchement des paroles ;
-- 14 sur 16 sans chevauchement d'aucune voix (deux éclats vocaux de moins de 0,7 s) ;
-- couverture des silences de 64 % ;
-- environ 3 min de calcul par minute de vidéo.
+**Premiers résultats** (4 octobre 2026, RTX 5080, Sintel 1:35–3:35, mesurés avec `eval/overlap.py`) :
+- version originale : 13 descriptions sur 13 sans chevauchement des répliques, 10 sur 13 sans chevauchement d'aucune voix (éclats vocaux de moins de 0,7 s), couverture de 69 % ;
+- doublage français (vérité terrain plus nette, musique atténuée de 15,8 dB) : 10 sur 10 sans chevauchement des répliques, chuchotements compris, 5 sur 10 sans chevauchement d'aucune voix, couverture de 72 % ;
+- environ 4 à 5 min de calcul pour 2 min de vidéo.
 
-Même extrait en version française (doublage de Touhoppai, vérité terrain plus nette : musique atténuée de 15,8 dB) :
-- 12 descriptions sur 13 sans chevauchement des paroles repérées par Silero ;
-- mais la VAD a manqué les répliques chuchotées de la fin, que Whisper a transcrites : en les comptant, 10 sur 13 sans chevauchement de dialogue ;
-- 6 sur 13 sans chevauchement d'aucune voix.
-
-Priorité P1 : détecter les chuchotements, par exemple avec les segments Whisper au débit plausible, ou l'énergie de la voix isolée par Demucs.
+Les chuchotements, d'abord manqués par la VAD, sont rattrapés par les segments Whisper au débit plausible. Priorité P1 : les sons vocaux brefs (cris, gémissements, souffles), par l'énergie de la voix isolée avec Demucs.
 
 ### Corpus et vérité terrain
 
@@ -364,7 +360,7 @@ Audesia génère automatiquement une piste d'audiodescription en français pour 
 - **Pourquoi en local :** les vidéos traitées (formations internes, archives, contenus non publiés) ne quittent jamais la machine, et le coût par heure de vidéo devient quasi nul.
 - **Pourquoi le GX10 :** la chaîne complète (vision, rédaction, parole, voix) reste chargée en mémoire en permanence, avec de la place pour plusieurs vidéos en parallèle et pour comparer des modèles de classe 120B. Sur une carte grand public de 16 Go, il faut des modèles nettement plus petits, en partie chargés l'un après l'autre.
 - **Ce qui sera validé sur le GX10 :** la mémoire réellement utilisée, la qualité des descriptions avec de grands modèles face à la version 16 Go, le respect des silences mesuré contre une vérité terrain (objectif : plus de 95 % des descriptions sans chevauchement de dialogue), la part des silences couverte et le temps de traitement par minute de vidéo.
-- **Où en est le projet :** un prototype complet tourne sur RTX 5080. Sur un extrait de Sintel, ses 16 descriptions sont toutes placées sans chevaucher les paroles, mesuré contre la piste musique + effets officielle du film.
+- **Où en est le projet :** un prototype complet tourne sur RTX 5080. Sur un extrait de Sintel, en version originale comme en doublage français, aucune de ses descriptions ne chevauche une réplique, même chuchotée, mesuré contre la piste musique + effets officielle du film.
 - **Livrable :** un dépôt open source, une démo web et des vidéos libres audiodécrites automatiquement.
 
 ## A2. Problème et contexte
@@ -573,7 +569,7 @@ Qwen3.6-35B-A3B (modèle de vision MoE) pour la compréhension des plans ; Gemma
 **État d'avancement :** « Prototype initial » : la chaîne complète tourne sur la RTX 5080 depuis le 4 octobre 2026.
 
 **Test & validation sur ASUS Ascent GX10 :**
-Je veux valider que la chaîne complète d'audiodescription tourne en local avec tous ses modèles chargés en même temps : modèle de vision MoE de 35B, rédacteur de 26B qui vérifie aussi chaque fait sur l'image, détection de parole, transcription et synthèse vocale, avec plusieurs vidéos en parallèle. Le GX10 me permettra aussi de comparer des modèles de classe 120B, impossibles à charger sur 16 Go, pour choisir les modèles par la mesure. Un premier prototype tourne déjà sur ma RTX 5080 : sur un extrait de Sintel, ses 16 descriptions sont placées sans chevaucher les paroles, mesuré contre la piste musique + effets officielle du film. Le code, les conteneurs ARM64 et le corpus de test (films libres Blender et vidéos françaises avec dialogues) seront prêts avant l'accès. Sur le GX10, je mesurerai : la mémoire réellement utilisée par étape, le taux de descriptions placées sans chevaucher les dialogues, vérifié contre une vérité terrain (objectif supérieur à 95 %), la part des silences couverte, la qualité des descriptions notée à l'aveugle et comparée à la même chaîne limitée à 16 Go sur ma RTX 5080, le taux d'hallucinations sur un échantillon, le temps de traitement par minute de vidéo et le nombre de vidéos traitables en parallèle. Livrables : rapport chiffré, extraits avant/après, dépôt open source.
+Je veux valider que la chaîne complète d'audiodescription tourne en local avec tous ses modèles chargés en même temps : modèle de vision MoE de 35B, rédacteur de 26B qui vérifie aussi chaque fait sur l'image, détection de parole, transcription et synthèse vocale, avec plusieurs vidéos en parallèle. Le GX10 me permettra aussi de comparer des modèles de classe 120B, impossibles à charger sur 16 Go, pour choisir les modèles par la mesure. Un premier prototype tourne déjà sur ma RTX 5080 : sur un extrait de Sintel, en version originale comme en français, aucune de ses descriptions ne chevauche une réplique, même chuchotée, mesuré contre la piste musique + effets officielle du film. Le code, les conteneurs ARM64 et le corpus de test (films libres Blender et vidéos françaises avec dialogues) seront prêts avant l'accès. Sur le GX10, je mesurerai : la mémoire réellement utilisée par étape, le taux de descriptions placées sans chevaucher les dialogues, vérifié contre une vérité terrain (objectif supérieur à 95 %), la part des silences couverte, la qualité des descriptions notée à l'aveugle et comparée à la même chaîne limitée à 16 Go sur ma RTX 5080, le taux d'hallucinations sur un échantillon, le temps de traitement par minute de vidéo et le nombre de vidéos traitables en parallèle. Livrables : rapport chiffré, extraits avant/après, dépôt open source.
 
 **Pertinence de l'exécution sur ASUS Ascent GX10 :**
 L'exécution locale est une condition, pas un confort : les vidéos à audiodécrire sont souvent internes, non publiées ou contiennent des personnes identifiables (formations, archives, cours avec des mineurs), et ne peuvent pas partir dans un cloud. Le local supprime aussi le coût à la minute, ce qui rend possible l'audiodescription de catalogues entiers. Le GX10 est une des rares machines de bureau à réunir 128 Go de mémoire unifiée et toute la pile CUDA : la chaîne complète y reste chargée en permanence, avec de la place pour plusieurs vidéos en parallèle et pour des modèles de classe 120B. Sur une carte de 16 Go, il faut des modèles nettement plus petits, en partie chargés l'un après l'autre ; je mesurerai l'effet sur la qualité des descriptions et la cohérence des personnages. Je tire parti des points forts de la machine : modèles MoE (peu de paramètres actifs, adaptés à sa bande passante), formats FP4 de Blackwell et traitement des plans en lot avec vLLM. À terme, un GX10 installé dans une médiathèque ou une université peut audiodécrire tout son catalogue sans qu'aucune vidéo ne quitte le bâtiment.
@@ -591,7 +587,7 @@ L'exécution locale est une condition, pas un confort : les vidéos à audiodéc
 | 0:30–0:55 | Démo : même extrait avec la piste générée | « Voici Audesia. Il repère les silences entre les dialogues, décrit chaque plan avec un modèle de vision, vérifie chaque détail sur l'image, réécrit chaque phrase pour qu'elle tienne dans le silence, puis la lit avec une voix française. Le tout, 100 % en local. » |
 | 0:55–1:10 | Schéma d'architecture, puis l'éditeur | « Un éditeur accessible permet de relire et corriger chaque description avant l'export. Pour une médiathèque, une université ou une association, c'est la possibilité d'audiodécrire tout un catalogue, sans qu'aucune vidéo ne quitte le bâtiment. » |
 | 1:10–1:35 | Schéma mémoire : chaîne complète résidente, vidéos en parallèle, balayage jusqu'à 120B ; comparaison 5080 / GX10 | « Pourquoi le GX10 ? Vision, rédaction, transcription et voix y restent en mémoire en même temps, avec de la place pour plusieurs vidéos à la fois et pour tester des modèles de 120 milliards de paramètres. Sur ma carte de 16 gigas, je dois me contenter de modèles bien plus petits. Le test dira ce que la taille apporte à la qualité. » |
-| 1:35–1:55 | Premiers résultats sur la 5080, puis plan de test GX10 | « Sur ma carte, le prototype place déjà ses 16 descriptions sans couvrir une seule parole, mesuré contre la piste sans dialogues du film. Sur le GX10, je mesurerai la mémoire utilisée, la qualité face à la version 16 gigas et le temps de traitement. Le tout sera publié en open source. » |
+| 1:35–1:55 | Premiers résultats sur la 5080, puis plan de test GX10 | « Sur ma carte, le prototype ne couvre déjà aucune réplique, même chuchotée, mesuré contre la piste sans dialogues du film. Sur le GX10, je mesurerai la mémoire utilisée, la qualité face à la version 16 gigas et le temps de traitement. Le tout sera publié en open source. » |
 | 1:55–2:00 | Logo, lien GitHub | « Audesia : rendre chaque vidéo visible, à l'oreille. » |
 
 **Tournage :** OBS + micro-casque. Créditer la Blender Foundation (Sintel, CC BY) et Touhoppai (version française, CC BY). La démo tourne : utiliser `clip.mp4` (sans audiodescription) et `clip_ad.mp4` (avec), produits par `audesia_p0.py` sur la 5080, et l'indiquer à l'écran.
