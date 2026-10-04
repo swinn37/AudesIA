@@ -1,0 +1,65 @@
+# Corpus d'évaluation (§7 de AUDESIA.md). Fichiers dans corpus/media/, ignoré par git : python corpus/download.py
+# Par vidéo : file et url (la vidéo), me et me_url (piste musique + effets sans dialogues : vérité terrain exacte
+# par soustraction), subs et subs_url (sous-titres horodatés).
+
+[[video]]
+id = "sintel-vo"
+title = "Sintel"
+language = "en"
+license = "CC BY 3.0, Blender Foundation"
+file = "Sintel.2010.1080p.mkv"
+url = "https://download.blender.org/durian/movies/Sintel.2010.1080p.mkv"
+me = "sintel-m+e-st.flac"
+me_url = "https://download.blender.org/durian/movies/sintel-m+e-st.flac"
+
+[[video]]
+id = "sintel-vf"
+title = "Sintel, doublage français"
+language = "fr"
+license = "CC BY 3.0, Blender Foundation ; doublage CC BY 4.0, Touhoppai"
+file = "Sintel.fr.touhoppai.1080p.mp4"
+url = "https://peertube.touhoppai.moe/download/web-videos/e2a2bd74-e1a0-4a89-927c-f2fa3088bdda-1080.mp4"
+me = "sintel-m+e-st.flac"  # la même piste : le doublage a été monté dessus (décalage mesuré : 28 ms)
+me_url = "https://download.blender.org/durian/movies/sintel-m+e-st.flac"
+
+[[video]]
+id = "tears-of-steel"
+title = "Tears of Steel"
+language = "en"
+license = "CC BY 3.0, Blender Foundation ; piste musique + effets CC BY-ND 3.0 : évaluation seulement, rien de dérivé n'est publié"
+file = "tears_of_steel_720p.mov"
+url = "https://download.blender.org/demo/movies/ToS/tears_of_steel_720p.mov"
+me = "TOS_MUSIC+FX_NO_DIALOGUE.aif"
+me_url = "https://download.blender.org/demo/movies/ToS/TOS_MUSIC%2BFX_NO_DIALOGUE.aif"
+subs = "TOS-en.srt"
+subs_url = "https://download.blender.org/demo/movies/ToS/subtitles/TOS-en.srt"
+
+[[video]]
+id = "sprite-fright-vf"
+title = "Sprite Fright, version française"
+language = "fr"
+license = "CC BY 4.0, Blender Foundation et Touhoppai"
+file = "sprite-fright.fr.touhoppai.858p.mp4"
+url = "https://peertube.touhoppai.moe/download/web-videos/46a507ea-f422-44ca-93fa-91a7c6545887-858.mp4"
+subs = "sprite-fright.fr.vtt"
+subs_url = "https://peertube.touhoppai.moe/lazy-static/video-captions/3ef479fd-f13c-4e03-96b8-0eb3cd30f508-fr.vtt"
+
+[[video]]
+id = "pepper-carrot-6-vf"
+title = "Pepper&Carrot, épisode 6 : Le concours de potion"
+language = "fr"
+license = "CC BY-SA 4.0 : la version audiodécrite sera aussi en CC BY-SA"
+file = "pepper-carrot-06.fr.touhoppai.1080p.mp4"
+url = "https://peertube.touhoppai.moe/download/web-videos/d18eac35-e726-40f0-a2c2-2382f282c8d5-1080.mp4"
+subs = "pepper-carrot-06.fr.vtt"
+subs_url = "https://peertube.touhoppai.moe/lazy-static/video-captions/d18eac35-e726-40f0-a2c2-2382f282c8d5-fr.vtt"
+
+[[video]]
+id = "sidiailles"
+title = "Le trésor de Sidiailles"
+language = "fr"
+license = "CC BY selon les métadonnées PeerTube, à confirmer par écrit ; enfants à l'écran : évaluation locale seulement, rien n'est publié"
+file = "sidiailles.k-prod.1080p.mp4"
+url = "https://film.k-prod.fr/download/streaming-playlists/hls/videos/2b25820c-9bd2-4cd6-9bfe-377a6e82aadb-1080-fragmented.mp4"
+subs = "sidiailles.fr.vtt"
+subs_url = "https://film.k-prod.fr/lazy-static/video-captions/c75ec7fb-3d27-4c48-a5d1-3488118201cc-fr.vtt"

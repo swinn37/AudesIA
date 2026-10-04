@@ -51,6 +51,7 @@ import subprocess
 import sys
 import threading
 import time
+import zlib
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
@@ -176,11 +177,18 @@ def silences(speech, duration, min_len=MIN_SILENCE):
     return out
 
 
+def plausible(d):
+    """Segment Whisper crédible : débit plausible, sans boucle. Sur la musique, Whisper étire une phrase
+    (15 mots sur 53 s) ou répète en boucle (« I'm sorry, I'm sorry… » sur 131 s de Sintel) ; un texte qui se
+    compresse plus de 2,4 fois tourne en boucle, critère que Whisper applique lui-même."""
+    text = d["text"].encode("utf-8")
+    return (bool(text) and len(text) <= 2.4 * len(zlib.compress(text))
+            and d["end"] - d["start"] <= WHISPER_S_PER_WORD * len(d["text"].split()) + 1.0)
+
+
 def plausible_segments(dialogues):
-    """Segments Whisper au débit plausible : ils rattrapent les chuchotements que la VAD manque,
-    sans les segments étirés sur la musique (une phrase de 15 mots sur 53 s, sur Sintel)."""
-    return [[d["start"] - WHISPER_PAD, d["end"] + WHISPER_PAD] for d in dialogues
-            if d["text"] and d["end"] - d["start"] <= WHISPER_S_PER_WORD * len(d["text"].split()) + 1.0]
+    """Segments Whisper crédibles, élargis : ils rattrapent les chuchotements que la VAD manque."""
+    return [[d["start"] - WHISPER_PAD, d["end"] + WHISPER_PAD] for d in dialogues if plausible(d)]
 
 
 def windows(silence, shots):
@@ -518,7 +526,7 @@ def describe(clip, segs, shots, profile, cps, out):
             f"Registre des personnages :\n{registry}\n\nPlan précédent : {previous}\n"
             f"Ce plan : {x['raw_description']}{note}\nPlan suivant : {following}")}, *visuals]) or x["raw_description"]
         previous = desc
-        heard = " / ".join(d["text"] for d in segs["dialogues"] if d["end"] <= w[1])[-600:] or "aucun"
+        heard = " / ".join(d["text"] for d in segs["dialogues"] if d["end"] <= w[1] and plausible(d))[-600:] or "aucun"
         context = (f"Personnages :\n{registry}\nDéjà décrit : {' '.join(said[-3:]) or 'rien'}\n"
                    f"Dialogues entendus jusqu'ici : {heard}")
         b = budget(w, cps)
@@ -707,6 +715,7 @@ def selftest():
         {"start": 113.7, "end": 115.3, "text": "Hé, c'est bientôt fini."},   # chuchotement : gardé
         {"start": 58.1, "end": 111.0, "text": "I've been alone for as long as I can remember. Oh, my God."},  # 53 s : ignoré
         {"start": 29.8, "end": 27.9, "text": ""},                          # vide : ignoré
+        {"start": 0.0, "end": 131.3, "text": "IAEA " + "I'm sorry, " * 135},  # boucle sur la musique : ignorée
     ]) == [[113.7 - WHISPER_PAD, 115.3 + WHISPER_PAD]]
     assert frame_times([0, 3], 4) == [0.375, 1.125, 1.875, 2.625]  # 4 images réparties sur la fenêtre
     assert len(frame_times([0, 17], 4)) == 4 and len(frame_times([0, 17], 8)) == 8 and len(frame_times([0, 1], 8)) == 3
@@ -768,6 +777,8 @@ def main():
     p.add_argument("--cps", type=float, default=13.0, help="débit de la voix en caractères/s (mesuré : 13 pour Vivian)")
     p.add_argument("--tts-model", default="Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice", help="…-0.6B-CustomVoice si la VRAM manque")
     p.add_argument("--voice", default="Vivian", help="Vivian, Serena, Uncle_Fu, Dylan, Eric, Ryan, Aiden, Ono_Anna, Sohee")
+    p.add_argument("--precompute", action="store_true",
+                   help="extrait, parole et plans seulement : à calculer sur la 5080, le GX10 n'a plus qu'à décrire")
     p.add_argument("--selftest", action="store_true", help="vérifie la logique de calage, sans GPU")
     a = p.parse_args()
     if a.selftest:
@@ -792,6 +803,9 @@ def main():
     segs["speech"] = merge(segs["speech"] + plausible_segments(segs["dialogues"]))
     segs["silences"] = silences(segs["speech"], segs["duration"])
     shots = step("plans", lambda: detect_shots(clip), out / "shots.json")
+    if a.precompute:
+        print(f"Précalcul prêt : {out}")
+        return
     descs = step("description", lambda: describe(clip, segs, shots, profile, a.cps, out), out / "descriptions.json")
     for base_url, model in {(profile[r]["base_url"], profile[r]["model"]) for r in ("vlm", "writer")}:
         unload_ollama(base_url, model)

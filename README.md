@@ -202,7 +202,16 @@ Les deux profils traitent le même corpus avec les mêmes entrées audio et visu
 | Mémoire | Relevé à 1 Hz sur l'hôte, par étape | Marge mesurée |
 | Hors ligne | Traitement complet dans un réseau Docker sans accès sortant | Réussi |
 
-Corpus (environ 42 min, dont 71 % en français) : *Tears of Steel* en version originale anglaise, *Sprite Fright* et *Pepper&Carrot* (épisode 6) en version française, *Le trésor de Sidiailles*. Le détail est dans [AUDESIA.md](AUDESIA.md).
+Corpus (74 min, dont 64 % en français) : *Sintel* en version originale et en version française, *Tears of Steel* en version originale anglaise, *Sprite Fright* et *Pepper&Carrot* (épisode 6) en version française, *Le trésor de Sidiailles*. Sintel et Tears of Steel, 44 min en tout, ont une piste musique + effets : leur vérité terrain est exacte. Le détail est dans [corpus/corpus.toml](corpus/corpus.toml) et [AUDESIA.md](AUDESIA.md).
+
+```bash
+python corpus/download.py                    # environ 3,3 Go, dans corpus/media/
+python eval/run_corpus.py --precompute       # extrait, parole et plans, une fois pour tous les profils
+python eval/run_corpus.py --profile small    # sur la 5080 ; sur le GX10 : --profile large --docker
+python eval/report.py                        # rapport chiffré, un tableau par profil : out/corpus/rapport.md
+```
+
+Une étape déjà faite est sautée : un traitement interrompu reprend là où il s'était arrêté.
 
 ## Résultats
 
@@ -239,6 +248,7 @@ python eval/overlap.py out/Sintel.2010.1080p_1.35-3.35 --video Sintel.2010.1080p
 
 - Les horodatages de Whisper débordaient sur la musique et effaçaient le passage de 51 s sans dialogue : seuls ses segments au débit plausible sont gardés.
 - La VAD manquait les répliques chuchotées du doublage (« C'est bientôt fini », « Ne bouge pas ») : ces segments Whisper, élargis de 0,5 s, les protègent désormais.
+- Sur les films entiers, Whisper hallucine pendant la musique (« I'm sorry » en boucle sur 131 s de Sintel) : ces boucles auraient effacé des silences. Un texte qui se compresse plus de 2,4 fois, critère de Whisper lui-même, est désormais écarté.
 - Le modèle de vision recevait en contexte les répliques (« Cette lame… ») et les descriptions précédentes, ce qui amorçait des inventions. Il ne voit plus que les images, et une passe de vérification confronte sa description aux images.
 - Une même personne devenait deux ou trois personnages (« rousse », « cheveux roses », « cheveux longs et clairs »), et une main restait « sombre » et anonyme. Un registre des personnages, puis une révision de chaque description sur ses images avec les plans voisins, fixent désormais une désignation unique. En VF : « la jeune fille aux cheveux roux » et « le petit dragon », et « elle tend une main gantée vers le dragon blessé ».
 - Les actions se perdaient (« accroupie sur un toit »). La consigne demande désormais la suite des actions et des objets nommés précisément : « Elle grimpe sur les façades et s'accroupit sur un toit rouge ».

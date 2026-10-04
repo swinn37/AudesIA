@@ -104,16 +104,16 @@ audesia/
 │   └── metrics.py             # chronos, marqueurs d'étape, export JSON
 ├── eval/
 │   ├── overlap.py             # chevauchement : parole détectée et vérité terrain
-│   ├── coverage.py            # couverture des silences, abandons, itérations, accélération
-│   ├── judge.py               # juge VLM extérieur, comparaison par paires à l'aveugle
-│   ├── hallucination_sample.py# mêmes 100 silences pour les deux profils, vérification humaine
-│   └── report.py              # génère le rapport Markdown + graphiques
+│   ├── run_corpus.py          # tout le corpus avec un profil : précalcul partagé, reprise, chevauchement mesuré
+│   ├── report.py              # rapport Markdown, un tableau par profil (couverture dans metrics.json)
+│   ├── judge.py               # à venir : juge VLM extérieur, comparaison par paires à l'aveugle
+│   └── hallucination_sample.py# à venir : mêmes 100 silences pour les deux profils, vérification humaine
 ├── corpus/
-│   └── download.sh            # vidéos, sous-titres, pistes musique + effets (vérité terrain)
+│   ├── corpus.toml            # vidéos, sous-titres, pistes musique + effets, licences
+│   └── download.py            # téléchargement dans corpus/media/, ignoré par git
 ├── scripts/
 │   ├── bench_memory.sh        # relevé à 1 Hz sur l'hôte (/proc/meminfo, nvidia-smi --query-compute-apps) et garde-fou
-│   ├── docker.sh              # modèles, image du pipeline, serveurs vLLM et runs sur un réseau sans sortie
-│   └── run_corpus.sh          # traite tout le corpus avec un profil
+│   └── docker.sh              # modèles, image du pipeline, serveurs vLLM et runs sur un réseau sans sortie
 └── docker/
     ├── Dockerfile             # pipeline, sur l'image vLLM (arm64 et amd64)
     └── requirements.txt       # paquets ajoutés, aux versions validées sur la 5080
@@ -282,8 +282,11 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026, puis le 4 octobre po
 - [x] `scripts/bench_memory.sh` : relevé mémoire à 1 Hz sur l'hôte et garde-fou qui tue les serveurs vLLM sous 8 Gio disponibles.
 - [ ] Marqueurs d'étape dans le relevé mémoire, pour attribuer la mémoire à chaque étape du pipeline.
 - [x] Preuve hors ligne : serveurs et pipeline sur un réseau Docker interne, vérification de l'accès sortant dans `metrics.json`. Run complet testé sur la 5080 le 4 octobre : 2 min 37 s pour 25 s de vidéo, `outbound_network: false`.
-- [ ] Scripts d'évaluation (`eval/*`) et génération du rapport.
-- [ ] Corpus et vérité terrain (§7) ; précalcul sur la 5080 de la VAD, de la transcription, des plans et des images clés.
+- [x] `eval/run_corpus.py` (tout le corpus avec un profil, précalcul partagé, reprise après arrêt, chevauchement mesuré) et `eval/report.py` (un tableau par profil).
+- [ ] Juge VLM extérieur (`eval/judge.py`) et échantillon de 100 silences pour la vérification humaine des hallucinations.
+- [x] Corpus et vérité terrain (§7) téléchargés ; précalcul sur la 5080 de l'extrait, de la parole et des plans (`eval/run_corpus.py --precompute`, 51 min pour les 74 min du corpus). Les images clés sont extraites à la description, en quelques secondes.
+  - Sur les films entiers, Whisper hallucine pendant la musique : « I'm sorry » en boucle sur 131 s de Sintel, « DECO DECO… » et du chinois sur la VF. Ces boucles passaient le filtre de débit et auraient effacé des silences. Elles sont écartées par le critère de Whisper lui-même (texte qui se compresse plus de 2,4 fois).
+  - Elles ralentissent aussi la transcription : 22 min pour les 15 min de Sintel VO. À faire : ne transcrire que les segments de parole de la VAD, ou plafonner les jetons par tranche de 30 s.
 - [ ] Run complet du corpus en profil `small` → résultats de référence archivés.
 
 ### P2 — Pendant l'accès au GX10
@@ -358,20 +361,22 @@ Les chuchotements, d'abord manqués par la VAD, sont rattrapés par les segments
 
 ### Corpus et vérité terrain
 
-Le corpus initial (Sintel, Tears of Steel, Spring) ne contenait qu'environ 3,5 min de dialogue, tout en anglais, et Spring n'en a aucun. Corpus retenu (~42 min, 71 % en français, ~13,6 min de parole, sous-titres horodatés pour tout) :
+Le corpus initial (Sintel, Tears of Steel, Spring) ne contenait qu'environ 3,5 min de dialogue, tout en anglais, et Spring n'en a aucun. Corpus retenu : 74 min, dont 64 % en français. Il est décrit dans `corpus/corpus.toml` et téléchargé par `corpus/download.py` (environ 3,3 Go) :
 
 | Vidéo | Durée | Licence | Intérêt |
 | --- | --- | --- | --- |
+| [Sintel](https://durian.blender.org/) (VO anglaise) | 14:48 | CC BY 3.0 | Film de la démo ; piste musique + effets officielle : vérité terrain exacte |
+| [Sintel, version française](https://peertube.touhoppai.moe/w/tZbHhmpfbC8vt2rw871P7A) (Touhoppai) | 17:03 | CC BY 3.0 et 4.0 | Le doublage est monté sur la même piste musique + effets (décalage de 28 ms) : vérité terrain exacte en français |
 | [Tears of Steel](https://download.blender.org/demo/movies/ToS/) (VO anglaise) | 12:14 | CC BY 3.0 | Acteurs réels ; la piste musique + effets sans dialogues donne un masque de parole exact (fichiers son BY-ND : évaluation uniquement, pas de redistribution de dérivé) |
 | [Sprite Fright, version française](https://peertube.touhoppai.moe/w/9HXS5EWh4TNKME8tyVFCne) (Touhoppai) | 10:30 | CC BY 4.0 | Dialogues de groupe en français, 6 personnages récurrents, VTT français |
 | [Pepper&Carrot, épisode 6, VF](https://peertube.touhoppai.moe/w/rSSkd86E2C4ikCCwewZUsZ) | 7:37 | CC BY-SA 4.0 | Cas difficile : 51 % de parole, narrateur, visages 2D. La version audiodécrite sera aussi en BY-SA |
 | [Le trésor de Sidiailles](https://film.k-prod.fr/w/6k27hDT7PbR2oZNoGrsPjc) (Kintésens) | 11:56 | CC BY (métadonnées PeerTube) | Prises de vues réelles en français. Licence à faire confirmer par écrit. Enfants à l'écran : ne publier aucun recadrage de visage |
 
-- Secours : [Sintel, version française](https://peertube.touhoppai.moe/w/tZbHhmpfbC8vt2rw871P7A) (continuité avec la vidéo de présentation ; piste musique + effets disponible pour la VO) ; « HATTILA et le visiteur du passé » si la licence de Sidiailles n'est pas confirmée.
+- Secours : « HATTILA et le visiteur du passé » si la licence de Sidiailles n'est pas confirmée.
 - Témoin sans dialogue : Spring.
 - Référence de qualité : Elephants Dream, avec les audiodescriptions textuelles humaines de Silvia Pfeiffer (anglais, CC BY 4.0).
 - À exclure : Agent 327 (CC BY-ND).
-- Vérité terrain : masque de parole issu des pistes musique + effets (Tears of Steel, Sintel) et des sous-titres horodatés ; annotation manuelle de quelques minutes pour les vidéos françaises si besoin.
+- Vérité terrain : masque de parole issu des pistes musique + effets pour Sintel (VO et VF) et Tears of Steel, soit 44 min sur 74. Les trois autres vidéos ont des sous-titres horodatés, trop lâches pour mesurer le chevauchement : ils restent affichés jusqu'à 2 s après la parole. Pour elles, la voix isolée par Demucs ou quelques minutes annotées à la main donneraient une vérité terrain.
 
 ---
 

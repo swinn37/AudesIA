@@ -6,6 +6,7 @@
 #   scripts/docker.sh start gx10     vision (Qwen3.6) puis rédacteur (Gemma 4), l'un après l'autre
 #   scripts/docker.sh start 5080     un seul serveur (Qwen3.5-2B) qui joue les deux rôles
 #   scripts/docker.sh run ARGS...    pipeline, par exemple : run film.mkv --start 1:35 --end 3:35 --profile large
+#   scripts/docker.sh py SCRIPT ...  un script Python du dépôt dans la même image, par exemple eval/overlap.py
 #   scripts/docker.sh stop           arrête les serveurs
 # À lancer depuis la racine du dépôt : run monte ce dossier, les vidéos et out/ s'y trouvent.
 # Sur le GX10, start lance aussi scripts/bench_memory.sh : relevé mémoire à 1 Hz et garde-fou.
@@ -22,6 +23,8 @@ HF_CACHE=${HF_CACHE:-audesia-hf}   # cache des modèles du pipeline ; sur la 508
 TEMPLATE=/root/.cache/huggingface/templates/gemma4  # modèle de conversation de Google (images en image_url)
 SERVER=(--gpus all --ipc=host --network "$NET" -v audesia-hf:/root/.cache/huggingface -v audesia-vllm:/root/.cache/vllm
         -e HF_HUB_OFFLINE=1 -e HF_HUB_DISABLE_TELEMETRY=1 -e VLLM_NO_USAGE_STATS=1 -e DO_NOT_TRACK=1)
+WORKER=(--rm --gpus all --ipc=host --network "$NET" -v "$HF_CACHE:/root/.cache/huggingface"
+        -v "$(pwd -W 2>/dev/null || pwd):/work")  # le dépôt monté : vidéos, corpus et out/ aux mêmes chemins qu'en natif
 
 hf() {  # téléchargement par le client Hugging Face de l'image vLLM : rien à installer sur l'hôte
   docker run --rm -v audesia-hf:/root/.cache/huggingface -e HF_TOKEN="${HF_TOKEN:-}" --entrypoint hf "$IMG" download "$@"
@@ -95,12 +98,15 @@ case "${1:-} ${2:-}" in
     network
     writer=http://audesia-writer:8001/v1
     docker inspect audesia-writer >/dev/null 2>&1 || writer=http://audesia-vision:8000/v1  # 5080 : un seul serveur
-    docker run --rm --gpus all --ipc=host --network "$NET" -v "$HF_CACHE:/root/.cache/huggingface" \
-      -v "$(pwd -W 2>/dev/null || pwd):/work" \
-      -e AUDESIA_VLM_URL=http://audesia-vision:8000/v1 -e AUDESIA_WRITER_URL="$writer" audesia-worker "$@" ;;
+    docker run "${WORKER[@]}" -e AUDESIA_VLM_URL=http://audesia-vision:8000/v1 -e AUDESIA_WRITER_URL="$writer" \
+      audesia-worker "$@" ;;
+  "py "*)  # un script Python du dépôt dans l'image du pipeline, par exemple : py eval/overlap.py ...
+    shift
+    network
+    docker run "${WORKER[@]}" --entrypoint python3 audesia-worker "$@" ;;
   "stop "*)
     docker rm -f audesia-writer audesia-vision 2>/dev/null || true
     pkill -f bench_memory.sh 2>/dev/null || true ;;
   *)
-    sed -n '2,11p' "$0"; exit 2 ;;
+    sed -n '2,12p' "$0"; exit 2 ;;
 esac
