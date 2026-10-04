@@ -14,3 +14,6 @@ extra_body = { chat_template_kwargs = { enable_thinking = false } }
 [run]
 max_images = 8  # par fenêtre, plus jusqu'à 8 copies éclaircies : les serveurs acceptent 16 images par requête
 parallel = 8    # requêtes simultanées, autant que --max-num-seqs de chaque serveur
+# Vérification fait par fait sur les images par le rédacteur. Mesurée sur la 5080 (Gemma 26B, 4 bits) : elle écarte à
+# raison des faits hors champ, mais aussi la main tendue vers le dragon, action clé du plan. À mesurer en A/B ici.
+verify = false

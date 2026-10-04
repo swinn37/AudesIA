@@ -16,3 +16,4 @@ extra_body = { chat_template_kwargs = { enable_thinking = false } }
 [run]
 max_images = 4
 parallel = 4  # autant que --max-num-seqs du serveur de test
+verify = true  # pour tester aussi ce chemin

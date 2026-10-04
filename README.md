@@ -97,7 +97,7 @@ Les fichiers sont écrits dans `out/<vidéo>_<début>-<fin>/` :
 | `relecture.html` | Page de relecture, à ouvrir dans un navigateur, hors ligne |
 | `relecture.json` | Fiche de relecture : horaire, place disponible, texte lu, durée de la voix et statut de chaque fenêtre |
 | `segments.json`, `shots.json`, `descriptions.json`, `personnages.json` | Étapes intermédiaires, mises en cache |
-| `metrics.json` | Durée par étape, couverture des silences, débit mesuré de la voix, synthèses refaites, requêtes et jetons par modèle, pic mémoire |
+| `metrics.json` | Durée par étape, couverture des silences, débit mesuré de la voix, synthèses refaites, requêtes et jetons par modèle, faits vérifiés et écartés, pic mémoire |
 
 Les étapes coûteuses sont mises en cache. Supprimer `descriptions.json` relance la description, le registre, la révision et la rédaction ; changer de voix ne refait que la voix et le mixage.
 
@@ -267,6 +267,7 @@ python eval/overlap.py out/Sintel.2010.1080p_1.35-3.35 --video Sintel.2010.1080p
 - Éclaircie, la masse sombre devient bien un morceau de bois, mais la posture est lue comme « elle se cache derrière » au lieu de « elle regarde dessous ». L'action se lit dans le mouvement, pas sur des images fixes.
 - Quand deux personnages ont le même genre (en VO : « la jeune femme » et « la petite créature ailée »), le rédacteur écrit encore des « elle » ambigus (« Elle sourit, elle crie »).
 - Le registre oublie les personnages secondaires : le vieil homme de la hutte n'y figure pas.
+- Une vérification fait par fait sur les images existe en option (`verify` dans le profil). Sur l'extrait VF, elle a écarté 19 faits sur 117 : à raison la jeune fille d'un plan où seul le dragon est visible, mais à tort la main gantée tendue vers le dragon, action clé du plan, tout en gardant un « sol pavé » sur un toit. Elle reste désactivée en attendant un A/B sur le GX10, avec un juge.
 - Avec 8 images par plan, la suite des actions était mieux suivie (« elle brandit un couteau »), mais la description prenait 50 min sur la 5080.
 - La voix de synthèse précipite parfois une phrase : 19 à 20 caractères par seconde au lieu de 10 à 15, et un mot avalé (« sur un toit » retranscrit « sur un C »). Le script retranscrit désormais chaque phrase, et la refait, jusqu'à 3 essais, si elle est dite à plus de 16 caractères par seconde ou qu'un mot de plus de 3 lettres manque à sa retranscription. Sur les 10 phrases de la VF, ce contrôle n'a rejeté aucune phrase à tort et ajoute environ 40 s à la voix.
 

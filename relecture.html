@@ -145,7 +145,7 @@
   <tr>
     <th scope="row"><button class="horaire" type="button"></button><span class="id"></span></th>
     <td><textarea rows="2"></textarea>
-      <details><summary>Description factuelle et variantes</summary><p class="factuelle"></p><p class="variantes"></p></details></td>
+      <details><summary>Description factuelle et variantes</summary><p class="factuelle"></p><p class="variantes"></p><p class="ecartes"></p></details></td>
     <td><meter min="0" aria-hidden="true"></meter><div class="mesures"><span class="duree"></span><br><span class="car"></span></div></td>
     <td><span class="statut"></span></td>
     <td><div class="actions">
@@ -250,6 +250,7 @@
     l.zone.setAttribute("aria-describedby", `d-${r.id} s-${r.id}`);
     $(".factuelle", tr).textContent = r.description || "—";
     $(".variantes", tr).textContent = r.variantes.length ? `Variantes : ${r.variantes.join(" / ")}` : "";
+    $(".ecartes", tr).textContent = r.faits_ecartes?.length ? `Écartés à la vérification sur les images : ${r.faits_ecartes.join(" / ")}` : "";
     for (const b of tr.querySelectorAll(".actions button")) b.setAttribute("aria-describedby", entete.id);
     $("#lignes").append(tr);
     return l;

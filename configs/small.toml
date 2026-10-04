@@ -16,3 +16,4 @@ extra_body = { reasoning_effort = "none" }
 [run]
 max_images = 4  # par fenêtre ; 8 suivait mieux les actions, mais la description passait de 9 à 50 min
 parallel = 1    # requêtes simultanées : Ollama les traite une par une
+verify = false  # vérification fait par fait : le même modèle se confirmerait lui-même, pour un appel de plus par fenêtre

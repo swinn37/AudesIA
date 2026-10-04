@@ -121,6 +121,11 @@ CAST = (
     "visuels distinctifs (cheveux, vêtements, accessoires). N'invente aucun personnage. Réponds uniquement en "
     'JSON : {"personnages": [{"designation": "...", "traits": "..."}]}'
 )
+VERIFY = """Tu vérifies, sur les images, la description d'un plan de film destinée à une audiodescription. Découpe \
+la description en faits élémentaires : un personnage, une action, un objet, un lieu, un état, une couleur. Pour chaque \
+fait, regarde les images : est-il clairement visible ? Un fait faux, douteux ou invisible n'est pas visible. N'ajoute \
+aucun fait qui ne soit pas dans la description.
+Réponds uniquement en JSON : {"faits": [{"fait": "...", "visible": true}]}"""
 ZOOM = (
     "La première image est un plan de film, les trois suivantes des détails agrandis de ce plan (gauche, centre, "
     "droite). Que tiennent ou manipulent les personnages, et quels objets reconnais-tu ? Nomme précisément ce que tu "
@@ -355,6 +360,12 @@ def json_list(raw, key):
     except (ValueError, KeyError, TypeError):
         return []
     return v if isinstance(v, list) else []
+
+
+def verified(raw):
+    """Faits du JSON de vérification, et le texte de ceux qui sont visibles."""
+    facts = [f for f in json_list(raw, "faits") if isinstance(f, dict) and isinstance(f.get("fait"), str) and f["fait"].strip()]
+    return facts, [f["fait"].strip() for f in facts if f.get("visible") is True]
 
 
 def parse_variants(raw):
@@ -606,7 +617,16 @@ def describe(clip, segs, shots, profile, cps, out):
         b = budget(w, cps)
         limits = "\n".join(f"Variante {i + 1} : au plus {n} caractères (environ {max(n // 6, 1)} mots)."
                            for i, n in enumerate((b, b * 2 // 3, b // 2)))
-        variants = parse_variants(ask("writer", WRITE, f"Description : {desc}\n{context}\n{limits}", json_mode=True))
+        source, x["facts"] = desc, None
+        if profile["run"].get("verify"):
+            # Vérification fait par fait sur les images, par le rédacteur (sur le GX10, d'une autre famille que le modèle
+            # de vision) : seuls les faits visibles sont rédigés ; s'ils sont tous écartés, le plan reste sans description.
+            x["facts"], kept = verified(ask("writer", VERIFY, [{"type": "text", "text": f"Description : {desc}"}, *visuals],
+                                            json_mode=True))
+            if x["facts"]:  # sans fait lisible, la description révisée reste
+                source = "Faits vérifiés sur les images : " + " ; ".join(kept) if kept else ""
+        variants = parse_variants(ask("writer", WRITE, f"Description : {source}\n{context}\n{limits}", json_mode=True)
+                                  ) if source else []
         x.update(description=desc, budget_chars=b, variants=variants)
         said += variants[:1]
         print(f"  {w[0]:6.1f}–{w[1]:6.1f} s  {'[zoom : ' + x['zoom'][:60] + '] ' if x['zoom'] else ''}{variants[:1]}",
@@ -713,7 +733,8 @@ def voice(descs, segs, a, out):
         row = {"id": d["id"], "horaire": horaire, "debut": round(w0, 2), "fin": round(w1, 2), "place_s": round(avail, 2),
                "place_caracteres": budget([w0, w1], a.cps), "statut": "relu" if reviewed else "automatique",
                "texte": got[0] if got else None, "voix_s": None, "acceleration": None,
-               "description": d.get("description", ""), "variantes": d["variants"]}
+               "description": d.get("description", ""), "variantes": d["variants"],
+               "faits_ecartes": [f["fait"] for f in d.get("facts") or [] if f.get("visible") is not True]}
         review.append(row)
         if not got:
             dropped.append(d["id"])
@@ -844,6 +865,10 @@ def selftest():
     assert parse_variants('Voici : {"variantes": ["Elle court.", "Elle court vers la porte.", "Elle court."]}') \
         == ["Elle court vers la porte.", "Elle court."]
     assert parse_variants("pas de JSON") == []
+    facts, kept = verified('{"faits": [{"fait": "Elle grimpe.", "visible": true}, {"fait": "Un tissu noir.", '
+                           '"visible": false}, {"fait": "", "visible": true}]}')
+    assert len(facts) == 2 and kept == ["Elle grimpe."]  # fait vide ignoré, fait invisible écarté
+    assert verified("pas de JSON") == ([], [])
     assert VAGUE.search("Elle tient un objet sphérique et piquant.") and not VAGUE.search("Elle tient un fruit épineux.")
     girl, dragon = "la jeune fille aux cheveux roux", "le petit dragon"
     assert short_form(girl) == "la jeune fille" and short_form(dragon) == dragon
@@ -931,7 +956,9 @@ def main():
         "dropped": dropped,
         "sped_up": sum(p["speedup"] > 1 for p in placed),
         "reviewed": sum(p["reviewed"] for p in placed),
-        "tts_retries": retries,  # synthèses refaites parce que la voix précipitait la phrase
+        "tts_retries": retries,  # synthèses refaites : voix précipitée ou mot manquant à la retranscription
+        "facts_checked": sum(len(d.get("facts") or []) for d in descs),  # vérification fait par fait (profil)
+        "facts_rejected": sum(f.get("visible") is not True for d in descs for f in d.get("facts") or []),
         "profile": profile["name"],
         "models": {r: profile[r]["model"] for r in ("vlm", "writer")},
         "parallel_requests": profile["run"].get("parallel", 1),

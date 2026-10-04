@@ -149,7 +149,7 @@ flowchart TD
 | 3 | Plans | vidéo | `shots.json` : plans (début, fin), 3 à 8 images clés par plan. Seuls les plans qui recouvrent un silence utilisable (± une fenêtre) sont décrits |
 | 4 | Personnages | images clés | `characters.json` : groupes de visages (prises de vues réelles) ou marquage visuel (animation) ; noms saisis dans l'éditeur |
 | 5 | Description | plans + contexte | `raw_descriptions.json` : description factuelle par plan |
-| 6 | Vérification | descriptions brutes + images clés | `facts.json` : faits élémentaires, validés ou rejetés sur les images |
+| 6 | Vérification (option, désactivée par défaut : §6) | description révisée + images clés | `facts` dans `descriptions.json` : faits élémentaires, validés ou rejetés sur les images |
 | 6 bis | Registre et révision | une image par plan, puis les images de chaque plan + registre + plans voisins | `personnages.json` (désignation stable et traits de chaque personnage) ; descriptions révisées : même désignation pour une même personne, actions rattachées au bon personnage, rien de non visible |
 | 7 | Rédaction | faits validés + silences | `descriptions.json` : 3 variantes par silence, budget en caractères |
 | 8 | Voix + calage | variantes | `tts/*.wav`, durée réelle, retranscription ; variante retenue, sinon retour à 7 |
@@ -268,7 +268,12 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026, puis le 4 octobre po
   - en contrepartie, couverture de 64 % au lieu de 76 % (un run). Le seuil (`BURST_DB`, +8 dB) a été choisi entre +6 et +10 dB sur les extraits VO et VF ;
   - séparation en 6 s pour 2 min de film, 86 s pour les 74 min du corpus.
 - [ ] Rédaction en 3 variantes + `fit_loop.py` + tests unitaires de l'invariant « aucun chevauchement avec la parole détectée ».
-- [ ] Vérification visuelle (`verify.py`, `prompts/verify.fr.md`) : faits élémentaires validés un par un sur les images clés par le second modèle.
+- [x] Vérification visuelle fait par fait, en option (`verify` dans le profil) : le rédacteur découpe la description en faits élémentaires et juge chacun sur les images, en un appel par fenêtre ; seuls les faits visibles sont rédigés, et les faits écartés s'affichent dans la page de relecture.
+  - Mesurée sur l'extrait VF (Gemma 26B se vérifiant lui-même) : 19 faits écartés sur 117, et 32 % de temps de description en plus.
+  - À raison : la jeune fille, dans un plan où seul le dragon est visible.
+  - À tort : la main gantée tendue vers le dragon, action clé du plan, rejetée en bloc à cause d'une couleur fausse (« beige »). Un « sol pavé » est resté, sur un toit.
+  - Une consigne qui réécrit les faits en partie visibles au lieu de les écarter devient trop permissive.
+  - Elle est donc désactivée par défaut, y compris sur le GX10, en attendant un A/B avec le juge.
 - [ ] Comparatif de voix sur ~30 phrases d'audiodescription :
   - candidats : Qwen3-TTS-1.7B, Chatterbox V3 (commit épinglé), VoxCPM2 ;
   - critères : erreur de retranscription, écoute, vitesse ;
@@ -304,7 +309,7 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026, puis le 4 octobre po
   - mesures clés : chevauchement contre vérité terrain, couverture, temps, mémoire ;
   - A/B rapide du rédacteur sur 20 à 30 silences.
 - [ ] Jour 2 : plusieurs vidéos en parallèle (débit).
-- [ ] Jour 3 : balayage de modèles de classe 120B (§5), juge VLM extérieur, ablations (sans contexte, sans personnages).
+- [ ] Jour 3 : balayage de modèles de classe 120B (§5), juge VLM extérieur, ablations (sans contexte, sans personnages, avec la vérification fait par fait).
 - [ ] Jour 4 : rapport, vidéo de démo, publication.
 - [ ] Plan B si mémoire insuffisante : versions NVFP4, contexte réduit, `--max-num-seqs` plus bas.
 
