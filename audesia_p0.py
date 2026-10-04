@@ -3,8 +3,8 @@
 
 Chaîne : ffmpeg → Silero VAD + Whisper large-v3 → PySceneDetect → VLM (description)
 → rédacteur (3 variantes calées sur le silence) → Qwen3-TTS → mixage → exports.
-VLM et rédacteur passent par une API compatible OpenAI : passer au GX10 (vLLM)
-ne demande que --base-url et --model.
+VLM et rédacteur passent par une API compatible OpenAI : passer de la 5080 (Ollama) au GX10
+(deux serveurs vLLM) ne demande que --profile large (configs/large.toml).
 
 Installation (WSL2, RTX 5080) :
   sudo apt install ffmpeg sox
@@ -49,7 +49,9 @@ import re
 import statistics
 import subprocess
 import sys
+import threading
 import time
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 os.environ.setdefault("HF_HUB_DISABLE_TELEMETRY", "1")  # contrainte n° 1 : aucune télémétrie
@@ -62,8 +64,7 @@ MIN_SILENCE = 2.0   # s : silence utilisable minimal (à 1,5 s, des descriptions
 MARGIN = 0.2        # s : marge avant et après chaque description
 WINDOW = 5.0        # s : durée visée d'une fenêtre dans un long silence (coupée aux changements de plan)
 MAX_WINDOW = 10.0   # s
-MAX_IMAGES = 4      # 8 suivait mieux les actions, mais la description passait de 9 à 50 min sur la 5080
-FRAME_STEP = 0.7    # s : écart visé entre deux images dans les plans courts
+FRAME_STEP = 0.7    # s : écart visé entre deux images dans les plans courts (leur nombre maximal est dans le profil)
 MAX_CAST = 10       # images (une par plan) pour le registre des personnages
 DARK_LEVEL = 40     # luminance sous laquelle un pixel compte comme très sombre (0-255)
 DARK_SHARE = 0.25   # contre-jour : plus de 25 % de pixels très sombres…
@@ -138,6 +139,9 @@ Réponds uniquement en JSON : {"variantes": ["...", "...", "..."]}, trois varian
 décroissante, la première sans dépasser la longueur maximale indiquée."""
 
 TIMINGS = {}
+USAGE = {r: {"requests": 0, "prompt_tokens": 0, "completion_tokens": 0} for r in ("vlm", "writer")}  # metrics.json
+MAX_TOKENS = 1500   # par réponse : une description fait 3 à 5 phrases, un registre quelques lignes de JSON
+CONFIGS = Path(__file__).with_name("configs")  # profils small (RTX 5080) et large (GX10)
 
 
 # --- Logique de calage (pure, couverte par --selftest) -------------------------------------------
@@ -197,10 +201,10 @@ def windows(silence, shots):
     return split
 
 
-def frame_times(win):
-    """De 3 à MAX_IMAGES images réparties sur la fenêtre, environ FRAME_STEP s d'écart dans les plans courts."""
+def frame_times(win, n_max):
+    """De 3 à n_max images réparties sur la fenêtre, environ FRAME_STEP s d'écart dans les plans courts."""
     a, b = win
-    n = min(MAX_IMAGES, max(3, round((b - a) / FRAME_STEP)))
+    n = min(n_max, max(3, round((b - a) / FRAME_STEP)))
     return [a + (b - a) * (i + 0.5) / n for i in range(n)]
 
 
@@ -406,26 +410,59 @@ def tiles(clip, t, folder):
     return paths
 
 
-def chat(llm, model, system, content, json_mode=False):
+def load_profile(name):
+    """Profil small, large ou chemin d'un fichier TOML : serveur, modèle et extra_body de chaque rôle (vlm décrit,
+    writer révise et rédige), images par fenêtre et requêtes simultanées."""
+    import tomllib
+    path = Path(name) if name.endswith(".toml") else CONFIGS / f"{name}.toml"
+    try:
+        profile = tomllib.loads(path.read_text(encoding="utf-8"))
+    except (OSError, tomllib.TOMLDecodeError) as e:
+        sys.exit(f"profil {path} illisible : {e}")
+    for role in ("vlm", "writer"):
+        if not {"base_url", "model"} <= profile.get(role, {}).keys():
+            sys.exit(f"profil {path} : la section [{role}] doit donner base_url et model")
+    profile["name"] = path.stem
+    profile.setdefault("run", {})
+    return profile
+
+
+def chat(llm, cfg, system, content, json_mode=False):
+    """Une requête au serveur d'un rôle, à température 0, avec l'extra_body du profil. Rend le texte et l'usage."""
     extra = {"response_format": {"type": "json_object"}} if json_mode else {}
-    # Sans reasoning_effort="none", Gemma 4 sous Ollama « réfléchit » 2 à 3 min et rend un contenu vide.
-    r = llm.chat.completions.create(model=model, temperature=0, reasoning_effort="none", messages=[
-        {"role": "system", "content": system}, {"role": "user", "content": content}], **extra)
-    return (r.choices[0].message.content or "").strip()
+    # extra_body coupe la « réflexion » : sans elle, Gemma 4 sous Ollama réfléchit 2 à 3 min et rend un contenu vide.
+    # max_tokens : à température 0, une boucle de répétition irait sinon jusqu'au bout du contexte.
+    r = llm.chat.completions.create(model=cfg["model"], temperature=0, max_tokens=MAX_TOKENS,
+                                    extra_body=cfg.get("extra_body", {}),
+                                    messages=[{"role": "system", "content": system}, {"role": "user", "content": content}],
+                                    **extra)
+    return (r.choices[0].message.content or "").strip(), r.usage
 
 
-def describe(clip, segs, shots, a, out):
-    """1. Par fenêtre : description de la suite d'images seule (VLM).
-    2. Sur l'ensemble : registre des personnages.
-    3. Par fenêtre : révision sur les mêmes images avec le registre et les plans voisins, puis 3 variantes calées."""
-    # ponytail: révision en un appel par le même modèle ; vérification fait par fait en P1 si besoin.
+def describe(clip, segs, shots, profile, cps, out):
+    """1. Par fenêtre, en parallèle : description de la suite d'images seule (vlm), puis détails agrandis si un objet
+    reste vague. 2. Sur l'ensemble : registre des personnages (vlm). 3. Par fenêtre, dans l'ordre : révision sur les
+    mêmes images avec le registre et les plans voisins, puis 3 variantes calées (writer)."""
+    # ponytail: révision et rédaction en série, car chacune reprend la précédente ; le parallèle porte sur les
+    # descriptions, les requêtes les plus lourdes (jusqu'à 16 images), et sur plusieurs vidéos à la fois.
     from openai import OpenAI
-    llm = OpenAI(base_url=a.base_url, api_key="local")
+    clients = {role: OpenAI(base_url=profile[role]["base_url"], api_key="local") for role in ("vlm", "writer")}
+    lock = threading.Lock()
+
+    def ask(role, system, content, json_mode=False):
+        text, usage = chat(clients[role], profile[role], system, content, json_mode)
+        with lock:  # jetons envoyés et générés : débit du rapport, et preuve que les images comptent bien
+            USAGE[role]["requests"] += 1
+            USAGE[role]["prompt_tokens"] += getattr(usage, "prompt_tokens", 0) or 0
+            USAGE[role]["completion_tokens"] += getattr(usage, "completion_tokens", 0) or 0
+        return text
+
+    n_max, parallel = profile["run"].get("max_images", 4), profile["run"].get("parallel", 1)
     (out / "frames").mkdir(exist_ok=True)
     wins = [w for sil in segs["silences"] for w in windows(sil, shots)]
-    items = []
-    for k, w in enumerate(wins):
-        times, images, bright = frame_times(w), [], []
+
+    def look(k, w):
+        times, images, bright = frame_times(w, n_max), [], []
         for t in times:
             f = out / "frames" / f"{t:08.2f}.jpg"
             ff("-ss", t, "-i", clip, "-frames:v", 1, "-vf", "scale=1024:-2", "-q:v", 3, f)
@@ -435,17 +472,32 @@ def describe(clip, segs, shots, a, out):
         extra = [{"type": "text", "text": "Versions éclaircies des images sombres :"}, *bright] if bright else []
         # Images seules : en contexte, les répliques (« Cette lame… ») et les descriptions précédentes
         # amorçaient des inventions qui se propageaient d'une fenêtre à l'autre.
-        raw = chat(llm, a.model, DESCRIBE, [{"type": "text", "text": "Décris cette suite d'images."}, *images, *extra])
-        items.append({"id": f"d_{k:04d}", "window": w, "frames": times, "brightened": len(bright),
-                      "raw_description": raw, "images": images, "extra": extra})
+        raw = ask("vlm", DESCRIBE, [{"type": "text", "text": "Décris cette suite d'images."}, *images, *extra])
         print(f"  {k + 1}/{len(wins)}  {w[0]:6.1f}–{w[1]:6.1f} s  décrit ({len(images)} images, "
               f"{len(bright)} éclaircies)", flush=True)
+        return {"id": f"d_{k:04d}", "window": w, "frames": times, "brightened": len(bright),
+                "raw_description": raw, "images": images, "extra": extra}
+
+    def zoom(x):
+        # Objet nommé vaguement : question directe sur des détails agrandis de l'image centrale, sans la
+        # description (elle ancrait la réponse sur « objet sphérique »). Envoyés en vrac dans la révision,
+        # ces détails ne suffisaient pas à la faire sortir de « objet ».
+        if not VAGUE.search(x["raw_description"]):
+            return None
+        mid = x["frames"][len(x["frames"]) // 2]
+        zoomed = [as_image(out / "frames" / f"{mid:08.2f}.jpg"), *[as_image(p) for p in tiles(clip, mid, out / "frames")]]
+        return ask("vlm", ZOOM, [{"type": "text", "text": "Plan et détails agrandis :"}, *zoomed])
+
+    with ThreadPoolExecutor(max_workers=parallel) as pool:
+        items = list(pool.map(look, range(len(wins)), wins))
+        for x, z in zip(items, list(pool.map(zoom, items))):
+            x["zoom"] = z
 
     # Une image par plan, pour que la même personne garde la même désignation tout au long de l'extrait.
     picks = items if len(items) <= MAX_CAST else [items[int(i * len(items) / MAX_CAST)] for i in range(MAX_CAST)]
-    cast = [c for c in json_list(chat(llm, a.model, CAST, [{"type": "text", "text": "Images, dans l'ordre :"},
-                                                          *[x["images"][len(x["images"]) // 2] for x in picks]],
-                                      json_mode=True), "personnages") if isinstance(c, dict)]
+    cast = [c for c in json_list(ask("vlm", CAST, [{"type": "text", "text": "Images, dans l'ordre :"},
+                                                  *[x["images"][len(x["images"]) // 2] for x in picks]],
+                                     json_mode=True), "personnages") if isinstance(c, dict)]
     registry = "\n".join(f"- {c.get('designation', '')} : {c.get('traits', '')}" for c in cast) or "aucun"
     (out / "personnages.json").write_text(json.dumps(cast, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"  registre : {[c.get('designation') for c in cast]}", flush=True)
@@ -454,30 +506,23 @@ def describe(clip, segs, shots, a, out):
     for k, x in enumerate(items):
         w = x["window"]
         visuals = x.pop("images") + x.pop("extra")  # pas de base64 dans le cache JSON
-        note, x["zoom"] = "", None
-        if VAGUE.search(x["raw_description"]):
-            # Objet nommé vaguement : question directe sur des détails agrandis de l'image centrale, sans la
-            # description (elle ancrait la réponse sur « objet sphérique »). Envoyés en vrac dans la révision,
-            # ces détails ne suffisaient pas à la faire sortir de « objet ».
-            mid = x["frames"][len(x["frames"]) // 2]
-            zoomed = [as_image(out / "frames" / f"{mid:08.2f}.jpg"), *[as_image(p) for p in tiles(clip, mid, out / "frames")]]
-            x["zoom"] = chat(llm, a.model, ZOOM, [{"type": "text", "text": "Plan et détails agrandis :"}, *zoomed])
-            if "inconnu" not in x["zoom"].lower():
-                note = f"\nPrécision sur l'objet, d'après des détails agrandis : {x['zoom']}"
+        note = (f"\nPrécision sur l'objet, d'après des détails agrandis : {x['zoom']}"
+                if x["zoom"] and "inconnu" not in x["zoom"].lower() else "")
         following = items[k + 1]["raw_description"] if k + 1 < len(items) else "aucun"
-        # Révision sur les images, avec le registre et les plans voisins : désignations stables, actions
-        # rattachées au bon personnage, rien de ce que les images ne montrent pas.
-        desc = chat(llm, a.model, REVISE, [{"type": "text", "text": (
+        # Révision sur les images, avec le registre et les plans voisins : désignations stables, actions rattachées au
+        # bon personnage, rien de ce que les images ne montrent pas. Sur le GX10, le rédacteur est un second modèle,
+        # d'une autre famille : il relit sur les images ce que le premier a décrit.
+        desc = ask("writer", REVISE, [{"type": "text", "text": (
             f"Registre des personnages :\n{registry}\n\nPlan précédent : {previous}\n"
             f"Ce plan : {x['raw_description']}{note}\nPlan suivant : {following}")}, *visuals]) or x["raw_description"]
         previous = desc
         heard = " / ".join(d["text"] for d in segs["dialogues"] if d["end"] <= w[1])[-600:] or "aucun"
         context = (f"Personnages :\n{registry}\nDéjà décrit : {' '.join(said[-3:]) or 'rien'}\n"
                    f"Dialogues entendus jusqu'ici : {heard}")
-        b = budget(w, a.cps)
+        b = budget(w, cps)
         limits = "\n".join(f"Variante {i + 1} : au plus {n} caractères (environ {max(n // 6, 1)} mots)."
                            for i, n in enumerate((b, b * 2 // 3, b // 2)))
-        variants = parse_variants(chat(llm, a.model, WRITE, f"Description : {desc}\n{context}\n{limits}", json_mode=True))
+        variants = parse_variants(ask("writer", WRITE, f"Description : {desc}\n{context}\n{limits}", json_mode=True))
         x.update(description=desc, budget_chars=b, variants=variants)
         said += variants[:1]
         print(f"  {w[0]:6.1f}–{w[1]:6.1f} s  {'[zoom : ' + x['zoom'][:60] + '] ' if x['zoom'] else ''}{variants[:1]}",
@@ -643,8 +688,11 @@ def selftest():
         {"start": 58.1, "end": 111.0, "text": "I've been alone for as long as I can remember. Oh, my God."},  # 53 s : ignoré
         {"start": 29.8, "end": 27.9, "text": ""},                          # vide : ignoré
     ]) == [[113.7 - WHISPER_PAD, 115.3 + WHISPER_PAD]]
-    assert frame_times([0, 3]) == [0.375, 1.125, 1.875, 2.625]  # 4 images réparties sur la fenêtre
-    assert len(frame_times([0, 17])) == MAX_IMAGES and len(frame_times([0, 1])) == 3
+    assert frame_times([0, 3], 4) == [0.375, 1.125, 1.875, 2.625]  # 4 images réparties sur la fenêtre
+    assert len(frame_times([0, 17], 4)) == 4 and len(frame_times([0, 17], 8)) == 8 and len(frame_times([0, 1], 8)) == 3
+    for path in sorted(CONFIGS.glob("*.toml")):                  # profils livrés : lisibles et complets
+        prof = load_profile(str(path))
+        assert prof["run"]["parallel"] >= 1 and prof["run"]["max_images"] >= 3, path.name
     fake = lambda text: (np.zeros(len(text) * 10), 100)           # voix factice : 10 caractères/s
     assert fit(["x" * 30, "x" * 20], 2.5, fake)[0] == "x" * 20    # 3 s ne tient pas, 2 s oui
     assert fit(["x" * 30], 2.8, fake)[3] == 3.0 / 2.8             # accélération ≤ 10 %
@@ -695,11 +743,8 @@ def main():
     p.add_argument("--start", default="0", help="début de l'extrait (s ou mm:ss)")
     p.add_argument("--end", help="fin de l'extrait (par défaut : fin de la vidéo)")
     p.add_argument("--out", help="dossier de sortie (par défaut : out/<vidéo>_<début>-<fin>)")
-    # 127.0.0.1 plutôt que localhost : sous Windows, localhost part d'abord en IPv6 et peut joindre un autre serveur.
-    p.add_argument("--base-url", default="http://127.0.0.1:11434/v1", help="API compatible OpenAI (Ollama, llama.cpp, vLLM)")
-    # 26B plutôt que 12B : sur Sintel, le 12B inventait un homme, un livre, une hache ; le 26B, non.
-    # Sur 16 Go, Ollama en place une partie sur le CPU (environ 35 s par fenêtre).
-    p.add_argument("--model", default="gemma4:26b-a4b-it-qat")
+    p.add_argument("--profile", default="small",
+                   help="small (RTX 5080, Ollama), large (GX10, deux serveurs vLLM) ou chemin d'un fichier TOML")
     p.add_argument("--cps", type=float, default=13.0, help="débit de la voix en caractères/s (mesuré : 13 pour Vivian)")
     p.add_argument("--tts-model", default="Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice", help="…-0.6B-CustomVoice si la VRAM manque")
     p.add_argument("--voice", default="Vivian", help="Vivian, Serena, Uncle_Fu, Dylan, Eric, Ryan, Aiden, Ono_Anna, Sohee")
@@ -709,6 +754,7 @@ def main():
         return selftest()
     if not a.video:
         p.error("indiquer la vidéo")
+    profile = load_profile(a.profile)  # avant les étapes longues : un profil invalide arrête tout de suite
 
     out = Path(a.out or Path("out") / f"{Path(a.video).stem}_{a.start}-{a.end or 'fin'}".replace(":", "."))
     out.mkdir(parents=True, exist_ok=True)
@@ -726,8 +772,9 @@ def main():
     segs["speech"] = merge(segs["speech"] + plausible_segments(segs["dialogues"]))
     segs["silences"] = silences(segs["speech"], segs["duration"])
     shots = step("plans", lambda: detect_shots(clip), out / "shots.json")
-    descs = step("description", lambda: describe(clip, segs, shots, a, out), out / "descriptions.json")
-    unload_ollama(a.base_url, a.model)
+    descs = step("description", lambda: describe(clip, segs, shots, profile, a.cps, out), out / "descriptions.json")
+    for base_url, model in {(profile[r]["base_url"], profile[r]["model"]) for r in ("vlm", "writer")}:
+        unload_ollama(base_url, model)
     placed, dropped, retries = step("voix", lambda: voice(descs, segs, a, out))
     step("mixage", lambda: mix_and_export(placed, out))
 
@@ -743,6 +790,10 @@ def main():
         "sped_up": sum(p["speedup"] > 1 for p in placed),
         "reviewed": sum(p["reviewed"] for p in placed),
         "tts_retries": retries,  # synthèses refaites parce que la voix précipitait la phrase
+        "profile": profile["name"],
+        "models": {r: profile[r]["model"] for r in ("vlm", "writer")},
+        "parallel_requests": profile["run"].get("parallel", 1),
+        "llm_usage": USAGE,  # requêtes et jetons par rôle ; 0 si les descriptions venaient du cache
         "coverage": round(sum(p["end"] - p["start"] for p in placed) / usable, 3) if usable else 0,
         "measured_chars_per_s": round(statistics.mean(p["chars_per_s"] for p in placed), 1) if placed else None,
         "peak_gpu_gib_this_process": round(torch.cuda.max_memory_allocated() / 2 ** 30, 2),

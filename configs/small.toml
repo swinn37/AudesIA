@@ -1,0 +1,18 @@
+# Profil small : RTX 5080 (16 Go). Un seul modèle, servi par Ollama, décrit et rédige.
+# Gemma 4 26B plutôt que 12B : sur Sintel, le 12B inventait un homme, un livre, une hache ; le 26B, non.
+# Sur 16 Go, Ollama en place une partie sur le CPU (environ 35 s par fenêtre).
+
+[vlm]  # description des plans, registre des personnages, détails agrandis
+# 127.0.0.1 plutôt que localhost : sous Windows, localhost part d'abord en IPv6 et peut joindre un autre serveur.
+base_url = "http://127.0.0.1:11434/v1"
+model = "gemma4:26b-a4b-it-qat"
+extra_body = { reasoning_effort = "none" }  # sinon Gemma 4 « réfléchit » 2 à 3 min et rend un contenu vide
+
+[writer]  # révision sur les images et rédaction
+base_url = "http://127.0.0.1:11434/v1"
+model = "gemma4:26b-a4b-it-qat"
+extra_body = { reasoning_effort = "none" }
+
+[run]
+max_images = 4  # par fenêtre ; 8 suivait mieux les actions, mais la description passait de 9 à 50 min
+parallel = 1    # requêtes simultanées : Ollama les traite une par une

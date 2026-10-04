@@ -1,0 +1,18 @@
+# Profil de test : le chemin vLLM sur une carte de 16 Go (RTX 5080), avant l'accès au GX10.
+# Qwen3.5-2B : même famille, même traitement des images et même analyseur de réponse que Qwen3.6, en petit.
+# Il joue les deux rôles ; on teste le chemin (images, JSON, réflexion coupée, requêtes en parallèle),
+# pas la qualité des descriptions. Serveur : scripts/vllm.sh start 5080.
+
+[vlm]
+base_url = "http://127.0.0.1:8000/v1"
+model = "Qwen/Qwen3.5-2B"
+extra_body = { chat_template_kwargs = { enable_thinking = false } }  # le modèle n'y pense pas, l'analyseur si
+
+[writer]
+base_url = "http://127.0.0.1:8000/v1"
+model = "Qwen/Qwen3.5-2B"
+extra_body = { chat_template_kwargs = { enable_thinking = false } }
+
+[run]
+max_images = 4
+parallel = 4  # autant que --max-num-seqs du serveur de test

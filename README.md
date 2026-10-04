@@ -97,7 +97,7 @@ Les fichiers sont écrits dans `out/<vidéo>_<début>-<fin>/` :
 | `relecture.html` | Page de relecture, à ouvrir dans un navigateur, hors ligne |
 | `relecture.json` | Fiche de relecture : horaire, place disponible, texte lu, durée de la voix et statut de chaque fenêtre |
 | `segments.json`, `shots.json`, `descriptions.json`, `personnages.json` | Étapes intermédiaires, mises en cache |
-| `metrics.json` | Durée par étape, couverture des silences, débit mesuré de la voix, synthèses refaites, pic mémoire |
+| `metrics.json` | Durée par étape, couverture des silences, débit mesuré de la voix, synthèses refaites, requêtes et jetons par modèle, pic mémoire |
 
 Les étapes coûteuses sont mises en cache. Supprimer `descriptions.json` relance la description, le registre, la révision et la rédaction ; changer de voix ne refait que la voix et le mixage.
 
@@ -138,10 +138,30 @@ En P1, un serveur local servira la même page, relancera lui-même la voix et le
 | Option | Rôle |
 | --- | --- |
 | `--start`, `--end` | Bornes de l'extrait (`mm:ss`) |
-| `--base-url`, `--model` | Serveur compatible OpenAI : Ollama (par défaut), llama.cpp ou vLLM |
+| `--profile` | `small` par défaut (RTX 5080 : un modèle servi par Ollama), `large` (GX10 : deux serveurs vLLM) ou chemin d'un fichier TOML ; voir [configs/](configs/) |
 | `--cps` | Débit de la voix en caractères par seconde ; reprendre `measured_chars_per_s` de `metrics.json` |
 | `--voice` | Voix Qwen3-TTS : Vivian (par défaut), Serena, Ryan, Aiden… |
 | `--tts-model` | `Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice` si la mémoire vidéo manque |
+
+### Sur le GX10 (profil `large`)
+
+Deux serveurs vLLM tournent dans l'image officielle : Qwen3.6-35B-A3B (FP8) décrit les plans, et Gemma 4 26B-A4B (NVFP4) relit chaque description sur les images puis rédige. Les descriptions partent en parallèle (8 requêtes à la fois), et vLLM les regroupe en lots.
+
+```bash
+scripts/vllm.sh fetch gx10   # une fois, avec internet : environ 56 Go de modèles
+scripts/vllm.sh start gx10   # vision puis rédacteur, l'un après l'autre
+python audesia_p0.py Sintel.2010.1080p.mkv --start 1:35 --end 3:35 --profile large
+scripts/vllm.sh stop
+```
+
+`start gx10` lance aussi `scripts/bench_memory.sh`, qui relève la mémoire de l'hôte chaque seconde dans `out/memoire.csv` : sur le GB10, `nvidia-smi` n'affiche pas la mémoire. C'est aussi un garde-fou. Deux serveurs sur la mémoire unifiée ont déjà fait geler un GB10 au démarrage, et une machine gelée ne se redémarre pas à distance. Le script arrête donc les serveurs si la mémoire disponible passe sous 8 Gio.
+
+Le chemin vLLM se teste avant sur une carte de 16 Go, avec Qwen3.5-2B, de la même famille que Qwen3.6 :
+
+```bash
+scripts/vllm.sh fetch 5080 && scripts/vllm.sh start 5080
+python audesia_p0.py Sintel.2010.1080p.mkv --start 1:35 --end 2:00 --profile test-vllm
+```
 
 ## Pourquoi le GX10
 

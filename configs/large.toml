@@ -1,0 +1,16 @@
+# Profil large : ASUS Ascent GX10 (GB10, 128 Go unifiés). Deux serveurs vLLM chargés en même temps,
+# démarrés par scripts/vllm.sh start gx10 (vision sur le port 8000, rédacteur sur le port 8001).
+
+[vlm]  # description des plans, registre des personnages, détails agrandis
+base_url = "http://127.0.0.1:8000/v1"
+model = "Qwen/Qwen3.6-35B-A3B-FP8"  # réflexion activée par défaut : à couper à chaque requête
+extra_body = { chat_template_kwargs = { enable_thinking = false } }
+
+[writer]  # second modèle, d'une autre famille : il relit sur les images ce que le premier a décrit, puis rédige
+base_url = "http://127.0.0.1:8001/v1"
+model = "nvidia/Gemma-4-26B-A4B-NVFP4"
+extra_body = { chat_template_kwargs = { enable_thinking = false } }
+
+[run]
+max_images = 8  # par fenêtre, plus jusqu'à 8 copies éclaircies : les serveurs acceptent 16 images par requête
+parallel = 8    # requêtes simultanées, autant que --max-num-seqs de chaque serveur

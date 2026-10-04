@@ -46,7 +46,7 @@ Source : règlement du challenge (Conditions Générales Gleam / ASUS). Ces moda
    - `large` : ASUS Ascent GX10 (GB10, 128 Go de mémoire unifiée, **ARM64 / aarch64**). Tous les modèles restent chargés en même temps.
    - Les deux profils partagent la même partie audio (VAD, transcription, voix) et les mêmes entrées précalculées. Seuls le modèle de vision, le rédacteur et le contexte changent.
 3. **ARM64 dès le départ** (vérifié le 3 octobre 2026) :
-   - Serveurs de modèles : image officielle `vllm/vllm-openai:v0.29.0` (arm64, CUDA 13.0), épinglée par digest. Les images NGC vLLM à partir de 26.04 ne démarrent pas sur le pilote R580 du GX10 ; NGC 26.02 en secours.
+   - Serveurs de modèles : image officielle `vllm/vllm-openai:v0.30.0` (arm64, CUDA 13.0), épinglée par digest, avec la v0.29.0 en repli. Les images NGC vLLM à partir de 26.04 ne démarrent pas sur le pilote R580 du GX10 ; NGC 26.02 en secours.
    - Workers : images construites nativement en arm64 (runners GitHub `ubuntu-24.04-arm`, gratuits pour un dépôt public, ou directement sur le GX10). Pas de test sous QEMU : l'émulation n'a pas de GPU.
    - Vérifier les roues aarch64 avant l'accès : `pip download -r requirements.txt --only-binary=:all: --platform manylinux_2_28_aarch64 --python-version 3.12`.
    - Éviter toute dépendance sans roue aarch64. CTranslate2 (faster-whisper, WhisperX) n'a pas de roue CUDA pour aarch64 : sur le GX10, il tourne sur le CPU sans prévenir.
@@ -78,8 +78,9 @@ audesia/
 ├── README.md                  # pitch, schéma, démarrage rapide, résultats, crédits CC-BY
 ├── LICENSE                    # Apache-2.0
 ├── configs/
-│   ├── profile.small.yaml     # RTX 5080 (16 Go)
-│   └── profile.large.yaml     # GX10 (128 Go)
+│   ├── small.toml             # RTX 5080 (16 Go), Ollama
+│   ├── large.toml             # GX10 (128 Go), deux serveurs vLLM
+│   └── test-vllm.toml         # chemin vLLM testé sur la RTX 5080
 ├── prompts/
 │   ├── describe.fr.md         # consigne VLM (description d'un plan)
 │   ├── write.fr.md            # consigne rédacteur (Charte AD, 3 variantes, budget)
@@ -109,8 +110,8 @@ audesia/
 ├── corpus/
 │   └── download.sh            # vidéos, sous-titres, pistes musique + effets (vérité terrain)
 ├── scripts/
-│   ├── bench_memory.sh        # relevé à 1 Hz sur l'hôte : /proc/meminfo, nvidia-smi --query-compute-apps
-│   ├── fetch_models.sh        # téléchargements HF (avec exclusions), puis HF_HUB_OFFLINE=1
+│   ├── bench_memory.sh        # relevé à 1 Hz sur l'hôte (/proc/meminfo, nvidia-smi --query-compute-apps) et garde-fou
+│   ├── vllm.sh                # téléchargement des modèles et serveurs vLLM (GX10, test 5080), puis HF_HUB_OFFLINE=1
 │   └── run_corpus.sh          # traite tout le corpus avec un profil
 └── docker/
     ├── Dockerfile.worker      # une image par pile de dépendances incompatible si besoin
@@ -207,35 +208,23 @@ Dérivées de la *Charte de l'audiodescription* (2008) et du *Guide de l'audiode
 
 ## 5. Profils de configuration
 
-```yaml
-# configs/profile.large.yaml (GX10)
-profile: large
-resident_models: true          # tout reste chargé
-vlm:
-  model: Qwen/Qwen3.6-35B-A3B-FP8        # repli mémoire : nvidia/Qwen3.6-35B-A3B-NVFP4
-  server: vllm
-  max_images_per_shot: 8
-  context_shots: 6             # mémoire des plans précédents
-writer:                        # rédaction + vérification visuelle (voit les images)
-  model: nvidia/Gemma-4-26B-A4B-NVFP4    # vérifier qu'il s'agit de la version instruct ; sinon unsloth/gemma-4-26B-A4B-it-NVFP4
-  server: vllm
-asr: { vad: silero, model: whisper-large-v3 }          # identique au profil small
-tts: { engine: à choisir par comparatif, language: fr, chars_per_second: à calibrer }
-fit: { min_silence_s: 1.5, margin_s: 0.2, variants: 3, max_iterations: 3, max_speedup: 1.10 }
-parallel_jobs: 2
-```
+Les profils sont des fichiers TOML dans `configs/`, choisis par `--profile`. Chacun donne un serveur, un modèle et un `extra_body` par rôle : `vlm` décrit les plans, établit le registre et lit les détails agrandis ; `writer` révise chaque description sur ses images, puis rédige. Ils fixent aussi le nombre d'images par fenêtre et les requêtes simultanées. La parole, la voix et le calage sont identiques d'un profil à l'autre.
 
-```yaml
-# configs/profile.small.yaml (RTX 5080, baseline)
-profile: small
-resident_models: false         # ASR déchargé avant la description ; rédacteur + voix chargés ensemble (~12 Go)
-vlm:    { model: gemma4:26b-a4b-it-qat, server: ollama, max_images_per_shot: 4, context_shots: 2 }  # en partie sur le CPU ; le 12B invente (mesuré sur Sintel)
-writer: { model: même modèle que le VLM }
-asr:    { vad: silero, model: whisper-large-v3 }       # identique au profil large
-tts:    { même moteur et même voix que le profil large }
-fit:    { identique au profil large }
-parallel_jobs: 1
-```
+| | `small` (RTX 5080) | `large` (GX10) | `test-vllm` (RTX 5080) |
+| --- | --- | --- | --- |
+| `vlm` | Gemma 4 26B-A4B QAT, Ollama | Qwen3.6-35B-A3B FP8, vLLM (port 8000) | Qwen3.5-2B, vLLM (port 8000) |
+| `writer` | le même modèle | Gemma 4 26B-A4B NVFP4, vLLM (port 8001) | le même modèle |
+| Réflexion coupée par | `reasoning_effort = "none"` | `chat_template_kwargs.enable_thinking = false` | idem |
+| Images par fenêtre | 4 | 8, plus jusqu'à 8 copies éclaircies | 4 |
+| Requêtes simultanées | 1 | 8 | 4 |
+
+- Sur le GX10, le rédacteur est d'une autre famille que le modèle de vision : il relit sur les images ce que celui-ci a décrit.
+- Les descriptions et les détails agrandis partent en parallèle. La révision et la rédaction restent en série, car chacune reprend la précédente.
+- Les serveurs vLLM sont lancés par `scripts/vllm.sh` dans l'image `vllm/vllm-openai:v0.30.0`, épinglée par digest, avec la v0.29.0 en repli. La v0.30.0 corrige des lenteurs sur GB10 : les prompts avec images de Gemma 4 étaient jusqu'à 3 à 4 fois plus lents, et le préremplissage de Qwen3.6 n'utilisait pas le bon noyau.
+- Réglages de serveur imposés par des problèmes connus de vLLM :
+  - Qwen3.6 : DeepGEMM dégrade sa précision sur Blackwell (#50332), d'où `--moe-backend triton` et `VLLM_USE_DEEP_GEMM=0`. Cache KV en BF16 : en FP8, il a déjà planté sur GB10 (#50331).
+  - Gemma 4 NVFP4 : le dépôt livre un ancien modèle de conversation qui ne reconnaît pas les images envoyées en `image_url`. On lui donne celui de Google (`--chat-template`).
+  - Qwen3.6 réfléchit par défaut, Gemma 4 non : `enable_thinking = false` est envoyé à chaque requête, et fixé aussi par défaut côté serveur.
 
 **Balayage de modèles (GX10 uniquement, chargés un par un à la place du modèle principal) :**
 
@@ -248,7 +237,7 @@ parallel_jobs: 1
 
 Juge de qualité : un VLM absent des chaînes comparées (par défaut Qwen3.5-122B-A10B, lancé après les runs).
 
-Identifiants vérifiés sur Hugging Face le 3 octobre 2026 ; versions plus récentes acceptées si elles tiennent dans le même budget mémoire. Gemma 4 12B est servi avec la vision par Ollama (`gemma4:12b-it-qat`) et par llama.cpp (`ggml-org/gemma-4-12B-it-GGUF`, fichier `mmproj` inclus). Mais sur Sintel, il inventait des personnages et des objets : le profil small utilise Gemma 4 26B-A4B (`gemma4:26b-a4b-it-qat`), qu'Ollama place en partie sur le CPU.
+Identifiants vérifiés sur Hugging Face le 3 octobre 2026, puis le 4 octobre pour les deux modèles du profil large : Qwen3.6-35B-A3B-FP8 (34,9 GiB, vision comprise) et Gemma-4-26B-A4B-NVFP4 (17,5 GiB, version instruct) ; versions plus récentes acceptées si elles tiennent dans le même budget mémoire. Gemma 4 12B est servi avec la vision par Ollama (`gemma4:12b-it-qat`) et par llama.cpp (`ggml-org/gemma-4-12B-it-GGUF`, fichier `mmproj` inclus). Mais sur Sintel, il inventait des personnages et des objets : le profil small utilise Gemma 4 26B-A4B (`gemma4:26b-a4b-it-qat`), qu'Ollama place en partie sur le CPU.
 
 ---
 
@@ -283,9 +272,10 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026 ; versions plus réce
   - relecture : tableau accessible (horodatage, texte modifiable, place disponible en secondes et en caractères, statut, description factuelle, Écouter, Supprimer, Régénérer) ;
   - lecteur avec/sans AD qui bascule entre deux MP4, puis export ;
   - le serveur écrit le même `corrections.json` que la maquette et relance lui-même la voix et le mixage : un seul mécanisme, testé dès le P0 ; il ajoute Régénérer et l'écoute d'un texte modifié.
-- [ ] Profils `small` / `large` ; serveurs vLLM via compose (image `vllm/vllm-openai:v0.29.0` épinglée par digest).
+- [x] Profils `small`, `large` et `test-vllm` (`configs/*.toml`) : deux rôles, réflexion coupée, requêtes en parallèle, requêtes et jetons par modèle dans `metrics.json`. Serveurs vLLM lancés par `scripts/vllm.sh` (image v0.30.0 épinglée par digest). Le compose viendra avec l'image du pipeline.
 - [ ] Images worker arm64 construites nativement (runners GitHub `ubuntu-24.04-arm`) ; roues vérifiées avec `pip download --platform`.
-- [ ] Instrumentation : `metrics.py` + `scripts/bench_memory.sh` (relevé à 1 Hz sur l'hôte, marqueurs d'étape).
+- [x] `scripts/bench_memory.sh` : relevé mémoire à 1 Hz sur l'hôte et garde-fou qui tue les serveurs vLLM sous 8 Gio disponibles.
+- [ ] Marqueurs d'étape dans le relevé mémoire, pour attribuer la mémoire à chaque étape du pipeline.
 - [ ] Preuve hors ligne : run complet dans un réseau Docker `internal: true`, variables anti-télémétrie actives.
 - [ ] Scripts d'évaluation (`eval/*`) et génération du rapport.
 - [ ] Corpus et vérité terrain (§7) ; précalcul sur la 5080 de la VAD, de la transcription, des plans et des images clés.
@@ -294,7 +284,7 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026 ; versions plus réce
 ### P2 — Pendant l'accès au GX10
 
 - [ ] Jour 1 (doit suffire à lui seul) :
-  - `scripts/fetch_models.sh`, vidage du cache de pages, démarrage des serveurs un par un, relevé mémoire réel ;
+  - `scripts/vllm.sh fetch gx10` puis `start gx10` (cache de pages vidé, serveurs démarrés un par un, relevé mémoire et garde-fou) ;
   - run complet du corpus avec la configuration principale ;
   - mesures clés : chevauchement contre vérité terrain, couverture, temps, mémoire ;
   - A/B rapide du rédacteur sur 20 à 30 silences.
@@ -481,7 +471,7 @@ L'interface est utilisable au clavier et au lecteur d'écran, pour que des créa
 | Médias | ffmpeg | LGPL / GPL | — |
 
 **Vérifié le 3 octobre 2026 :**
-- Les images NGC vLLM à partir de 26.04 sont incompatibles avec le pilote R580 : utiliser `vllm/vllm-openai:v0.29.0` (CUDA 13.0).
+- Les images NGC vLLM à partir de 26.04 sont incompatibles avec le pilote R580 : utiliser `vllm/vllm-openai:v0.30.0` (CUDA 13.0), ou la v0.29.0 en repli.
 - CTranslate2 n'a pas de version GPU pour aarch64.
 - Chatterbox 0.1.7 épingle torch 2.6 (sans support RTX 50xx) et plante sur les textes ≤ 5 tokens.
 - pyannote 4 et vLLM envoient de la télémétrie par défaut.
@@ -500,10 +490,10 @@ Le GX10 garde toute la chaîne en mémoire en permanence, avec de la place pour 
 | Composant chargé en permanence | Mémoire estimée |
 | --- | --- |
 | Vision : Qwen3.6-35B-A3B FP8 | ~35 GiB |
-| Rédaction + vérification : Gemma 4 26B-A4B NVFP4 | ~15 GiB |
+| Rédaction + vérification : Gemma 4 26B-A4B NVFP4 | ~17,5 GiB |
 | VAD, transcription, voix, visages, découpage | ~8 GiB |
 | Caches KV et runtimes vLLM (2 serveurs, 2 à 3 vidéos en parallèle) | ~15 GiB |
-| **Total estimé** | **~75 GiB sur ~119,7 GiB visibles (plafond réaliste ~105 GiB)** |
+| **Total estimé** | **~76 GiB sur ~119,7 GiB visibles (plafond réaliste ~105 GiB)** |
 
 Ces chiffres sont des estimations à confirmer par la mesure.
 - La marge restante sert à traiter plusieurs vidéos en parallèle.
@@ -570,7 +560,8 @@ Aucune offre française d'audiodescription par IA en local ou sur site n'a été
 | --- | --- |
 | Le modèle de vision invente des éléments | Vérification visuelle fait par fait par un second modèle d'une autre famille, consigne « ne décrire que le visible », relecture humaine |
 | Personnages confondus ou mal nommés | Visages regroupés sur toute la vidéo (prises de vues réelles), marquage visuel pour l'animation, noms seulement s'ils sont prononcés ou affichés, correction dans l'éditeur |
-| Mémoire insuffisante | Configuration principale estimée à ~75 GiB ; versions NVFP4 ; contexte réduit |
+| Mémoire insuffisante | Configuration principale estimée à ~76 GiB ; versions NVFP4 ; contexte réduit |
+| Gel de la machine au démarrage des serveurs (mémoire unifiée, vLLM #46307), sans redémarrage possible à distance | 0,40 + 0,25 de la mémoire réservés au plus ; serveurs démarrés l'un après l'autre, cache de pages vidé avant chacun ; garde-fou qui les tue sous 8 Gio disponibles |
 | Incompatibilités ARM64 | Image vLLM officielle CUDA 13.0 (compatible pilote R580), workers construits nativement en arm64, roues vérifiées avant l'accès |
 | Détection de parole imparfaite (musique, chants) | VAD sensible avec marge, réglée et mesurée contre une vérité terrain (pistes musique + effets) |
 | Voix peu naturelle ou qui saute des mots | Comparatif de 3 moteurs, retranscription de contrôle de chaque clip |
