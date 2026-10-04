@@ -28,9 +28,10 @@
   header p { margin: 0; color: var(--doux); }
   main { display: grid; gap: 20px; padding-top: 16px; padding-bottom: 20px; }
   @media (min-width: 1200px) {
-    main { grid-template-columns: minmax(440px, 5fr) 7fr; align-items: start; }
+    main { grid-template-columns: minmax(360px, 1fr) 2fr; align-items: start; }  /* le tableau tient dès ~1366 px */
     #colonne-video { position: sticky; top: 16px; }
   }
+  main > * { min-width: 0; }  /* sinon la grille s'élargit au tableau au lieu de le faire défiler */
   #colonne-video { display: grid; gap: 20px; }
   section { background: var(--surface); border: 1px solid var(--ligne); border-radius: 10px; padding: 16px; }
   video { display: block; width: 100%; max-height: 52vh; background: #000; border-radius: 6px; }
@@ -59,7 +60,7 @@
   tr.courante > * { background: var(--courante); }
   .horaire { font-variant-numeric: tabular-nums; }
   .id { display: block; font-size: .8rem; color: var(--doux); margin-top: 4px; }
-  textarea { width: 100%; min-width: 16em; min-height: 3.4em; field-sizing: content; font: inherit; color: inherit; background: var(--fond);
+  textarea { width: 100%; min-width: 15em; min-height: 3.4em; field-sizing: content; font: inherit; color: inherit; background: var(--fond);
              border: 1px solid var(--ligne); border-radius: 6px; padding: 6px 8px; resize: vertical; }
   details { margin-top: 6px; font-size: .9rem; color: var(--doux); }
   summary { cursor: pointer; }

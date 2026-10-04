@@ -5,7 +5,7 @@
 Audesia ajoute une piste d'audiodescription française à une vidéo. Il repère les silences entre les dialogues, décrit ce qui se passe à l'écran avec un modèle de vision, réécrit chaque description pour qu'elle tienne dans le silence, puis la fait lire par une voix de synthèse mixée à la bande-son. Une fois les modèles téléchargés, tout tourne hors ligne : aucune vidéo ne quitte la machine.
 
 > Projet candidat au **ASUS Ascent GX10 – Local AI Developer Challenge**.
-> État : prototype initial, un script de bout en bout ([`audesia_p0.py`](audesia_p0.py)), testé sur RTX 5080. Premiers résultats mesurés : voir [Résultats](#résultats).
+> État : prototype initial, un script de bout en bout ([`audesia_p0.py`](audesia_p0.py)) et sa page de relecture, testés sur RTX 5080. Premiers résultats mesurés : voir [Résultats](#résultats).
 
 ## Pourquoi
 
@@ -99,16 +99,22 @@ Les fichiers sont écrits dans `out/<vidéo>_<début>-<fin>/` :
 | `segments.json`, `shots.json`, `descriptions.json`, `personnages.json` | Étapes intermédiaires, mises en cache |
 | `metrics.json` | Durée par étape, couverture des silences, débit mesuré de la voix, synthèses refaites, pic mémoire |
 
-Les étapes coûteuses sont mises en cache. Supprimer `descriptions.json` relance la rédaction ; changer de voix ne refait que la voix et le mixage.
+Les étapes coûteuses sont mises en cache. Supprimer `descriptions.json` relance la description, le registre, la révision et la rédaction ; changer de voix ne refait que la voix et le mixage.
 
 ### Relecture (facultative)
 
-Ouvrir `relecture.html`, dans le dossier de sortie, avec un navigateur. La page fonctionne hors ligne, sans serveur :
+Ouvrir `relecture.html`, dans le dossier de sortie, avec un navigateur. La page fonctionne hors ligne, sans serveur.
+
+![Page de relecture : à gauche, la vidéo et la description en cours ; à droite, le tableau des descriptions avec leur horaire, le texte modifiable, la durée de la voix sur la place disponible, le statut et les actions Écouter, Supprimer, Rétablir et Régénérer](docs/relecture.png)
+
+*Relecture de l'extrait de* Sintel *en version française : la ligne surlignée est celle de la scène en cours. Image : Sintel © Blender Foundation (CC BY 3.0), doublage Touhoppai (CC BY).*
+
+Elle réunit :
 
 - la vidéo avec ou sans audiodescription, en gardant la position ; la description en cours s'affiche sous l'image ;
 - pour chaque silence : l'horaire (un clic lance la scène), le texte lu, modifiable, la durée de la voix sur la place disponible, le statut, la description factuelle et les variantes du modèle ;
-- Écouter, Supprimer, Rétablir. Pendant la saisie, la durée de la voix est estimée, et un texte trop long est signalé avec le nombre de caractères à retirer ;
-- utilisable au clavier et au lecteur d'écran, avec des raccourcis affichés sur la page.
+- les boutons Écouter, Supprimer et Rétablir ; pendant la saisie, la durée de la voix est estimée, et un texte trop long est signalé avec le nombre de caractères à retirer ;
+- l'accès au clavier et au lecteur d'écran, avec des raccourcis affichés sur la page.
 
 « Enregistrer les corrections » écrit `corrections.json` : directement dans le dossier choisi sous Chrome et Edge, sinon dans les téléchargements. Il reste à relancer la commande affichée sur la page. « Régénérer » attend le serveur local du P1.
 
@@ -161,7 +167,7 @@ Les deux profils traitent le même corpus avec les mêmes entrées audio et visu
 | Mémoire | Relevé à 1 Hz sur l'hôte, par étape | Marge mesurée |
 | Hors ligne | Traitement complet dans un réseau Docker sans accès sortant | Réussi |
 
-Corpus (environ 42 min, dont 71 % en français) : *Tears of Steel*, *Sprite Fright* et *Pepper&Carrot* (épisode 6) en version française, *Le trésor de Sidiailles*. Le détail est dans [AUDESIA.md](AUDESIA.md).
+Corpus (environ 42 min, dont 71 % en français) : *Tears of Steel* en version originale anglaise, *Sprite Fright* et *Pepper&Carrot* (épisode 6) en version française, *Le trésor de Sidiailles*. Le détail est dans [AUDESIA.md](AUDESIA.md).
 
 ## Résultats
 
