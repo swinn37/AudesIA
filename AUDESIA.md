@@ -256,7 +256,7 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026 ; versions plus réce
 
 ### P0 — Avant l'envoi de la candidature (4 octobre, 23h59)
 
-- [ ] Reporter dans Gleam les réponses corrigées de l'annexe A10 ; tourner la vidéo selon A11.
+- [x] Candidature envoyée le 4 octobre 2026 : réponses de l'annexe A10 et vidéo de présentation.
 - [x] Dépôt `swinn37/AudesIA` créé avec README, licence et premiers résultats. Privé pour l'instant : à rendre public pour que le lien du formulaire s'ouvre.
 - [x] Script CLI minimal, **en un seul fichier** (`audesia_p0.py`, lancé le 4 octobre sur la 5080, résultats au §7), sur un extrait de 1 à 2 min de Sintel ou Sprite Fright en version française, profil `small` :
   - Silero VAD → Whisper large-v3 (transformers, même code que sur le GX10) → PySceneDetect → VLM via un serveur compatible OpenAI (Ollama `gemma4:26b-a4b-it-qat`, llama.cpp ou vLLM) → réécriture en 3 variantes avec budget → Qwen3-TTS → mixage ffmpeg ;
