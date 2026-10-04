@@ -219,11 +219,12 @@ La qualité se compare sur les mêmes silences, à l'aveugle, une fois les deux 
 python eval/judge.py out/corpus/small out/corpus/large                 # juge VLM : notes et meilleure description
 python eval/judge.py out/corpus/small --judge configs/judge-5080.toml  # notation seule, sur la 5080
 python eval/hallucination_sample.py out/corpus/small out/corpus/large  # 100 silences à vérifier à la main
-python eval/hallucination_sample.py --score out/corpus/reponses.json   # taux d'hallucinations par profil
+python eval/hallucination_sample.py out/corpus/small                   # ou ceux d'un seul profil
+python eval/hallucination_sample.py --score out/corpus/reponses_small_vs_large.json  # taux par profil
 ```
 
 - **Juge :** un VLM absent des deux chaînes comparées (sur le GX10, Qwen3.5-122B-A10B : `scripts/docker.sh start juge`, puis `scripts/docker.sh py eval/judge.py …`). Pour chaque silence, il voit 6 images du plan et les deux descriptions, dans un ordre tiré au sort. Il note chacune de 1 à 5 (exactitude, pertinence, cohérence des personnages, concision) et désigne la meilleure. Avec un seul run, il note ses descriptions sans comparaison et liste les moins exactes ; sur la 5080, Qwen3.6 sous Ollama, absent du profil `small`, tient ce rôle.
-- **Hallucinations :** `hallucinations.html` montre chaque silence tiré au sort en vidéo, avec ses deux descriptions : fidèle, invente ou se trompe, ou je ne sais pas. La page ne contient pas le nom des profils ; la correspondance reste dans un fichier à part jusqu'au comptage.
+- **Hallucinations :** la page `hallucinations_….html` montre chaque silence tiré au sort en vidéo, avec ses descriptions : fidèle, invente ou se trompe, ou je ne sais pas. Elle ne contient pas le nom des profils ; la correspondance reste dans le `.json` du même nom jusqu'au comptage. Chaque tirage a ses propres fichiers, réponses comprises : un nouveau tirage n'écrase pas les réponses d'un autre.
 - `report.py` reprend les tableaux du juge et des hallucinations.
 
 ## Résultats

@@ -44,7 +44,7 @@
   <h1>Vérification des hallucinations</h1>
   <p>Pour chaque silence, regardez le plan (la vidéo s'arrête à la fin du silence), puis dites si chaque description
     est fidèle aux images. Les descriptions sont anonymes, dans un ordre tiré au sort. Enregistrez les réponses
-    dans <code>reponses.json</code>, à côté de cette page.</p>
+    dans <code id="nom-reponses">le fichier proposé</code>, à côté de cette page.</p>
   <p id="sans-donnees" hidden>Cette page est le modèle : <code>eval/hallucination_sample.py</code> en écrit une copie remplie.</p>
 </header>
 <main id="silences"></main>
@@ -66,6 +66,8 @@
   const $ = (s, racine = document) => racine.querySelector(s);
   if (!D) { $("#sans-donnees").hidden = false; return; }
   const CLE = `audesia-hallucinations:${D.cle}`;  // sauvegarde dans ce navigateur, propre à ce tirage
+  const nomReponses = `${D.nom.replace("hallucinations", "reponses")}.json`;  // un fichier par tirage
+  $("#nom-reponses").textContent = nomReponses;
   let reponses = {};
   try { reponses = JSON.parse(localStorage.getItem(CLE)) || {}; } catch { reponses = {}; }
   const choix = [["fidele", "Fidèle aux images"], ["invente", "Invente ou se trompe"], ["inconnu", "Je ne sais pas"]];
@@ -94,7 +96,7 @@
       }
       const fs = document.createElement("fieldset");
       const lg = document.createElement("legend");
-      lg.textContent = `Description ${d.place}`;
+      lg.textContent = s.descriptions.length > 1 ? `Description ${d.place}` : "Description";
       const t = document.createElement("p");
       t.className = "texte";
       t.textContent = d.texte;
@@ -129,7 +131,7 @@
   $("#enregistrer").addEventListener("click", async () => {
     const texte = JSON.stringify({cle: D.cle, reponses: Object.values(reponses)}, null, 1) + "\n";
     try {
-      const h = await window.showSaveFilePicker({suggestedName: "reponses.json",
+      const h = await window.showSaveFilePicker({suggestedName: nomReponses,
         types: [{description: "Réponses", accept: {"application/json": [".json"]}}]});
       const w = await h.createWritable();
       await w.write(texte);
@@ -137,7 +139,7 @@
     } catch (e) {
       if (e.name === "AbortError") return;
       const a = Object.assign(document.createElement("a"),
-        {href: URL.createObjectURL(new Blob([texte], {type: "application/json"})), download: "reponses.json"});
+        {href: URL.createObjectURL(new Blob([texte], {type: "application/json"})), download: nomReponses});
       a.click();
       setTimeout(() => URL.revokeObjectURL(a.href), 1000);
     }
