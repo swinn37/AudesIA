@@ -247,7 +247,7 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026, puis le 4 octobre po
 
 ### P0 — Avant l'envoi de la candidature (4 octobre, 23h59)
 
-- [x] Candidature envoyée le 4 octobre 2026 : réponses de l'annexe A10 et vidéo de présentation.
+- [x] Candidature envoyée le 4 octobre 2026, avec la vidéo de présentation.
 - [x] Dépôt `swinn37/AudesIA` créé avec README, licence et premiers résultats. Privé pour l'instant : à rendre public pour que le lien du formulaire s'ouvre.
 - [x] Script CLI minimal, **en un seul fichier** (`audesia_p0.py`, lancé le 4 octobre sur la 5080, résultats au §7), sur un extrait de 1 à 2 min de Sintel ou Sprite Fright en version française, profil `small` :
   - Silero VAD → Whisper large-v3 (transformers, même code que sur le GX10) → PySceneDetect → VLM via un serveur compatible OpenAI (Ollama `gemma4:26b-a4b-it-qat`, llama.cpp ou vLLM) → réécriture en 3 variantes avec budget → Qwen3-TTS → mixage ffmpeg ;
@@ -581,37 +581,7 @@ Aucune offre française d'audiodescription par IA en local ou sur site n'a été
 | Télémétrie cachée | Variables d'environnement + run complet dans un réseau Docker sans sortie, qui a déjà révélé un appel caché de transformers au Hub, neutralisé |
 | Phase de test très courte | Tout prêt avant l'accès, plan tenable en une journée, entrées précalculées |
 
-## A10. Réponses au formulaire Gleam
-
-*Réponses définitives une fois envoyées. Date limite : 4 octobre 2026, 23h59.*
-
-**Champs personnels :** prénom, nom, e-mail, téléphone, ville, LinkedIn (facultatif), entreprise/organisation (facultatif).
-
-**Métier / Fonction (exemple à adapter) :** Développeur, passionné d'IA locale et de traitement vidéo (ffmpeg, encodage GPU, pipelines de conversion VR).
-
-**Nom du projet :** Audesia
-
-**Description du projet :**
-Audesia génère automatiquement une audiodescription en français pour n'importe quelle vidéo, 100 % en local. En France, 1,7 million de personnes ont une déficience visuelle (DREES), mais l'audiodescription reste l'exception : environ 4 % des programmes télévisés selon la Fédération des aveugles de France, et elle est rare en ligne. La production humaine est trop chère pour les cours, vidéos d'associations, formations ou contenus institutionnels, et les outils IA existants imposent d'envoyer ses vidéos dans le cloud. Audesia détecte les silences entre les dialogues, décrit chaque plan avec un modèle de vision, vérifie chaque détail sur l'image, réécrit les descriptions pour qu'elles tiennent dans les silences en mesurant la durée réelle de la voix, puis génère une voix française mixée à la bande-son. Un éditeur accessible permet de relire et corriger avant export (vidéo, piste audio, WebVTT). Cible : associations, médiathèques, universités, collectivités et créateurs, avec un outil open source installable sur site.
-
-**Domaine IA concerné :** Computer Vision (le cœur du projet est la compréhension vidéo ; « IA générative » est aussi défendable).
-
-**Modèles, frameworks ou technologies IA utilisées :**
-Qwen3.6-35B-A3B (modèle de vision MoE) pour la compréhension des plans ; Gemma 4 26B-A4B pour la rédaction et la vérification visuelle des descriptions ; comparaison sur le GX10 avec des modèles de classe 120B (Qwen3.5-122B-A10B, gpt-oss-120b, Mistral Small 4) ; Silero VAD et Whisper large-v3 pour la parole et les silences ; PySceneDetect et embeddings de visages pour les plans et les personnages ; voix française open source choisie par comparatif (Qwen3-TTS, Chatterbox, VoxCPM2) ; vLLM et PyTorch pour le service des modèles ; Docker sur ARM64 ; ffmpeg pour les médias ; FastAPI pour l'application.
-
-**État d'avancement :** « Prototype initial » : la chaîne complète tourne sur la RTX 5080 depuis le 4 octobre 2026.
-
-**Test & validation sur ASUS Ascent GX10 :**
-Je veux valider que la chaîne complète d'audiodescription tourne en local avec tous ses modèles chargés en même temps : modèle de vision MoE de 35B, rédacteur de 26B qui vérifie aussi chaque fait sur l'image, détection de parole, transcription et synthèse vocale, avec plusieurs vidéos en parallèle. Le GX10 me permettra aussi de comparer des modèles de classe 120B, impossibles à charger sur 16 Go, pour choisir les modèles par la mesure. Un premier prototype tourne déjà sur ma RTX 5080 : sur un extrait de Sintel, en version originale comme en français, aucune de ses descriptions ne chevauche une réplique, même chuchotée, mesuré contre la piste musique + effets officielle du film. Sur cette carte, seul un modèle de 26B, qui déborde sur le processeur, décrit les images sans rien inventer. Le code, les conteneurs ARM64 et le corpus de test (films libres Blender et vidéos françaises avec dialogues) seront prêts avant l'accès. Sur le GX10, je mesurerai : la mémoire réellement utilisée par étape, le taux de descriptions placées sans chevaucher les dialogues, vérifié contre une vérité terrain (objectif supérieur à 95 %), la part des silences couverte, la qualité des descriptions notée à l'aveugle et comparée à la même chaîne limitée à 16 Go sur ma RTX 5080, le taux d'hallucinations sur un échantillon, le temps de traitement par minute de vidéo et le nombre de vidéos traitables en parallèle. Livrables : rapport chiffré, extraits avant/après, dépôt open source.
-
-**Pertinence de l'exécution sur ASUS Ascent GX10 :**
-L'exécution locale est une condition, pas un confort : les vidéos à audiodécrire sont souvent internes, non publiées ou contiennent des personnes identifiables (formations, archives, cours avec des mineurs), et ne peuvent pas partir dans un cloud. Le local supprime aussi le coût à la minute, ce qui rend possible l'audiodescription de catalogues entiers. Le GX10 est une des rares machines de bureau à réunir 128 Go de mémoire unifiée et toute la pile CUDA : la chaîne complète y reste chargée en permanence, avec de la place pour plusieurs vidéos en parallèle et pour des modèles de classe 120B. Sur ma carte de 16 Go, je l'ai déjà mesuré : un modèle de 12 milliards de paramètres invente des détails, et celui de 26 milliards, qui décrit juste, déborde sur le processeur et ralentit tout le traitement. Je tire parti des points forts de la machine : modèles MoE (peu de paramètres actifs, adaptés à sa bande passante), formats FP4 de Blackwell et traitement des plans en lot avec vLLM. À terme, un GX10 installé dans une médiathèque ou une université peut audiodécrire tout son catalogue sans qu'aucune vidéo ne quitte le bâtiment.
-
-**Vidéo de présentation :** lien YouTube non répertorié (vérifier en navigation privée avant d'envoyer).
-
-**Lien GitHub / démo / portfolio :** https://github.com/swinn37/AudesIA (README : résumé, schéma, résultats, capture de la page de relecture, crédits). À rendre public avant d'envoyer, puis vérifier le lien en navigation privée.
-
-## A11. Script de la vidéo (2 minutes, ~280 mots)
+## A10. Script de la vidéo (2 minutes, ~280 mots)
 
 | Temps | À l'écran | Voix off |
 | --- | --- | --- |
@@ -625,7 +595,7 @@ L'exécution locale est une condition, pas un confort : les vidéos à audiodéc
 
 **Tournage :** OBS + micro-casque. Créditer la Blender Foundation (Sintel, CC BY) et Touhoppai (version française, CC BY). La démo tourne : utiliser `clip.mp4` (sans audiodescription) et `clip_ad.mp4` (avec), produits par `audesia_p0.py` sur la 5080, et l'indiquer à l'écran. Pour l'éditeur, filmer `relecture.html`, ouverte dans le navigateur depuis le même dossier.
 
-## A12. Sources
+## A11. Sources
 
 - Règlement du challenge (Conditions Générales, Gleam / ASUS) — dates, critères, grille de notation. Non publié ailleurs : en garder une copie.
 - [DREES, *Études et Résultats* n° 416 (juillet 2005)](https://drees.solidarites-sante.gouv.fr/publications/etudes-et-resultats/les-personnes-ayant-un-handicap-visuel-les-apports-de-lenquete), d'après l'enquête HID (1998 en institution, 1999-2000 à domicile) — 1,7 million de déficients visuels en France métropolitaine (29 pour 1 000), dont 207 000 aveugles ou malvoyants profonds (61 000 aveugles complets), 932 000 malvoyants moyens et 560 000 malvoyants légers.
