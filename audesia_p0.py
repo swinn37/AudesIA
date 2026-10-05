@@ -388,6 +388,16 @@ def ff(*args):
         sys.exit(f"ffmpeg : {r.stderr.strip()}")
 
 
+def video_length(path):
+    """Durée de la piste vidéo, qui peut finir avant le son ; infinie si le conteneur ne la donne pas."""
+    r = subprocess.run(["ffprobe", "-v", "error", "-select_streams", "v:0", "-show_entries", "stream=duration",
+                        "-of", "csv=p=0", str(path)], capture_output=True, text=True)
+    try:
+        return float(r.stdout.strip())
+    except ValueError:
+        return float("inf")
+
+
 def step(name, fn, cache=None):
     """Lance une étape, la chronomètre, et la met en cache dans un JSON si cache est donné."""
     t0 = time.perf_counter()
@@ -895,6 +905,11 @@ def selftest():
     assert vtt([{"start": 3725.5, "end": 3727.25, "text": "Elle sourit."}]) \
         == "WEBVTT\n\n01:02:05.500 --> 01:02:07.250\nElle sourit.\n\n"
     assert not PAGE.exists() or PAGE.read_text(encoding="utf-8").count(PAGE_DATA) == 1  # emplacement des données
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmp:                     # image de 1 s, son de 2 s : la vidéo fait foi
+        short = Path(tmp) / "court.mp4"
+        ff("-f", "lavfi", "-i", "color=black:s=64x64:d=1", "-f", "lavfi", "-i", "anullsrc=d=2", "-c:v", "libx264", short)
+        assert abs(video_length(short) - 1) < 0.1 and video_length(Path(tmp) / "absent.mp4") == float("inf")
     print("selftest OK")
 
 
@@ -936,7 +951,8 @@ def main():
                  out / "vocal.json")
     # Recalculés à chaque lancement : changer ces réglages ne refait ni l'ASR ni la séparation.
     segs["speech"] = merge(segs["speech"] + plausible_segments(segs["dialogues"]) + vocal)
-    segs["silences"] = silences(segs["speech"], segs["duration"])
+    # Rien à décrire là où l'image s'arrête avant le son : la VF de Sintel finit sur 2 min 15 de silence sans image.
+    segs["silences"] = silences(segs["speech"], min(segs["duration"], video_length(clip)))
     shots = step("plans", lambda: detect_shots(clip), out / "shots.json")
     if a.precompute:
         print(f"Précalcul prêt : {out}")
