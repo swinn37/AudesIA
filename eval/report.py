@@ -3,8 +3,10 @@
 des hallucinations s'ils existent, écrit dans out/corpus/rapport.md.
 
   python eval/report.py
+  python eval/report.py results       le même rapport sur l'archive (eval/archive.py), dans results/rapport.md
 """
 import json
+import sys
 from datetime import date
 from pathlib import Path
 
@@ -72,25 +74,25 @@ def table(folder):
     return lines, models
 
 
-def main():
+def main(corpus=CORPUS):
     out = [f"# Rapport du corpus ({date.today():%d/%m/%Y})", "",
            "Calcul par minute de vidéo : durée des étapes de ce run, sans le précalcul (extrait, parole, plans) "
            "quand il était déjà fait. Chevauchement : contre la vérité terrain tirée de la piste musique + effets, "
            "pour les vidéos qui en ont une ; « aucune voix » compte aussi les cris et les souffles. Musique retirée du "
            f"résidu : sous {num(RELIABLE_DB)} dB, la piste ne retire presque rien du mixage, la mesure n'est pas probante "
            "et ne compte pas au total.", ""]
-    for folder in sorted(p for p in CORPUS.iterdir() if p.is_dir() and p.name != "commun") if CORPUS.exists() else []:
+    for folder in sorted(p for p in corpus.iterdir() if p.is_dir() and p.name != "commun") if corpus.exists() else []:
         lines, models = table(folder)
         if len(lines) > 2:
             out += [f"## Profil {folder.name} : {', '.join(sorted(models))}", "", *lines, ""]
     # Qualité : tableaux écrits par eval/judge.py et eval/hallucination_sample.py --score, s'ils existent.
-    for extra in [*sorted(CORPUS.glob("juge_*.md")), *sorted(CORPUS.glob("hallucinations*.md"))] if CORPUS.exists() else []:
+    for extra in [*sorted(corpus.glob("juge_*.md")), *sorted(corpus.glob("hallucinations*.md"))] if corpus.exists() else []:
         out += [extra.read_text(encoding="utf-8").strip(), ""]
     report = "\n".join(out)
-    CORPUS.mkdir(parents=True, exist_ok=True)
-    (CORPUS / "rapport.md").write_text(report, encoding="utf-8")
+    corpus.mkdir(parents=True, exist_ok=True)
+    (corpus / "rapport.md").write_text(report, encoding="utf-8")
     print(report)
 
 
 if __name__ == "__main__":
-    main()
+    main(Path(sys.argv[1]) if len(sys.argv) > 1 else CORPUS)

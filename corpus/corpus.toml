@@ -59,6 +59,7 @@ id = "sidiailles"
 title = "Le trésor de Sidiailles"
 language = "fr"
 license = "CC BY selon les métadonnées PeerTube, à confirmer par écrit ; enfants à l'écran : évaluation locale seulement, rien n'est publié"
+publish = false  # eval/archive.py n'en garde que les chiffres, sans aucune description
 file = "sidiailles.k-prod.1080p.mp4"
 url = "https://film.k-prod.fr/download/streaming-playlists/hls/videos/2b25820c-9bd2-4cd6-9bfe-377a6e82aadb-1080-fragmented.mp4"
 subs = "sidiailles.fr.vtt"
