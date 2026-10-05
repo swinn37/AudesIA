@@ -1,0 +1,236 @@
+[
+ {
+  "id": "d_0000",
+  "start": 9.7,
+  "end": 14.173,
+  "text": "Une femme aux longs cheveux bruns dort sous une couverture marron.",
+  "speedup": 1.0,
+  "chars_per_s": 14.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0001",
+  "start": 15.9,
+  "end": 20.777,
+  "text": "Elle regarde l'avant, un œil ouvert et l'autre plissé. Des nuages.",
+  "speedup": 1.0,
+  "chars_per_s": 13.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0002",
+  "start": 27.2,
+  "end": 28.876,
+  "text": "Elle regarde en haut.",
+  "speedup": 1.0,
+  "chars_per_s": 12.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0003",
+  "start": 32.2,
+  "end": 33.943,
+  "text": "Île flottante.",
+  "speedup": 1.0,
+  "chars_per_s": 8.0,
+  "reviewed": false
+ },
+ {
+  "id": "d_0004",
+  "start": 61.1,
+  "end": 63.327,
+  "text": "Un chat roux sur un balai.",
+  "speedup": 1.0,
+  "chars_per_s": 11.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0005",
+  "start": 85.0,
+  "end": 85.955,
+  "text": "Elle regarde.",
+  "speedup": 1.0,
+  "chars_per_s": 13.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0006",
+  "start": 115.5,
+  "end": 118.691,
+  "text": "Trois femmes et trois animaux alignés.",
+  "speedup": 1.0,
+  "chars_per_s": 11.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0007",
+  "start": 131.2,
+  "end": 132.053,
+  "text": "« Consider ».",
+  "speedup": 1.0,
+  "chars_per_s": 14.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0008",
+  "start": 142.1,
+  "end": 144.658,
+  "text": "Le mot Saffron s'affiche sur fond rouge.",
+  "speedup": 1.0,
+  "chars_per_s": 15.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0009",
+  "start": 167.2,
+  "end": 168.396,
+  "text": "Pepper s'affiche.",
+  "speedup": 1.0,
+  "chars_per_s": 14.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0010",
+  "start": 231.8,
+  "end": 233.236,
+  "text": "Elle tient une fiole.",
+  "speedup": 1.0,
+  "chars_per_s": 14.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0011",
+  "start": 288.8,
+  "end": 294.077,
+  "text": "Un oiseau jaune à perruque et perles crie sous une aura verte.",
+  "speedup": 1.0,
+  "chars_per_s": 11.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0012",
+  "start": 294.908,
+  "end": 297.143,
+  "text": "Une patte d'oiseau s'écrase.",
+  "speedup": 1.0,
+  "chars_per_s": 12.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0013",
+  "start": 303.28,
+  "end": 305.758,
+  "text": "L'oiseau jaune déploie ses ailes.",
+  "speedup": 1.0,
+  "chars_per_s": 13.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0014",
+  "start": 324.1,
+  "end": 325.537,
+  "text": "Il survole la ville.",
+  "speedup": 1.0,
+  "chars_per_s": 13.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0015",
+  "start": 341.8,
+  "end": 343.639,
+  "text": "Gros plan sur un œil jaune.",
+  "speedup": 1.0,
+  "chars_per_s": 14.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0016",
+  "start": 352.1,
+  "end": 357.697,
+  "text": "L'oiseau porte une perruque et des lunettes. Un personnage et un chat sont sur lui.",
+  "speedup": 1.0,
+  "chars_per_s": 14.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0017",
+  "start": 358.908,
+  "end": 360.905,
+  "text": "L'oiseau vole vers le soleil.",
+  "speedup": 1.0,
+  "chars_per_s": 14.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0018",
+  "start": 361.98,
+  "end": 367.257,
+  "text": "L'oiseau jaune aux cheveux bouclés vole vers une île flottante.",
+  "speedup": 1.0,
+  "chars_per_s": 11.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0019",
+  "start": 367.825,
+  "end": 371.74,
+  "text": "L'oiseau jaune vole de profil dans un ciel vert.",
+  "speedup": 1.0,
+  "chars_per_s": 12.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0020",
+  "start": 396.9,
+  "end": 403.618,
+  "text": "Sur fond noir, les crédits défilent. Les noms des acteurs et les auteurs de l'œuvre s'affichent en blanc.",
+  "speedup": 1.0,
+  "chars_per_s": 15.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0021",
+  "start": 405.1,
+  "end": 412.693,
+  "text": "Sur fond noir, les crédits techniques et le logo de Reanimedia Ltd défilent verticalement en blanc.",
+  "speedup": 1.0,
+  "chars_per_s": 13.0,
+  "reviewed": false
+ },
+ {
+  "id": "d_0022",
+  "start": 413.3,
+  "end": 420.482,
+  "text": "Sur fond noir, les titres de Grégoire Lourme s'affichent. Le logo de Krita apparaît.",
+  "speedup": 1.0,
+  "chars_per_s": 11.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0023",
+  "start": 421.5,
+  "end": 427.97,
+  "text": "Les titres s'affichent sur fond noir, suivis du logo Krita et de donateurs sur fond vert.",
+  "speedup": 1.0,
+  "chars_per_s": 13.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0024",
+  "start": 436.4,
+  "end": 445.36,
+  "text": "Les logos de Krita, Blender, RenderChan et Papagayo-NG s'affichent en ligne. Puis, ceux de CoATools, Ethic Cinema et Adamant.",
+  "speedup": 1.089,
+  "chars_per_s": 12.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0025",
+  "start": 445.758,
+  "end": 454.71,
+  "text": "Des textes blancs listent les crédits de Pepper & Carrot et la licence Creative Commons. Gorno-Altaisk, 2017.",
+  "speedup": 1.018,
+  "chars_per_s": 12.0,
+  "reviewed": false
+ }
+]

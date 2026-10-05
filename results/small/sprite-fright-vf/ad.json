@@ -1,0 +1,290 @@
+[
+ {
+  "id": "d_0000",
+  "start": 80.5,
+  "end": 84.884,
+  "text": "L'homme blond, bouche ouverte, tient une canette et un crochet.",
+  "speedup": 1.0,
+  "chars_per_s": 14.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0001",
+  "start": 85.992,
+  "end": 88.386,
+  "text": "Elle tient une bombe bleue.",
+  "speedup": 1.0,
+  "chars_per_s": 11.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0002",
+  "start": 128.7,
+  "end": 135.813,
+  "text": "La petite fille aux cheveux noirs est surprise. Un champignon rouge est au premier plan.",
+  "speedup": 1.0,
+  "chars_per_s": 12.4,
+  "reviewed": false
+ },
+ {
+  "id": "d_0003",
+  "start": 137.262,
+  "end": 144.536,
+  "text": "Un petit champignon rouge à pois blancs marche dans l'herbe parmi des débris et d'autres champignons.",
+  "speedup": 1.0,
+  "chars_per_s": 13.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0004",
+  "start": 145.825,
+  "end": 150.382,
+  "text": "Accroupie dans la forêt, la petite fille tient un livre beige.",
+  "speedup": 1.0,
+  "chars_per_s": 13.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0005",
+  "start": 151.658,
+  "end": 155.493,
+  "text": "La petite fille rampe dans la végétation, inquiète.",
+  "speedup": 1.0,
+  "chars_per_s": 13.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0006",
+  "start": 251.1,
+  "end": 252.619,
+  "text": "La petite fille dort.",
+  "speedup": 1.0,
+  "chars_per_s": 13.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0007",
+  "start": 279.0,
+  "end": 283.317,
+  "text": "Des champignons rouges s'agitent près d'une lueur verte.",
+  "speedup": 1.0,
+  "chars_per_s": 13.0,
+  "reviewed": false
+ },
+ {
+  "id": "d_0008",
+  "start": 307.7,
+  "end": 312.895,
+  "text": "Une cassette « VEEJAY » entre dans un lecteur.",
+  "speedup": 1.0,
+  "chars_per_s": 8.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0009",
+  "start": 314.867,
+  "end": 316.701,
+  "text": "La petite fille est effrayée.",
+  "speedup": 1.0,
+  "chars_per_s": 15.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0010",
+  "start": 323.0,
+  "end": 327.634,
+  "text": "Une silhouette tombe devant la lune. La femme est au sol.",
+  "speedup": 1.0,
+  "chars_per_s": 12.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0011",
+  "start": 329.033,
+  "end": 336.224,
+  "text": "Trois champignons rouges entourent une bombe bleue. Le garçon au chapeau bleu court et se cache derrière un arbre.",
+  "speedup": 1.0,
+  "chars_per_s": 15.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0012",
+  "start": 346.5,
+  "end": 352.578,
+  "text": "La petite fille regarde un couteau au manche rouge. Des champignons rouges s'éloignent.",
+  "speedup": 1.0,
+  "chars_per_s": 14.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0014",
+  "start": 359.9,
+  "end": 362.036,
+  "text": "Cinq champignons l'encerclent.",
+  "speedup": 1.0,
+  "chars_per_s": 13.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0015",
+  "start": 363.6,
+  "end": 366.633,
+  "text": "La femme aux cheveux orange est emprisonnée.",
+  "speedup": 1.0,
+  "chars_per_s": 14.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0016",
+  "start": 387.46,
+  "end": 392.012,
+  "text": "Le garçon au chapeau bleu est couvert d'escargots verts au sol.",
+  "speedup": 1.0,
+  "chars_per_s": 13.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0017",
+  "start": 395.8,
+  "end": 397.075,
+  "text": "L'homme tombe.",
+  "speedup": 1.0,
+  "chars_per_s": 10.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0018",
+  "start": 406.0,
+  "end": 411.036,
+  "text": "Vue plongeante sur un trou ouvrant sur un ciel nocturne lunaire.",
+  "speedup": 1.0,
+  "chars_per_s": 12.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0019",
+  "start": 411.908,
+  "end": 418.304,
+  "text": "Dans une forêt sombre, la petite fille aux cheveux noirs a la bouche ouverte et les yeux écarquillés.",
+  "speedup": 1.0,
+  "chars_per_s": 15.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0020",
+  "start": 440.7,
+  "end": 444.933,
+  "text": "La créature court. La petite fille est inquiète.",
+  "speedup": 1.0,
+  "chars_per_s": 11.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0021",
+  "start": 447.242,
+  "end": 452.035,
+  "text": "Dans la forêt, la petite fille regarde avec effroi.",
+  "speedup": 1.0,
+  "chars_per_s": 10.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0022",
+  "start": 453.408,
+  "end": 458.687,
+  "text": "Elle brandit un bâton sur lequel une créature projette du liquide jaune.",
+  "speedup": 1.0,
+  "chars_per_s": 13.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0023",
+  "start": 460.908,
+  "end": 467.537,
+  "text": "La petite fille est allongée, effrayée. Un petit être vert est sur son dos.",
+  "speedup": 1.025,
+  "chars_per_s": 11.0,
+  "reviewed": false
+ },
+ {
+  "id": "d_0024",
+  "start": 468.24,
+  "end": 473.83,
+  "text": "Dans la forêt brumeuse, la petite fille rampe au sol, les yeux écarquillés.",
+  "speedup": 1.0,
+  "chars_per_s": 13.4,
+  "reviewed": false
+ },
+ {
+  "id": "d_0025",
+  "start": 476.408,
+  "end": 478.325,
+  "text": "Le champignon menace la fille.",
+  "speedup": 1.0,
+  "chars_per_s": 15.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0027",
+  "start": 494.408,
+  "end": 499.606,
+  "text": "Un oiseau jaune est sur une branche. La petite fille regarde en haut, surprise.",
+  "speedup": 1.0,
+  "chars_per_s": 15.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0028",
+  "start": 501.492,
+  "end": 507.243,
+  "text": "Dans une forêt sombre, la petite fille regarde vers la gauche, inquiète.",
+  "speedup": 1.0,
+  "chars_per_s": 12.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0029",
+  "start": 508.325,
+  "end": 513.196,
+  "text": "Une branche porte un ruban bleu et un objet vert. Une silhouette flotte.",
+  "speedup": 1.0,
+  "chars_per_s": 14.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0030",
+  "start": 513.992,
+  "end": 518.942,
+  "text": "La petite fille se plaque contre un arbre. Une silhouette se tient au loin.",
+  "speedup": 1.0,
+  "chars_per_s": 15.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0031",
+  "start": 520.746,
+  "end": 524.982,
+  "text": "Un champignon rouge à points blancs serre ses poings verts.",
+  "speedup": 1.0,
+  "chars_per_s": 13.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0032",
+  "start": 606.7,
+  "end": 611.492,
+  "text": "Des crédits blancs défilent sur fond noir, puis sur fond gris clair.",
+  "speedup": 1.0,
+  "chars_per_s": 14.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0034",
+  "start": 620.45,
+  "end": 622.208,
+  "text": "L'écran est noir.",
+  "speedup": 1.0,
+  "chars_per_s": 9.7,
+  "reviewed": false
+ }
+]

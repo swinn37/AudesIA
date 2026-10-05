@@ -1,0 +1,2320 @@
+[
+ {
+  "id": "d_0000",
+  "window": [
+   0.0,
+   7.83333325
+  ],
+  "frames": [
+   0.97916665625,
+   2.93749996875,
+   4.89583328125,
+   6.85416659375
+  ],
+  "brightened": 0,
+  "raw_description": "Un texte blanc sur fond gris indique : « THE BLENDER FOUNDATION PRESENTS ». Des formes sombres et floues semblent flotter ou tomber dans un espace vide.",
+  "zoom": "inconnu.",
+  "facts": null,
+  "description": "Sur un fond gris, le texte blanc « THE BLENDER FOUNDATION PRESENTS » s'affiche au centre. Des formes sombres et floues semblent flotter ou tomber dans l'espace vide autour du texte.",
+  "budget_chars": 96,
+  "variants": [
+   "Sur fond gris, le texte blanc « THE BLENDER FOUNDATION PRESENTS » s'affiche au centre. Des formes sombres flottent autour.",
+   "Sur fond gris, le texte blanc « THE BLENDER FOUNDATION PRESENTS » apparaît au centre.",
+   "Le texte blanc « THE BLENDER FOUNDATION PRESENTS » s'affiche sur fond gris."
+  ]
+ },
+ {
+  "id": "d_0001",
+  "window": [
+   7.83333325,
+   15.6666665
+  ],
+  "frames": [
+   8.81249990625,
+   10.770833218749999,
+   12.72916653125,
+   14.68749984375
+  ],
+  "brightened": 0,
+  "raw_description": "Un paysage de montagnes escarpées et enneigées s'étend sous un ciel gris et brumeux. Le texte « THE DURIAN OPEN MOVIE PROJECT » apparaît au centre de l'image, puis est complété par la mention « A BLENDER INSTITUTE PRODUCTION » en bas à droite. La vue panoramique sur les sommets rocheux et la neige reste constante à travers les différentes images.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un paysage de montagnes escarpées et enneigées s'étend sous un ciel gris et brumeux. Le texte blanc « THE DURIAN OPEN MOVIE PROJECT » s'affiche au centre, suivi de la mention « A BLENDER INSTITUTE PRODUCTION » en bas à droite.",
+  "budget_chars": 96,
+  "variants": [
+   "Des montagnes enneigées s'étendent sous un ciel brumeux. Texte : \"THE DURIAN OPEN MOVIE PROJECT\".",
+   "Montagnes enneigées sous un ciel gris. Texte : \"THE DURIAN OPEN MOVIE PROJECT\".",
+   "Montagnes enneigées. Texte : \"THE DURIAN OPEN MOVIE PROJECT\"."
+  ]
+ },
+ {
+  "id": "d_0002",
+  "window": [
+   15.6666665,
+   23.49999975
+  ],
+  "frames": [
+   16.64583315625,
+   18.60416646875,
+   20.56249978125,
+   22.52083309375
+  ],
+  "brightened": 0,
+  "raw_description": "Un paysage de montagnes enneigées et de falaises escarpées s'étend sous un ciel brumeux. Le texte « THIS FILM WAS SUPPORTED BY THE NETHERLANDS FILM FUND » apparaît en blanc au centre de l'image. La luminosité augmente progressivement sur les sommets et les parois rocheuses au fil des plans.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un paysage de montagnes enneigées et de falaises escarpées s'étend sous un ciel brumeux. Le texte blanc « THIS FILM WAS SUPPORTED BY THE NETHERLANDS FILM FUND » apparaît au centre de l'image. La luminosité augmente progressivement sur les sommets et les parois rocheuses.",
+  "budget_chars": 96,
+  "variants": [
+   "Des montagnes enneigées et des falaises s'étendent sous un ciel brumeux. Texte : « THIS FILM WAS SUPPORTED BY THE NETHERLANDS FILM FUND ». La lumière gagne les sommets.",
+   "Des montagnes et des falaises s'étendent sous un ciel brumeux. Texte : « THIS FILM WAS SUPPORTED BY THE NETHERLANDS FILM FUND »."
+  ]
+ },
+ {
+  "id": "d_0003",
+  "window": [
+   23.49999975,
+   31.333333
+  ],
+  "frames": [
+   24.479166406250002,
+   26.43749971875,
+   28.39583303125,
+   30.354166343750002
+  ],
+  "brightened": 0,
+  "raw_description": "Un personnage marche dans un paysage enneigé et brumeux, suivant un sentier de pierres posées sur la neige. Il tient un bâton et se dirige vers des blocs de pierre sombres situés devant lui. À droite, des formations rocheuses émergent de la neige, tandis que des montagnes escarpées se dessinent dans le brouillard à l'arrière-plan.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un personnage marche dans un paysage enneigé et brumeux, suivant un sentier de pierres posées sur la neige. Il tient un bâton et se dirige vers deux blocs de pierre sombres situés devant lui. À droite, des formations rocheuses sombres émergent de la neige, tandis que des montagnes escarpées se dessinent dans le brouillard à l'arrière-plan.",
+  "budget_chars": 96,
+  "variants": [
+   "Un personnage marche sur un sentier de pierres dans la neige vers deux blocs sombres.",
+   "Un personnage avance sur un sentier de pierres dans la brume.",
+   "Un personnage marche sur un sentier de pierres."
+  ]
+ },
+ {
+  "id": "d_0004",
+  "window": [
+   31.333333,
+   36.7666665
+  ],
+  "frames": [
+   32.0124996875,
+   33.3708330625,
+   34.7291664375,
+   36.0874998125
+  ],
+  "brightened": 0,
+  "raw_description": "Un personnage aux cheveux bruns, vêtu de vêtements sombres, se tient debout dans un paysage montagneux enneigé et brumeux. Il tient un bâton en bois verticalement devant lui. Dans les images suivantes, le personnage tourne la tête vers la droite et lève la main pour ajuster ou toucher son visage.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un personnage aux cheveux bruns et aux vêtements sombres se tient debout dans un paysage montagneux enneigé et brumeux. Il tient un bâton en bois verticalement devant lui. Le personnage tourne la tête vers la droite et lève la main vers son visage.",
+  "budget_chars": 65,
+  "variants": [
+   "Un homme aux cheveux bruns tient un bâton face à lui.",
+   "L'homme tient un bâton et lève la main.",
+   "L'homme lève la main."
+  ]
+ },
+ {
+  "id": "d_0005",
+  "window": [
+   36.7666665,
+   42.199999999999996
+  ],
+  "frames": [
+   37.4458331875,
+   38.8041665625,
+   40.162499937499994,
+   41.520833312499995
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune femme aux cheveux roux et au visage marqué par l'inquiétude se tient dans un paysage enneigé et brumeux. Elle porte un manteau épais et semble regarder vers le haut ou vers l'horizon. En arrière-plan, des formations rocheuses sombres et dentelées émergent de la neige, tandis qu'une silhouette humaine portant un bâton se déplace sur une pente au loin.",
+  "zoom": null,
+  "facts": null,
+  "description": "Une jeune femme aux cheveux roux et au visage marqué par l'inquiétude se tient dans un paysage enneigé et brumeux, le regard dirigé vers le haut. Elle porte un manteau épais et tient un bâton en bois dans sa main gauche. En arrière-plan, une silhouette humaine portant un bâton se déplace sur une pente enneigée.",
+  "budget_chars": 65,
+  "variants": [
+   "Une femme rousse inquiète regarde vers le ciel.",
+   "La femme rousse regarde vers le haut.",
+   "La femme rousse lève les yeux."
+  ]
+ },
+ {
+  "id": "d_0006",
+  "window": [
+   50.019999999999996,
+   52.22
+  ],
+  "frames": [
+   50.38666666666666,
+   51.12,
+   51.85333333333333
+  ],
+  "brightened": 1,
+  "raw_description": "Dans un paysage montagneux et brumeux, un homme barbu et chauve au corps musclé tient une lance contre le visage d'une femme aux cheveux bruns. La femme, qui semble lutter, saisit la hampe de l'arme pour tenter de l'écarter. L'homme porte une tenue de cuir et de tissu, tandis que la femme porte une tunique claire.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans un paysage montagneux et brumeux, un homme barbu et chauve au corps musclé tient une lance contre le visage d'une femme aux cheveux bruns. La femme, qui semble lutter, saisit la hampe de l'arme de ses deux mains pour tenter de l'écarter. L'homme porte une tenue de cuir et de tissu, tandis que la femme porte une tunique claire.",
+  "budget_chars": 23,
+  "variants": [
+   "L'homme menace la femme.",
+   "L'homme l'arme."
+  ]
+ },
+ {
+  "id": "d_0007",
+  "window": [
+   58.26,
+   61.22
+  ],
+  "frames": [
+   58.629999999999995,
+   59.37,
+   60.11,
+   60.85
+  ],
+  "brightened": 1,
+  "raw_description": "Une personne aux cheveux roux est allongée sur le dos dans un paysage enneigé, la tête vue de profil. À côté d'elle, une lance est plantée dans la neige. La personne lève la tête et regarde vers l'avant avec une expression de détresse. En arrière-plan, des montagnes enneigées se découpent sous un ciel gris.",
+  "zoom": null,
+  "facts": null,
+  "description": "Allongée sur le dos dans la neige, une femme aux cheveux roux lève la tête vers l'avant avec une expression de détresse. À côté d'elle, une lance est plantée dans la neige. En arrière-plan, des montagnes enneigées se découpent sous un ciel gris.",
+  "budget_chars": 33,
+  "variants": [
+   "La femme rousse est au sol.",
+   "Elle est au sol.",
+   "Elle est nue."
+  ]
+ },
+ {
+  "id": "d_0008",
+  "window": [
+   61.48,
+   63.6
+  ],
+  "frames": [
+   61.83333333333333,
+   62.54,
+   63.24666666666667
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme chauve et barbu, vêtu d'une tunique sombre, brandit un couteau dans un paysage enneigé et brumeux. Une femme aux cheveux roux, portant une cape marron, apparaît de face avant de se coucher au sol dans la neige. Une lance repose sur la neige à côté d'elle, tandis que des montagnes escarpées et enneigées occupent l'arrière-plan.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un homme chauve et barbu, vêtu d'une tunique sombre, brandit un couteau dans un paysage enneigé et brumeux. Une femme aux cheveux roux, portant une cape marron, se couche au sol dans la neige. Une lance repose sur la neige à côté d'elle, tandis que des montagnes escarpées et enneigées occupent l'arrière-plan.",
+  "budget_chars": 22,
+  "variants": [
+   "L'homme brandit un couteau.",
+   "L'homme menace."
+  ]
+ },
+ {
+  "id": "d_0009",
+  "window": [
+   65.64,
+   74.041667
+  ],
+  "frames": [
+   66.690208375,
+   68.790625125,
+   70.891041875,
+   72.991458625
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme chauve et barbu, vêtu de vêtements sombres, se tient debout au-dessus d'une femme aux cheveux roux allongée au sol dans un paysage enneigé. L'homme s'incline vers elle tandis qu'elle lève les mains vers son visage. Une longue lance traverse l'espace entre eux, passant au-dessus de la femme. Dans l'image suivante, l'homme est debout et la femme est assise, la lance pointée vers elle. Enfin, la femme, toujours assise, lève les mains vers l'homme qui se tient devant elle, la lance toujours positionnée entre eux.",
+  "zoom": null,
+  "facts": null,
+  "description": "L'homme chauve et barbu, vêtu de vêtements sombres, se tient debout au-dessus de la femme aux cheveux roux allongée dans la neige. Il se penche vers elle tandis qu'elle lève les mains vers son visage, une longue lance traversant l'espace entre eux au-dessus de la femme.",
+  "budget_chars": 104,
+  "variants": [
+   "L'homme chauve et barbu se penche vers la femme rousse allongée dans la neige. Une lance passe au-dessus d'elle.",
+   "L'homme se penche sur la femme rousse au sol. Une lance survole la scène.",
+   "L'homme se penche sur la femme. Une lance passe au-dessus d'elle."
+  ]
+ },
+ {
+  "id": "d_0010",
+  "window": [
+   74.041667,
+   81.458333
+  ],
+  "frames": [
+   74.96875025,
+   76.82291675,
+   78.67708325,
+   80.53124975
+  ],
+  "brightened": 0,
+  "raw_description": "Une personne aux cheveux roux est allongée sur le dos sur un sol clair et semble inconsciente ou blessée, la bouche entrouverte. Elle porte un manteau marron boutonné. Un objet long et sombre traverse l'image en diagonale derrière sa tête. Sur la dernière image, la personne ouvre les yeux et regarde vers le haut.",
+  "zoom": "Les personnages ne tiennent ni ne manipulent aucun objet. On peut seulement reconnaître un vêtement en cuir marron muni de rivets métalliques.",
+  "facts": null,
+  "description": "La personne aux cheveux roux est allongée sur le dos sur un sol clair, la bouche entrouverte et les yeux fermés. Elle porte un manteau marron boutonné muni de rivets métalliques. Un objet long et sombre traverse l'image en diagonale derrière sa tête. La personne ouvre les yeux et regarde vers le haut.",
+  "budget_chars": 91,
+  "variants": [
+   "Allongée sur le dos, la femme rousse ouvre les yeux vers le haut.",
+   "La femme rousse ouvre les yeux vers le haut.",
+   "La femme rousse ouvre les yeux."
+  ]
+ },
+ {
+  "id": "d_0011",
+  "window": [
+   81.458333,
+   88.541667
+  ],
+  "frames": [
+   82.34374975,
+   84.11458325,
+   85.88541675,
+   87.65625025
+  ],
+  "brightened": 0,
+  "raw_description": "Un paysage de montagnes enneigées et escarpées s'étend sous un ciel brumeux, avec une petite grotte d'où émane une lumière orangée. Au premier plan, une surface enneuse est parsemée de quelques rochers sombres. Un bâton en métal sombre et sculpté repose sur la neige. Une main gantée de gris saisit le bâton par son manche métallique.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un paysage de montagnes enneigées et escarpées s'étend sous un ciel brumeux, avec une petite grotte d'où émane une lumière orangée. Au premier plan, une surface enneuse est parsemée de quelques rochers sombres. Un bâton en métal sombre et sculpté repose sur la neige. Une main gantée de gris saisit le manche métallique du bâton.",
+  "budget_chars": 86,
+  "variants": [
+   "Montagnes enneigées sous un ciel brumeux. Une main gantée de gris saisit un bâton sculpté.",
+   "Montagnes brumeuses. Une main gantée saisit un bâton métallique.",
+   "Une main gantée saisit un bâton sculpté."
+  ]
+ },
+ {
+  "id": "d_0012",
+  "window": [
+   88.541667,
+   94.875
+  ],
+  "frames": [
+   89.33333362500001,
+   90.916666875,
+   92.500000125,
+   94.083333375
+  ],
+  "brightened": 0,
+  "raw_description": "Dans un paysage de montagnes enneigées et brumeuses, un personnage portant une cape rouge et tenant un bâton marche vers la droite. Le titre « SINTEL » s'affiche en grandes lettres noires au centre de l'image, accompagné d'un logo représentant un arbre stylisé dans un cercle. Le décor est composé de pics rocheux recouverts de neige et de quelques arbres sombres éparpillés sur les pentes.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans un paysage de montagnes enneigées et brumeuses, un personnage en tenue rouge marche vers la droite en tenant un bâton. Le titre « SINTEL » s'affiche en grandes lettres noires au centre de l'image, accompagné d'un logo représentant un arbre stylisé dans un cercle. Des pics rocheux recouverts de neige et quelques arbres sombres parsèment les pentes sous un ciel grisâtre.",
+  "budget_chars": 77,
+  "variants": [
+   "Un personnage en rouge marche avec un bâton. Le titre SINTEL s'affiche.",
+   "Un personnage en rouge marche. Le titre SINTEL apparaît.",
+   "Un personnage marche. Le titre SINTEL s'affiche."
+  ]
+ },
+ {
+  "id": "d_0013",
+  "window": [
+   94.875,
+   101.208333
+  ],
+  "frames": [
+   95.666666625,
+   97.249999875,
+   98.833333125,
+   100.41666637499999
+  ],
+  "brightened": 0,
+  "raw_description": "Le titre « SINTEL » s'affiche en lettres noires au centre d'un paysage montagneux enneigé et brumeux, accompagné d'un logo représentant un arbre stylisé dans un cercle. Un personnage portant une tenue rouge et tenant un bâton marche sur la neige à gauche de l'écran. Dans l'image suivante, le personnage est allongé sur le sol, face vers la droite. Le paysage reste composé de pics rocheux recouverts de neige sous un ciel grisâtre.",
+  "zoom": null,
+  "facts": null,
+  "description": "Le titre « SINTEL » s'affiche en lettres noires au centre d'un paysage montagneux enneigé et brumeux, accompagné d'un logo représentant un arbre stylisé dans un cercle. Un personnage en tenue rouge marche sur la neige à gauche de l'écran en tenant un bâton. Au premier plan, une silhouette noire est allongée sur le sol.",
+  "budget_chars": 77,
+  "variants": [
+   "Le titre SINTEL s'affiche sur des montagnes brumeuses. Un personnage en rouge marche avec un bâton.",
+   "Le titre SINTEL s'affiche sur des montagnes.",
+   "Le titre SINTEL s'affiche."
+  ]
+ },
+ {
+  "id": "d_0014",
+  "window": [
+   101.208333,
+   107.4
+  ],
+  "frames": [
+   101.982291375,
+   103.530208125,
+   105.078124875,
+   106.626041625
+  ],
+  "brightened": 0,
+  "raw_description": "Dans une pièce sombre, un petit feu brûle au centre d'un cercle tracé au sol. Autour du foyer, plusieurs objets et récipinaires sont disposés sur le sol et sur des étagères en arrière-plan. Au premier plan, des silhouettes sombres et des objets flous encadrent la scène.",
+  "zoom": "Inconnu.",
+  "facts": null,
+  "description": "Dans une pièce sombre, un petit feu brûle au centre d'un cercle tracé au sol. Autour du foyer, plusieurs récipinaires sont disposés sur le sol et sur des étagères en arrière-plan. Au premier plan, des silhouettes sombres et des objets flous encadrent la scène.",
+  "budget_chars": 75,
+  "variants": [
+   "Un petit feu brûle dans un cercle au sol d'une pièce sombre.",
+   "Un feu brûle au centre d'une pièce sombre.",
+   "Un feu brûle dans le noir."
+  ]
+ },
+ {
+  "id": "d_0015",
+  "window": [
+   114.3,
+   116.84
+  ],
+  "frames": [
+   114.61749999999999,
+   115.2525,
+   115.8875,
+   116.52250000000001
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune femme aux cheveux courts et roux est assise de dos, face à un homme musclé et barbu qui est accroupi devant un petit feu. L'homme porte un vêtement sombre et regarde vers la jeune femme. Entre eux, sur le sol, un petit feu éclaire une marmite et un bol posés sur la terre. L'action se déroule à l'intérieur d'une structure faite de tissus et de cordes.",
+  "zoom": null,
+  "facts": null,
+  "description": "À l'intérieur d'une structure de tissus et de cordes, une jeune femme aux cheveux courts et roux est assise de dos, face à un homme musclé et barbu accroupi devant un petit feu. L'homme, vêtu d'un vêtement sombre, regarde vers la jeune femme tandis qu'une marmite et un bol sont posés sur le sol près des flammes.",
+  "budget_chars": 27,
+  "variants": [
+   "La femme fait face à l'homme.",
+   "L'homme la regarde.",
+   "Il la regarde."
+  ]
+ },
+ {
+  "id": "d_0016",
+  "window": [
+   153.0,
+   159.3
+  ],
+  "frames": [
+   153.7875,
+   155.3625,
+   156.9375,
+   158.51250000000002
+  ],
+  "brightened": 0,
+  "raw_description": "Une vue panoramique montre une ville dense aux toits de tuiles sombres, entourée d'un haut mur de pierre. À l'arrière-plan, une haute tour pointue s'élève à gauche et une colline escarpée avec des structures blanches domine la droite. La scène passe ensuite à une vue en contre-plongée d'une ruelle étroite et dévastée, jonchée de débris et de planches de bois. Une femme torse nu et portant un pantalon marche dans la rue, entourée de bâtiments en bois et en pierre.",
+  "zoom": null,
+  "facts": null,
+  "description": "Une vue panoramique montre une ville dense aux toits de tuiles sombres, entourée d'un haut mur de pierre. À l'arrière-plan, une haute tour pointue s'élève à gauche et une colline escarpée avec des structures blanches domine la droite. Dans une ruelle étroite et dévastée, jonchée de débris et de planches de bois, une femme torse nu et portant un pantalon marche entre des bâtiments en bois et en pierre.",
+  "budget_chars": 76,
+  "variants": [
+   "Vue panoramique d'une ville fortifiée aux toits sombres et une ruelle dévastée.",
+   "Une ville dense aux toits sombres derrière un haut mur.",
+   "Une ville fortifiée aux toits sombres."
+  ]
+ },
+ {
+  "id": "d_0017",
+  "window": [
+   160.2,
+   168.3083335
+  ],
+  "frames": [
+   161.2135416875,
+   163.2406250625,
+   165.2677084375,
+   167.2947918125
+  ],
+  "brightened": 4,
+  "raw_description": "Dans une ruelle étroite bordée de maisons en bois et en pierre, une jeune femme aux cheveux courts et roux s'appuie contre un mur de pierre sombre. Elle porte un haut blanc à bretelles et un protège-épaule métallique sur son bras gauche. Son regard est dirigé vers le bas avec une expression sérieuse ou concentrée.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans une ruelle étroite bordée de maisons en bois et en pierre, une jeune femme aux cheveux courts et roux s'appuie contre un mur de pierre sombre. Elle porte un haut blanc à bretelles, un protège-épaule métallique sur son bras gauche et un gant gris sur sa main droite. Son regard est dirigé vers le bas avec une expression sérieuse.",
+  "budget_chars": 100,
+  "variants": [
+   "La femme rousse, en haut blanc, s'appuie contre un mur de pierre, le regard sérieux.",
+   "La femme rousse s'appuie contre un mur de pierre, le regard bas.",
+   "La femme rousse s'appuie contre un mur."
+  ]
+ },
+ {
+  "id": "d_0018",
+  "window": [
+   168.3083335,
+   176.416667
+  ],
+  "frames": [
+   169.3218751875,
+   171.3489585625,
+   173.3760419375,
+   175.40312531249998
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune femme aux cheveux courts et roux se tient devant des maisons à colombages. Elle porte un débardeur gris clair et regarde avec une expression surprise un objet rond et rouge qu'elle tient dans sa main gauche. Elle porte également un gant gris sur cette main.",
+  "zoom": "La personne tient un objet sphérique recouvert de pointes métalliques. On reconnaît également un dé à coudre géant.",
+  "facts": null,
+  "description": "Devant des maisons à colombages, la jeune femme aux cheveux courts et roux regarde avec une expression surprise un objet sphérique rouge recouvert de pointes métalliques. Elle tient cet objet de la main gauche, laquelle est protégée par un gant gris.",
+  "budget_chars": 100,
+  "variants": [
+   "Devant des maisons à colombages, elle observe avec surprise une sphère rouge épineuse tenue de la main gauche gantée de gris.",
+   "Devant des maisons à colombages, elle regarde une sphère rouge épineuse.",
+   "Elle observe une sphère rouge épineuse."
+  ]
+ },
+ {
+  "id": "d_0019",
+  "window": [
+   176.416667,
+   182.0
+  ],
+  "frames": [
+   177.114583625,
+   178.510416875,
+   179.90625012499999,
+   181.302083375
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune femme aux cheveux courts et roux se déplace sur les toits d'une ville ancienne aux maisons à colombages. Elle grimpe avec agilité le long des façades et des poutres en bois, passant d'un toit incliné à un autre. Dans une séquence rapide, elle s'agrippe à une structure en bois et se hisse vers le haut. Elle finit par se stabiliser sur un toit de tuiles rouges, tenant un couteau de sa main droite.",
+  "zoom": null,
+  "facts": null,
+  "description": "La jeune femme aux cheveux courts et roux grimpe le long d'une façade à colombages, s'agrippant à une structure en bois. Elle se hisse vers le haut avant de se stabiliser sur un toit de tuiles rouges, un couteau tenu de la main droite.",
+  "budget_chars": 67,
+  "variants": [
+   "La femme rousse grimpe sur un toit de tuiles, un couteau à la main.",
+   "Elle grimpe sur un toit de tuiles, un couteau à la main.",
+   "Elle grimpe sur un toit, un couteau à la main."
+  ]
+ },
+ {
+  "id": "d_0020",
+  "window": [
+   182.0,
+   189.791667
+  ],
+  "frames": [
+   182.973958375,
+   184.92187512499999,
+   186.869791875,
+   188.817708625
+  ],
+  "brightened": 0,
+  "raw_description": "Sur un toit de tuiles sombres, une petite créature ailée est allongée, blessée et couverte de sang. La créature, qui ressemble à un petit dragon, a les ailes déployées et du sang rouge s'écoule de son corps sur les tuiles. Une jeune femme aux cheveux courts et roses regarde la scène avec une expression sérieuse.",
+  "zoom": null,
+  "facts": null,
+  "description": "Sur un toit de tuiles sombres, une petite créature ailée, semblable à un dragon, est allongée, blessée et couverte de sang rouge. La créature a les ailes déployées et du sang s'écoule de son corps sur les tuiles. La jeune femme aux cheveux courts et roses regarde la scène avec une expression sérieuse.",
+  "budget_chars": 96,
+  "variants": [
+   "Sur un toit de tuiles sombres, une petite créature ailée et ensanglantée gît, les ailes déployées. La femme rousse l'observe.",
+   "Une petite créature ailée et ensanglantée est allongée sur les tuiles. La femme rousse la regarde.",
+   "Une créature ailée et ensanglantée gît sur le toit. La femme rousse l'observe."
+  ]
+ },
+ {
+  "id": "d_0021",
+  "window": [
+   189.791667,
+   196.416667
+  ],
+  "frames": [
+   190.619792,
+   192.276042,
+   193.932292,
+   195.588542
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune femme aux cheveux roux, vêtue d'un débardeur blanc et d'un pantalon marron, est accroupie sur un sol pavé entre deux murs de pierre. Elle regarde avec une expression de surprise une petite créature ailée, semblable à un dragon, qui gît au sol avec une tache de sang rouge à ses côtés. Une main humaine s'approche de la créature, tandis que celle-ci lève la tête vers l'observateur, révélant une blessure sanglante sur son aile.",
+  "zoom": null,
+  "facts": null,
+  "description": "Accroupie sur un sol pavé entre deux murs de pierre, la jeune femme aux cheveux roux, en débardeur blanc et pantalon marron, regarde la petite créature ailée avec une expression de surprise. La créature, semblable à un dragon, gît au sol avec une tache de sang rouge à ses côtés et une aile tachée de sang. Une main humaine s'approche de la créature tandis que celle-ci lève la tête vers l'observateur.",
+  "budget_chars": 80,
+  "variants": [
+   "Accroupie sur des pavés, la femme rousse regarde la créature ailée blessée.",
+   "La femme rousse observe la créature ailée au sol.",
+   "La femme rousse regarde la créature."
+  ]
+ },
+ {
+  "id": "d_0022",
+  "window": [
+   196.416667,
+   203.125
+  ],
+  "frames": [
+   197.255208625,
+   198.932291875,
+   200.60937512499999,
+   202.286458375
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune femme aux cheveux roux et aux yeux marron regarde avec une expression surprise un petit dragon ailé. Le dragon, à la peau beige et aux ailes blanches tachées de rouge, est assis sur un sol pavé de pierres sombres. La jeune femme tend la main vers la créature, qui la regarde en restant immobile.",
+  "zoom": null,
+  "facts": null,
+  "description": "La jeune femme aux cheveux roux et aux yeux marron regarde la petite créature ailée avec une expression surprise. Une main humaine, gantée de brun, s'approche de la créature à la peau beige et aux ailes blanches tachées de rouge. La créature, semblable à un petit dragon, est assise sur un sol pavé de pierres sombres et regarde vers la main.",
+  "budget_chars": 82,
+  "variants": [
+   "La femme rousse, surprise, approche une main gantée de la créature.",
+   "Une main gantée s'approche de la petite créature ailée.",
+   "Une main gantée s'approche de la créature."
+  ]
+ },
+ {
+  "id": "d_0023",
+  "window": [
+   203.125,
+   205.98
+  ],
+  "frames": [
+   203.481875,
+   204.195625,
+   204.90937499999998,
+   205.623125
+  ],
+  "brightened": 1,
+  "raw_description": "Une jeune femme aux cheveux courts roux et aux yeux marron sourit face caméra devant un mur de pierres. À côté d'elle, un reptile à la peau écailleuse et de couleur beige ouvre la gueule. L'animal semble regarder vers le haut dans un décor sombre et flou.",
+  "zoom": null,
+  "facts": null,
+  "description": "La jeune femme aux cheveux courts roux et aux yeux marron sourit face caméra devant un mur de pierres. À côté d'elle, un reptile à la peau écailleuse et de couleur beige ouvre la gueule en regardant vers le haut.",
+  "budget_chars": 31,
+  "variants": [
+   "La femme sourit face au reptile.",
+   "Elle sourit au reptile.",
+   "Elle sourit."
+  ]
+ },
+ {
+  "id": "d_0024",
+  "window": [
+   212.9,
+   219.458333
+  ],
+  "frames": [
+   213.719791625,
+   215.35937487500001,
+   216.998958125,
+   218.63854137500002
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune femme aux cheveux courts et roux regarde un petit reptile avec un léger sourire. Elle tient l'animal, qui ressemble à un dinosaure miniature à la peau écailleuse et brune, entre ses mains gantées. Le reptile a les yeux fermés et semble calme. L'arrière-plan est sombre et flou, laissant entrevoir des structures rocheuses et des lueurs orangées.",
+  "zoom": null,
+  "facts": null,
+  "description": "La jeune femme aux cheveux courts roux regarde le petit reptile avec un léger sourire. Elle tient l'animal, un reptile à la peau écailleuse et brune, entre ses mains gantées de gris. Le reptile a les yeux ouverts et regarde vers la gauche. L'arrière-plan est sombre et flou, laissant entrevoir des structures rocheuses et des lueurs orangées.",
+  "budget_chars": 80,
+  "variants": [
+   "Elle tient le reptile brun entre ses mains gantées de gris.",
+   "Elle tient le reptile brun dans ses mains grises.",
+   "Elle tient le reptile brun."
+  ]
+ },
+ {
+  "id": "d_0025",
+  "window": [
+   219.458333,
+   229.37222200000002
+  ],
+  "frames": [
+   220.697569125,
+   223.176041375,
+   225.65451362500002,
+   228.13298587500003
+  ],
+  "brightened": 0,
+  "raw_description": "Deux mains gantées de bleu soutiennent un bol en pierre sombre au-dessus d'un tissu plissé. Dans l'image suivante, une main gantée s'approche d'un tissu sombre tendu sur une surface. La scène finale montre une pièce sombre et encombrée où un objet rose et blanc repose sur une structure en bois.",
+  "zoom": "Inconnu.",
+  "facts": null,
+  "description": "Deux mains gantées de bleu soutiennent un bol en pierre sombre au-dessus d'un tissu plissé noir. La scène se déroule dans une pièce sombre et encombrée où un objet rose et blanc repose sur une structure en bois.",
+  "budget_chars": 123,
+  "variants": [
+   "Deux mains gantées de bleu soutiennent un bol en pierre sombre au-dessus d'un tissu noir plissé, dans une pièce encombrée.",
+   "Des mains gantées de bleu tiennent un bol en pierre sombre sur un tissu noir plissé.",
+   "Des mains gantées de bleu soutiennent un bol en pierre sombre."
+  ]
+ },
+ {
+  "id": "d_0026",
+  "window": [
+   229.37222200000002,
+   239.286111
+  ],
+  "frames": [
+   230.611458125,
+   233.08993037500002,
+   235.568402625,
+   238.04687487500001
+  ],
+  "brightened": 1,
+  "raw_description": "Dans une pièce sombre et encombrée, une femme aux cheveux courts est allongée sur un lit couvert de tissus roses et blancs. À côté d'elle, un autre personnage est partiellement visible, allongé sur le sol. L'espace est rempli de structures en bois, de cordes épaisses et de grands morceaux de tissu blanc marbré de gris. Une grande hache à manche doré et à lame sombre traverse l'image en diagonale.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans une pièce sombre et encombrée, une femme aux cheveux courts est allongée sur un lit couvert de tissus roses et blancs. À côté d'elle, un personnage est allongé sur le sol. Une grande hache à manche doré et à lame sombre traverse l'image en diagonale, passant devant des structures en bois, des cordes épaisses et des morceaux de tissu blanc marbré de gris.",
+  "budget_chars": 123,
+  "variants": [
+   "Dans une pièce sombre, la femme aux cheveux courts est allongée sur un lit de tissus roses et blancs. Un personnage gît au sol.",
+   "La femme aux cheveux courts repose sur un lit de tissus roses et blancs. Un personnage est au sol.",
+   "La femme repose sur un lit de tissus roses. Un personnage est au sol."
+  ]
+ },
+ {
+  "id": "d_0027",
+  "window": [
+   239.286111,
+   249.20000000000002
+  ],
+  "frames": [
+   240.525347125,
+   243.003819375,
+   245.48229162500002,
+   247.96076387500003
+  ],
+  "brightened": 3,
+  "raw_description": "Une jeune femme aux cheveux roux, vêtue d'un débardeur blanc et de gants, est assise et tient un petit dragon dans ses mains. L'animal, à la peau écailleuse, est posé sur un tissu jaune. La scène est baignée de taches de lumière projetées sur les personnages et les objets environnants.",
+  "zoom": "La personne porte des gants et manipule un petit dragon. On reconnaît également les lacet de son corset et de sa ceinture.",
+  "facts": null,
+  "description": "Une jeune femme aux cheveux roux, vêtue d'un débardeur blanc et d'un corset lacé, est assise et tient un petit dragon à la peau écailleuse dans ses mains gantées. L'animal est posé sur un tissu jaune. La scène est baignée de taches de lumière projetées sur les personnages et les objets environnants.",
+  "budget_chars": 123,
+  "variants": [
+   "La femme rousse, en débardeur blanc et corset lacé, tient un petit dragon écailleux sur un tissu jaune sous des taches de lumière.",
+   "La femme rousse tient un petit dragon écailleux sur un tissu jaune sous des taches de lumière.",
+   "La femme rousse tient un dragon sur un tissu jaune."
+  ]
+ },
+ {
+  "id": "d_0028",
+  "window": [
+   252.32,
+   255.20000000000002
+  ],
+  "frames": [
+   252.68,
+   253.4,
+   254.12,
+   254.84
+  ],
+  "brightened": 1,
+  "raw_description": "Une personne aux cheveux roux saute dans les airs au-dessus d'une ruelle étroite. Un petit animal, ressemblant à un rongeur, se cache sous un tonneau en bois renversé au premier plan. Dans une scène suivante, un oiseau blanc s'envole au-dessus d'une charrette en bois chargée de marchandises. Enfin, un poulet blanc s'envole devant des poutres en bois dans un décor de village médiéval.",
+  "zoom": null,
+  "facts": null,
+  "description": "Une personne aux cheveux roux saute dans les airs au-dessus d'une ruelle étroite. Au premier plan, un petit animal à la fourrure rousse se cache sous un tonneau en bois renversé. Un oiseau blanc s'envole au-dessus d'une charrette en bois chargée de marchandises, tandis qu'un oiseau blanc aux plumes grises et blanches s'élève devant des poutres en bois.",
+  "budget_chars": 32,
+  "variants": [
+   "Une rousse saute en ruelle.",
+   "Un saut en ruelle.",
+   "Saut en ruelle."
+  ]
+ },
+ {
+  "id": "d_0029",
+  "window": [
+   255.58,
+   257.7
+  ],
+  "frames": [
+   255.93333333333334,
+   256.64,
+   257.34666666666664
+  ],
+  "brightened": 2,
+  "raw_description": "Dans une ruelle étroite bordée de structures en bois et de tonneaux, une femme blonde vêtue d'un haut vert court et d'une jupe longue se tient debout, regardant vers la droite. À côté d'elle, un homme barbu portant un bonnet blanc et tenant un long bâton s'incline vers l'avant. Au premier plan, un homme de dos, portant un haut sombre aux manches lacées, observe une femme aux cheveux roux qui s'éloigne en courant dans la ruelle.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans une ruelle étroite bordée de structures en bois et de tonneaux, une femme blonde vêtue d'un haut vert et d'une jupe longue se tient debout, le regard tourné vers la droite. À côté d'elle, un homme barbu portant un bonnet blanc et tenant un long bâton s'incline vers l'avant. Au premier plan, un homme de dos, portant un haut sombre aux manches lacées, observe une femme aux cheveux roux qui s'éloigne en courant dans la ruelle.",
+  "budget_chars": 22,
+  "variants": [
+   "La rousse s'enfuit.",
+   "Elle court.",
+   "Elle fuit."
+  ]
+ },
+ {
+  "id": "d_0030",
+  "window": [
+   257.96,
+   263.25
+  ],
+  "frames": [
+   258.62125,
+   259.94374999999997,
+   261.26625,
+   262.58875
+  ],
+  "brightened": 0,
+  "raw_description": "Dans une ruelle étroite bordée de bâtiments en bois, une jeune femme aux cheveux courts et roux se tient debout sur une caisse en bois. Elle porte un haut blanc et un pantalon marron. Autour d'elle, des fruits sont éparpillés sur le sol et dans des caisses, tandis que des tonneaux et des structures en bois occupent l'espace. À l'arrière-plan, d'autres personnages marchent ou se tiennent près de charrettes dans la lumière tamisée de la rue.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans une ruelle étroite bordée de bâtiments en bois, une jeune femme aux cheveux courts et roux se tient debout sur une caisse en bois, vêtue d'un haut blanc et d'un pantalon marron. Des fruits sont éparpillés sur le sol et dans des caisses à ses pieds, tandis que des tonneaux et des structures en bois occupent l'espace. À l'arrière-plan, des silhouettes marchent ou se tiennent près de charrettes dans la lumière tamisée.",
+  "budget_chars": 63,
+  "variants": [
+   "Elle se tient debout sur une caisse dans une ruelle.",
+   "Elle est debout sur une caisse en bois.",
+   "Elle se tient sur une caisse."
+  ]
+ },
+ {
+  "id": "d_0031",
+  "window": [
+   263.25,
+   271.625
+  ],
+  "frames": [
+   264.296875,
+   266.390625,
+   268.484375,
+   270.578125
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune femme aux cheveux courts et roux, portant un débardeur gris et un tatouage sur l'épaule, se tient dans une ruelle étroite bordée de cabanes en bois. Elle regarde vers la gauche avec une expression sérieuse. À sa droite, une structure en bois supporte des marchandises, tandis que des toits de chaume et des poutres surplombent le passage.",
+  "zoom": null,
+  "facts": null,
+  "description": "La jeune femme aux cheveux courts et roux, vêtue d'un débardeur gris et arborant un tatouage sur l'épaule gauche, se tient dans une ruelle étroite bordée de cabanes en bois. Elle regarde vers la gauche avec une expression sérieuse. À sa droite, une structure en bois supporte des marchandises sous des toits de chaume et des poutres qui surplombent le passage.",
+  "budget_chars": 103,
+  "variants": [
+   "La rousse, en débardeur gris, regarde vers la gauche dans une ruelle étroite bordée de cabanes en bois.",
+   "La rousse regarde vers la gauche dans une ruelle étroite aux cabanes en bois.",
+   "La rousse regarde vers la gauche dans la ruelle."
+  ]
+ },
+ {
+  "id": "d_0032",
+  "window": [
+   271.625,
+   278.791667
+  ],
+  "frames": [
+   272.520833375,
+   274.312500125,
+   276.10416687500003,
+   277.895833625
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune femme aux cheveux courts et roux regarde vers le haut avec une expression de surprise. Un petit reptile ailé à la peau grise et aux yeux jaunes survole une structure en bois. La scène se déroule en extérieur, entre des bâtiments et des planches de bois au sol, avec des tonneaux et des tissus à l'arrière-plan.",
+  "zoom": null,
+  "facts": null,
+  "description": "La jeune femme aux cheveux courts et roux regarde vers le haut avec une expression de surprise. Un petit reptile ailé à la peau grise et aux yeux jaunes survole une structure en bois. La scène se déroule en extérieur, entre des bâtiments et des planches de bois au sol, avec des tonneaux et des tissus à l'arrière-plan.",
+  "budget_chars": 87,
+  "variants": [
+   "La rousse regarde en haut, surprise. Un petit reptile ailé gris survole une structure en bois.",
+   "La rousse regarde en haut, surprise. Un reptile ailé survole une structure.",
+   "La rousse regarde en haut, surprise."
+  ]
+ },
+ {
+  "id": "d_0033",
+  "window": [
+   278.791667,
+   287.5
+  ],
+  "frames": [
+   279.880208625,
+   282.05729187500003,
+   284.234375125,
+   286.411458375
+  ],
+  "brightened": 1,
+  "raw_description": "Un petit reptile à la peau brune est assis sur une poutre en bois, regardant un vol d'oiseaux en formation de V dans un ciel nuageux. Une jeune femme aux cheveux roux grimpe sur un escalier de pierre au milieu de ruines antiques sous un ciel orangé. Des oiseaux rouges volent autour d'elle alors qu'elle monte les marches. La scène est baignée d'une lumière dorée et intense.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un petit reptile à la peau brune est assis sur une poutre en bois et regarde un vol d'oiseaux en formation de V dans un ciel nuageux. Une jeune femme aux cheveux roux grimpe les marches d'un escalier de pierre au milieu de ruines antiques sous un ciel orangé. Des oiseaux rouges volent autour d'elle alors qu'elle monte les marches dans une lumière dorée et intense.",
+  "budget_chars": 108,
+  "variants": [
+   "Un reptile brun sur une poutre observe des oiseaux en V dans un ciel nuageux. La rousse monte un escalier de pierre sous un ciel orangé.",
+   "Un reptile brun observe des oiseaux. La rousse monte un escalier de pierre sous un ciel orangé.",
+   "Un reptile observe des oiseaux. La rousse monte l'escalier."
+  ]
+ },
+ {
+  "id": "d_0034",
+  "window": [
+   287.5,
+   297.25
+  ],
+  "frames": [
+   288.71875,
+   291.15625,
+   293.59375,
+   296.03125
+  ],
+  "brightened": 2,
+  "raw_description": "Une jeune femme aux cheveux courts et roux regarde vers le haut avec une expression de surprise ou d'étonnement, sur fond de toits de bâtiments denses. La scène s'élargit sur un paysage urbain de pierre baigné par la lumière d'un soleil couchant, où plusieurs oiseaux volent dans le ciel orangé près de structures en ruines. Un oiseau passe au premier plan, survolant des remparts et des bâtiments en pierre sous un ciel lumineux. La vue plongeante révèle une ville étendue de maisons et de tours, avec une silhouette humaine marchant sur une terrasse en pierre au milieu des décombres.",
+  "zoom": null,
+  "facts": null,
+  "description": "La jeune femme aux cheveux courts et roux regarde vers le haut, la bouche entrouverte. La vue plongeante révèle une ville de pierre étendue sous un ciel orangé de coucher de soleil, où des oiseaux volent près de structures en ruines. Sur une terrasse de pierre au milieu des décombres, une silhouette humaine marche.",
+  "budget_chars": 121,
+  "variants": [
+   "La rousse regarde vers le haut, bouche ouverte. Vue plongeante sur une ville en ruines sous un ciel orangé. Une silhouette marche sur une terrasse.",
+   "La rousse regarde en haut, bouche ouverte. Vue plongeante sur une ville en ruines sous un ciel orangé.",
+   "La rousse regarde en haut. Vue plongeante sur une ville en ruines."
+  ]
+ },
+ {
+  "id": "d_0035",
+  "window": [
+   297.25,
+   301.44
+  ],
+  "frames": [
+   297.77375,
+   298.82125,
+   299.86875,
+   300.91625
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune femme aux cheveux courts et roux se tient sur un promontoire rocheux surplombant une vaste ville dense sous un ciel de coucher de soleil. Elle porte un débardeur blanc, un pantalon marron et des protections sur les bras. Au fil des images, son expression change : elle ferme les yeux avec un léger sourire, puis ouvre la bouche comme pour crier ou s'essouffler, avant de baisser la tête et de s'incliner vers l'avant. Dans la dernière image, elle se redresse, le regard dirigé vers l'avant, avec un léger sourire.",
+  "zoom": null,
+  "facts": null,
+  "description": "La jeune femme aux cheveux courts et roux se tient sur un promontoire rocheux surplombant une ville dense sous un ciel de coucher de soleil. Elle porte un débardeur blanc, un pantalon marron et des protections sur les bras et les mains. Elle ferme les yeux avec un léger sourire, puis ouvre la bouche, avant de baisser la tête et de s'incliner vers l'avant, pour enfin se redresser le regard dirigé vers l'avant avec un léger sourire.",
+  "budget_chars": 49,
+  "variants": [
+   "La rousse sourit et s'incline sur un rocher.",
+   "Elle s'incline en souriant.",
+   "Elle sourit et s'incline."
+  ]
+ },
+ {
+  "id": "d_0036",
+  "window": [
+   329.5,
+   333.46
+  ],
+  "frames": [
+   329.995,
+   330.985,
+   331.97499999999997,
+   332.965
+  ],
+  "brightened": 1,
+  "raw_description": "Un dragon brun vole dans un ciel orangé au-dessus d'une main tendue. Une jeune femme aux cheveux roux, l'air effrayée, regarde vers le haut. Elle se tient debout dans un paysage désertique sous un ciel de coucher de soleil. Au premier plan, une personne est allongée au sol, face à une statue de pierre sculptée.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un créature ailée brune vole dans un ciel orangé au-dessus d'une main gantée de blanc tendue vers elle. La jeune femme aux cheveux courts et roux, l'air effrayée, regarde vers le haut. Au premier plan, une personne est allongée au sol, face à une statue de pierre sculptée.",
+  "budget_chars": 46,
+  "variants": [
+   "Une créature ailée survole la rousse.",
+   "Une créature survole la rousse.",
+   "Une créature vole."
+  ]
+ },
+ {
+  "id": "d_0037",
+  "window": [
+   338.86,
+   344.305
+  ],
+  "frames": [
+   339.54062500000003,
+   340.901875,
+   342.263125,
+   343.624375
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune femme aux cheveux courts et roux se tient debout sur un toit en pierre, contemplant une cité aux bâtiments escarpés sous un ciel de coucher de soleil orangé. Un oiseau blanc plane dans le ciel lumineux au-dessus des toits. La scène change pour un gros plan sur le visage de la jeune femme, qui regarde droit devant elle avec une expression de surprise ou d'étonnement. Elle porte un débardeur clair et un épaulière sur l'épaule gauche.",
+  "zoom": null,
+  "facts": null,
+  "description": "La jeune femme aux cheveux courts et roux se tient debout sur un toit en pierre, contemplant une cité aux bâtiments escarpés sous un ciel de coucher de soleil orangé. Un oiseau blanc plane dans le ciel lumineux au-dessus des toits. La scène change pour un gros plan sur le visage de la jeune femme, qui regarde droit devant elle avec une expression de surprise. Elle porte un débardeur clair et une épaulière sur l'épaule gauche.",
+  "budget_chars": 65,
+  "variants": [
+   "La rousse contemple une cité sous un ciel orangé.",
+   "Elle regarde la cité sous un ciel orangé.",
+   "Elle contemple la cité orange."
+  ]
+ },
+ {
+  "id": "d_0038",
+  "window": [
+   344.305,
+   349.75
+  ],
+  "frames": [
+   344.985625,
+   346.346875,
+   347.708125,
+   349.069375
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune femme aux cheveux roux courts et à la peau claire regarde droit devant elle avec une expression de surprise ou d'inquiétude, la bouche entrouverte. Le plan se resserre progressivement sur son visage, passant d'un plan moyen à un gros plan très serré sur ses yeux et son nez. Ses yeux sont de couleur ambre et ses sourcils sont froncés. L'arrière-plan montre un paysage de ruines sous un ciel aux teintes orangées.",
+  "zoom": null,
+  "facts": null,
+  "description": "La jeune femme aux cheveux courts et roux regarde droit devant elle, la bouche entrouverte et les sourcils froncés. Le plan se resserre progressivement sur son visage, passant d'un plan moyen à un gros plan très serré sur ses yeux ambre et son nez. L'arrière-plan montre des ruines sous un ciel aux teintes orangées.",
+  "budget_chars": 65,
+  "variants": [
+   "La rousse regarde droit, les sourcils froncés.",
+   "Elle regarde droit, les sourcils froncés.",
+   "Elle regarde, les sourcils froncés."
+  ]
+ },
+ {
+  "id": "d_0039",
+  "window": [
+   349.75,
+   357.44791675
+  ],
+  "frames": [
+   350.71223959375,
+   352.63671878125,
+   354.56119796875,
+   356.48567715625
+  ],
+  "brightened": 0,
+  "raw_description": "Une personne en mouvement court sur un sol terreux, ses pieds et ses jambes étant flous par la vitesse. La caméra se rapproche du visage d'une jeune femme aux cheveux bruns, qui regarde droit devant elle avec une expression sérieuse. Le décor change pour montrer un paysage désolé composé de nombreux souches d'arbres sous un ciel de crépuscule. Enfin, le visage de la jeune femme se superpose en transparence sur ce même paysage de souches et de terre.",
+  "zoom": null,
+  "facts": null,
+  "description": "Une personne en mouvement court sur un sol terreux, ses jambes et ses pieds étant flous par la vitesse. La caméra se rapproche du visage d'une jeune femme aux cheveux bruns qui regarde droit devant elle avec une expression sérieuse. Le décor montre un paysage désolé composé de nombreuses souches d'arbres sous un ciel de crépuscule, puis le visage de la jeune femme se superpose en transparence sur ce même paysage.",
+  "budget_chars": 94,
+  "variants": [
+   "Une femme court sur un sol terreux. Son visage sérieux se superpose à un paysage de souches au crépuscule.",
+   "Elle court sur un sol terreux. Son visage sérieux se superpose à un paysage de souches.",
+   "Elle court. Son visage se superpose à un paysage de souches."
+  ]
+ },
+ {
+  "id": "d_0040",
+  "window": [
+   357.44791675,
+   365.1458335
+  ],
+  "frames": [
+   358.41015634375,
+   360.33463553125,
+   362.25911471874997,
+   364.18359390625
+  ],
+  "brightened": 0,
+  "raw_description": "Un gros plan sur le visage d'un personnage aux cheveux bruns et au regard fixe s'affiche en transparence sur un paysage nocturne. À droite, une silhouette humaine marche sur le flanc d'une colline sombre, tenant un bâton ou une lance. En arrière-plan, une lune imposante et une structure architecturale massive se découpent sur un ciel nocturne.",
+  "zoom": null,
+  "facts": null,
+  "description": "Le visage d'une personne aux cheveux bruns s'affiche en transparence sur un paysage nocturne. À droite, une silhouette humaine marche sur le flanc d'une colline sombre en tenant un bâton. En arrière-plan, une lune imposante et une structure architecturale massive se découpent sur le ciel.",
+  "budget_chars": 94,
+  "variants": [
+   "Un visage aux cheveux bruns s'affiche en transparence sur un paysage nocturne avec une silhouette et une lune.",
+   "Un visage brun en transparence surplombe une silhouette marchant sous une lune.",
+   "Un visage brun en transparence sur un paysage nocturne."
+  ]
+ },
+ {
+  "id": "d_0041",
+  "window": [
+   365.1458335,
+   372.84375025
+  ],
+  "frames": [
+   366.10807309374997,
+   368.03255228125,
+   369.95703146875,
+   371.88151065625004
+  ],
+  "brightened": 0,
+  "raw_description": "Une lune croissante brille dans un ciel nocturne sombre. La scène s'éclaircit pour révéler un vaste désert de dunes de sable sous un ciel lumineux. Une silhouette solitaire marche sur le flanc d'une dune, tenant un bâton.",
+  "zoom": null,
+  "facts": null,
+  "description": "Une lune en croissant brille dans un ciel nocturne sombre. La scène s'éclaircit pour révéler un vaste désert de dunes de sable sous un ciel lumineux. Une silhouette solitaire marche sur le flanc d'une dune en tenant un bâton.",
+  "budget_chars": 94,
+  "variants": [
+   "Un croissant de lune brille dans le ciel. Un désert de dunes s'étend sous une lumière nocturne. Une silhouette marche avec un bâton.",
+   "Un croissant de lune brille. Un désert de dunes s'étend. Une silhouette marche avec un bâton.",
+   "Un croissant de lune brille sur un désert de dunes."
+  ]
+ },
+ {
+  "id": "d_0042",
+  "window": [
+   372.84375025,
+   380.541667
+  ],
+  "frames": [
+   373.80598984375,
+   375.73046903125004,
+   377.65494821875,
+   379.57942740625003
+  ],
+  "brightened": 0,
+  "raw_description": "Une silhouette de femme est superposée à un paysage de dunes de sable doré sous un ciel clair. Une petite silhouette humaine marche seule sur une crête de dune. Dans une scène suivante, une vue plongeante montre une personne tombant à travers une végétation dense de tiges de bambou vertes.",
+  "zoom": null,
+  "facts": null,
+  "description": "Une silhouette de femme est superposée à un paysage de dunes de sable doré sous un ciel clair. Une petite silhouette humaine marche seule sur une crête de dune en tenant un bâton.",
+  "budget_chars": 94,
+  "variants": [
+   "La silhouette d'une femme se superpose à des dunes dorées sous un ciel clair. Une personne marche avec un bâton sur une crête.",
+   "Une silhouette de femme surplombe des dunes dorées. Une personne marche seule avec un bâton.",
+   "Une femme en transparence sur des dunes. Une personne marche avec un bâton."
+  ]
+ },
+ {
+  "id": "d_0043",
+  "window": [
+   380.541667,
+   386.85999999999996
+  ],
+  "frames": [
+   381.331458625,
+   382.911041875,
+   384.49062512499995,
+   386.070208375
+  ],
+  "brightened": 0,
+  "raw_description": "Dans une forêt de bambous denses, une jeune femme vêtue d'un haut blanc et d'un short marron grimpe sur une tige de bambou inclinée. Elle se déplace entre les troncs verts et l'image s'éclaircit pour montrer la même forêt de bambous vue de plus près. La jeune femme, vue de profil, continue sa progression en sautant entre les tiges. La scène change brusquement pour un paysage désertique et rocheux où la jeune femme, debout, tient un long bâton vertical.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans une forêt de bambous denses, une jeune femme vêtue d'un haut blanc et d'un short marron grimpe sur une tige de bambou inclinée. Elle se déplace entre les troncs verts, puis, vue de profil, elle saute entre les tiges. La scène change pour un paysage désertique et rocheux où la jeune femme se tient debout, tenant un long bâton vertical.",
+  "budget_chars": 76,
+  "variants": [
+   "La jeune femme grimpe et saute entre des bambous, puis se tient dans un désert.",
+   "Elle grimpe dans les bambous et se tient dans un désert.",
+   "Elle grimpe dans les bambous puis dans le désert."
+  ]
+ },
+ {
+  "id": "d_0044",
+  "window": [
+   390.44,
+   398.65444433333334
+  ],
+  "frames": [
+   391.46680554166664,
+   393.520416625,
+   395.57402770833335,
+   397.6276387916667
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune femme aux cheveux courts et bruns se tient dans un paysage rocheux et désertique sous un ciel orangé. Elle porte un haut clair et des gants sombres, et regarde vers la droite de l'image. Dans la scène suivante, un personnage de dos, portant une tenue sombre et tenant un long bâton, se déplace dans un paysage brumeux et montagneux. La caméra filme ensuite ce personnage de dos, qui s'éloigne en tenant toujours son bâton verticalement. Enfin, une femme au regard intense et aux cheveux sombres tend la main vers l'avant, tenant un bâton en bois de sa main droite.",
+  "zoom": null,
+  "facts": null,
+  "description": "Sous un ciel orangé, une jeune femme aux cheveux courts et bruns, vêtue d'un haut clair et de gants sombres, regarde vers la droite dans un paysage rocheux et désertique.",
+  "budget_chars": 101,
+  "variants": [
+   "Sous un ciel orangé, la jeune femme aux cheveux bruns regarde vers la droite dans un paysage rocheux.",
+   "La jeune femme regarde vers la droite sous un ciel orangé.",
+   "Elle regarde vers la droite sous un ciel orangé."
+  ]
+ },
+ {
+  "id": "d_0045",
+  "window": [
+   398.65444433333334,
+   406.86888866666663
+  ],
+  "frames": [
+   399.681249875,
+   401.73486095833334,
+   403.78847204166664,
+   405.842083125
+  ],
+  "brightened": 0,
+  "raw_description": "Une femme à la peau très pâle et aux cheveux sombres tient un bâton en bois sculpté dans un paysage brumeux et montagneux. Elle porte une tunique sombre à col montant et semble exprimer une émotion intense, la bouche entrouverte. La caméra se rapproche de son visage et de son bâton alors que l'image devient floue et que des éclats sombres traversent l'écran.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans un paysage montagneux et brumeux, une femme à la peau très pâle et aux cheveux sombres tient un bâton en bois sculpté. La caméra se rapproche de son visage et de son bâton alors que l'image devient floue et que des éclats sombres traversent l'écran.",
+  "budget_chars": 101,
+  "variants": [
+   "Dans un paysage montagneux et brumeux, la jeune femme tient un bâton sculpté. L'image devient floue.",
+   "La jeune femme tient un bâton sculpté dans la brume. L'image devient floue.",
+   "La jeune femme tient un bâton sculpté."
+  ]
+ },
+ {
+  "id": "d_0046",
+  "window": [
+   406.86888866666663,
+   415.083333
+  ],
+  "frames": [
+   407.8956942083333,
+   409.94930529166663,
+   412.002916375,
+   414.05652745833333
+  ],
+  "brightened": 0,
+  "raw_description": "Dans un paysage de montagnes enneigées et de falaises sombres, une silhouette humaine escalade une paroi rocheuse escarpée. La personne, vêtue de vêtements sombres, s'accroche à la roche sous une épaisse couche de neige qui surplombe la paroi. La vue s'élargit pour révéler un panorama de sommets enneigés baignés dans une lumière blanche et brumeuse.",
+  "zoom": null,
+  "facts": null,
+  "description": "Une silhouette humaine vêtue de vêtements sombres escalade une paroi rocheuse escarpée et sombre, partiellement recouverte par une épaisse couche de neige. La vue s'élargit pour révéler un panorama de sommets enneigés baignés dans une lumière blanche et brumeuse.",
+  "budget_chars": 101,
+  "variants": [
+   "Une silhouette sombre escalade une paroi rocheuse enneigée. Un panorama de sommets brumeux se révèle.",
+   "Une silhouette escalade une paroi rocheuse et enneigée. Des sommets brumeux apparaissent.",
+   "Une silhouette escalade une paroi rocheuse enneigée."
+  ]
+ },
+ {
+  "id": "d_0047",
+  "window": [
+   415.083333,
+   420.458333
+  ],
+  "frames": [
+   415.755208,
+   417.098958,
+   418.442708,
+   419.786458
+  ],
+  "brightened": 0,
+  "raw_description": "Une personne aux cheveux bruns est partiellement recouverte par une épaisse couche de neige. Elle semble s'enfoncer dans la neige, un bâton ou un objet long dépassant de son épaule. La personne est vue de dos et de profil, portant des vêtements de couleur claire. L'arrière-plan est composé de formes sombres et floues sur un fond blanc brumeux.",
+  "zoom": "Inconnu.",
+  "facts": null,
+  "description": "Une personne aux cheveux bruns est partiellement ensevelie sous une épaisse couche de neige. Vue de dos et de profil, elle porte des vêtements de couleur claire et un objet long dépasse de son épaule. L'arrière-plan est composé de formes sombres et floues sur un fond blanc brumeux.",
+  "budget_chars": 64,
+  "variants": [
+   "Une personne aux cheveux bruns est ensevelie sous la neige.",
+   "Une personne est partiellement sous la neige.",
+   "Une personne sous la neige."
+  ]
+ },
+ {
+  "id": "d_0048",
+  "window": [
+   420.458333,
+   425.833333
+  ],
+  "frames": [
+   421.130208,
+   422.473958,
+   423.817708,
+   425.161458
+  ],
+  "brightened": 0,
+  "raw_description": "Dans un paysage enneigé et brumeux, une silhouette humaine marche vers la droite en tenant un long bâton. Le personnage traverse un terrain parsemé de pierres et de rochers qui forment un chemin sinueux. À droite, une structure de deux blocs de pierre se dresse devant une paroi de glace, tandis qu'un crâne d'animal repose au premier plan.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans un paysage enneigé et brumeux, une silhouette humaine marche vers la droite en tenant un long bâton. Le personnage traverse un terrain parsemé de pierres et de rochers qui forment un chemin sinueux. À droite, une structure de deux blocs de pierre se dresse devant une paroi de glace, tandis qu'un crâne d'animal repose au premier plan.",
+  "budget_chars": 64,
+  "variants": [
+   "Une silhouette marche avec un bâton dans la brume.",
+   "Une silhouette marche dans un paysage enneigé.",
+   "Une silhouette marche dans la brume."
+  ]
+ },
+ {
+  "id": "d_0049",
+  "window": [
+   425.833333,
+   431.583333
+  ],
+  "frames": [
+   426.552083,
+   427.989583,
+   429.427083,
+   430.864583
+  ],
+  "brightened": 0,
+  "raw_description": "Un personnage vêtu de vêtements sombres marche dans un paysage enneigé et brumeux, laissant une trace de pas derrière lui. Il tient un bâton ou une lance à deux mains. À droite, de grandes formations rocheuses sombres et irrégulières s'élèvent au-dessus de la neige. Le personnage se déplace vers la gauche de l'image, s'éloignant de la caméra.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un personnage vêtu de vêtements sombres marche dans un paysage enneigé et brumeux, laissant une trace de pas derrière lui. Il tient un bâton à deux mains et se déplace vers la gauche de l'image, s'éloignant de la caméra. À droite, de grandes formations rocheuses sombres et irrégulières s'élèvent au-dessus de la neige.",
+  "budget_chars": 69,
+  "variants": [
+   "Une silhouette sombre s'éloigne dans la neige vers la gauche.",
+   "Il marche dans la neige vers la gauche.",
+   "Il marche dans la neige."
+  ]
+ },
+ {
+  "id": "d_0050",
+  "window": [
+   431.583333,
+   434.88
+  ],
+  "frames": [
+   431.995416375,
+   432.819583125,
+   433.64374987499997,
+   434.467916625
+  ],
+  "brightened": 0,
+  "raw_description": "Dans un paysage enneigé et brumeux, une jeune femme aux cheveux roux porte une tenue sombre et un col montant. Elle regarde vers le haut avec une expression inquiète. En arrière-plan, une silhouette humaine court sur une pente de neige, portant un bâton ou une arme. Dans l'image finale, la jeune femme court vers la droite dans la neige, tandis que des débris sombres sont projetés en l'air autour d'elle.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans un paysage enneigé et brumeux, une jeune femme aux cheveux roux et à la tenue sombre regarde vers le haut avec une expression inquiète. En arrière-plan, une silhouette humaine court sur une pente de neige en portant un objet long. La jeune femme court ensuite vers la droite dans la neige, tandis que des débris sombres sont projetés en l'air autour d'elle.",
+  "budget_chars": 37,
+  "variants": [
+   "La femme rousse court dans la neige.",
+   "Elle court dans la neige.",
+   "Elle court vite."
+  ]
+ },
+ {
+  "id": "d_0051",
+  "window": [
+   435.14,
+   442.375
+  ],
+  "frames": [
+   436.044375,
+   437.853125,
+   439.661875,
+   441.470625
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune femme aux cheveux courts et roux, portant un débardeur gris et une épaulière métallique sur l'épaule gauche, regarde vers la droite avec une expression de peur ou de surprise, la bouche entrouverte. Un tatouage complexe est visible sur son épaule droite. L'arrière-plan est plongé dans l'obscurité, laissant apparaître seulement des formes indistinctes.",
+  "zoom": "Les personnages ne tiennent ni ne manipulent aucun objet. On peut seulement reconnaître un tatouage sur l'épaule de la femme et une épaulière sur son bras.",
+  "facts": null,
+  "description": "La jeune femme aux cheveux courts et roux, portant un débardeur gris et une épaulière métallique sur l'épaule gauche, regarde vers la droite avec une expression de peur, la bouche entrouverte. Un tatouage complexe est visible sur son épaule droite. L'arrière-plan est plongé dans l'obscurité, laissant apparaître seulement des formes indistinctes.",
+  "budget_chars": 88,
+  "variants": [
+   "La femme rousse, terrifiée, regarde vers la droite dans l'obscurité.",
+   "La femme rousse regarde vers la droite, effrayée."
+  ]
+ },
+ {
+  "id": "d_0052",
+  "window": [
+   442.375,
+   445.9
+  ],
+  "frames": [
+   442.815625,
+   443.696875,
+   444.578125,
+   445.45937499999997
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme barbu portant un couvre-chef orné de plumes et des marques rouges sur le visage tient une pipe à la bouche. Il porte un vêtement de couleur terre avec des motifs circulaires sur les épaules. La scène passe ensuite au gros plan d'une jeune femme aux cheveux courts et roux, qui regarde vers le bas avec une expression sérieuse. Elle porte un haut à bretelles fines dans un environnement sombre.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un homme barbu portant un couvre-chef orné de plumes et des marques rouges sur le visage tient une pipe à la bouche. Il porte un vêtement de couleur terre avec des motifs circulaires sur les épaules. La scène passe au gros plan d'une jeune femme aux cheveux courts et roux qui regarde vers le bas avec une expression sérieuse.",
+  "budget_chars": 40,
+  "variants": [
+   "Un homme barbu fume une pipe. La femme rousse baisse les yeux.",
+   "L'homme fume. La femme baisse les yeux.",
+   "L'homme fume. Elle baisse les yeux."
+  ]
+ },
+ {
+  "id": "d_0053",
+  "window": [
+   464.2,
+   473.9541665
+  ],
+  "frames": [
+   465.4192708125,
+   467.8578124375,
+   470.2963540625,
+   472.7348956875
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune femme aux cheveux roux regarde avec une expression inquiète un objet circulaire tenu devant elle. Ses doigts reposent sur le médaillon, qui présente un motif de dragon gravé entouré de runes. Le médaillon s'ouvre pour révéler un motif de l'arbre de vie sculpté en relief. L'image finale montre un arbre solitaire au tronc épais et au feuillage dense, situé devant une paroi rocheuse sombre.",
+  "zoom": "Inconnu.",
+  "facts": null,
+  "description": "La jeune femme aux cheveux roux regarde avec une expression inquiète un médaillon circulaire tenu devant elle. Ses doigts reposent sur le revers du médaillon où est gravé un motif de créature ailée entouré de runes. Le médaillon s'ouvre pour révéler un motif d'arbre sculpté en relief, puis l'image montre un arbre solitaire au tronc épais et au feuillage dense, situé devant une paroi rocheuse sombre.",
+  "budget_chars": 121,
+  "variants": [
+   "Elle observe un médaillon gravé d'une créature ailée et de runes. Il s'ouvre sur un arbre devant une paroi rocheuse.",
+   "Elle regarde un médaillon gravé. Il s'ouvre sur un arbre devant une paroi rocheuse.",
+   "Elle regarde un médaillon. Il révèle un arbre devant une paroi rocheuse."
+  ]
+ },
+ {
+  "id": "d_0054",
+  "window": [
+   473.9541665,
+   483.708333
+  ],
+  "frames": [
+   475.17343731249997,
+   477.6119789375,
+   480.05052056249997,
+   482.4890621875
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune femme aux cheveux roux et au regard écarquillé regarde vers le haut avec une expression d'étonnement. Elle porte une tenue grise à bretelles et une protection sombre sur l'épaule gauche. À côté d'elle, un objet métallique noir et sculpté est partiellement visible. Le décor en arrière-plan est sombre et semble être un paysage rocheux sous un ciel nocturne.",
+  "zoom": "inconnu.",
+  "facts": null,
+  "description": "La jeune femme aux cheveux roux, le regard écarquillé et la bouche entrouverte, regarde vers le haut avec étonnement. Elle porte une tenue grise à bretelles et une protection sombre sur l'épaule gauche, sur laquelle apparaît un motif tatoué. À sa gauche, un objet métallique noir et sculpté est partiellement visible.",
+  "budget_chars": 121,
+  "variants": [
+   "Sintel regarde vers le haut, les yeux écarquillés et la bouche ouverte. Elle porte une tenue grise et une protection tatouée.",
+   "Sintel regarde vers le haut, stupéfaite. Elle porte une tenue grise et une protection sombre.",
+   "Sintel regarde vers le haut, bouche bée."
+  ]
+ },
+ {
+  "id": "d_0055",
+  "window": [
+   483.708333,
+   490.958333
+  ],
+  "frames": [
+   484.614583,
+   486.427083,
+   488.239583,
+   490.052083
+  ],
+  "brightened": 0,
+  "raw_description": "Depuis l'ouverture d'une grotte rocheuse et sombre, on aperçoit au loin un lac sous une pleine lune brillante. Une petite silhouette se tient debout sur le rivage, face à l'eau. La vue bascule ensuite sur un plan très rapproché et flou du sol de la grotte, où l'on distingue le mouvement d'une jambe chaussée d'une botte sombre. Des taches de lumière bleutées et hexagonales apparaissent au premier plan.",
+  "zoom": null,
+  "facts": null,
+  "description": "Depuis l'ouverture d'une grotte rocheuse et sombre, on aperçoit au loin un lac sous une pleine lune brillante. Une petite silhouette se tient debout sur le rivage, face à l'eau. La vue bascule sur un plan très rapproché et flou du sol de la grotte, où l'on distingue le mouvement d'une jambe chaussée d'une botte sombre. Des taches de lumière bleutées et hexagonales apparaissent au premier plan.",
+  "budget_chars": 89,
+  "variants": [
+   "Depuis une grotte sombre, un lac brille sous la lune. Une silhouette se tient au bord de l'eau.",
+   "Une silhouette se tient au bord d'un lac sous la lune. Une botte bouge au sol.",
+   "Une silhouette face au lac sous la lune. Une botte bouge au sol."
+  ]
+ },
+ {
+  "id": "d_0056",
+  "window": [
+   490.958333,
+   496.708333
+  ],
+  "frames": [
+   491.677083,
+   493.114583,
+   494.552083,
+   495.989583
+  ],
+  "brightened": 0,
+  "raw_description": "Dans une grotte sombre et escarpée, une silhouette humaine se tient debout face à des formations rocheuses lumineuses. Au premier plan, une main tenant une dague à la lame large et incurvée est dirigée vers l'avant. La scène est plongée dans une lumière bleutée et diffuse, éclairant partiellement les parois rocheuses et les cristaux brillants au loin.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans la grotte sombre et escarpée, une main tenant une dague à la lame large et incurvée est dirigée vers l'avant. La scène est plongée dans une lumière bleutée et diffuse qui éclaire partiellement les parois rocheuses et les cristaux brillants au loin.",
+  "budget_chars": 69,
+  "variants": [
+   "Une main tient une dague incurvée dans la grotte bleue.",
+   "Une main pointe une dague dans la grotte.",
+   "Une main tient une dague incurvée."
+  ]
+ },
+ {
+  "id": "d_0057",
+  "window": [
+   496.708333,
+   502.458333
+  ],
+  "frames": [
+   497.427083,
+   498.864583,
+   500.302083,
+   501.739583
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune femme aux cheveux roux, vue de dos et de profil, observe un paysage caverneux et sombre. Dans la grotte, un animal à la fourrure claire et à la gueule ouverte repose sur un rocher. De nombreux cristaux bleus et blancs émettent une lumière vive à travers la scène rocheuse.",
+  "zoom": null,
+  "facts": null,
+  "description": "De dos et de profil, une jeune femme aux cheveux roux observe le paysage caverneux et sombre. Au centre, un animal à la fourrure claire et à la gueule ouverte repose sur un rocher. De nombreux cristaux bleus et blancs émettent une lumière vive à travers la scène rocheuse.",
+  "budget_chars": 69,
+  "variants": [
+   "Sintel observe un animal à la gueule ouverte parmi des cristaux bleus.",
+   "Un animal repose sur un rocher parmi des cristaux bleus.",
+   "Un animal repose parmi des cristaux bleus."
+  ]
+ },
+ {
+  "id": "d_0058",
+  "window": [
+   502.458333,
+   504.5
+  ],
+  "frames": [
+   502.7986108333333,
+   503.4791665,
+   504.15972216666665
+  ],
+  "brightened": 0,
+  "raw_description": "Une créature à la peau grise et texturée, dotée de cornes, se penche sur une carcasse de viande rouge et striée. La créature lèche la viande avec une langue rose. L'action se déroule dans un environnement sombre et rocheux, avec des cristaux bleus lumineux visibles à l'arrière-plan.",
+  "zoom": null,
+  "facts": null,
+  "description": "Une créature à la peau grise et texturée, dotée de cornes, se penche sur une carcasse de viande rouge et striée. La créature lèche la viande avec une langue rose. L'action se déroule dans un environnement sombre et rocheux, avec des cristaux bleus lumineux visibles à l'arrière-plan.",
+  "budget_chars": 21,
+  "variants": [
+   "La créature lèche la viande.",
+   "Elle lèche la viande.",
+   "Elle lèche."
+  ]
+ },
+ {
+  "id": "d_0059",
+  "window": [
+   529.5,
+   536.333333
+  ],
+  "frames": [
+   530.3541666250001,
+   532.062499875,
+   533.7708331250001,
+   535.479166375
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune fille aux cheveux courts et roux est vue de dos dans un environnement sombre et rocheux. Elle se penche vers l'avant pour regarder ce qui se trouve dans une cavité rocheuse devant elle. La caméra passe alors devant elle pour montrer son visage de face, révélant ses grands yeux sombres et son expression sérieuse. Elle porte un haut blanc à bretelles fines.",
+  "zoom": null,
+  "facts": null,
+  "description": "Une jeune fille aux cheveux courts et roux est vue de dos dans un environnement sombre et rocheux. Elle se penche vers l'avant pour regarder dans une cavité rocheuse. La caméra pivote pour montrer son visage de face, révélant ses grands yeux sombres et son expression sérieuse. Elle porte un haut blanc à bretelles fines.",
+  "budget_chars": 83,
+  "variants": [
+   "Sintel se penche vers une cavité rocheuse, le visage sérieux.",
+   "Sintel se penche vers une cavité, le regard sérieux.",
+   "Sintel regarde dans une cavité."
+  ]
+ },
+ {
+  "id": "d_0060",
+  "window": [
+   536.333333,
+   539.18
+  ],
+  "frames": [
+   536.689166375,
+   537.400833125,
+   538.112499875,
+   538.824166625
+  ],
+  "brightened": 1,
+  "raw_description": "Une personne aux cheveux roux, vue de dos et de profil, observe un petit dragon ailé sur un sol rocheux. Le dragon, de couleur grise avec des ailes claires, est d'abord couché, la tête basse et les yeux fermés. Il finit par lever la tête vers la personne, la gueule grande ouverte et les yeux ouverts.",
+  "zoom": null,
+  "facts": null,
+  "description": "Une personne aux cheveux roux, vue de dos et de profil, observe un petit dragon ailé sur un sol rocheux. Le dragon gris, aux ailes claires, est d'abord couché, la tête basse et les yeux fermés. Il finit par lever la tête vers la personne, la gueule grande ouverte et les yeux ouverts.",
+  "budget_chars": 31,
+  "variants": [
+   "Le dragon lève la tête.",
+   "Le dragon s'éveille."
+  ]
+ },
+ {
+  "id": "d_0061",
+  "window": [
+   543.54,
+   550.3
+  ],
+  "frames": [
+   544.385,
+   546.0749999999999,
+   547.765,
+   549.4549999999999
+  ],
+  "brightened": 1,
+  "raw_description": "Dans une grotte sombre, une jeune femme aux cheveux courts et roux s'agrippe à une paroi rocheuse parsemée de cristaux bleus lumineux. Elle semble chercher un appui, la main tendue contre la pierre rugueuse. La scène est plongée dans une atmosphère nocturne et bleutée, avec des reflets de lumière provenant de cristaux et d'une ouverture lointaine.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans une grotte sombre, une jeune femme aux cheveux courts et roux s'agrippe à une paroi rocheuse parsemée de cristaux bleus lumineux. Sa main gauche, gantée de noir, est tendue contre la pierre rugueuse pour chercher un appui. La scène est plongée dans une atmosphère nocturne et bleutée, avec des reflets de lumière provenant des cristaux et d'une ouverture lointaine.",
+  "budget_chars": 82,
+  "variants": [
+   "Sintel s'agrippe à une paroi rocheuse parsemée de cristaux bleus.",
+   "Elle s'agrippe à une paroi de cristaux bleus.",
+   "Elle s'agrippe aux cristaux bleus."
+  ]
+ },
+ {
+  "id": "d_0062",
+  "window": [
+   553.42,
+   557.38
+  ],
+  "frames": [
+   553.915,
+   554.905,
+   555.895,
+   556.885
+  ],
+  "brightened": 0,
+  "raw_description": "Dans une grotte sombre, une femme aux cheveux rouges, vêtue d'un haut blanc et d'un pantalon marron, fait face à un dragon imposant aux écailles grises. Elle tient une arme courte dans sa main droite et se tient prête au combat. Le dragon déploie ses ailes et s'approche d'elle, tandis que des cristaux bleus lumineux parsèment le sol rocheux. La scène passe ensuite à un plan rapproché sur la tête du dragon, puis montre une vue d'ensemble de la caverne sombre et escarpée.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans la grotte sombre, une femme aux cheveux courts et roux, vêtue d'un haut blanc et d'un pantalon marron, fait face à une créature ailée imposante aux écailles grises. Elle tient une arme courte de la main droite, bras tendu vers l'animal. La créature déploie ses ailes et s'avance vers elle, tandis que des cristaux bleus lumineux parsèment le sol rocheux.",
+  "budget_chars": 46,
+  "variants": [
+   "Sintel fait face au dragon.",
+   "Sintel arme face au dragon.",
+   "Sintel face au dragon."
+  ]
+ },
+ {
+  "id": "d_0063",
+  "window": [
+   559.4,
+   565.6999999999999
+  ],
+  "frames": [
+   560.1875,
+   561.7624999999999,
+   563.3375,
+   564.9124999999999
+  ],
+  "brightened": 1,
+  "raw_description": "Une femme aux cheveux courts et roux, vêtue d'un haut blanc et d'un pantalon marron, brandit une lance dans une grotte sombre. Elle fait face à un grand dragon aux écailles sombres qui se tient devant elle. Des cristaux bleus brillants sont éparpillés sur le sol rocheux autour d'eux. Une explosion de flammes orangées envahit le premier plan, masquant partiellement la scène.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans la grotte sombre, une femme aux cheveux courts et roux, vêtue d'un haut blanc et d'un pantalon marron, brandit une lance vers une créature ailée imposante aux écailles sombres. Des cristaux bleus brillants sont éparpillés sur le sol rocheux autour d'eux. Une explosion de flammes orangées envahit le premier plan, masquant partiellement la scène.",
+  "budget_chars": 76,
+  "variants": [
+   "Sintel brandit une lance face au dragon ailé. Des flammes envahissent l'image.",
+   "Sintel brandit sa lance face au dragon.",
+   "Sintel brandit sa lance."
+  ]
+ },
+ {
+  "id": "d_0064",
+  "window": [
+   570.86,
+   580.14
+  ],
+  "frames": [
+   572.02,
+   574.34,
+   576.66,
+   578.98
+  ],
+  "brightened": 0,
+  "raw_description": "Dans un paysage nocturne et rocheux, une femme aux cheveux courts et roux est allongée au sol, le regard dirigé vers l'avant. Elle porte un haut blanc à bretelles et un pantalon sombre. Derrière elle, une créature ailée s'élève dans l'obscurité. Dans l'image suivante, la femme est debout, penchée vers l'avant, tandis que les ailes de la créature s'étendent largement derrière elle.",
+  "zoom": null,
+  "facts": null,
+  "description": "Allongée sur le sol rocheux et sombre, la femme aux cheveux courts et roux porte un haut blanc à bretelles et un pantalon marron. Derrière elle, une créature ailée aux écailles sombres déploie ses ailes dans l'obscurité.",
+  "budget_chars": 115,
+  "variants": [
+   "Sintel est allongée sur le sol rocheux. Derrière elle, le dragon déploie ses ailes sombres.",
+   "Sintel est au sol. Derrière elle, le dragon déploie ses ailes.",
+   "Sintel est au sol. Le dragon déploie ses ailes."
+  ]
+ },
+ {
+  "id": "d_0065",
+  "window": [
+   581.82,
+   588.92
+  ],
+  "frames": [
+   582.7075,
+   584.4825000000001,
+   586.2574999999999,
+   588.0325
+  ],
+  "brightened": 0,
+  "raw_description": "Une femme aux cheveux rouges est allongée sur un sol rocheux et sombre. Elle porte un haut blanc et un pantalon marron, et elle est penchée vers l'avant, la main droite posée au sol. Un grand reptile ailé, vu de dos, se tient debout devant elle dans l'obscurité. L'image finale est très floue et montre des formes lumineuses et sombres en mouvement rapide.",
+  "zoom": "inconnu",
+  "facts": null,
+  "description": "La femme aux cheveux roux est allongée sur un sol rocheux et sombre, le corps penché vers l'avant et la main droite posée au sol. Devant elle, une créature ailée à la peau écailleuse est vue de dos dans l'obscurité. L'image devient très floue, ne laissant apparaître que des traînées lumineuses et sombres en mouvement rapide.",
+  "budget_chars": 87,
+  "variants": [
+   "Sintel est penchée sur le sol rocheux face au dragon de dos. L'image devient floue.",
+   "Sintel est penchée sur le sol face au dragon. L'image devient floue.",
+   "Sintel est penchée face au dragon. L'image devient floue."
+  ]
+ },
+ {
+  "id": "d_0066",
+  "window": [
+   589.76,
+   596.88
+  ],
+  "frames": [
+   590.65,
+   592.43,
+   594.21,
+   595.99
+  ],
+  "brightened": 0,
+  "raw_description": "Un dragon à la peau écailleuse et aux cornes recourbées se tient debout dans l'obscurité. La créature se penche vers une personne aux cheveux rouges allongée au sol. La tête du dragon surplombe la personne, dont le corps est partiellement visible.",
+  "zoom": null,
+  "facts": null,
+  "description": "Une créature ailée à la peau écailleuse et aux cornes recourbées se tient debout dans l'obscurité. La tête de la créature surplombe la femme aux cheveux roux allongée au sol. La créature se penche vers elle, son visage écailleux et son œil sombre se rapprochant de la femme.",
+  "budget_chars": 87,
+  "variants": [
+   "Le dragon ailé se penche vers Sintel, allongée au sol dans l'obscurité.",
+   "Le dragon se penche vers Sintel, au sol.",
+   "Le dragon surplombe Sintel."
+  ]
+ },
+ {
+  "id": "d_0067",
+  "window": [
+   604.32,
+   610.416667
+  ],
+  "frames": [
+   605.082083375,
+   606.606250125,
+   608.130416875,
+   609.654583625
+  ],
+  "brightened": 0,
+  "raw_description": "Dans une grotte sombre, une créature reptilienne à la peau écailleuse et aux cornes incurvées approche d'une jeune femme aux cheveux roux. La femme, qui semble effrayée, tient fermement une arme imposante à deux mains. Elle regarde la créature avec une expression de terreur alors que le visage du monstre, doté d'un œil rouge brillant, s'approche d'elle.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans l'obscurité d'une grotte, une créature reptilienne à la peau écailleuse et aux cornes incurvées approche d'une jeune femme aux cheveux roux. La jeune femme, l'air effrayée, tient fermement une arme imposante à deux mains. Le visage de la créature, doté d'un œil rouge brillant, s'approche de la jeune femme.",
+  "budget_chars": 74,
+  "variants": [
+   "Dans l'obscurité, une créature cornue s'approche de Sintel armée.",
+   "Une créature écailleuse s'approche de Sintel effrayée.",
+   "La créature s'approche de Sintel."
+  ]
+ },
+ {
+  "id": "d_0068",
+  "window": [
+   610.416667,
+   616.75
+  ],
+  "frames": [
+   611.208333625,
+   612.7916668749999,
+   614.375000125,
+   615.9583333749999
+  ],
+  "brightened": 0,
+  "raw_description": "Un gros plan montre la tête d'un reptile à la peau écailleuse et à l'œil orangé. La scène change pour montrer une jeune fille aux cheveux roux, l'air effrayée, qui tient un bâton. La caméra se rapproche ensuite de la silhouette de la jeune fille, qui fait face à une masse sombre et texturée. Enfin, la vue s'élargit sur la silhouette de la jeune fille de dos, contemplant une surface rocheuse et sombre.",
+  "zoom": "inconnu",
+  "facts": null,
+  "description": "En gros plan, la tête d'une créature reptilienne à la peau écailleuse et à l'œil orangé est visible. La jeune femme aux cheveux roux, l'air effrayée, tient un bâton. De dos, la silhouette de la jeune femme fait face à une masse sombre et texturée.",
+  "budget_chars": 77,
+  "variants": [
+   "Gros plan sur la tête écailleuse d'une créature à l'œil orangé.",
+   "La créature écailleuse fait face à la jeune femme.",
+   "La créature fait face à elle."
+  ]
+ },
+ {
+  "id": "d_0069",
+  "window": [
+   616.75,
+   621.75
+  ],
+  "frames": [
+   617.375,
+   618.625,
+   619.875,
+   621.125
+  ],
+  "brightened": 0,
+  "raw_description": "Dans une grotte sombre, une jeune femme aux cheveux roux se tient debout face à une créature massive et écailleuse qui repose au sol. La femme a une expression de peur et regarde la créature. La scène passe ensuite à un gros plan sur le visage de la jeune femme, qui a les yeux écarquillés et la bouche entrouverte.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans une grotte sombre, la jeune femme aux cheveux roux se tient debout, les mains levées, face à une créature massive et écailleuse qui repose au sol. La scène passe en gros plan sur le visage de la jeune femme aux yeux écarquillés et à la bouche entrouverte.",
+  "budget_chars": 59,
+  "variants": [
+   "Sintel, les mains levées, fait face à la créature.",
+   "Sintel fait face à la créature.",
+   "Sintel face à la créature."
+  ]
+ },
+ {
+  "id": "d_0070",
+  "window": [
+   621.75,
+   631.375
+  ],
+  "frames": [
+   622.953125,
+   625.359375,
+   627.765625,
+   630.171875
+  ],
+  "brightened": 0,
+  "raw_description": "Un dragon à la peau écailleuse et aux cornes incurvées apparaît dans une grotte sombre, avec des cristaux bleus lumineux en arrière-plan. La créature est vue de profil, révélant un œil rouge et une mâchoire dentée. La scène change pour montrer une étendue de liquide rouge sombre, semblable à du sang, s'étalant sur un sol rocheux et irrégulier.",
+  "zoom": null,
+  "facts": null,
+  "description": "Une créature massive à la peau écailleuse et aux cornes incurvées est vue de profil dans une grotte sombre, révélant un œil rouge et une mâchoire dentée. En arrière-plan, des cristaux bleus lumineux brillent dans l'obscurité. Un liquide rouge sombre s'étale sur le sol rocheux et irrégulier.",
+  "budget_chars": 119,
+  "variants": [
+   "De profil dans une grotte sombre, une créature écailleuse aux cornes incurvées montre un œil rouge et une mâchoire dentée.",
+   "Profil d'une créature écailleuse à l'œil rouge dans une grotte sombre.",
+   "La créature écailleuse montre son œil rouge en profil."
+  ]
+ },
+ {
+  "id": "d_0071",
+  "window": [
+   631.375,
+   641.0
+  ],
+  "frames": [
+   632.578125,
+   634.984375,
+   637.390625,
+   639.796875
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune femme aux cheveux courts et clairs regarde vers le haut avec une expression de peur et les yeux écarquillés. Elle se trouve dans un paysage désertique et sombre sous un ciel nocturne. Dans les dernières images, elle porte une main gantée vers son visage, tandis que l'arrière-plan reste plongé dans l'obscurité.",
+  "zoom": null,
+  "facts": null,
+  "description": "Une jeune femme aux cheveux courts et clairs regarde vers le haut, les yeux écarquillés et la bouche entrouverte. Dans l'obscurité d'un paysage désertique, elle porte une main gantée vers son visage.",
+  "budget_chars": 119,
+  "variants": [
+   "Sintel, les yeux écarquillés et la bouche ouverte, lève une main gantée vers son visage dans l'obscurité.",
+   "Sintel regarde vers le haut, la bouche entrouverte, une main gantée vers son visage.",
+   "Sintel regarde vers le haut, la bouche entrouverte."
+  ]
+ },
+ {
+  "id": "d_0072",
+  "window": [
+   641.0,
+   647.458333
+  ],
+  "frames": [
+   641.8072916250001,
+   643.421874875,
+   645.0364581250001,
+   646.651041375
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune femme aux cheveux courts, bicolores (gris et rouge), se tient dans l'obscurité. Elle porte un débardeur gris, des gants sans doigts et présente des tatouages sur l'épaule et le bras. Elle semble effrayée, la bouche entrouverte, et tend une main gantée vers l'avant.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans l'obscurité, une jeune femme aux cheveux courts bicolores, gris et rouges, porte un débardeur gris et des gants sans doigts. Elle présente des tatouages sombres sur l'épaule et le bras, ainsi que des marques sombres sur la peau. La bouche entrouverte, elle tend une main gantée vers l'avant.",
+  "budget_chars": 78,
+  "variants": [
+   "Sintel tend une main gantée vers l'avant, la bouche entrouverte.",
+   "Elle tend une main gantée vers l'avant.",
+   "Elle tend la main vers l'avant."
+  ]
+ },
+ {
+  "id": "d_0073",
+  "window": [
+   647.458333,
+   654.958333
+  ],
+  "frames": [
+   648.395833,
+   650.270833,
+   652.145833,
+   654.020833
+  ],
+  "brightened": 0,
+  "raw_description": "Dans un environnement rocheux et sombre, une créature massive à la peau écailleuse et texturée occupe tout le premier plan à gauche. À droite, une jeune femme aux cheveux courts et bruns, vêtue d'un débardeur gris et d'un pantalon sombre, se tient debout et regarde la créature. Elle a les mains levées devant elle dans une posture de surprise ou de défense. L'arrière-plan est composé de formations rocheuses plongées dans l'obscurité, avec quelques lueurs bleutées au loin.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans un environnement rocheux et sombre, une créature massive à la peau écailleuse et texturée occupe le premier plan à gauche. À droite, une jeune femme aux cheveux courts et bruns, vêtue d'un débardeur gris et d'un pantalon sombre, se tient debout face à elle, les mains levées devant elle. L'arrière-plan est composé de formations rocheuses plongées dans l'obscurité avec quelques lueurs bleutées au loin.",
+  "budget_chars": 92,
+  "variants": [
+   "Dans une grotte sombre, Sintel fait face à une créature massive et écailleuse.",
+   "Sintel se tient debout face à une créature écailleuse dans l'obscurité.",
+   "Sintel fait face à la créature dans la grotte."
+  ]
+ },
+ {
+  "id": "d_0074",
+  "window": [
+   654.958333,
+   661.125
+  ],
+  "frames": [
+   655.729166375,
+   657.2708331250001,
+   658.812499875,
+   660.3541666250001
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune femme aux cheveux courts, bicolores rouge et gris, se tient dans une grotte sombre. Elle porte un débardeur gris et une protection métallique sur l'épaule gauche. Son visage est marqué par des traînées sombres et elle regarde vers le haut avec une expression de crainte ou d'étonnement. En arrière-plan, des cristaux bleus brillent dans l'obscurité de la caverne.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans une grotte sombre, une jeune femme aux cheveux courts bicolores rouge et gris regarde vers le haut, le visage marqué par des traînées sombres et une expression de crainte. Elle porte un débardeur gris et une protection métallique sur l'épaule gauche. En arrière-plan, des cristaux bleus brillent dans l'obscurité.",
+  "budget_chars": 74,
+  "variants": [
+   "Sintel regarde vers le haut, effrayée, dans une grotte aux cristaux bleus.",
+   "Sintel lève les yeux, craintive, parmi des cristaux bleus.",
+   "Sintel regarde vers le haut, effrayée."
+  ]
+ },
+ {
+  "id": "d_0075",
+  "window": [
+   661.125,
+   666.208333
+  ],
+  "frames": [
+   661.7604166250001,
+   663.031249875,
+   664.3020831250001,
+   665.572916375
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune femme aux cheveux bruns et écorchés regarde vers le haut avec une expression effrayée. Elle porte un débardeur gris et des gants, et semble être en mouvement dans un environnement sombre. Un gros reptile à la peau écailleuse et aux cornes incurvées apparaît ensuite en gros plan, révélant un œil rouge brillant dans l'obscurité. L'animal occupe la majeure partie de l'image, montrant une texture rugueuse et des dents pointues.",
+  "zoom": null,
+  "facts": null,
+  "description": "La jeune femme aux cheveux bicolores rouge et gris, le visage marqué de traînées sombres et l'expression effrayée, est vue en plongée alors qu'elle semble en mouvement. Un gros reptile à la peau écailleuse et aux cornes incurvées occupe le reste de l'image, révélant un œil rouge brillant dans l'obscurité.",
+  "budget_chars": 60,
+  "variants": [
+   "Sintel, effrayée, fait face à un œil rouge géant.",
+   "Un œil rouge brille dans l'obscurité.",
+   "Un œil rouge brille."
+  ]
+ },
+ {
+  "id": "d_0076",
+  "window": [
+   666.208333,
+   671.208333
+  ],
+  "frames": [
+   666.833333,
+   668.083333,
+   669.333333,
+   670.583333
+  ],
+  "brightened": 0,
+  "raw_description": "Dans une grotte sombre, une femme aux cheveux courts et bruns se tient debout face à un dragon blanc couché au sol. La créature repose sur une flaque de sang. La femme, qui porte un débardeur gris et un tatouage sur l'épaché, affiche une expression de détresse et de peur. Des éclats lumineux flottent dans l'air autour d'elle.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans une grotte sombre, une femme aux cheveux courts et bicolores rouge et gris se tient debout face à un grand reptile blanc couché au sol dans une flaque de sang. La femme, qui porte un débardeur gris et un tatouage sur l'épaule, affiche une expression de détresse et de peur. Des éclats lumineux flottent dans l'air autour d'elle.",
+  "budget_chars": 59,
+  "variants": [
+   "Sintel, terrifiée, fait face à un reptile blanc sanglant.",
+   "Sintel fait face au reptile blanc.",
+   "Sintel face au reptile."
+  ]
+ },
+ {
+  "id": "d_0077",
+  "window": [
+   671.208333,
+   677.0
+  ],
+  "frames": [
+   671.932291375,
+   673.3802081250001,
+   674.828124875,
+   676.2760416250001
+  ],
+  "brightened": 1,
+  "raw_description": "Une femme aux cheveux courts et bruns court dans une grotte sombre. Son épaule est marquée par une blessure rouge. Elle s'arrête et regarde vers l'ouverture de la caverne, où de gros rochers flottent dans un ciel lumineux. Des débris tombent du plafond de la grotte.",
+  "zoom": null,
+  "facts": null,
+  "description": "La femme aux cheveux courts et bicolores rouge et gris court dans la grotte sombre. Elle s'arrête et regarde vers l'ouverture de la caverne où de gros rochers flottent dans un ciel lumineux. Des débris tombent du plafond de la grotte.",
+  "budget_chars": 70,
+  "variants": [
+   "Sintel court dans la grotte et regarde les rochers flottants.",
+   "Elle court vers l'ouverture et les rochers flottants.",
+   "Elle court vers les rochers flottants."
+  ]
+ },
+ {
+  "id": "d_0078",
+  "window": [
+   677.0,
+   684.416667
+  ],
+  "frames": [
+   677.9270833749999,
+   679.781250125,
+   681.6354168749999,
+   683.489583625
+  ],
+  "brightened": 0,
+  "raw_description": "L'image montre l'intérieur d'une grotte sombre et rocheuse. Des amas de pierres et de rochers de tailles variées occupent le sol et les parois de la cavité. Sur la droite, des racines d'arbre épaisses descendent le long de la paroi rocheuse. L'ensemble de la scène est plongé dans une lumière tamisée et des tons brunâtres.",
+  "zoom": null,
+  "facts": null,
+  "description": "L'intérieur de la grotte est sombre et rocheux, avec des amas de pierres de tailles variées sur le sol et les parois. Sur la droite, de grosses racines d'arbre descendent le long de la paroi rocheuse. La scène est plongée dans une lumière tamisée aux tons brunâtres.",
+  "budget_chars": 91,
+  "variants": [
+   "L'intérieur de la grotte est sombre et rocheux, avec des racines descendant le long de la paroi.",
+   "La grotte est sombre et rocheuse, avec de grosses racines à droite.",
+   "La grotte est sombre et rocheuse."
+  ]
+ },
+ {
+  "id": "d_0079",
+  "window": [
+   684.416667,
+   692.354167
+  ],
+  "frames": [
+   685.4088545,
+   687.3932295,
+   689.3776045,
+   691.3619795
+  ],
+  "brightened": 2,
+  "raw_description": "Dans un paysage désertique et brumeux aux tons ocre, un immense arbre aux racines apparentes s'élève sur la gauche. Au loin, une silhouette humaine est assise seule sur une colline rocheuse, face à une chaîne de montagnes escarpées noyées dans la brume. Sur une autre image, la silhouette est vue de profil, assise au bord d'une falaise escarpée, le regard tourné vers le sol.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans un paysage désertique et brumeux aux tons ocre, un immense arbre aux racines apparentes s'élève sur la gauche. Au loin, une silhouette humaine est assise seule sur une colline rocheuse, face à une chaîne de montagnes escarpées noyées dans la brume. Sur une autre image, la silhouette est vue de profil, assise au bord d'une falaise escarpée, le regard tourné vers le sol.",
+  "budget_chars": 97,
+  "variants": [
+   "Un arbre immense domine un désert brumeux. Une silhouette est assise face à des montagnes.",
+   "Une silhouette est assise sur une colline rocheuse face aux montagnes.",
+   "Une silhouette est assise au bord d'une falaise."
+  ]
+ },
+ {
+  "id": "d_0080",
+  "window": [
+   692.354167,
+   700.291667
+  ],
+  "frames": [
+   693.3463545,
+   695.3307295,
+   697.3151045,
+   699.2994795
+  ],
+  "brightened": 0,
+  "raw_description": "Une femme aux cheveux courts est assise au bord d'une falaise rocheuse, face à un paysage montagneux brumeux. Elle porte un haut clair et un pantalon foncé, et ses mains sont jointes devant elle. Le ciel est d'une teinte orangée et diffuse, et quelques petits débris ou particules flottent dans l'air.",
+  "zoom": null,
+  "facts": null,
+  "description": "Assise au bord d'une falaise rocheuse face à un paysage montagneux brumeux, une femme aux cheveux courts porte un haut clair et un pantalon foncé. Ses mains sont jointes devant elle sous un ciel orangé où flottent quelques particules.",
+  "budget_chars": 97,
+  "variants": [
+   "La silhouette est assise au bord d'une falaise face à des montagnes brumeuses sous un ciel orangé.",
+   "Elle est assise face aux montagnes brumeuses sous un ciel orangé.",
+   "Elle est assise face aux montagnes brumeuses."
+  ]
+ },
+ {
+  "id": "d_0081",
+  "window": [
+   700.291667,
+   710.041667
+  ],
+  "frames": [
+   701.510417,
+   703.947917,
+   706.385417,
+   708.822917
+  ],
+  "brightened": 4,
+  "raw_description": "Une jeune femme aux cheveux courts, roux et gris, se tient devant un tronc d'arbre massif dont les racines s'étendent au sol. Elle porte un débardeur gris et présente une éraflure sur l'épaule droite ainsi qu'un tatouage sur le haut du bras. Elle baisse la tête, les yeux fermés, avant de lever le regard vers l'avant avec une expression de surprise ou d'inquiétude.",
+  "zoom": null,
+  "facts": null,
+  "description": "Devant un tronc d'arbre massif dont les racines s'étendent au sol, une jeune femme aux cheveux courts roux et gris porte un débardeur gris et présente une éraflure sur l'épaule droite ainsi qu'un tatouage sur le haut du bras. Elle baisse la tête, les yeux fermés, puis lève le regard vers l'avant avec une expression d'inquiétude.",
+  "budget_chars": 121,
+  "variants": [
+   "Devant un tronc massif, une femme aux cheveux roux et gris baisse la tête, puis lève un regard inquiet.",
+   "Une femme aux cheveux roux et gris baisse la tête, puis lève un regard inquiet.",
+   "La femme baisse la tête, puis lève un regard inquiet."
+  ]
+ },
+ {
+  "id": "d_0082",
+  "window": [
+   710.041667,
+   718.5520835
+  ],
+  "frames": [
+   711.1054690625,
+   713.2330731874999,
+   715.3606773125,
+   717.4882814375
+  ],
+  "brightened": 0,
+  "raw_description": "Une ceinture en cuir repose sur un sol rocheux et accidenté. Dans l'image suivante, la ceinture est toujours au sol, mais on aperçoit les pieds d'une personne chaussée de bottes sombres qui marchent sur la roche. La vue s'élargit pour montrer une personne de dos, debout sur un relief rocheux, face à un paysage montagneux brumeux où poussent de grandes fleurs blanches.",
+  "zoom": null,
+  "facts": null,
+  "description": "Une ceinture en cuir repose sur un sol rocheux et accidenté. Des pieds chaussés de bottes sombres marchent sur la roche, puis une personne de dos se tient debout sur un relief rocheux, face à un paysage montagneux brumeux où poussent de grandes fleurs blanches.",
+  "budget_chars": 105,
+  "variants": [
+   "Une ceinture en cuir repose sur la roche. Des pieds en bottes marchent, puis une silhouette de dos contemple des fleurs blanches et des montagnes brumeuses.",
+   "Une ceinture en cuir est sur la roche. Des pieds marchent, puis une silhouette fait face aux montagnes brumeuses.",
+   "Une ceinture en cuir est sur la roche. Une silhouette contemple les montagnes."
+  ]
+ },
+ {
+  "id": "d_0083",
+  "window": [
+   718.5520835,
+   727.0625
+  ],
+  "frames": [
+   719.6158855625,
+   721.7434896875,
+   723.8710938125,
+   725.9986979375
+  ],
+  "brightened": 0,
+  "raw_description": "Une femme se tient debout, de dos, sur un chemin rocheux et escarpé. Elle regarde vers des montagnes enneigées baignées dans une lumière dorée et brumeuse. Au premier plan, à droite, de grandes fleurs blanches en forme de cloches pendent de longues tiges vertes. Le soleil brille intensément sur la gauche, créant un fort contre-jour.",
+  "zoom": "Les personnages ne tiennent ni ne manipulent aucun objet. On peut reconnaître des fleurs blanches et un couteau posé au sol.",
+  "facts": null,
+  "description": "Une femme se tient debout, de dos, sur un chemin rocheux escarpé face à des montagnes enneigées baignées dans une lumière dorée et brumeuse. Au premier plan à droite, de grandes fleurs blanches en forme de cloches pendent de longues tiges vertes. Un soleil éclatant crée un fort contre-jour sur la gauche de l'image.",
+  "budget_chars": 105,
+  "variants": [
+   "Elle se tient debout, de dos, sur un chemin rocheux face à des montagnes enneigées sous une lumière dorée.",
+   "Elle contemple des montagnes enneigées et des fleurs blanches sous un soleil éclatant.",
+   "Elle fait face à des montagnes enneigées et des fleurs blanches."
+  ]
+ },
+ {
+  "id": "d_0084",
+  "window": [
+   727.0625,
+   735.5729165
+  ],
+  "frames": [
+   728.1263020625,
+   730.2539061875,
+   732.3815103125,
+   734.5091144375
+  ],
+  "brightened": 0,
+  "raw_description": "Une silhouette humaine se tient debout sur un chemin rocheux, face à une chaîne de montagnes brumeuses sous une lumière dorée. Dans l'image suivante, la personne est assise sur le sol rocailleux, regardant vers l'horizon. Un petit animal ailé, semblable à une chauve-souris, apparaît alors sur le chemin, à côté de la personne assise. Le paysage est bordé au premier plan par de grandes fleurs blanches en forme de cloches suspendues à de longues tiges vertes.",
+  "zoom": "Les personnages ne tiennent ni ne manipulent aucun objet. On peut reconnaître un couteau posé sur le sol rocheux.",
+  "facts": null,
+  "description": "Une silhouette humaine se tient debout sur un chemin rocheux, face à des montagnes brumeuses sous une lumière dorée. Au premier plan à droite, de grandes fleurs blanches en forme de cloches pendent de longues tiges vertes. Un couteau est posé sur le sol rocheux à côté de la silhouette.",
+  "budget_chars": 105,
+  "variants": [
+   "La silhouette fait face à des montagnes brumeuses sous une lumière dorée. Un couteau repose sur le sol.",
+   "La silhouette contemple des montagnes brumeuses. Un couteau gît sur le sol.",
+   "Un couteau repose au sol près de la silhouette."
+  ]
+ },
+ {
+  "id": "d_0085",
+  "window": [
+   735.5729165,
+   744.083333
+  ],
+  "frames": [
+   736.6367185625,
+   738.7643226875,
+   740.8919268125001,
+   743.0195309375
+  ],
+  "brightened": 0,
+  "raw_description": "Un paysage montagneux baigné par une lumière dorée et brumeuse s'étend sous un ciel clair. Au premier plan, sur un sol rocheux et aride, de grandes fleurs blanches en forme de cloches pendent de longues tiges vertes sur la droite. À l'arrière-plan, des sommets montagneux enneigés émergent d'une brume épaisse. Un petit animal, ressemblant à un reptile, est allongé au centre du chemin rocheux, tourné vers les montagnes.",
+  "zoom": "Inconnu.",
+  "facts": null,
+  "description": "Un paysage montagneux baigné par une lumière dorée et brumeuse s'étend sous un ciel clair. Au premier plan à droite, de grandes fleurs blanches en forme de cloches pendent de longues tiges vertes. Au centre, sur le chemin rocheux et aride, un petit animal ressemblant à un reptile est allongé, tourné vers les sommets enneigés qui émergent d'une brume épaisse à l'arrière-plan.",
+  "budget_chars": 105,
+  "variants": [
+   "Des fleurs blanches pendent à droite. Un petit reptile est allongé sur un chemin rocheux face aux sommets enneigés.",
+   "Des fleurs blanches pendent à droite. Un reptile est allongé sur le chemin rocheux.",
+   "Des fleurs blanches et un reptile sur le chemin rocheux."
+  ]
+ },
+ {
+  "id": "d_0086",
+  "window": [
+   744.083333,
+   747.8
+  ],
+  "frames": [
+   744.547916375,
+   745.477083125,
+   746.406249875,
+   747.335416625
+  ],
+  "brightened": 0,
+  "raw_description": "Sur un fond noir, le texte blanc « DIRECTED BY » apparaît en lettres capitales, suivi en dessous du nom « COLIN LEVY » écrit en plus grand.",
+  "zoom": null,
+  "facts": null,
+  "description": "Sur un fond noir, le texte blanc « DIRECTED BY » apparaît en lettres capitales, suivi en dessous du nom « COLIN LEVY » écrit en plus grand.",
+  "budget_chars": 43,
+  "variants": [
+   "Sur fond noir, texte : DIRECTED BY COLIN LEVY.",
+   "Texte : DIRECTED BY COLIN LEVY.",
+   "DIRECTED BY COLIN LEVY."
+  ]
+ },
+ {
+  "id": "d_0087",
+  "window": [
+   805.9,
+   814.8
+  ],
+  "frames": [
+   807.0124999999999,
+   809.2375,
+   811.4625,
+   813.6875
+  ],
+  "brightened": 0,
+  "raw_description": "Sur un fond de bois sombre, des listes de noms et de remerciements s'affichent en blanc. En bas à droite, plusieurs pommes rouges et vertes sont posées sur une surface claire, à côté d'une illustration représentant une femme debout tenant un bâton. L'image finale montre une partie de cette illustration ainsi qu'un dessin de bâtiments en contrebas.",
+  "zoom": null,
+  "facts": null,
+  "description": "Sur un fond de bois sombre, des listes de noms et de remerciements s'affichent en blanc. En bas à droite, plusieurs pommes rouges et vertes sont posées sur une surface claire, à côté d'une illustration représentant une femme debout tenant un bâton. L'image montre également une partie de cette illustration ainsi qu'un dessin de bâtiments en contrebas.",
+  "budget_chars": 110,
+  "variants": [
+   "Sur un fond de bois sombre, des noms s'affichent en blanc. Des pommes et une illustration sont posées en bas.",
+   "Des noms blancs défilent sur du bois sombre. Des pommes et une illustration sont en bas à droite.",
+   "Des noms blancs s'affichent sur du bois sombre."
+  ]
+ },
+ {
+  "id": "d_0088",
+  "window": [
+   814.8,
+   823.6999999999999
+  ],
+  "frames": [
+   815.9124999999999,
+   818.1374999999999,
+   820.3625,
+   822.5875
+  ],
+  "brightened": 2,
+  "raw_description": "Une série de textes blancs sur fond de bois sombre présente les crédits de production, notamment les sponsors comme DivX, Inc. et THP Games. Des illustrations de style croquis, représentant des paysages de villes anciennes et des créatures, sont éparpillées sur les côtés comme des photos posées sur une table en bois. Les images s'éclaircissent progressivement, révélant davantage de détails sur les dessins, comme une silhouette de créature sur la droite.",
+  "zoom": null,
+  "facts": null,
+  "description": "Sur un fond de bois sombre, des textes blancs listent les crédits de production, incluant les sponsors DivX, Inc. et THP Games. Des croquis de paysages urbains et de créatures sont éparpillés sur le bois comme des photos posées sur une table. L'image s'éclaircit, révélant une silhouette de créature sur un dessin à droite.",
+  "budget_chars": 110,
+  "variants": [
+   "Sur un fond de bois sombre, des crédits blancs et des croquis de paysages et de créatures sont éparpillés.",
+   "Des crédits blancs et des croquis de paysages et de créatures sont posés sur du bois sombre.",
+   "Des crédits et des croquis sont éparpillés sur du bois sombre."
+  ]
+ },
+ {
+  "id": "d_0089",
+  "window": [
+   823.6999999999999,
+   832.6
+  ],
+  "frames": [
+   824.8125,
+   827.0374999999999,
+   829.2625,
+   831.4875
+  ],
+  "brightened": 3,
+  "raw_description": "Une série d'images montre une liste de noms de sponsors sur un fond sombre et texturé. Les noms sont écrits en blanc et organisés en colonnes. Les images sont des versions éclaircies de la même liste de noms, avec un contraste plus élevé.",
+  "zoom": null,
+  "facts": null,
+  "description": "Sur un fond de bois sombre et texturé, une liste de noms de sponsors est écrite en blanc et organisée en colonnes. Les versions éclaircies de l'image révèlent la même liste de noms avec un contraste plus élevé sur le fond texturé.",
+  "budget_chars": 110,
+  "variants": [
+   "Sur un fond de bois sombre, une liste de sponsors s'affiche en blanc en colonnes.",
+   "Une liste de sponsors blancs s'organise en colonnes sur du bois sombre.",
+   "Des noms de sponsors blancs s'affichent sur du bois sombre."
+  ]
+ },
+ {
+  "id": "d_0090",
+  "window": [
+   832.6,
+   841.5
+  ],
+  "frames": [
+   833.7125,
+   835.9375,
+   838.1625,
+   840.3875
+  ],
+  "brightened": 4,
+  "raw_description": "Une série de listes de noms, écrits en blanc sur des fonds noirs, défilent de haut en bas. Les noms sont disposés en colonnes et en lignes, couvrant l'intégralité de l'image. Les versions éclaircies montrent les mêmes listes de noms, mais sur un fond gris clair.",
+  "zoom": null,
+  "facts": null,
+  "description": "Des listes de noms blancs défilent de haut en bas sur un fond noir, organisées en colonnes et en lignes qui couvrent l'intégralité de l'image. Les versions éclaircies révèlent les mêmes listes de noms sur un fond gris clair.",
+  "budget_chars": 110,
+  "variants": [
+   "Des listes de noms blancs défilent en colonnes sur fond noir, puis sur fond gris clair.",
+   "Des listes de noms blancs défilent sur fond noir, puis sur fond gris clair.",
+   "Des noms blancs défilent sur fond noir et gris clair."
+  ]
+ },
+ {
+  "id": "d_0091",
+  "window": [
+   841.5,
+   850.4
+  ],
+  "frames": [
+   842.6125,
+   844.8375,
+   847.0625,
+   849.2875
+  ],
+  "brightened": 4,
+  "raw_description": "Une série de textes blancs sur fond noir présente de nombreux noms de personnes, disposés en colonnes. Les noms sont écrits en lettres capitales et s'étendent sur toute la largeur de l'image. Les images sont des versions éclaircies de listes de noms sur fond sombre.",
+  "zoom": null,
+  "facts": null,
+  "description": "De nombreux noms de personnes, écrits en lettres capitales blanches, sont disposés en colonnes sur un fond noir. Les versions éclaircies révèlent ces mêmes listes de noms sur un fond gris clair.",
+  "budget_chars": 110,
+  "variants": [
+   "Des noms en lettres capitales blanches défilent en colonnes sur fond noir, puis sur fond gris clair.",
+   "Des noms blancs défilent en colonnes sur fond noir, puis sur fond gris clair.",
+   "Des noms blancs défilent sur fond noir, puis gris clair."
+  ]
+ },
+ {
+  "id": "d_0092",
+  "window": [
+   857.6,
+   860.5799999999999
+  ],
+  "frames": [
+   857.9725,
+   858.7175,
+   859.4625,
+   860.2075
+  ],
+  "brightened": 4,
+  "raw_description": "Une série de gros plans sur des listes de noms imprimées en blanc sur un fond noir. Les noms sont disposés en colonnes et couvrent la quasi-totalité de l'image. La lumière semble provenir de l'arrière, créant un effet de transparence sur le papier.",
+  "zoom": null,
+  "facts": null,
+  "description": "Des gros plans sur des listes de noms imprimés en blanc sur un fond noir couvrent la quasi-totalité de l'image. Les noms sont disposés en colonnes. La lumière semble provenir de l'arrière, créant un effet de transparence sur le papier.",
+  "budget_chars": 33,
+  "variants": [
+   "Des noms blancs défilent.",
+   "Noms blancs défilant.",
+   "Noms défilent."
+  ]
+ },
+ {
+  "id": "d_0093",
+  "window": [
+   861.68,
+   868.6999999999999
+  ],
+  "frames": [
+   862.5574999999999,
+   864.3125,
+   866.0674999999999,
+   867.8225
+  ],
+  "brightened": 4,
+  "raw_description": "Il n'y a aucune image de film, personnage ou action à décrire dans ces fichiers. Les images fournies ne sont que des listes de noms de personnes sur des fonds noirs ou gris, présentées sous forme de texte.",
+  "zoom": "inconnu",
+  "facts": null,
+  "description": "Des listes de noms écrits en blanc sur un fond noir ou gris couvrent l'intégralité de l'image. Les noms sont disposés en colonnes serrées.",
+  "budget_chars": 86,
+  "variants": [
+   "Des listes de noms blancs défilent en colonnes sur fond noir et gris.",
+   "Des noms blancs défilent en colonnes sur fond noir et gris.",
+   "Des noms blancs défilent sur fond noir et gris."
+  ]
+ },
+ {
+  "id": "d_0094",
+  "window": [
+   869.16,
+   872.36
+  ],
+  "frames": [
+   869.56,
+   870.36,
+   871.16,
+   871.96
+  ],
+  "brightened": 4,
+  "raw_description": "Une liste de noms est écrite en blanc sur un fond noir. Sur la droite, une partie d'un personnage de profil est visible, portant une tenue marron et un couvre-chef. L'arrière-plan est composé de textures marron et noires.",
+  "zoom": null,
+  "facts": null,
+  "description": "Une liste de noms écrits en blanc sur un fond noir occupe l'image. Sur la droite, le profil d'un personnage portant un couvre-chef et une tenue marron est partiellement visible. L'arrière-plan présente des textures marron et noires.",
+  "budget_chars": 36,
+  "variants": [
+   "Noms blancs sur fond noir.",
+   "Noms blancs défilent."
+  ]
+ },
+ {
+  "id": "d_0095",
+  "window": [
+   873.74,
+   880.87
+  ],
+  "frames": [
+   874.63125,
+   876.41375,
+   878.19625,
+   879.97875
+  ],
+  "brightened": 3,
+  "raw_description": "Sur un fond de planches de bois sombre, plusieurs croquis sur papier jauni sont disposés. En haut à gauche, un dessin montre un personnage aux cheveux rouges portant une tunique et des bottes. En bas à droite, un autre croquis représente trois créatures fantastiques, dont une petite fille et un petit dragon. Des textes blancs listent les crédits de la chanson \"I Move On\" ainsi que les organismes ayant soutenu la réalisation de Sintel.",
+  "zoom": null,
+  "facts": null,
+  "description": "Sur des planches de bois sombre, plusieurs croquis sur papier jauni sont disposés. En haut à gauche, un dessin montre un personnage aux cheveux rouges portant une tunique et des bottes. En bas à droite, un autre croquis représente trois créatures fantastiques, dont une petite fille et un petit dragon. Des textes blancs listent les crédits de la chanson \"I Move On\" ainsi que les organismes ayant soutenu la réalisation de Sintel.",
+  "budget_chars": 87,
+  "variants": [
+   "Des croquis sur papier jauni sont posés sur des planches de bois sombre.",
+   "Des croquis sur papier jauni reposent sur du bois sombre.",
+   "Des croquis sur du bois sombre."
+  ]
+ },
+ {
+  "id": "d_0096",
+  "window": [
+   880.87,
+   888.0
+  ],
+  "frames": [
+   881.76125,
+   883.54375,
+   885.32625,
+   887.10875
+  ],
+  "brightened": 1,
+  "raw_description": "Sur un fond de planches de bois verticales, plusieurs dessins sur papier jauni sont disposés en diagonale. Le dessin de droite montre une petite fille avec un dinosaure, accompagnée d'un personnage ailé et d'un petit animal hérisson. Le texte en blanc en haut de l'image indique « NETHERLANDS FILM FUND » suivi de plusieurs noms de villes et de régions.",
+  "zoom": null,
+  "facts": null,
+  "description": "Sur des planches de bois verticales, plusieurs dessins sur papier jauni sont disposés en diagonale. Le dessin de droite montre une petite fille debout à côté d'un dinosaure, accompagnée d'un personnage ailé et d'un petit animal hérisson. Le texte blanc en haut de l'image indique « NETHERLANDS FILM FUND » suivi de « City of Amsterdam, Pieken in de Delta, EFRO, province of Noord-Holland ».",
+  "budget_chars": 87,
+  "variants": [
+   "Des dessins sur papier jauni sont disposés en diagonale sur des planches de bois. Un texte blanc affiche \"NETHERLANDS FILM FUND\" et des noms de partenaires.",
+   "Des dessins sur papier jauni sont disposés en diagonale sur du bois. Un texte blanc affiche \"NETHERLANDS FILM FUND\".",
+   "Des dessins sur papier jauni sont disposés en diagonale sur du bois."
+  ]
+ }
+]

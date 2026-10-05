@@ -1,0 +1,494 @@
+[
+ {
+  "id": "d_0000",
+  "horaire": "0:09,5 – 0:15,7",
+  "debut": 9.5,
+  "fin": 15.7,
+  "place_s": 5.8,
+  "place_caracteres": 75,
+  "statut": "automatique",
+  "texte": "Une femme aux longs cheveux bruns dort sous une couverture marron.",
+  "voix_s": 4.47,
+  "acceleration": 1.0,
+  "description": "Une personne aux longs cheveux bruns est allongée, les yeux clos et le visage tourné vers la droite. Elle repose la tête sur un oreiller blanc et est recouverte d'une couverture marron. En arrière-plan, des nuages s'étendent sous un ciel aux teintes orangées.",
+  "variantes": [
+   "Une femme aux longs cheveux bruns dort sous une couverture marron.",
+   "Une femme dort sous une couverture marron.",
+   "Une femme dort sous une couverture."
+  ],
+  "faits_ecartes": []
+ },
+ {
+  "id": "d_0001",
+  "horaire": "0:15,7 – 0:21,9",
+  "debut": 15.7,
+  "fin": 21.9,
+  "place_s": 5.8,
+  "place_caracteres": 75,
+  "statut": "automatique",
+  "texte": "Elle regarde l'avant, un œil ouvert et l'autre plissé. Des nuages.",
+  "voix_s": 4.88,
+  "acceleration": 1.0,
+  "description": "Une personne aux longs cheveux bruns est allongée sur un oreiller, sous une couverture marron. Elle regarde vers l'avant avec un œil ouvert et l'autre plissé. En arrière-plan, des nuages s'étendent sous un ciel clair et lumineux.",
+  "variantes": [
+   "Elle regarde l'avant, un œil ouvert et l'autre plissé. Des nuages.",
+   "Elle regarde l'avant, un œil ouvert, l'autre plissé.",
+   "Elle regarde l'avant, un œil plissé."
+  ],
+  "faits_ecartes": []
+ },
+ {
+  "id": "d_0002",
+  "horaire": "0:27,0 – 0:29,7",
+  "debut": 27.0,
+  "fin": 29.7,
+  "place_s": 2.3,
+  "place_caracteres": 29,
+  "statut": "automatique",
+  "texte": "Elle regarde en haut.",
+  "voix_s": 1.68,
+  "acceleration": 1.0,
+  "description": "La personne aux longs cheveux bruns est allongée sur le dos, la tête tournée vers la droite. Elle porte un vêtement marron avec un col blanc et regarde vers le haut avec une expression calme. En arrière-plan, des nuages volumineux occupent l'espace sous un ciel clair et lumineux.",
+  "variantes": [
+   "Elle regarde en haut.",
+   "Elle regarde le ciel.",
+   "Elle regarde."
+  ],
+  "faits_ecartes": []
+ },
+ {
+  "id": "d_0003",
+  "horaire": "0:32,0 – 0:34,4",
+  "debut": 32.0,
+  "fin": 34.4,
+  "place_s": 2.0,
+  "place_caracteres": 25,
+  "statut": "automatique",
+  "texte": "Île flottante.",
+  "voix_s": 1.74,
+  "acceleration": 1.0,
+  "description": "Sous un soleil éclatant, une île flottante surmontée d'un immense arbre à la canopée arrondie domine le paysage. La plateforme de l'île est occupée par une ville aux toits rouges et est soutenue par d'épaisses racines entrelacées. En arrière-plan, une seconde île similaire flotte plus loin, tandis que des oiseaux volent dans un ciel baigné de lumière dorée. Au sol, un fleuve sinueux serpente à travers une plaine entre des nuages vaporeux.",
+  "variantes": [
+   "Île flottante et arbre.",
+   "Île flottante.",
+   "Île haute."
+  ],
+  "faits_ecartes": []
+ },
+ {
+  "id": "d_0004",
+  "horaire": "1:00,9 – 1:05,1",
+  "debut": 60.9,
+  "fin": 65.14,
+  "place_s": 3.84,
+  "place_caracteres": 49,
+  "statut": "automatique",
+  "texte": "Un chat roux sur un balai.",
+  "voix_s": 2.23,
+  "acceleration": 1.0,
+  "description": "Une petite fille aux cheveux bruns est allongée dans un lit suspendu par des cordes au-dessus de nuages orangés, le regard tourné vers le haut avec un sourire. Un chat roux portant des lunettes est perché sur un manche à balai qui traverse le dessus du lit. Un chapeau pointu est accroché au pied du lit.",
+  "variantes": [
+   "La fillette sourit dans son lit suspendu.",
+   "Un chat roux sur un balai.",
+   "Lit suspendu et chat roux."
+  ],
+  "faits_ecartes": []
+ },
+ {
+  "id": "d_0005",
+  "horaire": "1:24,8 – 1:27,1",
+  "debut": 84.8,
+  "fin": 87.06,
+  "place_s": 1.86,
+  "place_caracteres": 24,
+  "statut": "automatique",
+  "texte": "Elle regarde.",
+  "voix_s": 0.95,
+  "acceleration": 1.0,
+  "description": "Sur un fond bleu, une jeune fille portant un chapeau de sorcière à larges bords et une chemise à col boutonné regarde vers la droite, la bouche entrouverte. Des lignes blanches rayonnantes partent de derrière sa tête vers les bords de l'image. Dans le coin inférieur droit, une main tient une petite bouteille bouchée.",
+  "variantes": [
+   "La fillette regarde à droite.",
+   "Elle regarde à droite.",
+   "Elle regarde."
+  ],
+  "faits_ecartes": []
+ },
+ {
+  "id": "d_0006",
+  "horaire": "1:55,3 – 2:00,2",
+  "debut": 115.3,
+  "fin": 120.2,
+  "place_s": 4.5,
+  "place_caracteres": 58,
+  "statut": "automatique",
+  "texte": "Trois femmes et trois animaux alignés.",
+  "voix_s": 3.19,
+  "acceleration": 1.0,
+  "description": "Devant des maisons aux toits de tuiles, trois jeunes femmes et trois animaux sont alignés. À gauche, une femme au chapeau haut et marron tient une fiole de liquide rouge et un oiseau bleu. À ses côtés, une sorcière au chapeau pointu violet sourit en tenant une fiole de liquide jaune, accompagnée d'un chat blanc tacheté de roux. À droite, une femme blonde au regard sérieux porte un renard orange et tient une fiole de liquide vert, tandis qu'un autre renard orange et un petit être orange à oreilles pointues apparaissent au premier plan.",
+  "variantes": [
+   "Trois femmes et trois animaux devant des maisons.",
+   "Trois femmes et trois animaux alignés.",
+   "Trois femmes et trois animaux."
+  ],
+  "faits_ecartes": []
+ },
+ {
+  "id": "d_0007",
+  "horaire": "2:11,0 – 2:13,3",
+  "debut": 131.0,
+  "fin": 133.3,
+  "place_s": 1.9,
+  "place_caracteres": 24,
+  "statut": "automatique",
+  "texte": "« Consider ».",
+  "voix_s": 0.85,
+  "acceleration": 1.0,
+  "description": "Sur un fond orange rayonnant parsemé d'éclats lumineux, le mot « Consider » s'affiche en grandes lettres blanches stylisées. Au centre, un personnage souriant porte un haut-de-forme marron surmonté de lunettes de protection et un chapeau à larges bords. Il tient une fiole contenant un liquide orange dans sa main gauche et un poulet bleu sous son bras droit.",
+  "variantes": [
+   "Le mot « Consider » s'affiche.",
+   "« Consider » s'affiche.",
+   "« Consider »."
+  ],
+  "faits_ecartes": []
+ },
+ {
+  "id": "d_0008",
+  "horaire": "2:21,9 – 2:26,4",
+  "debut": 141.9,
+  "fin": 146.4,
+  "place_s": 4.1,
+  "place_caracteres": 53,
+  "statut": "automatique",
+  "texte": "Le mot Saffron s'affiche sur fond rouge.",
+  "voix_s": 2.56,
+  "acceleration": 1.0,
+  "description": "Sur un fond rouge parsemé d'éclats lumineux, le mot « Saffron » s'affiche en grandes lettres blanches stylisées. Une jeune femme souriante portant un chapeau de sorcière pointu et une robe pourpre tient une fiole dorée devant elle, accompagnée d'un petit chat roux à taches blanches. Sur une scène en extérieur, un homme en tenue beige lit un parchemfel devant une foule de spectateurs, tandis que quatre personnages aux styles variés se tiennent debout à ses côtés.",
+  "variantes": [
+   "Le mot Saffron s'affiche sur fond rouge.",
+   "Saffron s'affiche sur fond rouge.",
+   "Saffron s'affiche."
+  ],
+  "faits_ecartes": []
+ },
+ {
+  "id": "d_0009",
+  "horaire": "2:47,0 – 2:49,1",
+  "debut": 167.0,
+  "fin": 169.1,
+  "place_s": 1.7,
+  "place_caracteres": 22,
+  "statut": "automatique",
+  "texte": "Pepper s'affiche.",
+  "voix_s": 1.2,
+  "acceleration": 1.0,
+  "description": "Sur un fond orange rayonnant, le mot « Pepper » s'affiche en grandes lettres blanches. Une jeune fille portant un grand chapeau de sorcière pointu et un gilet violet se tient debout, les bras croisés. À ses côtés, un petit chat orange lève les pattes pour tenir une fiole contenant un liquide jaune.",
+  "variantes": [
+   "Pepper s'affiche.",
+   "Pepper apparaît."
+  ],
+  "faits_ecartes": []
+ },
+ {
+  "id": "d_0010",
+  "horaire": "3:51,6 – 3:54,6",
+  "debut": 231.6,
+  "fin": 234.6,
+  "place_s": 2.6,
+  "place_caracteres": 33,
+  "statut": "automatique",
+  "texte": "Elle tient une fiole.",
+  "voix_s": 1.44,
+  "acceleration": 1.0,
+  "description": "Une jeune femme aux cheveux roux et au chapeau pointu violet tient une petite fiole transparente contenant un liquide et l'examine. À ses pieds, un petit oiseau jaune regarde vers le haut. L'image s'éclaircit pour devenir un fond orange parsemé de petites étoiles blanches brillantes.",
+  "variantes": [
+   "Coriandre examine une fiole.",
+   "Elle tient une fiole.",
+   "Elle examine."
+  ],
+  "faits_ecartes": []
+ },
+ {
+  "id": "d_0011",
+  "horaire": "4:48,6 – 4:54,7",
+  "debut": 288.6,
+  "fin": 294.71,
+  "place_s": 5.71,
+  "place_caracteres": 74,
+  "statut": "automatique",
+  "texte": "Un oiseau jaune à perruque et perles crie sous une aura verte.",
+  "voix_s": 5.28,
+  "acceleration": 1.0,
+  "description": "Un grand oiseau jaune, portant des lunettes, une perruque bouclée et un collier de perles, déploie ses ailes et ouvre le bec en criant. À ses côtés, une sorcière au chapeau pointu et un personnage aux cheveux courts ont la bouche ouverte. Une aura verte lumineuse avec des éclairs entoure l'oiseau devant un ciel lumineux et des bâtiments. Une ombre massive traverse l'image en diagonale de haut en bas.",
+  "variantes": [
+   "Un oiseau jaune à perruque et perles crie sous une aura verte.",
+   "L'oiseau jaune crie sous une aura verte et des éclairs.",
+   "L'oiseau jaune crie sous une aura verte."
+  ],
+  "faits_ecartes": []
+ },
+ {
+  "id": "d_0012",
+  "horaire": "4:54,7 – 4:57,9",
+  "debut": 294.71,
+  "fin": 297.9,
+  "place_s": 2.79,
+  "place_caracteres": 36,
+  "statut": "automatique",
+  "texte": "Une patte d'oiseau s'écrase.",
+  "voix_s": 2.23,
+  "acceleration": 1.0,
+  "description": "Une immense patte d'oiseau aux griffes rouges s'écrase sur le sol, brisant la terre en morceaux. Dans une scène éclaircie, plusieurs personnages aux traits fantastiques courent dans une rue bordée de maisons à colombages. Une femme aux cheveux blonds et une sorcière au chapeau pointu courent avec une expression terrifiée, tandis qu'un homme en costume et un petit personnage ressemblant à un chien courent également dans la même direction.",
+  "variantes": [
+   "Une patte d'oiseau brise le sol.",
+   "Une patte d'oiseau s'écrase.",
+   "Une patte s'écrase."
+  ],
+  "faits_ecartes": []
+ },
+ {
+  "id": "d_0013",
+  "horaire": "5:03,1 – 5:06,5",
+  "debut": 303.08,
+  "fin": 306.5,
+  "place_s": 3.02,
+  "place_caracteres": 39,
+  "statut": "automatique",
+  "texte": "L'oiseau jaune déploie ses ailes.",
+  "voix_s": 2.48,
+  "acceleration": 1.0,
+  "description": "Un grand oiseau jaune anthropomorphe, portant des lunettes de soleil, un collier de perles et une perruque blanche bouclée, lève une patte griffue vers l'avant dans un village aux maisons à colombages. L'oiseau ouvre le bec et déploie ses ailes. Une patte massive aux griffes rouges s'écrase violemment sur le sol, faisant jaillir de la poussière et des débris.",
+  "variantes": [
+   "L'oiseau jaune déploie ses ailes.",
+   "L'oiseau déploie ses ailes."
+  ],
+  "faits_ecartes": []
+ },
+ {
+  "id": "d_0014",
+  "horaire": "5:23,9 – 5:26,1",
+  "debut": 323.9,
+  "fin": 326.1,
+  "place_s": 1.8,
+  "place_caracteres": 23,
+  "statut": "automatique",
+  "texte": "Il survole la ville.",
+  "voix_s": 1.44,
+  "acceleration": 1.0,
+  "description": "Un grand oiseau jaune anthropomorphe, portant une perruque blanche bouclée, des lunettes de soleil et des colliers, survole une ville aux toits rouges le bec ouvert. Un sac à main marron est suspendu à son aile. Sur la gauche, un personnage portant un chapeau de cowboy et un sac à dos est perché sur un poteau en bois et regarde l'oiseau.",
+  "variantes": [
+   "L'oiseau survole la ville.",
+   "Il survole la ville.",
+   "Il survole."
+  ],
+  "faits_ecartes": []
+ },
+ {
+  "id": "d_0015",
+  "horaire": "5:41,6 – 5:43,9",
+  "debut": 341.6,
+  "fin": 343.94,
+  "place_s": 1.94,
+  "place_caracteres": 25,
+  "statut": "automatique",
+  "texte": "Gros plan sur un œil jaune.",
+  "voix_s": 1.84,
+  "acceleration": 1.0,
+  "description": "Un gros plan montre l'œil unique d'une créature jaune et duveteuse. L'œil blanc, parcouru de fines veines rouges, est entouré de longs cils noirs. La pupille est noire et l'iris est rose avec des détails plus sombres.",
+  "variantes": [
+   "Gros plan sur un œil jaune.",
+   "L'œil est jaune.",
+   "Œil jaune."
+  ],
+  "faits_ecartes": []
+ },
+ {
+  "id": "d_0016",
+  "horaire": "5:51,9 – 5:58,7",
+  "debut": 351.9,
+  "fin": 358.71,
+  "place_s": 6.41,
+  "place_caracteres": 83,
+  "statut": "automatique",
+  "texte": "L'oiseau porte une perruque et des lunettes. Un personnage et un chat sont sur lui.",
+  "voix_s": 5.6,
+  "acceleration": 1.0,
+  "description": "Un grand oiseau jaune portant une perruque bouclée, des lunettes de soleil et un collier de perles vole au-dessus d'un village aux toits rouges. Un personnage coiffé d'un chapeau pointu et un petit chat roux sont assis sur le dos de l'oiseau. Dans un plan rapproché, le chat est debout sur une petite branche tenue par l'oiseau, tandis que celui-ci ouvre grand le bec. L'image finale montre la patte griffue de l'oiseau et le chat qui se tient sur la branche.",
+  "variantes": [
+   "L'oiseau jaune porte une perruque, des lunettes et des perles. Il survole un village.",
+   "L'oiseau porte une perruque et des lunettes. Un personnage et un chat sont sur lui.",
+   "L'oiseau porte une perruque et survole le village."
+  ],
+  "faits_ecartes": []
+ },
+ {
+  "id": "d_0017",
+  "horaire": "5:58,7 – 6:01,4",
+  "debut": 358.71,
+  "fin": 361.44,
+  "place_s": 2.33,
+  "place_caracteres": 30,
+  "statut": "automatique",
+  "texte": "L'oiseau vole vers le soleil.",
+  "voix_s": 2.0,
+  "acceleration": 1.0,
+  "description": "Un petit oiseau jaune vole vers un grand soleil blanc et lumineux dans un ciel vert pâle. En dessous, une foule de silhouettes grises lève les bras vers l'oiseau et le soleil. Les toits des maisons en arrière-plan sont flous.",
+  "variantes": [
+   "L'oiseau vole vers le soleil.",
+   "L'oiseau s'envole.",
+   "L'oiseau vole."
+  ],
+  "faits_ecartes": []
+ },
+ {
+  "id": "d_0018",
+  "horaire": "6:01,8 – 6:07,6",
+  "debut": 361.78,
+  "fin": 367.62,
+  "place_s": 5.44,
+  "place_caracteres": 70,
+  "statut": "automatique",
+  "texte": "L'oiseau jaune aux cheveux bouclés vole vers une île flottante.",
+  "voix_s": 5.28,
+  "acceleration": 1.0,
+  "description": "Un petit oiseau jaune aux cheveux bouclés et portant des lunettes de soleil vole de la gauche vers la droite dans un ciel clair. En arrière-plan, une île flottante surmontée d'un grand arbre est visible au-dessus d'un tapis de nuages blancs.",
+  "variantes": [
+   "L'oiseau jaune aux cheveux bouclés vole vers une île flottante.",
+   "L'oiseau jaune survole une île avec un grand arbre.",
+   "L'oiseau vole vers l'île flottante."
+  ],
+  "faits_ecartes": []
+ },
+ {
+  "id": "d_0019",
+  "horaire": "6:07,6 – 6:12,0",
+  "debut": 367.62,
+  "fin": 372.0,
+  "place_s": 3.98,
+  "place_caracteres": 51,
+  "statut": "automatique",
+  "texte": "L'oiseau jaune vole de profil dans un ciel vert.",
+  "voix_s": 3.92,
+  "acceleration": 1.0,
+  "description": "Un petit oiseau jaune vole de profil dans un ciel vert pâle au-dessus d'un tapis de nuages blancs. Les ailes de l'oiseau sont déployées vers le haut et vers le bas.",
+  "variantes": [
+   "L'oiseau jaune vole de profil dans un ciel vert.",
+   "L'oiseau vole dans un ciel vert.",
+   "L'oiseau vole en haut."
+  ],
+  "faits_ecartes": []
+ },
+ {
+  "id": "d_0020",
+  "horaire": "6:36,7 – 6:44,9",
+  "debut": 396.7,
+  "fin": 404.9,
+  "place_s": 7.8,
+  "place_caracteres": 101,
+  "statut": "automatique",
+  "texte": "Sur fond noir, les crédits défilent. Les noms des acteurs et les auteurs de l'œuvre s'affichent en blanc.",
+  "voix_s": 6.72,
+  "acceleration": 1.0,
+  "description": "Sur un écran noir, des textes blancs affichent les crédits de fin. La liste des acteurs présente Pepper interprétée par Samantha Faye Ignacio, le Mayor par Duffy Weber, Saffron par Ariel Hancock, Shichimi par Marielena Alcaraz, Coriander par Ariel Hancock, le Narrator par Duffy Weber et Carrot par Nikolai Mamashev. Le texte précise également que l'œuvre originale est de David Revoy, avec une réalisation et une animation de Nikolai Mamashev.",
+  "variantes": [
+   "Sur fond noir, les crédits défilent. Les noms des acteurs et les auteurs de l'œuvre s'affichent en blanc.",
+   "Sur fond noir, les crédits de fin s'affichent en blanc.",
+   "Sur fond noir, les crédits s'affichent en blanc."
+  ],
+  "faits_ecartes": []
+ },
+ {
+  "id": "d_0021",
+  "horaire": "6:44,9 – 6:53,1",
+  "debut": 404.9,
+  "fin": 413.1,
+  "place_s": 7.8,
+  "place_caracteres": 101,
+  "statut": "automatique",
+  "texte": "Sur fond noir, les crédits techniques et le logo de Reanimedia Ltd défilent verticalement en blanc.",
+  "voix_s": 7.59,
+  "acceleration": 1.0,
+  "description": "Sur un fond noir, des textes blancs défilent verticalement, listant les crédits techniques. On peut lire les noms des responsables de l'animation, de l'artwork, du sound design et de la production, ainsi que le logo blanc de Reanimedia Ltd. La liste se poursuit avec les titres de morceaux de musique de Grégoire Lourme.",
+  "variantes": [
+   "Sur fond noir, les crédits techniques et le logo de Reanimedia Ltd défilent verticalement en blanc.",
+   "Des crédits techniques et le logo de Reanimedia Ltd défilent en blanc sur fond noir.",
+   "Les crédits défilent en blanc sur fond noir."
+  ],
+  "faits_ecartes": []
+ },
+ {
+  "id": "d_0022",
+  "horaire": "6:53,1 – 7:01,3",
+  "debut": 413.1,
+  "fin": 421.3,
+  "place_s": 7.8,
+  "place_caracteres": 101,
+  "statut": "automatique",
+  "texte": "Sur fond noir, les titres de Grégoire Lourme s'affichent. Le logo de Krita apparaît.",
+  "voix_s": 7.18,
+  "acceleration": 1.0,
+  "description": "Sur un fond noir, une liste de titres musicaux composés par Grégoire Lourme s'affiche avec leurs liens respectifs, incluant « Minions to the Rescue », « Slasher Kills », « Ultimate Countdown » et « Heroes Confrontation ». En bas de l'écran, la mention « Sponsored by » apparaît au-dessus du logo circulaire multicolore de Krita.",
+  "variantes": [
+   "Sur fond noir, une liste de titres musicaux de Grégoire Lourme s'affiche. En bas, le logo de Krita apparaît.",
+   "Sur fond noir, les titres musicaux de Grégoire Lourme s'affichent. Le logo de Krita apparaît en bas.",
+   "Sur fond noir, les titres de Grégoire Lourme s'affichent. Le logo de Krita apparaît."
+  ],
+  "faits_ecartes": []
+ },
+ {
+  "id": "d_0023",
+  "horaire": "7:01,3 – 7:09,5",
+  "debut": 421.3,
+  "fin": 429.5,
+  "place_s": 7.8,
+  "place_caracteres": 101,
+  "statut": "automatique",
+  "texte": "Les titres s'affichent sur fond noir, suivis du logo Krita et de donateurs sur fond vert.",
+  "voix_s": 6.47,
+  "acceleration": 1.0,
+  "description": "Sur un fond noir, les titres « Ultimate Countdown » et « Heroes Confrontation » de Grégoire Lourme s'affichent avec leurs liens URL respectifs. Le logo circulaire multicolore de la Krita Foundation apparaît sous la mention « Sponsored by ». Une liste de noms de donateurs, séparés par des étoiles, s'affiche sous le logo, puis se répète sur un fond vert foncé accompagnée d'une mention précisant l'utilisation d'effets sonores de FreeSound.org.",
+  "variantes": [
+   "Sur fond noir, les titres Ultimate Countdown et Heroes Confrontation s'affichent avec leurs URL. Le logo de la Krita Foundation apparaît sous la mention Sponsored by, suivi d'une liste de donateurs. Sur fond vert, une mention cite FreeSound.org.",
+   "Sur fond noir, les titres Ultimate Countdown et Heroes Confrontation s'affichent. Le logo de la Krita Foundation et une liste de donateurs apparaissent, puis une mention FreeSound.org sur fond vert.",
+   "Les titres s'affichent sur fond noir, suivis du logo Krita et de donateurs sur fond vert."
+  ],
+  "faits_ecartes": []
+ },
+ {
+  "id": "d_0024",
+  "horaire": "7:16,2 – 7:25,6",
+  "debut": 436.2,
+  "fin": 445.56,
+  "place_s": 8.96,
+  "place_caracteres": 116,
+  "statut": "automatique",
+  "texte": "Les logos de Krita, Blender, RenderChan et Papagayo-NG s'affichent en ligne. Puis, ceux de CoATools, Ethic Cinema et Adamant.",
+  "voix_s": 8.96,
+  "acceleration": 1.089,
+  "description": "Sur un fond noir, les logos de Krita, Blender, RenderChan et Papagayo-NG s'affichent en ligne. En dessous, les mentions « Produced by Morevna Project » et « in association with » précèdent les logos de CoATools et d'Ethic Cinema, suivis de celui d'Adamant.",
+  "variantes": [
+   "Sur fond noir, les logos de Krita, Blender, RenderChan et Papagayo-NG s'alignent. En dessous, les logos de CoATools, Ethic Cinema et Adamant apparaissent.",
+   "Les logos de Krita, Blender, RenderChan et Papagayo-NG s'affichent. En dessous, les logos de CoATools, Ethic Cinema et Adamant suivent.",
+   "Les logos de Krita, Blender, RenderChan et Papagayo-NG s'affichent en ligne. Puis, ceux de CoATools, Ethic Cinema et Adamant."
+  ],
+  "faits_ecartes": []
+ },
+ {
+  "id": "d_0025",
+  "horaire": "7:25,6 – 7:34,9",
+  "debut": 445.56,
+  "fin": 454.92,
+  "place_s": 8.96,
+  "place_caracteres": 116,
+  "statut": "automatique",
+  "texte": "Des textes blancs listent les crédits de Pepper & Carrot et la licence Creative Commons. Gorno-Altaisk, 2017.",
+  "voix_s": 8.95,
+  "acceleration": 1.018,
+  "description": "Sur un fond noir, des textes blancs s'affichent successivement. Les premières lignes mentionnent la webcomic \"Pepper & Carrot\" de David Revoy, l'univers de Hereva, ainsi que les contributeurs et les correcteurs. Le texte précise ensuite que l'œuvre est sous licence Creative Commons Attribution-ShareAlike 4.0, accompagnée de son logo, avant de conclure sur l'indication \"Gorno-Altaisk, 2017\".",
+  "variantes": [
+   "Sur fond noir, des textes blancs listent les crédits de Pepper & Carrot, l'univers de Hereva, les contributeurs et la licence Creative Commons. Gorno-Altaisk, 2017.",
+   "Des textes blancs sur fond noir listent les crédits de Pepper & Carrot et la licence Creative Commons. Gorno-Altaisk, 2017.",
+   "Des textes blancs listent les crédits de Pepper & Carrot et la licence Creative Commons. Gorno-Altaisk, 2017."
+  ],
+  "faits_ecartes": []
+ }
+]

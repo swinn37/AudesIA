@@ -1,0 +1,1889 @@
+[
+ {
+  "id": "d_0000",
+  "window": [
+   0.0,
+   2.1799999999999997
+  ],
+  "frames": [
+   0.3633333333333333,
+   1.0899999999999999,
+   1.8166666666666664
+  ],
+  "brightened": 0,
+  "raw_description": "L'image est un écran noir sur lequel apparaît le texte blanc « Blender Foundation Presents » au centre.",
+  "zoom": null,
+  "facts": null,
+  "description": "Sur un écran noir, le texte blanc « Blender Foundation Presents » apparaît au centre.",
+  "budget_chars": 23,
+  "variants": [
+   "Blender Foundation Presents s'affiche.",
+   "Blender Foundation."
+  ]
+ },
+ {
+  "id": "d_0001",
+  "window": [
+   11.6,
+   18.416667
+  ],
+  "frames": [
+   12.452083374999999,
+   14.156250125,
+   15.860416875,
+   17.564583625
+  ],
+  "brightened": 0,
+  "raw_description": "Une vue en contre-plongée montre l'intérieur d'une structure industrielle complexe composée de grands réservoirs métalliques et de tuyaux massifs. De puissants jets de lumière blanche et éblouissante jaillissent de la base de plusieurs conduits cylindriques, s'élançant vers le haut. La lumière intense occulte partiellement les détails des structures métalliques et des échafaudages qui entourent les installations.",
+  "zoom": null,
+  "facts": null,
+  "description": "En contre-plongée, l'intérieur d'une structure industrielle complexe est dominé par de grands réservoirs métalliques et des tuyaux massifs. De puissants jets de lumière blanche et éblouissante jaillissent de la base de plusieurs conduits cylindriques, s'élançant vers le haut. La lumière intense occulte partiellement les détails des structures métalliques et des échafaudages qui entourent les installations.",
+  "budget_chars": 83,
+  "variants": [
+   "En contre-plongée, des jets de lumière blanche jaillissent de tuyaux massifs.",
+   "Des faisceaux lumineux s'élancent de conduits métalliques.",
+   "Des jets de lumière jaillissent des tuyaux."
+  ]
+ },
+ {
+  "id": "d_0002",
+  "window": [
+   18.416667,
+   23.299999999999997
+  ],
+  "frames": [
+   19.027083625,
+   20.247916874999998,
+   21.468750125,
+   22.689583374999998
+  ],
+  "brightened": 0,
+  "raw_description": "Un paysage industriel dense composé de nombreuses tours métalliques et de structures de type échafaudage s'étend sous un ciel couvert. Au centre, une colonne de lumière blanche et brillante s'élève verticalement vers le ciel. Au premier plan, des bâtiments sombres aux toits pointus sont visibles. Le texte « This film is supported by the Netherlands Film Fund » apparaît en blanc en bas à gauche de l'image.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un paysage industriel dense, composé de nombreuses tours métalliques et de structures en échafaudage, s'étend sous un ciel couvert et brumeux. Au centre, une colonne de lumière blanche et brillante s'élève verticalement vers le ciel. Au premier plan, les toits sombres de bâtiments aux formes pointues sont visibles. Le texte « This film is supported by the Netherlands Film Fund » apparaît en blanc en bas à gauche.",
+  "budget_chars": 58,
+  "variants": [
+   "Un paysage industriel s'élève sous un ciel brumeux.",
+   "Des tours métalliques sous un ciel couvert.",
+   "Paysage industriel brumeux."
+  ]
+ },
+ {
+  "id": "d_0003",
+  "window": [
+   45.5,
+   49.5
+  ],
+  "frames": [
+   46.0,
+   47.0,
+   48.0,
+   49.0
+  ],
+  "brightened": 3,
+  "raw_description": "Dans un décor industriel complexe rempli de câbles et de structures métalliques, deux silhouettes filaires lumineuses, l'une orange et l'autre bleue, apparaissent en surimpression. Des interfaces numériques flottantes, affichant des commandes de lecture et le texte « MEMORY PLAYBACK - GLOBAL », s'activent devant ces formes. Des lignes et des cercles de lumière rose et verte parcourent l'espace, créant des effets de distorsion visuelle.",
+  "zoom": "Inconnu.",
+  "facts": null,
+  "description": "Dans un décor industriel complexe de structures métalliques et de câbles, deux silhouettes filaires lumineuses, l'une orange et l'autre bleue, apparaissent en surimpression. Devant elles, des interfaces numériques flottantes affichent des commandes de lecture et le texte « MEMORY PLAYBACK - GLOBAL » en vert et bleu. Des lignes et des cercles de lumière rose et verte parcourent l'espace, créant des effets de distorsion visuelle sur l'ensemble de la scène.",
+  "budget_chars": 46,
+  "variants": [
+   "Deux silhouettes lumineuses face à des interfaces.",
+   "Silhouettes lumineuses et interfaces.",
+   "Silhouettes et interfaces."
+  ]
+ },
+ {
+  "id": "d_0004",
+  "window": [
+   54.0,
+   60.8
+  ],
+  "frames": [
+   54.85,
+   56.55,
+   58.25,
+   59.949999999999996
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme aux cheveux longs et bandeau rouge regarde vers le bas devant un poste de travail encombré de machines et de câbles. Des graphiques numériques bleus et roses, incluant le texte « SIMULATION READY », flottent dans l'air devant lui. Un cerveau humain repose sur une assiette blanche, entouré de lignes lumineuses et de formes géométriques en surimpression. L'homme se penche ensuite très près du cerveau, dont les circonvolutions sont nettement visibles sous une lumière rosée.",
+  "zoom": "Les personnages ne tiennent ni ne manipulent aucun objet. Les objets reconnaissables sont un cerveau humain et un livre.",
+  "facts": null,
+  "description": "Un homme aux cheveux longs et bandeau rouge regarde vers le bas devant un poste de travail encombré de machines et de câbles. Des graphiques numériques bleus et roses, incluant le texte « SIMULATION READY », flottent dans l'air devant lui. Un cerveau humain repose sur une assiette blanche, entouré de lignes lumineuses et de formes géométriques en surimpression. L'homme se penche très près du cerveau, dont les circonvolutions sont nettement visibles sous une lumière rosée.",
+  "budget_chars": 83,
+  "variants": [
+   "L'homme aux cheveux longs et au bandeau rouge observe un cerveau sur une assiette.",
+   "L'homme observe un cerveau sur une assiette blanche.",
+   "L'homme observe un cerveau lumineux."
+  ]
+ },
+ {
+  "id": "d_0005",
+  "window": [
+   62.6,
+   69.916667
+  ],
+  "frames": [
+   63.514583375,
+   65.343750125,
+   67.172916875,
+   69.002083625
+  ],
+  "brightened": 1,
+  "raw_description": "Un homme au regard intense fixe un cerveau humain exposé sur une table. Son œil droit est recouvert d'un dispositif technologique circulaire et lumineux. Des traînées de lumière violette et rose entourent le cerveau et les mains de l'homme. Le titre « TEARS OF STEEL » apparaît ensuite en lettres stylisées sur un fond noir.",
+  "zoom": null,
+  "facts": null,
+  "description": "L'homme au regard intense fixe un cerveau humain posé sur une table, tandis que son œil droit est recouvert d'un dispositif technologique circulaire et lumineux. Des traînées de lumière violette et rose entourent le cerveau et les mains de l'homme. Le titre « TEARS OF STEEL » apparaît ensuite en lettres stylisées sur un fond noir.",
+  "budget_chars": 89,
+  "variants": [
+   "L'homme fixe un cerveau entouré de lueurs violettes. Le titre « TEARS OF STEEL » s'affiche.",
+   "L'homme fixe un cerveau lumineux. Le titre « TEARS OF STEEL » apparaît.",
+   "L'homme fixe un cerveau. Le titre « TEARS OF STEEL » s'affiche."
+  ]
+ },
+ {
+  "id": "d_0006",
+  "window": [
+   69.916667,
+   79.375
+  ],
+  "frames": [
+   71.09895862500001,
+   73.463541875,
+   75.828125125,
+   78.192708375
+  ],
+  "brightened": 0,
+  "raw_description": "Une vue panoramique montre une ville industrielle sombre sous un ciel nuageux, avec une haute tour et des cheminées dégageant de la fumée. Au premier plan, l'intérieur d'un navire est plongé dans l'ombre, révélant des cordages, des mâts et des structures en bois. À l'arrière-plan, à travers l'ouverture du navire, on aperçoit la silhouette de la ville et de ses bâtiments. Deux personnes sont allongées sur le pont du navire, entourées de sacs et de matériel.",
+  "zoom": null,
+  "facts": null,
+  "description": "Une vue panoramique montre une ville industrielle sombre sous un ciel nuageux, avec une haute tour et des cheminées dégageant de la fumée. Au premier plan, l'intérieur d'un navire est plongé dans l'ombre, révélant des cordages, des mâts et des structures en bois. À l'arrière-plan, à travers l'ouverture du navire, on aperçoit la silhouette de la ville et de ses bâtiments. Deux personnes sont allongées sur le pont du navire, entourées de sacs et de matériel.",
+  "budget_chars": 117,
+  "variants": [
+   "Vue panoramique d'une ville industrielle sombre sous un ciel nuageux. Deux personnes gisent sur le pont d'un navire.",
+   "Une ville industrielle sombre s'élève derrière un navire sombre. Deux personnes sont allongées sur le pont.",
+   "Une ville industrielle sombre en arrière-plan. Deux personnes sont au sol sur un navire."
+  ]
+ },
+ {
+  "id": "d_0007",
+  "window": [
+   79.375,
+   84.833333
+  ],
+  "frames": [
+   80.057291625,
+   81.421874875,
+   82.786458125,
+   84.15104137499999
+  ],
+  "brightened": 1,
+  "raw_description": "Une main tient un journal froissé dont le titre affiche « De Amsterdamist ROBOTICIST CREATES KILLER ROBOTS ». Le texte en dessous mentionne une panique dans les rues et des flammes atteignant des installations civiles. Une autre partie de l'article, plus petite, montre une photo et un titre concernant une fièvre hors de contrôle.",
+  "zoom": null,
+  "facts": null,
+  "description": "Une main tient un journal froissé dont le titre affiche « De Amsterdamist ROBOTICIST CREATES KILLER ROBOTS ». Le texte en dessous mentionne une panique dans les rues et des flammes atteignant des installations civiles. Une autre partie de l'article, plus petite, montre une photo et un titre concernant une fièvre hors de contrôle.",
+  "budget_chars": 65,
+  "variants": [
+   "Une main tient un journal froissé sur les robots tueurs.",
+   "Une main tient un journal sur les robots.",
+   "Une main tient un journal."
+  ]
+ },
+ {
+  "id": "d_0008",
+  "window": [
+   84.833333,
+   92.416667
+  ],
+  "frames": [
+   85.78124975,
+   87.67708325,
+   89.57291675,
+   91.46875025
+  ],
+  "brightened": 0,
+  "raw_description": "À travers une ouverture circulaire, un imposant vaisseau volant de style steampunk survole une ville aux toits rouges et aux façades étroites. Le vaisseau est composé de plusieurs structures métalliques sombres, surmontées de multiples projecteurs et de mâts. En dessous de l'appareil, les bâtiments de la ville sont plongés dans une brume bleutée.",
+  "zoom": null,
+  "facts": null,
+  "description": "À travers une ouverture circulaire, un imposant vaisseau volant de style steampunk survole une ville aux toits rouges et aux façades étroites. L'appareil est composé de plusieurs structures métalliques sombres, surmontées de multiples projecteurs et de mâts. En dessous du vaisseau, les bâtiments de la ville sont plongés dans une brume bleutée.",
+  "budget_chars": 93,
+  "variants": [
+   "Un vaisseau steampunk survole une ville aux toits rouges dans une brume bleue.",
+   "Un vaisseau métallique survole une ville aux toits rouges.",
+   "Un vaisseau survole une ville brumeuse."
+  ]
+ },
+ {
+  "id": "d_0009",
+  "window": [
+   92.416667,
+   95.94000000000001
+  ],
+  "frames": [
+   92.857083625,
+   93.73791687500001,
+   94.618750125,
+   95.49958337500001
+  ],
+  "brightened": 3,
+  "raw_description": "Une personne au regard intense vise avec une arme futuriste imposante. L'arme, de couleur sombre avec des détails rouges et bleus, occupe le premier plan de l'image. En arrière-plan, à travers une ouverture circulaire, on aperçoit une ville embrumée surmontée de plusieurs véhicules volants massifs.",
+  "zoom": null,
+  "facts": null,
+  "description": "En gros plan, une personne au regard intense vise avec une arme futuriste imposante, de couleur sombre avec des détails rouges et bleus. À travers une ouverture circulaire en arrière-plan, plusieurs véhicules volants massifs survolent une ville embrumée.",
+  "budget_chars": 40,
+  "variants": [
+   "Un personnage vise avec une arme.",
+   "Il vise avec une arme.",
+   "Il vise une arme."
+  ]
+ },
+ {
+  "id": "d_0010",
+  "window": [
+   97.5,
+   107.36
+  ],
+  "frames": [
+   98.7325,
+   101.1975,
+   103.6625,
+   106.1275
+  ],
+  "brightened": 4,
+  "raw_description": "Un homme aux cheveux blancs est allongé sur un lit, les yeux fermés, tandis qu'un autre homme armé d'un fusil de précision est accroupi en arrière-plan, surveillant l'horizon. Le décor est une terrasse avec une balustrade en bois et des bougies allumées. À travers une ouverture circulaire, un grand vaisseau volant complexe survolant une ville aux toits rouges est visible au loin dans une brume claire.",
+  "zoom": null,
+  "facts": null,
+  "description": "Sur une terrasse avec une balustrade en bois et des bougies allumées, un homme aux cheveux blancs est allongé sur un lit, les yeux fermés. En arrière-plan, un homme accroupi vise avec un fusil de précision vers l'horizon. À travers une ouverture circulaire, un grand vaisseau volant complexe survole une ville aux toits rouges dans une brume claire.",
+  "budget_chars": 122,
+  "variants": [
+   "Sur une terrasse aux bougies, un homme aux cheveux blancs dort sur un lit. Un tireur vise l'horizon. Un vaisseau survole une ville brumeuse.",
+   "Un homme aux cheveux blancs dort sur une terrasse. Un tireur vise l'horizon. Un vaisseau survole une ville.",
+   "Un homme dort sur une terrasse. Un tireur vise l'horizon. Un vaisseau survole la ville."
+  ]
+ },
+ {
+  "id": "d_0011",
+  "window": [
+   112.4,
+   117.6
+  ],
+  "frames": [
+   113.05000000000001,
+   114.35,
+   115.65,
+   116.94999999999999
+  ],
+  "brightened": 2,
+  "raw_description": "À travers une vue en plongée cadrée par un cercle, un immense vaisseau volant aux lumières éblouissantes survole une ville aux toits de tuiles rouges et aux façades classiques. Un homme noir, vêtu d'une veste matelassée bleue, est accroupi sur un balcon et vise avec un fusil d'assaut équipé d'une lunette de visée. La scène est baignée dans une atmosphère brumeuse et bleutée.",
+  "zoom": null,
+  "facts": null,
+  "description": "À travers une vue en plongée cadrée par un cercle, un immense vaisseau volant aux lumières éblouissantes survole une ville aux toits de tuiles rouges et aux façades classiques dans une brume bleutée. Un homme noir, vêtu d'une veste matelassée bleue, est accroupi sur un balcon et vise avec un fusil d'assaut équipé d'une lunette de visée.",
+  "budget_chars": 62,
+  "variants": [
+   "Un vaisseau lumineux survole une ville brumeuse. Un homme vise.",
+   "Un vaisseau survole une ville. Un homme vise.",
+   "Un vaisseau survole la ville."
+  ]
+ },
+ {
+  "id": "d_0012",
+  "window": [
+   118.9,
+   125.08000000000001
+  ],
+  "frames": [
+   119.67250000000001,
+   121.2175,
+   122.76250000000002,
+   124.3075
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme aux cheveux gris est allongé sur un lit dans une pièce sombre, le regard tourné vers le haut. À l'arrière-plan, un homme noir est accroupi et vise avec un fusil d'assaut équipé d'une lunette de précision. Des bougies allumées sont disposées sur une surface derrière l'homme allongé. La scène se déroule sur une terrasse ou un balcon avec une balustrade en bois sculpté.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un homme aux cheveux gris est allongé sur un lit dans une pièce sombre, le regard tourné vers le haut. À l'arrière-plan, un homme noir est accroupi et vise avec un fusil d'assaut équipé d'une lunette de précision. Des bougies allumées sont disposées sur une surface derrière l'homme allongé, sur une terrasse bordée d'une balustrade en bois sculpté.",
+  "budget_chars": 75,
+  "variants": [
+   "Un homme aux cheveux gris est allongé sur un lit dans l'obscurité.",
+   "Un homme aux cheveux gris est allongé sur un lit.",
+   "L'homme est allongé sur un lit."
+  ]
+ },
+ {
+  "id": "d_0013",
+  "window": [
+   125.08000000000001,
+   131.26000000000002
+  ],
+  "frames": [
+   125.85250000000002,
+   127.39750000000001,
+   128.94250000000002,
+   130.4875
+  ],
+  "brightened": 1,
+  "raw_description": "Un homme aux cheveux gris et à la barbe courte, vêtu d'une veste à carreaux, se tient sur un balcon avec une balustrade en bois. Il semble souffrir ou être en détresse, portant sa main à sa poitrine ou à son épaule. À l'arrière-plan, un homme armé d'un fusil est accroupi près de sacs de sable. L'ensemble de la scène est baigné dans une lumière bleutée et brumeuse.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un homme aux cheveux gris et à la barbe courte, vêtu d'une veste à carreaux bleus et noirs, se tient sur un balcon avec une balustrade en bois. Il porte sa main à sa poitrine, le visage marqué par la douleur. À l'arrière-plan, un homme noir est accroupi et tient un fusil d'assaut. La scène est baignée dans une lumière bleutée et brumeuse.",
+  "budget_chars": 75,
+  "variants": [
+   "L'homme aux cheveux gris se tient sur un balcon, la main sur le cœur.",
+   "L'homme aux cheveux gris se tient sur un balcon.",
+   "L'homme se tient sur un balcon."
+  ]
+ },
+ {
+  "id": "d_0014",
+  "window": [
+   133.1,
+   136.4
+  ],
+  "frames": [
+   133.5125,
+   134.3375,
+   135.1625,
+   135.9875
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme aux cheveux gris et à la barbe courte porte une chemise à carreaux bleus et noirs. Il se tient debout sur un pont de bateau, le regard dirigé vers la droite. À l'arrière-plan, un autre homme est accroupi et tient un fusil. Le décor est composé de rambardes en bois et de cordages, le tout baigné dans une lumière bleutée et brumeuse.",
+  "zoom": null,
+  "facts": null,
+  "description": "L'homme aux cheveux gris et à la barbe courte, vêtu d'une chemise à carreaux bleus et noirs, se tient debout sur le pont d'un navire, le regard tourné vers la droite. À l'arrière-plan, un homme est accroupi et tient un fusil. La scène, baignée dans une lumière bleutée et brumeuse, est encadrée par des poteaux en bois et des cordages.",
+  "budget_chars": 37,
+  "variants": [
+   "L'homme aux cheveux gris regarde à droite.",
+   "Il regarde vers la droite.",
+   "Il regarde à droite."
+  ]
+ },
+ {
+  "id": "d_0015",
+  "window": [
+   137.64000000000001,
+   143.291667
+  ],
+  "frames": [
+   138.346458375,
+   139.75937512500002,
+   141.17229187499998,
+   142.585208625
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme âgé aux cheveux gris est assis, immobile et le regard fixe, sur le pont d'un navire dans une atmosphère brumeuse. À l'arrière-plan, un autre homme est accroupi et semble manipuler un objet. Un homme noir, vêtu d'une veste matelassée bleue, pointe une arme futuriste équipée d'une lunette de visée vers la gauche. Il tient l'arme à deux mains, le regard concentré, devant une balustrade de pierre.",
+  "zoom": "Le personnage tient un fusil d'assaut équipé d'une lunette de visée et d'un bipied. On reconnaît également une partie de sa veste matelassée et des balustres en pierre.",
+  "facts": null,
+  "description": "Sur le pont d'un navire dans une atmosphère brumeuse, un homme âgé aux cheveux gris est assis, immobile, le regard fixe. À l'arrière-plan, un homme est accroupi derrière un fusil d'assaut équipé d'une lunette de visée et d'un bipied. Au premier plan, un homme noir vêtu d'une veste matelassée bleue pointe l'arme vers la gauche, le regard concentré, derrière une balustrade de pierre.",
+  "budget_chars": 68,
+  "variants": [
+   "Sur un pont brumeux, l'homme aux cheveux gris fixe l'horizon.",
+   "L'homme aux cheveux gris est assis sur un pont brumeux.",
+   "L'homme aux cheveux gris est assis immobile."
+  ]
+ },
+ {
+  "id": "d_0016",
+  "window": [
+   143.291667,
+   151.38
+  ],
+  "frames": [
+   144.30270862499998,
+   146.324791875,
+   148.346875125,
+   150.368958375
+  ],
+  "brightened": 1,
+  "raw_description": "Un homme aux cheveux gris et à la barbe courte, vêtu d'une veste à carreaux, tient une corde épaisse sur un balcon. À l'arrière-plan, un homme noir est accroupi derrière une arme de précision équipée d'une lunette et d'un bipied. Dans un plan rapproché, le même homme noir boit dans une petite brique de jus de mangue jaune. Son visage est marqué par la tension et des larmes coulent sur ses joues.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un homme aux cheveux gris et à la barbe courte, vêtu d'une veste à carreaux, tient une corde épaisse de la main droite sur un balcon. À l'arrière-plan, un homme noir est accroupi derrière une arme de précision équipée d'une lunette et d'un bipied. En plan rapproché, l'homme noir boit dans une petite brique de jus de mangue jaune, le regard fixe et le visage marqué par des larmes.",
+  "budget_chars": 99,
+  "variants": [
+   "L'homme aux cheveux gris tient une corde sur un balcon. Derrière, un homme noir est accroupi près d'un fusil de précision.",
+   "L'homme aux cheveux gris tient une corde. Derrière, un homme noir est accroupi près d'un fusil.",
+   "L'homme aux cheveux gris tient une corde. Derrière, un homme noir est accroupi."
+  ]
+ },
+ {
+  "id": "d_0017",
+  "window": [
+   151.76,
+   158.66
+  ],
+  "frames": [
+   152.6225,
+   154.3475,
+   156.0725,
+   157.79749999999999
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme au visage tendu et aux dents serrées vise avec une arme à feu entre deux piliers en pierre. Dans les images suivantes, l'homme est vu de loin, suspendu par un câble devant un immense orgue de cathédrale aux tuyaux dorés. La cathédrale est envahie par de la végétation grimpante sur ses colonnes et ses structures.",
+  "zoom": null,
+  "facts": null,
+  "description": "L'homme au visage tendu et aux dents serrées vise avec une arme à feu entre deux piliers de pierre.",
+  "budget_chars": 84,
+  "variants": [
+   "L'homme au visage tendu vise avec une arme entre deux piliers de pierre.",
+   "L'homme vise avec une arme entre deux piliers.",
+   "Il vise entre deux piliers de pierre."
+  ]
+ },
+ {
+  "id": "d_0018",
+  "window": [
+   159.3,
+   162.68
+  ],
+  "frames": [
+   159.72250000000003,
+   160.5675,
+   161.41250000000002,
+   162.2575
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme vêtu d'une chemise à carreaux et d'un pantalon sombre se tient debout sur un sol en dalles grises. Il tient une épaisse corde beige qui descend verticalement devant lui. L'homme, dont on aperçoit le visage barbu, porte une main sur son épaule gauche. En arrière-plan, des caisses en bois et des planches reposent sur le sol.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un homme barbu, vêtu d'une chemise à carreaux et d'un pantalon sombre, se tient debout sur un sol de dalles grises. Il tient une épaisse corde beige qui descend verticalement devant lui et pose sa main droite sur son épaule gauche. En arrière-plan, des caisses en bois et des planches reposent sur le sol.",
+  "budget_chars": 38,
+  "variants": [
+   "L'homme barbu tient une corde.",
+   "Il tient une corde."
+  ]
+ },
+ {
+  "id": "d_0019",
+  "window": [
+   162.94,
+   172.291667
+  ],
+  "frames": [
+   164.108958375,
+   166.446875125,
+   168.784791875,
+   171.122708625
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme aux cheveux gris, portant une chemise à carreaux bleue et un pantalon sombre, se tient de dos dans une pièce vaste et délabrée. Il fait face à une grande machine circulaire et dorée située au fond de la pièce, entourée de débris et de plantes grimpantes. Le sol est jonché de morceaux de bois et de pierres. Une épaisse corde descend verticalement au premier plan, à gauche de l'homme.",
+  "zoom": null,
+  "facts": null,
+  "description": "De dos, un homme aux cheveux gris et à la chemise à carreaux bleue se tient debout dans une vaste pièce délabrée, faisant face à une grande machine circulaire dorée au fond. Une épaisse corde beige descend verticalement au premier plan, à gauche de l'homme. Le sol est jonché de débris, de morceaux de bois et de pierres parmi des plantes grimpantes.",
+  "budget_chars": 116,
+  "variants": [
+   "De dos, l'homme aux cheveux gris fait face à une machine dorée dans une pièce délabrée jonchée de débris.",
+   "L'homme aux cheveux gris contemple une machine dorée dans une pièce en ruines.",
+   "L'homme fait face à une machine dorée dans une pièce délabrée."
+  ]
+ },
+ {
+  "id": "d_0020",
+  "window": [
+   172.291667,
+   177.70583349999998
+  ],
+  "frames": [
+   172.96843781249999,
+   174.32197943749998,
+   175.6755210625,
+   177.0290626875
+  ],
+  "brightened": 4,
+  "raw_description": "Dans une pièce faiblement éclairée, un homme aux cheveux gris et à la barbe courte, vêtu d'une chemise à carreaux sous une veste, se tient debout dans l'encadrement d'une porte, le regard tourné vers la gauche. À gauche, une femme en tenue sombre et utilitaire regarde dans la même direction. Le décor comprend une étagère remplie de livres, deux lampes à abat-jour rouge et un grand plan technique affiché au mur.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans une pièce faiblement éclairée, un homme aux cheveux gris et à la barbe courte, vêtu d'une chemise à carreaux sous une veste, se tient debout dans l'encadrement d'une porte, le regard tourné vers la gauche. À gauche, une femme en tenue sombre et utilitaire regarde dans la même direction. Le décor comprend une étagère remplie de livres, deux lampes à abat-jour rouge et un grand plan technique affiché au mur.",
+  "budget_chars": 65,
+  "variants": [
+   "L'homme barbu et une femme regardent vers la gauche.",
+   "L'homme et la femme regardent à gauche.",
+   "Ils regardent vers la gauche."
+  ]
+ },
+ {
+  "id": "d_0021",
+  "window": [
+   177.70583349999998,
+   183.12
+  ],
+  "frames": [
+   178.38260431249998,
+   179.7361459375,
+   181.0896875625,
+   182.4432291875
+  ],
+  "brightened": 1,
+  "raw_description": "Dans une pièce faiblement éclairée, une femme et un homme aux cheveux gris se tiennent debout, regardant vers la gauche avec des expressions sérieuses. La femme porte une veste militaire marron et un appareil de communication est accroché à sa poitrine. Derrière eux, une étagère est remplie de livres colorés et de cadres, avec deux lampes à abat-jour rouge posées sur un meuble. L'homme porte une chemise à carreaux sous une veste sombre.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans une pièce faiblement éclairée, une femme en tenue militaire marron et un homme aux cheveux gris se tiennent debout, le regard tourné vers la gauche. La femme porte un appareil de communication noir sur la poitrine et une veste utilitaire marquée de taches sombres. Derrière eux, une étagère est remplie de livres colorés et de cadres, avec deux lampes à abat-jour rouge posées sur un meuble.",
+  "budget_chars": 65,
+  "variants": [
+   "La femme en tenue militaire et l'homme gris regardent à gauche.",
+   "La femme et l'homme regardent vers la gauche.",
+   "Ils regardent vers la gauche."
+  ]
+ },
+ {
+  "id": "d_0022",
+  "window": [
+   183.46,
+   188.04
+  ],
+  "frames": [
+   184.0325,
+   185.1775,
+   186.3225,
+   187.4675
+  ],
+  "brightened": 0,
+  "raw_description": "Dans une pièce aux murs de briques partiellement effondrés et envahis par une végétation dense, un homme aux cheveux gris et à la barbe courte se tient debout, de face. Il porte une longue veste sombre sur une chemise bleue et regarde droit devant lui. Derrière lui, un fauteuil en velours orange est placé près d'une table, et une lampe de bureau est allumée sur un bureau à gauche.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans une pièce aux murs de briques partiellement effondrés et envahis par une végétation dense, un homme aux cheveux gris et à la barbe courte se tient debout, de face. Il porte une longue veste sombre sur une chemise bleue et regarde droit devant lui. Derrière lui, un fauteuil en velours orange est placé près d'une table, et une lampe de bureau est allumée sur un bureau à gauche.",
+  "budget_chars": 54,
+  "variants": [
+   "L'homme barbu fait face à la caméra.",
+   "L'homme barbu regarde droit devant.",
+   "L'homme barbu se tient debout."
+  ]
+ },
+ {
+  "id": "d_0023",
+  "window": [
+   188.32,
+   191.3
+  ],
+  "frames": [
+   188.6925,
+   189.4375,
+   190.1825,
+   190.9275
+  ],
+  "brightened": 1,
+  "raw_description": "Un homme aux cheveux gris et à la barbe blanche se tient debout au milieu des ruines d'un bâtiment envahi par la végétation. Il porte une veste longue et sombre sur une chemise à carreaux. Au premier plan, une personne de dos, vue de manière floue, observe la scène. L'arrière-plan montre des bâtiments anciens sous une lumière brumeuse et une structure métallique imposante.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un homme aux cheveux gris et à la barbe blanche se tient debout au milieu des ruines d'un bâtiment envahi par la végétation, portant une veste longue et sombre sur une chemise à carreaux. Au premier plan, une silhouette floue de dos observe la scène. À l'arrière-plan, une structure métallique imposante et des bâtiments anciens se découpent dans une lumière brumeuse.",
+  "budget_chars": 33,
+  "variants": [
+   "L'homme barbu est dans les ruines.",
+   "L'homme est dans les ruines.",
+   "L'homme est debout."
+  ]
+ },
+ {
+  "id": "d_0024",
+  "window": [
+   217.28,
+   222.7
+  ],
+  "frames": [
+   217.9575,
+   219.3125,
+   220.6675,
+   222.02249999999998
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme de dos, vêtu d'une veste rouge et d'un pantalon gris, lève les bras vers une structure métallique géante suspendue au-dessus d'une rue. Des formes géométriques blanches et lumineuses flottent dans l'air, recouvrant la scène et les bâtiments environnants. La rue est bordée d'arbres et de maisons à plusieurs étages, tandis qu'une autre personne est visible de dos au premier plan à gauche.",
+  "zoom": "Les personnages ne tiennent ni ne manipulent aucun objet. Les objets reconnaissables sont des bâtiments, des arbres, des lampadaires et des formes géométriques blanches flottantes.",
+  "facts": null,
+  "description": "Un homme de dos, vêtu d'une veste rouge et d'un pantalon gris, lève les bras de chaque côté de son corps face à une structure métallique géante suspendue au-dessus d'une rue. Des formes géométriques blanches et lumineuses flottent dans l'air et recouvrent la scène, les bâtiments et les arbres. Au premier plan à gauche, une silhouette de dos est visible.",
+  "budget_chars": 65,
+  "variants": [
+   "Un homme en veste rouge lève les bras face à une structure.",
+   "L'homme en veste rouge lève les bras.",
+   "L'homme lève les bras."
+  ]
+ },
+ {
+  "id": "d_0025",
+  "window": [
+   226.2,
+   230.68
+  ],
+  "frames": [
+   226.76,
+   227.88,
+   229.0,
+   230.12
+  ],
+  "brightened": 0,
+  "raw_description": "Dans un intérieur encombré, trois personnes regardent vers la gauche avec des expressions de surprise ou d'inquiétude. À gauche, un homme aux cheveux gris et à la barbe courte porte une veste à carreaux sur une chemise sombre. Au centre, un homme corpulent vêtu d'une chemise rouge ornée de motifs et de franges porte un appareil métallique sur l'œil droit et tend le bras vers l'homme à sa droite. À droite, une jeune femme aux cheveux noirs regarde fixement dans la même direction.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans un intérieur encombré, un homme aux cheveux gris et à la barbe courte, vêtu d'une veste à carreaux sur une chemise sombre, regarde vers la gauche avec une expression d'inquiétude. À sa droite, un homme corpulent en chemise rouge ornée de motifs et de franges, portant un appareil métallique sur l'œil droit, tend le bras vers l'homme aux cheveux gris. À l'extrême droite, une jeune femme aux cheveux noirs regarde fixement dans la même direction.",
+  "budget_chars": 53,
+  "variants": [
+   "L'homme barbu est inquiet. À sa droite, un homme corpulent tend le bras. Une femme regarde.",
+   "L'homme barbu est inquiet. Un homme tend le bras.",
+   "L'homme barbu est inquiet."
+  ]
+ },
+ {
+  "id": "d_0026",
+  "window": [
+   248.2,
+   253.416667
+  ],
+  "frames": [
+   248.85208337499998,
+   250.15625012499999,
+   251.460416875,
+   252.764583625
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme aux cheveux gris et à la barbe courte porte une chemise à carreaux sous une veste sombre. À sa droite, un homme plus âgé avec un casque audio sur les oreilles et une chemise rouge à franges rouges le regarde avec une expression tendue. Une jeune femme aux cheveux noirs, vêtue d'une veste beige, observe la scène avec un regard sérieux. Ils se trouvent dans une pièce encombrée où l'on aperçoit un haut-parleur blanc et des cadres au mur.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans un intérieur encombré, l'homme aux cheveux gris et à la barbe courte, vêtu d'une chemise à carreaux sous une veste sombre, regarde vers l'avant avec une expression inquiète. À sa droite, l'homme corpulent en chemise rouge à franges et portant un casque audio sur l'oreille lui pose une main sur l'épaule tout en le regardant avec un visage tendu. À l'extrême droite, la jeune femme aux cheveux noirs, vêtue d'une veste beige, observe la scène avec un regard sérieux.",
+  "budget_chars": 62,
+  "variants": [
+   "L'homme barbu est inquiet. L'homme corpulent le touche. La femme observe.",
+   "L'homme barbu est inquiet. L'homme corpulent le touche.",
+   "L'homme barbu est inquiet."
+  ]
+ },
+ {
+  "id": "d_0027",
+  "window": [
+   253.416667,
+   261.49250025
+  ],
+  "frames": [
+   254.42614615624998,
+   256.44510446875,
+   258.46406278125,
+   260.48302109375
+  ],
+  "brightened": 0,
+  "raw_description": "Trois personnes sont debout, de dos, face à une rue bordée de maisons aux façades colorées. L'homme au centre porte une veste rouge et semble faire un geste de la main vers l'homme à sa droite, qui porte une veste à carreaux bleus et noirs. Une femme à gauche, portant un sac à dos, regarde dans la même direction. Des éléments graphiques numériques et des lignes lumineuses vertes sont superposés à l'image.",
+  "zoom": "inconnu",
+  "facts": null,
+  "description": "De dos, trois personnes font face à une rue bordée de maisons aux façades colorées. L'homme au centre, vêtu d'une veste rouge, lève la main droite vers l'homme à sa droite qui porte une veste à carreaux bleus et noirs. À gauche, la femme porte un sac à dos. Des lignes lumineuses vertes et des éléments graphiques numériques sont superposés à l'image.",
+  "budget_chars": 99,
+  "variants": [
+   "De dos, trois personnes font face à une rue colorée. Des lignes vertes et des graphiques numériques s'affichent.",
+   "Trois personnes de dos face à une rue colorée. Des lignes vertes et des graphiques numériques s'affichent.",
+   "Trois personnes de dos face à une rue colorée. Des graphiques numériques s'affichent."
+  ]
+ },
+ {
+  "id": "d_0028",
+  "window": [
+   261.49250025,
+   269.5683335
+  ],
+  "frames": [
+   262.50197940625,
+   264.52093771874996,
+   266.53989603125,
+   268.55885434375
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme marche sur un trottoir pavé en pente, devant une balustrade métallique verte. Il porte une veste sombre sur un t-shirt à motifs clairs et un pantalon foncé. Il regarde vers le bas, puis lève les yeux vers sa droite tout en marchant. En arrière-plan, des bâtiments classiques, des arbres et des voitures garées sont visibles.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un homme marche sur un trottoir pavé en pente, devant une balustrade métallique verte. Il porte une veste sombre sur un t-shirt à motifs clairs et un pantalon foncé. Il regarde vers le bas, puis lève les yeux vers sa droite tout en marchant. En arrière-plan, des bâtiments classiques, des arbres et des voitures garées sont visibles.",
+  "budget_chars": 99,
+  "variants": [
+   "L'homme marche sur un trottoir pavé en pente devant une balustrade verte et regarde à droite.",
+   "Il marche sur un trottoir pavé et lève les yeux vers sa droite.",
+   "Il marche sur un trottoir et regarde à droite."
+  ]
+ },
+ {
+  "id": "d_0029",
+  "window": [
+   269.5683335,
+   277.64416674999995
+  ],
+  "frames": [
+   270.57781265625,
+   272.59677096875,
+   274.61572928124997,
+   276.63468759374996
+  ],
+  "brightened": 0,
+  "raw_description": "Un jeune homme aux cheveux noirs marche sur un pont pavé dans une rue bordée de bâtiments anciens. Il porte une veste bleue sur un t-shirt blanc à motifs noirs et un pantalon foncé. En arrière-plan, des arbres verts et des façades de maisons encadrent un canal. Un panneau jaune avec une flèche noire est visible sur la droite.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un jeune homme aux cheveux noirs marche sur un pont pavé, vêtu d'une veste bleue sur un t-shirt blanc à motifs noirs et d'un pantalon foncé. Il regarde vers sa gauche, tandis qu'en arrière-plan, des arbres verts et des façades de bâtiments encadrent un canal. Sur la droite, un panneau jaune avec une flèche noire est visible.",
+  "budget_chars": 99,
+  "variants": [
+   "Un jeune homme aux cheveux noirs marche sur un pont pavé et regarde à gauche.",
+   "Il marche sur un pont pavé et regarde vers sa gauche.",
+   "Il marche sur un pont et regarde à gauche."
+  ]
+ },
+ {
+  "id": "d_0030",
+  "window": [
+   277.64416674999995,
+   285.71999999999997
+  ],
+  "frames": [
+   278.65364590624995,
+   280.67260421874994,
+   282.69156253125,
+   284.71052084375
+  ],
+  "brightened": 0,
+  "raw_description": "Un jeune homme aux cheveux noirs, portant une veste grise et bleue ornée d'un motif de tigre jaune dans le dos, marche sur un pont. Il regarde vers la droite, vers les bâtiments de style européen qui bordent un canal. En arrière-plan, des voitures sont garées le long de la rue et des vélos sont appuyés contre des barrières. Sur la droite, une partie d'une structure métallique massive et complexe est visible.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un jeune homme aux cheveux noirs, vêtu d'une veste grise et bleue ornée d'un motif de tigre jaune dans le dos, marche sur un pont en regardant vers la droite. En arrière-plan, des bâtiments de style européen bordent un canal où sont garées des voitures et des vélos. Sur la droite, une partie d'une structure métallique massive et complexe est visible.",
+  "budget_chars": 99,
+  "variants": [
+   "Le jeune homme marche sur un pont, regardant à droite. Derrière lui, des bâtiments bordent un canal.",
+   "Il marche sur un pont et regarde à droite. Des bâtiments bordent un canal.",
+   "Il marche sur un pont et regarde à droite."
+  ]
+ },
+ {
+  "id": "d_0031",
+  "window": [
+   286.02,
+   292.65999999999997
+  ],
+  "frames": [
+   286.84999999999997,
+   288.51,
+   290.16999999999996,
+   291.83
+  ],
+  "brightened": 3,
+  "raw_description": "Un jeune homme de dos, portant une veste grise et bleue avec un motif de tigre jaune, contemple une immense machine métallique complexe sur un pont. À l'intérieur d'un atelier encombré de livres et d'objets, un homme corpulent vêtu d'une combinaison orange et portant un dispositif cybernétique sur l'œil droit regarde vers l'avant avec une expression surprise. À sa droite, une personne en uniforme sombre se tient debout, tenant un petit objet noir.",
+  "zoom": "Les personnages ne tiennent ni ne manipulent aucun objet identifiable. Les objets reconnaissables sont un piano, des livres, une tasse blanche et un appareil photo.",
+  "facts": null,
+  "description": "De dos, un jeune homme aux cheveux noirs et à la veste grise et bleue ornée d'un tigre jaune contemple une immense machine métallique complexe sur un pont. À l'intérieur d'un atelier encombré de livres, un homme corpulent en combinaison orange, portant un dispositif cybernétique sur l'œil droit, regarde vers l'avant avec une expression surprise. À sa droite, une personne en uniforme sombre se tient debout.",
+  "budget_chars": 81,
+  "variants": [
+   "Le jeune homme contemple une machine sur un pont. Dans un atelier, un homme surpris et un officier se tiennent debout.",
+   "Un homme surpris et un officier sont dans un atelier encombré.",
+   "Un homme surpris et un officier en uniforme."
+  ]
+ },
+ {
+  "id": "d_0032",
+  "window": [
+   305.86,
+   312.375
+  ],
+  "frames": [
+   306.674375,
+   308.303125,
+   309.931875,
+   311.560625
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme aux cheveux courts et sombres regarde une femme de profil dans une rue bordée d'arbres. L'homme porte une veste bleue sur un t-shirt blanc à motifs noirs et blancs. En arrière-plan, des bâtiments et des voitures sont visibles dans un flou artistique.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un homme aux cheveux courts et sombres regarde une femme de profil dans une rue bordée d'arbres. L'homme porte une veste bleue sur un t-shirt blanc à motifs noirs et blancs. En arrière-plan, des bâtiments et des voitures sont visibles dans un flou artistique.",
+  "budget_chars": 79,
+  "variants": [
+   "L'homme en veste bleue regarde une femme de profil dans une rue arborée.",
+   "L'homme en veste bleue regarde une femme dans une rue.",
+   "L'homme regarde une femme en rue."
+  ]
+ },
+ {
+  "id": "d_0033",
+  "window": [
+   312.375,
+   314.94
+  ],
+  "frames": [
+   312.695625,
+   313.336875,
+   313.978125,
+   314.619375
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme de profil, aux cheveux courts et foncés, regarde vers la droite de l'image. En arrière-plan, une rangée de maisons typiques borde un canal, avec des arbres verts et quelques voitures garées. Un texte rose en lettres pixelisées s'affiche au centre de l'image : « LOOK CELIA, WE HAVE TO FOLLOW OUR PASSIONS... ».",
+  "zoom": null,
+  "facts": null,
+  "description": "L'homme aux cheveux courts et foncés est de profil et regarde vers la droite. En arrière-plan, une rangée de maisons bordant un canal est floue, avec des arbres verts et des voitures garées. Un texte rose en lettres pixelisées s'affiche au centre de l'image : « LOOK CELIA, WE HAVE TO FOLLOW OUR PASSIONS... ».",
+  "budget_chars": 28,
+  "variants": [
+   "L'homme de profil regarde.",
+   "Il regarde à droite.",
+   "Il regarde."
+  ]
+ },
+ {
+  "id": "d_0034",
+  "window": [
+   329.92,
+   336.14
+  ],
+  "frames": [
+   330.6975,
+   332.2525,
+   333.8075,
+   335.3625
+  ],
+  "brightened": 3,
+  "raw_description": "À travers une ouverture circulaire, on aperçoit un panorama de toits de maisons aux façades travaillées et aux tuiles orangées. Un robot métallique massif se déplace sur les toits, passant de l'arrière-plan vers le premier plan. Dans les versions éclaircies, les détails des bâtiments et du robot deviennent plus visibles malgré un voile brumeux.",
+  "zoom": null,
+  "facts": null,
+  "description": "À travers une ouverture circulaire, un panorama de toits de maisons aux façades travaillées et aux tuiles orangées est visible sous un voile brumeux. Un robot métallique massif se déplace sur les toits, passant de l'arrière-plan vers le premier plan.",
+  "budget_chars": 75,
+  "variants": [
+   "À travers un cercle, un robot massif traverse des toits brumeux.",
+   "Un robot massif traverse des toits brumeux.",
+   "Un robot traverse des toits."
+  ]
+ },
+ {
+  "id": "d_0035",
+  "window": [
+   350.36,
+   356.02
+  ],
+  "frames": [
+   351.0675,
+   352.4825,
+   353.8975,
+   355.3125
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme de profil regarde vers la droite de l'image. Devant lui, une main robotique grise est levée. En arrière-plan, des bâtiments de ville bordent un canal et des arbres verts bordent la rue. Le texte rose « CELIA, I LOVE YOUR ROBOT HAND » est superposé sur l'image.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un homme de profil regarde vers la droite de l'image. Devant lui, une main robotique grise est levée. En arrière-plan, des bâtiments de ville bordent un canal et des arbres verts bordent la rue. Le texte rose « CELIA, I LOVE YOUR ROBOT HAND » est superposé sur l'image.",
+  "budget_chars": 68,
+  "variants": [
+   "Tom regarde une main robotique grise. Texte rose : CELIA, I LOVE YOUR ROBOT HAND.",
+   "Une main robotique grise face à Tom. Texte rose.",
+   "Une main robotique grise. Texte rose."
+  ]
+ },
+ {
+  "id": "d_0036",
+  "window": [
+   393.5,
+   396.5
+  ],
+  "frames": [
+   393.875,
+   394.625,
+   395.375,
+   396.125
+  ],
+  "brightened": 0,
+  "raw_description": "Un jeune homme aux cheveux bruns a les yeux clos et la tête légèrement inclinée vers l'arrière. Un dispositif mécanique gris et complexe, composé de pièces articulées et de câbles, est pressé contre son visage, couvrant son nez et sa bouche. L'arrière-plan montre un paysage extérieur verdoyant et flou avec un lampadaire.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un jeune homme aux cheveux bruns a les yeux clos et la tête inclinée vers l'arrière. Un dispositif mécanique gris et complexe, composé de pièces articulées et de câbles, est pressé contre son nez et sa bouche. L'arrière-plan montre un paysage extérieur verdoyant et flou avec la silhouette d'un lampadaire.",
+  "budget_chars": 33,
+  "variants": [
+   "Un masque mécanique sur son visage.",
+   "Masque sur son visage.",
+   "Masque mécanique."
+  ]
+ },
+ {
+  "id": "d_0037",
+  "window": [
+   398.5,
+   404.041667
+  ],
+  "frames": [
+   399.192708375,
+   400.578125125,
+   401.96354187500003,
+   403.348958625
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme aux cheveux courts et portant une veste en cuir marron est assis à un bureau, le regard dirigé vers le haut. Un dispositif mécanique est fixé sur son œil droit. À sa droite, une femme en tenue militaire beige le regarde avec une expression sérieuse. L'arrière-plan montre une bibliothèque remplie de livres et une lampe de bureau allumée.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un homme aux cheveux courts et portant une veste en cuir marron est assis à un bureau, le regard dirigé vers le haut. Un dispositif mécanique gris est fixé sur son œil droit. À sa droite, une femme en tenue militaire beige le regarde avec une expression sérieuse. L'arrière-plan montre une bibliothèque remplie de livres et une lampe de bureau allumée.",
+  "budget_chars": 66,
+  "variants": [
+   "L'homme en veste marron a un dispositif sur l'œil droit.",
+   "L'homme porte un dispositif sur l'œil droit.",
+   "Un dispositif sur son œil droit."
+  ]
+ },
+ {
+  "id": "d_0038",
+  "window": [
+   404.041667,
+   407.32
+  ],
+  "frames": [
+   404.451458625,
+   405.27104187500004,
+   406.090625125,
+   406.910208375
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme aux cheveux sombres a les yeux clos et la bouche entrouverte. Une main robotique articulée, composée de pièces métalliques grises, est placée contre son visage, ses doigts mécaniques touchant ses lèvres. En arrière-plan, des bâtiments urbains sont visibles sous un ciel couvert, avec une enseigne lumineuse rose affichant le texte « CELIA, I LOVE YOUR HAND ».",
+  "zoom": null,
+  "facts": null,
+  "description": "Un homme aux cheveux sombres a les yeux clos et la bouche entrouverte. Une main robotique articulée en métal gris est placée contre son visage, ses doigts mécaniques touchant ses lèvres. En arrière-plan, des bâtiments urbains se découpent sous un ciel couvert, avec une enseigne lumineuse rose affichant le texte « CELIA, I LOVE YOUR HAND ».",
+  "budget_chars": 37,
+  "variants": [
+   "Une main robotique touche ses lèvres.",
+   "La main touche ses lèvres.",
+   "Main sur ses lèvres."
+  ]
+ },
+ {
+  "id": "d_0039",
+  "window": [
+   411.1,
+   416.625
+  ],
+  "frames": [
+   411.79062500000003,
+   413.171875,
+   414.553125,
+   415.934375
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme de profil, portant une veste bleue et jaune avec un motif de tigre dans le dos, regarde vers le haut. Face à lui, une silhouette humaine translucide et composée de lignes blanches s'approche de son visage. L'arrière-plan montre des arbres verts et des bâtiments urbains sous une lumière du jour.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un homme de profil, portant une veste bleue et jaune avec un motif de tigre dans le dos, regarde vers le haut. Face à lui, une silhouette humaine translucide composée de lignes blanches s'approche de son visage. L'arrière-plan montre des arbres verts et des bâtiments urbains sous une lumière du jour.",
+  "budget_chars": 66,
+  "variants": [
+   "L'homme en veste bleue et jaune regarde une silhouette blanche.",
+   "Une silhouette blanche s'approche de l'homme.",
+   "Une silhouette blanche approche l'homme."
+  ]
+ },
+ {
+  "id": "d_0040",
+  "window": [
+   416.625,
+   419.26
+  ],
+  "frames": [
+   416.954375,
+   417.61312499999997,
+   418.271875,
+   418.93062499999996
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme aux cheveux bouclés et portant des lunettes regarde vers la droite avec une expression tendue. Devant lui, des éléments graphiques numériques colorés et des lignes de code bleu clair flottent dans l'air. En arrière-plan, une personne de dos est assise devant un écran, éclairée par une lampe de bureau blanche.",
+  "zoom": "Le personnage porte un sac à dos beige et semble faire face à une structure robotique complexe. On reconnaît des chaînes métalliques et des câbles noirs sur la machine.",
+  "facts": null,
+  "description": "L'homme aux cheveux bouclés et portant des lunettes regarde vers la droite avec une expression tendue. Devant lui, des éléments graphiques numériques colorés et des lignes de code bleu clair flottent dans l'air. En arrière-plan, une personne de dos est assise devant un écran, éclairée par une lampe de bureau blanche.",
+  "budget_chars": 29,
+  "variants": [
+   "L'homme aux lunettes est tendu.",
+   "Il est tendu."
+  ]
+ },
+ {
+  "id": "d_0041",
+  "window": [
+   422.8,
+   428.46
+  ],
+  "frames": [
+   423.5075,
+   424.9225,
+   426.3375,
+   427.7525
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme aux cheveux bouclés et portant des lunettes regarde vers le haut à travers des interfaces numériques colorées qui flottent devant lui. Dans l'image suivante, il lève davantage le visage vers la lumière, toujours entouré de ces éléments graphiques. La scène change brusquement pour montrer un espace sombre et brumeux parsemé de petites lumières blanches et de formes géométriques indistinctes. Enfin, un homme plus âgé, portant un monocle complexe sur l'œil droit, regarde vers le haut en tenant une pipe à la main.",
+  "zoom": "inconnu",
+  "facts": null,
+  "description": "L'homme aux cheveux bouclés et portant des lunettes regarde vers le haut à travers des interfaces numériques colorées et des lignes de code bleu clair qui flottent devant lui. La scène change pour un espace sombre et brumeux parsemé de petites lumières blanches et de formes géométriques indistinctes. Un homme plus âgé, portant un monocle complexe sur l'œil droit, regarde vers le haut en tenant une pipe de sa main droite.",
+  "budget_chars": 68,
+  "variants": [
+   "L'homme aux lunettes fixe des interfaces et du code bleu.",
+   "L'homme aux lunettes regarde des codes numériques.",
+   "L'homme fixe des codes numériques."
+  ]
+ },
+ {
+  "id": "d_0042",
+  "window": [
+   437.7,
+   444.875
+  ],
+  "frames": [
+   438.596875,
+   440.390625,
+   442.184375,
+   443.978125
+  ],
+  "brightened": 1,
+  "raw_description": "Une haute tour d'horloge métallique et sculptée s'élève vers un ciel nuageux. La structure présente des détails complexes, des engrenages et des cadrans d'horloge dorés. La scène change pour un gros plan sur une machine technologique complexe, d'où s'échappe une épaisse fumée blanche. Une main gantée manipule l'appareil au milieu de cette vapeur.",
+  "zoom": null,
+  "facts": null,
+  "description": "Une haute tour d'horloge métallique et sculptée s'élève vers un ciel nuageux, présentant des détails complexes, des engrenages et des cadrans d'horloge dorés. La scène change pour un gros plan sur une machine technologique complexe d'où s'échappe une épaisse fumée blanche. Une main gantée manipule l'appareil au milieu de cette vapeur.",
+  "budget_chars": 88,
+  "variants": [
+   "Une tour d'horloge métallique sculptée s'élève vers un ciel nuageux. Une machine dégage de la fumée blanche sous une main gantée.",
+   "Une tour d'horloge sculptée s'élève. Une main gantée manipule une machine fumante.",
+   "Une tour d'horloge s'élève. Une main manipule une machine fumante."
+  ]
+ },
+ {
+  "id": "d_0043",
+  "window": [
+   444.875,
+   453.3333335
+  ],
+  "frames": [
+   445.93229168749997,
+   448.0468750625,
+   450.16145843749996,
+   452.2760418125
+  ],
+  "brightened": 2,
+  "raw_description": "Un jeune homme aux cheveux bruns, vêtu d'une blouse blanche et portant des lunettes sur le col, regarde avec une expression surprise un robot blanc complexe situé à sa gauche. Le robot est composé de plusieurs segments cylindriques et de pièces mécaniques blanches et noires. En arrière-plan, une femme portant des lunettes de soleil et un bandeau noir est visible dans un environnement industriel sombre et encombré.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un jeune homme aux cheveux bruns, vêtu d'une blouse blanche avec des lunettes accrochées à son col, regarde avec une expression surprise un robot blanc et noir composé de segments cylindriques situé à sa gauche. En arrière-plan, une femme portant des lunettes de soleil et un bandeau noir est visible dans un environnement industriel sombre et encombré.",
+  "budget_chars": 104,
+  "variants": [
+   "L'homme aux cheveux bruns regarde avec surprise un robot cylindrique noir et blanc. Une femme est en arrière-plan.",
+   "L'homme aux cheveux bruns regarde un robot cylindrique. Une femme se tient derrière lui.",
+   "L'homme regarde un robot cylindrique. Une femme est en arrière-plan."
+  ]
+ },
+ {
+  "id": "d_0044",
+  "window": [
+   453.3333335,
+   461.791667
+  ],
+  "frames": [
+   454.3906251875,
+   456.5052085625,
+   458.6197919375,
+   460.7343753125
+  ],
+  "brightened": 4,
+  "raw_description": "Un jeune homme aux cheveux bruns, vêtu d'une veste blanche avec des lunettes accrochées à son col, regarde avec une expression surprise un petit robot blanc et noir qui lévite devant lui. Le robot, composé de plusieurs pièces mécaniques, se déplace devant le visage de l'homme. L'action se déroule dans un atelier sombre rempli de rouages et de structures métalliques en arrière-plan.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un jeune homme aux cheveux bruns, vêtu d'une veste blanche avec des lunettes accrochées à son col, regarde avec une expression surprise un petit robot blanc et noir composé de segments mécaniques qui lévite devant lui. Le robot, constitué de plusieurs pièces blanches et noires, passe devant le visage de l'homme. L'action se déroule dans un atelier sombre, avec des structures métalliques et des rouages en arrière-plan.",
+  "budget_chars": 104,
+  "variants": [
+   "Dans un atelier sombre, l'homme aux cheveux bruns regarde avec surprise un petit robot blanc et noir qui lévite.",
+   "L'homme aux cheveux bruns observe un petit robot blanc et noir en lévitation.",
+   "L'homme regarde un petit robot en lévitation."
+  ]
+ },
+ {
+  "id": "d_0045",
+  "window": [
+   461.791667,
+   466.91999999999996
+  ],
+  "frames": [
+   462.43270862500003,
+   463.714791875,
+   464.996875125,
+   466.27895837499995
+  ],
+  "brightened": 0,
+  "raw_description": "Dans un grand bâtiment de verre et de métal baigné de lumière, quatre personnes en vêtements blancs ou gris sont agenouillées au sol. Elles manipulent des armes et du matériel technique parmi des caisses et des débris. Soudain, l'image devient très floue et sombre, montrant des éclats de lumière blanche et des formes sombres en mouvement rapide.",
+  "zoom": "inconnu",
+  "facts": null,
+  "description": "Dans un grand bâtiment de verre et de métal baigné de lumière, quatre personnes en vêtements blancs ou gris sont agenouillées au sol. Elles manipulent des armes et du matériel technique parmi des caisses et des débris. Soudain, l'image devient très floue et sombre, montrant des éclats de lumière blanche et des formes sombres en mouvement rapide.",
+  "budget_chars": 61,
+  "variants": [
+   "Quatre personnes agenouillées manipulent du matériel technique.",
+   "Quatre personnes manipulent des armes au sol.",
+   "Quatre personnes agenouillées au sol."
+  ]
+ },
+ {
+  "id": "d_0046",
+  "window": [
+   467.62,
+   470.84
+  ],
+  "frames": [
+   468.0225,
+   468.8275,
+   469.6325,
+   470.4375
+  ],
+  "brightened": 0,
+  "raw_description": "Un jeune homme aux cheveux blonds, l'air inquiet, tient un jouet de construction blanc et noir qui ressemble à un robot ou un vaisseau. Dans l'image suivante, le décor montre des colonnes de pierre et des débris flous en mouvement. La scène finale présente une structure mécanique massive et complexe, composée de pièces grises et noires, située devant des colonnes de pierre.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un jeune homme aux cheveux blonds et à l'expression inquiète tient un objet de construction blanc et noir ressemblant à un robot. En arrière-plan, des colonnes de pierre et des débris flous défilent rapidement. Une structure mécanique massive et complexe, composée de pièces grises et noires, se dresse devant des colonnes de pierre.",
+  "budget_chars": 36,
+  "variants": [
+   "L'homme inquiet tient un robot.",
+   "Il tient un robot."
+  ]
+ },
+ {
+  "id": "d_0047",
+  "window": [
+   471.1,
+   478.958333
+  ],
+  "frames": [
+   472.08229162500004,
+   474.046874875,
+   476.011458125,
+   477.97604137499997
+  ],
+  "brightened": 0,
+  "raw_description": "Dans un grand hall envahi par la végétation et des débris métalliques, quatre personnes en combinaisons blanches sont agenouillées au sol. Elles pointent des armes vers l'avant, dans une direction opposée à la caméra. L'espace est encombré de caisses, de débris et de structures métalliques sous une lumière zénithale filtrée par de hautes fenêtres.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans un grand hall envahi par la végétation et des débris métalliques, quatre personnes en combinaisons blanches sont agenouillées au sol. Elles pointent des armes vers l'avant, dans une direction opposée à la caméra. L'espace est encombré de caisses, de débris et de structures métalliques sous une lumière zénithale filtrée par de hautes fenêtres.",
+  "budget_chars": 96,
+  "variants": [
+   "Dans un hall encombré de débris, quatre personnes en combinaisons blanches sont agenouillées, armes pointées.",
+   "Quatre personnes en combinaisons blanches sont agenouillées, armes au poing.",
+   "Quatre personnes en combinaisons blanches sont agenouillées."
+  ]
+ },
+ {
+  "id": "d_0048",
+  "window": [
+   478.958333,
+   481.7
+  ],
+  "frames": [
+   479.30104137499995,
+   479.986458125,
+   480.67187487499996,
+   481.357291625
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme noir, au regard intense, est allongé au sol dans un lieu sombre. La caméra effectue un mouvement rapide et flou vers l'avant, traversant un espace plongé dans l'obscurité. La scène révèle ensuite un immense canyon industriel composé de structures métalliques, de câbles et de plateformes suspendues, le tout baigné de lumières jaunes et orangées.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un homme noir, au regard intense, est allongé au sol dans l'obscurité. La caméra effectue un mouvement rapide et flou vers l'avant, traversant un espace sombre, pour révéler un immense canyon industriel composé de structures métalliques, de câbles et de plateformes suspendues baignées de lumières jaunes et orangées.",
+  "budget_chars": 30,
+  "variants": [
+   "L'homme noir est au sol.",
+   "L'homme est au sol."
+  ]
+ },
+ {
+  "id": "d_0049",
+  "window": [
+   482.26,
+   489.73999999999995
+  ],
+  "frames": [
+   483.195,
+   485.065,
+   486.93499999999995,
+   488.80499999999995
+  ],
+  "brightened": 1,
+  "raw_description": "Un homme noir vêtu d'une veste sombre à col en fourrure regarde vers le bas avec une expression inquiète. Dans un plan rapproché, son visage est marqué par la tension et ses yeux sont humides. Il se trouve au milieu d'une structure métallique complexe composée de poutres et de cordes épaisses. L'arrière-plan montre une vue plongeante sur un abîme sombre parsemé de structures et de lumières dorées.",
+  "zoom": null,
+  "facts": null,
+  "description": "En plan rapproché, l'homme noir, le regard humide et la bouche entrouverte, porte une veste sombre à col en fourrure. Il se tient au milieu de structures métalliques et de cordes épaisses, avec en arrière-plan un abîme sombre parsemé de lumières dorées.",
+  "budget_chars": 92,
+  "variants": [
+   "L'homme noir, le regard humide, porte une veste à col en fourrure parmi des cordes et du métal.",
+   "L'homme noir, le regard humide, porte une veste à col en fourrure.",
+   "L'homme noir a le regard humide."
+  ]
+ },
+ {
+  "id": "d_0050",
+  "window": [
+   490.02,
+   495.44
+  ],
+  "frames": [
+   490.6975,
+   492.0525,
+   493.40749999999997,
+   494.7625
+  ],
+  "brightened": 0,
+  "raw_description": "Dans une grande salle aux plafonds voûtés, un homme tient une corde et une arme noire tout en regardant vers l'avant. À l'arrière-plan, de nombreux tuyaux d'orgue s'élèvent verticalement. Une structure métallique massive et complexe occupe le premier plan à droite, tandis qu'une lame lumineuse traverse l'image horizontalement.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans une grande salle aux plafonds voûtés, l'homme noir tient une corde blanche d'une main et une arme noire de l'autre, le regard fixé vers l'avant. À l'arrière-plan, de nombreux tuyaux d'orgue s'élèvent verticalement, tandis qu'une structure métallique massive occupe le premier plan à droite. Une lame lumineuse traverse l'image horizontalement.",
+  "budget_chars": 65,
+  "variants": [
+   "L'homme noir tient une corde et une arme face à des orgues.",
+   "L'homme noir tient une corde et une arme.",
+   "Il tient une corde et une arme."
+  ]
+ },
+ {
+  "id": "d_0051",
+  "window": [
+   495.78000000000003,
+   500.7
+  ],
+  "frames": [
+   496.39500000000004,
+   497.625,
+   498.855,
+   500.085
+  ],
+  "brightened": 0,
+  "raw_description": "Dans un lieu aux allures de cathédrale, plusieurs robots massifs et délabrés sont éparpillés au sol devant un orgue imposant. Un homme de dos, portant un sac à dos bleu et une veste sombre, s'agrippe à une corde blanche pour grimper. Il se hisse devant les tuyaux verticaux de l'orgue, tandis qu'un autre robot aux formes arrondies est suspendu à la paroi sur la gauche. La lumière est diffuse et semble provenir de la gauche de l'image.",
+  "zoom": "Le personnage tient une corde. On reconnaît un orgue en arrière-plan.",
+  "facts": null,
+  "description": "Dans un lieu aux allures de cathédrale, plusieurs robots massifs et délabrés sont éparpillés au sol devant un orgue imposant. Un homme de dos, portant un sac à dos bleu et une veste sombre, s'agrippe à une corde blanche pour grimper devant les tuyaux verticaux de l'orgue. Un autre robot aux formes arrondies est suspendu à la paroi sur la gauche.",
+  "budget_chars": 58,
+  "variants": [
+   "L'homme grimpe à la corde devant un orgue géant.",
+   "Il grimpe devant un orgue imposant.",
+   "Il grimpe à la corde."
+  ]
+ },
+ {
+  "id": "d_0052",
+  "window": [
+   508.76,
+   511.17999999999995
+  ],
+  "frames": [
+   509.1633333333333,
+   509.96999999999997,
+   510.77666666666664
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme aux cheveux noirs et portant une veste bleue et grise regarde vers le haut avec une expression de surprise. À sa droite, une immense structure métallique composée de rouages et de câbles s'élève. L'homme se tient sur un pont avec des garde-corps noirs, au-dessus d'un canal bordé d'arbres verts et de bâtiments urbains.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un homme aux cheveux noirs et portant une veste bleue et grise regarde vers le haut, la bouche entrouverte. À sa droite, une immense structure métallique composée de rouages et de câbles s'élève au-dessus d'un pont aux garde-corps noirs. En arrière-plan, des arbres verts et des bâtiments urbains bordent un canal.",
+  "budget_chars": 26,
+  "variants": [
+   "L'homme regarde en haut.",
+   "Il regarde en haut."
+  ]
+ },
+ {
+  "id": "d_0053",
+  "window": [
+   512.0799999999999,
+   519.12
+  ],
+  "frames": [
+   512.9599999999999,
+   514.7199999999999,
+   516.48,
+   518.24
+  ],
+  "brightened": 0,
+  "raw_description": "Un jeune homme aux cheveux noirs et portant une veste bleue se tient debout sur un pont au-dessus d'un canal. À sa droite, une immense structure métallique complexe et délabrée occupe une grande partie du cadre. Le jeune homme regarde vers l'avant avec une expression sérieuse, tandis que l'arrière-plan montre des arbres verts et des bâtiments urbains.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un jeune homme aux cheveux noirs et portant une veste bleue et grise se tient debout sur un pont au-dessus d'un canal. À sa droite, une immense structure métallique complexe et délabrée occupe une grande partie du cadre. Le jeune homme regarde vers l'avant avec une expression sérieuse, tandis que l'arrière-plan montre des arbres verts et des bâtiments urbains.",
+  "budget_chars": 86,
+  "variants": [
+   "Un jeune homme en veste bleue et grise se tient sur un pont au-dessus d'un canal.",
+   "Il se tient sur un pont face à une immense structure métallique.",
+   "Il se tient sur un pont urbain."
+  ]
+ },
+ {
+  "id": "d_0054",
+  "window": [
+   520.5,
+   527.5
+  ],
+  "frames": [
+   521.375,
+   523.125,
+   524.875,
+   526.625
+  ],
+  "brightened": 0,
+  "raw_description": "Dans un décor industriel en ruines, de grandes structures métalliques rouillées et des tuyaux massifs occupent le premier plan. Au centre, une machine imposante et complexe semble s'activer dans un nuage de poussière et de fumée. Des câbles pendent du plafond et des plantes grimpent le long de colonnes en pierre. Des étincelles jaillissent de l'intérieur d'une roue dentée sur la gauche.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans un décor industriel en ruines, de grandes structures métalliques rouillées et des tuyaux massifs occupent le premier plan. Au centre, une machine imposante et complexe s'active dans un nuage de poussière et de fumée. Des câbles pendent du plafond et des plantes grimpent le long de colonnes en pierre. Des étincelles jaillissent d'une roue dentée sur la gauche.",
+  "budget_chars": 85,
+  "variants": [
+   "Dans un décor industriel en ruines, une machine s'active dans la fumée.",
+   "Une machine complexe s'active dans la poussière et la fumée.",
+   "Une machine s'active dans la fumée."
+  ]
+ },
+ {
+  "id": "d_0055",
+  "window": [
+   530.44,
+   535.04
+  ],
+  "frames": [
+   531.0150000000001,
+   532.165,
+   533.315,
+   534.4649999999999
+  ],
+  "brightened": 1,
+  "raw_description": "Un homme aux cheveux gris et à la barbe courte regarde vers la droite avec une expression sérieuse. Il porte une chemise à carreaux sous une veste marron. À sa droite, une structure métallique massive et complexe occupe une partie de l'image. L'arrière-plan montre un environnement industriel sombre et encombré de machines.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un homme aux cheveux gris et à la barbe courte regarde vers la droite avec une expression sérieuse. Il porte une chemise à carreaux bleue et noire sous une veste marron. À sa droite, une structure métallique massive et complexe occupe une partie de l'image, avec des surfaces usées et des câbles sombres. L'arrière-plan montre un environnement industriel sombre et encombré de machines.",
+  "budget_chars": 54,
+  "variants": [
+   "L'homme barbu regarde à droite devant une machine.",
+   "L'homme barbu regarde une structure métallique.",
+   "L'homme regarde la machine."
+  ]
+ },
+ {
+  "id": "d_0056",
+  "window": [
+   541.94,
+   545.52
+  ],
+  "frames": [
+   542.3875,
+   543.2825,
+   544.1775,
+   545.0725
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme aux cheveux gris et portant une chemise à carreaux se tient debout devant une immense machine robotique complexe et usée. Il tend les mains vers une partie de la structure métallique, semblant l'examiner ou la manipuler. L'arrière-plan montre un décor industriel sombre avec des structures circulaires éclairées de l'intérieur. Des éléments graphiques colorés et translucides, comme des schémas numériques, sont superposés sur l'image.",
+  "zoom": "L'homme manipule une partie de la structure métallique d'un robot géant. On reconnaît des câbles électriques, des boulons et des éléments mécaniques complexes.",
+  "facts": null,
+  "description": "L'homme aux cheveux gris et à la barbe courte, vêtu d'une chemise à carreaux bleue et noire sous une veste marron, se tient debout face à une immense structure robotique usée et marquée de traces de peinture rose et bleue. Il tend les mains vers une partie de la machine composée de câbles, de boulons et d'éléments mécaniques complexes. L'arrière-plan montre un décor industriel sombre avec des structures circulaires éclairées de l'intérieur.",
+  "budget_chars": 41,
+  "variants": [
+   "L'homme tend les mains vers la machine.",
+   "Il touche la machine.",
+   "Il tend les mains."
+  ]
+ },
+ {
+  "id": "d_0057",
+  "window": [
+   546.02,
+   552.833333
+  ],
+  "frames": [
+   546.871666625,
+   548.574999875,
+   550.278333125,
+   551.981666375
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme aux cheveux blancs et à la barbe courte, vêtu d'une chemise à carreaux sur un vêtement sombre, se tient debout face à une imposante structure mécanique. Il pose ses mains sur une partie métallique et usée de la machine, qui présente des traces de peinture rose et bleue. L'arrière-plan montre un décor industriel complexe et sombre, composé de rouages et de structures métalliques dorées.",
+  "zoom": null,
+  "facts": null,
+  "description": "L'homme aux cheveux gris et à la barbe courte, vêtu d'une chemise à carreaux bleue et noire sur un vêtement sombre, pose ses mains sur une partie métallique et usée d'une immense structure robotique marquée de traces de peinture rose et bleue. Il se tient de profil face à la machine, dont les composants mécaniques sont entremêlés de câbles rouges et bleus. L'arrière-plan montre un décor industriel sombre composé de structures métalliques dorées et de rouages.",
+  "budget_chars": 83,
+  "variants": [
+   "L'homme barbu pose ses mains sur une structure robotique usée.",
+   "Il pose ses mains sur une immense machine métallique.",
+   "Il touche la structure robotique usée."
+  ]
+ },
+ {
+  "id": "d_0058",
+  "window": [
+   552.833333,
+   559.06
+  ],
+  "frames": [
+   553.611666375,
+   555.168333125,
+   556.724999875,
+   558.281666625
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme aux cheveux gris et à la barbe courte regarde fixement vers la droite avec une expression inquiète. Un autre homme, dont le visage est partiellement caché par un dispositif mécanique rouge et noir fixé sur son œil droit, lève les mains devant lui, les doigts écartés. L'arrière-plan est sombre et flou, laissant apparaître des formes indistinctes et une lampe allumée sur la gauche.",
+  "zoom": "Inconnu.",
+  "facts": null,
+  "description": "L'homme aux cheveux gris et à la barbe courte regarde vers la droite avec une expression inquiète. Un homme lève les mains devant lui, les doigts écartés, tandis qu'un dispositif mécanique rouge et noir est fixé sur son œil droit. L'arrière-plan est sombre et flou, avec une lampe allumée sur la gauche.",
+  "budget_chars": 75,
+  "variants": [
+   "L'homme barbu, inquiet, regarde à droite. Un autre homme tend les mains.",
+   "L'homme barbu est inquiet. Un autre homme lève les mains.",
+   "L'homme barbu est inquiet."
+  ]
+ },
+ {
+  "id": "d_0059",
+  "window": [
+   559.6,
+   561.88
+  ],
+  "frames": [
+   559.98,
+   560.74,
+   561.5
+  ],
+  "brightened": 1,
+  "raw_description": "Un homme au teint clair, portant une veste marron zippée avec des détails rouges, regarde vers le haut avec une expression surprise. Un dispositif mécanique complexe, composé de lentilles et de câbles, est fixé sur son œil droit. Il lève l'index de sa main gauche vers le haut. En arrière-plan, on aperçoit un meuble en bois sombre surmonté de divers objets, dont une bouteille en plastique et une tasse blanche.",
+  "zoom": "Les personnages ne tiennent ni ne manipulent aucun objet visible sur ces images. Les objets reconnaissables sont une lampe, une bouteille en plastique et un appareil blanc.",
+  "facts": null,
+  "description": "L'homme au teint clair, portant une veste marron zippée avec des détails rouges, regarde vers le haut avec une expression surprise. Un dispositif mécanique complexe, composé de lentilles et de câbles, est fixé sur son œil droit. Il lève l'index de sa main gauche vers le haut. En arrière-plan, on aperçoit un meuble en bois sombre surmonté de divers objets, dont une bouteille en plastique et une tasse blanche.",
+  "budget_chars": 24,
+  "variants": [
+   "L'homme est surpris.",
+   "Il est surpris.",
+   "Il s'étonne."
+  ]
+ },
+ {
+  "id": "d_0060",
+  "window": [
+   571.24,
+   579.62
+  ],
+  "frames": [
+   572.2875,
+   574.3825,
+   576.4775,
+   578.5725
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme âgé aux cheveux blancs et portant un tablier sombre se tient debout sur un sol pavé. Il tend les mains vers une grande machine métallique complexe composée de câbles et de pièces mécaniques. La scène se déroule en extérieur, près d'une balustrade en fer et de buissons verdoyants, dans un environnement industriel et sombre.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un homme âgé aux cheveux blancs et portant un tablier sombre se tient debout sur un sol pavé. Il tend les deux mains vers une grande machine métallique complexe composée de câbles et de pièces mécaniques. La scène se déroule en extérieur, près d'une balustrade en fer et de buissons verdoyants.",
+  "budget_chars": 103,
+  "variants": [
+   "L'homme aux cheveux blancs tend les mains vers une machine métallique complexe sur un sol pavé.",
+   "L'homme aux cheveux blancs tend les mains vers une machine métallique.",
+   "L'homme tend les mains vers la machine."
+  ]
+ },
+ {
+  "id": "d_0061",
+  "window": [
+   579.62,
+   588.0
+  ],
+  "frames": [
+   580.6675,
+   582.7625,
+   584.8575,
+   586.9525
+  ],
+  "brightened": 0,
+  "raw_description": "Dans un vaste hangar industriel brumeux, une femme aux cheveux blancs et un homme marchent côte à côte sur une passerelle surélevée. Ils passent devant une immense structure métallique composée de câbles et de tuyaux qui descend du plafond. Plusieurs robots mécaniques de grande taille sont répartis dans l'espace, certains immobiles et d'autres semblant se déplacer sur le sol rocailleux et verdoyant. Des structures métalliques et des échafaudages entourent la scène, baignée dans une lumière diffuse et poussiéreuse.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans un vaste hangar industriel brumeux, une femme aux cheveux blancs et un homme marchent côte à côte sur une passerelle surélevée. Ils passent devant une immense structure métallique composée de câbles et de tuyaux qui descend du plafond. Plusieurs robots mécaniques de grande taille sont répartis dans l'espace, certains immobiles et d'autres semblant se déplacer sur le sol rocailleux et verdoyant. Des structures métalliques et des échafaudages entourent la scène, baignée dans une lumière diffuse et poussiéreuse.",
+  "budget_chars": 103,
+  "variants": [
+   "Dans un hangar brumeux, une femme aux cheveux blancs et un homme marchent sur une passerelle métallique.",
+   "Une femme aux cheveux blancs et un homme marchent sur une passerelle dans un hangar.",
+   "Une femme et un homme marchent sur une passerelle."
+  ]
+ },
+ {
+  "id": "d_0062",
+  "window": [
+   588.0,
+   594.12
+  ],
+  "frames": [
+   588.765,
+   590.295,
+   591.825,
+   593.355
+  ],
+  "brightened": 3,
+  "raw_description": "Sur un fond noir, des formes mécaniques stylisées apparaissent en bleu néon et en orange. Des lignes de contour bleues délimitent des pièces de robotique complexes, tandis qu'une silhouette orange en arrière-plan présente des détails techniques. Au centre, le texte blanc indique « Written and Directed by IAN HUBERT ».",
+  "zoom": "Inconnu.",
+  "facts": null,
+  "description": "Sur un fond noir, des formes mécaniques stylisées apparaissent en bleu néon et en orange. Des lignes de contour bleues délimitent des pièces de robotique complexes, tandis qu'une silhouette orange en arrière-plan présente des détails techniques. Au centre, le texte blanc indique « Written and Directed by IAN HUBERT ».",
+  "budget_chars": 74,
+  "variants": [
+   "Des formes mécaniques bleues et orange s'animent sur fond noir. Texte : « Written and Directed by IAN HUBERT ».",
+   "Formes mécaniques bleues et orange sur fond noir. Texte : « Written and Directed by IAN HUBERT ».",
+   "Formes mécaniques sur fond noir. Texte : « Written and Directed by IAN HUBERT »."
+  ]
+ },
+ {
+  "id": "d_0063",
+  "window": [
+   594.52,
+   598.6999999999999
+  ],
+  "frames": [
+   595.0425,
+   596.0875,
+   597.1324999999999,
+   598.1774999999999
+  ],
+  "brightened": 4,
+  "raw_description": "Une série d'images stylisées présente des formes mécaniques bleues et blanches sur un fond noir ou orange. Le texte « Produced by TON ROOSENDAAL » apparaît sur les premières images, suivi par « Director of Photography JORIS KERBOSCH N.S.C. ». Les formes mécaniques, composées de câbles et de pièces articulées, sont éclaircies dans les versions plus claires.",
+  "zoom": "Inconnu.",
+  "facts": null,
+  "description": "Sur un fond noir, des formes mécaniques bleues et blanches, composées de câbles et de pièces articulées, s'entremêlent avec des éléments orange. Le texte blanc « Produced by TON ROOSENDAAL » apparaît au centre, suivi par « Director of Photography JORIS KERBOSCH N.S.C. ».",
+  "budget_chars": 49,
+  "variants": [
+   "Des formes mécaniques s'animent sur fond noir.",
+   "Formes mécaniques sur fond noir.",
+   "Formes mécaniques bleues."
+  ]
+ },
+ {
+  "id": "d_0064",
+  "window": [
+   599.04,
+   606.18
+  ],
+  "frames": [
+   599.9325,
+   601.7175,
+   603.5024999999999,
+   605.2874999999999
+  ],
+  "brightened": 3,
+  "raw_description": "Une série de titres de générique défile sur un fond noir parsemé de formes géométriques orange et de structures mécaniques bleues et blanches. Les noms de l'équipe technique, comme le directeur de la photographie Joris Kerbosch et le responsable du son Joram Letwory, apparaissent successivement. Enfin, une liste de la distribution présente les noms des acteurs et leurs personnages respectifs.",
+  "zoom": "Inconnu.",
+  "facts": null,
+  "description": "Sur un fond noir parsemé de formes géométriques orange et de structures mécaniques bleues et blanches, les titres de générique défilent. Les noms du directeur de la photographie Joris Kerbosch N.S.C., puis du responsable du son Joram Letwory, apparaissent successivement. Enfin, une liste de noms de la distribution s'affiche à gauche sous le titre « Cast ».",
+  "budget_chars": 87,
+  "variants": [
+   "Sur un fond noir géométrique, les noms de Joris Kerbosch N.S.C. et Joram Letwory défilent, puis la liste du Cast s'affiche.",
+   "Des formes géométriques défilent. Les noms de Joris Kerbosch N.S.C. et Joram Letwory apparaissent, puis le Cast.",
+   "Des formes géométriques défilent. Les noms de Joris Kerbosch N.S.C., Joram Letwory et le Cast apparaissent."
+  ]
+ },
+ {
+  "id": "d_0065",
+  "window": [
+   606.18,
+   613.3199999999999
+  ],
+  "frames": [
+   607.0725,
+   608.8575,
+   610.6424999999999,
+   612.4274999999999
+  ],
+  "brightened": 1,
+  "raw_description": "Sur un fond noir, une liste de noms apparaît à gauche sous le titre « Cast ». À droite, une main robotique bleue et lumineuse est représentée en gros plan sur un fond orange et noir. La scène passe ensuite à un écran noir parsemé de fragments orange, avant de montrer une partie d'un robot bleu et blanc en bas de l'image. Enfin, une liste de techniciens intitulée « MANGO ARTISTS » s'affiche à droite, tandis qu'un robot bleu occupe la partie gauche de l'écran.",
+  "zoom": null,
+  "facts": null,
+  "description": "Sur un fond noir parsemé de formes géométriques orange, une liste de noms apparaît à gauche sous le titre « Cast ». À droite, une main robotique bleue et lumineuse est représentée en gros plan. La scène passe ensuite à un écran noir parsemé de fragments orange, avant de montrer une partie d'un robot bleu et blanc en bas de l'image. Enfin, une liste de techniciens intitulée « MANGO ARTISTS » s'affiche à droite, tandis qu'un robot bleu occupe la partie gauche de l'écran.",
+  "budget_chars": 87,
+  "variants": [
+   "À gauche, le titre « Cast » et une liste de noms. À droite, une main robotique bleue.",
+   "À gauche, le titre « Cast » et une liste. À droite, une main bleue.",
+   "Le titre « Cast » et une main bleue."
+  ]
+ },
+ {
+  "id": "d_0066",
+  "window": [
+   622.54,
+   632.2022222222222
+  ],
+  "frames": [
+   623.7477777777777,
+   626.1633333333333,
+   628.5788888888889,
+   630.9944444444444
+  ],
+  "brightened": 1,
+  "raw_description": "Un schéma technique bleu et blanc d'un mécanisme complexe s'affiche sur un fond noir parsemé de formes orange. Le texte blanc indique « All CG and VFX realised entirely with Blender » suivi de l'adresse « www.blender.org ». L'image s'éclaircit pour révéler le même schéma technique sur un fond grisâtre.",
+  "zoom": "inconnu",
+  "facts": null,
+  "description": "Un schéma technique bleu et blanc d'un mécanisme complexe s'affiche sur un fond noir parsemé de formes orange. Le texte blanc indique « All CG and VFX realised entirely with » suivi du logo et de l'adresse « www.blender.org ». L'image s'éclaircit pour révéler le même schéma technique sur un fond grisâtre.",
+  "budget_chars": 120,
+  "variants": [
+   "Un schéma technique bleu et blanc s'affiche sur fond noir parsemé d'orange. Le texte mentionne Blender. Le fond devient gris.",
+   "Un schéma technique bleu et blanc s'affiche sur fond noir et orange. Le fond s'éclaircit en gris.",
+   "Un schéma technique bleu et blanc s'affiche sur fond noir, puis gris."
+  ]
+ },
+ {
+  "id": "d_0067",
+  "window": [
+   632.2022222222222,
+   641.8644444444444
+  ],
+  "frames": [
+   633.41,
+   635.8255555555555,
+   638.2411111111111,
+   640.6566666666666
+  ],
+  "brightened": 0,
+  "raw_description": "Le texte blanc sur fond noir présente les crédits de l'équipe de tournage, notamment le design des costumes, le casting et l'équipement de caméra. La liste se poursuit avec les postes de l'assistant réalisateur, du chef électricien, du chef opérateur et du preneur de son. Des noms de techniciens apparaissent également pour la conception des décors, les accessoires, le maquillage et la régie. Des remerciements spéciaux sont adressés aux développeurs de Blender en bas de l'écran.",
+  "zoom": null,
+  "facts": null,
+  "description": "Sur un fond noir parsemé de lignes et de formes géométriques orange, des textes blancs listent les membres de l'équipe de tournage. Les crédits mentionnent le design des costumes, le casting, l'équipement de caméra, ainsi que les postes de l'assistant réalisateur, du gaffer, du best boy, des électriciens, du focus puller, du key grip et du preneur de son. La liste se poursuit avec le set design, la construction, les accessoires, le set dresser, le costumier, le maquillage et les coiffure, le catering, le studio de fond vert et les remerciements spéciaux.",
+  "budget_chars": 120,
+  "variants": [
+   "Sur un fond noir aux formes orange, les crédits techniques défilent en blanc.",
+   "Des textes blancs listent l'équipe technique sur un fond noir et orange.",
+   "Les crédits de l'équipe défilent sur fond noir et orange."
+  ]
+ },
+ {
+  "id": "d_0068",
+  "window": [
+   641.8644444444444,
+   651.5266666666666
+  ],
+  "frames": [
+   643.0722222222222,
+   645.4877777777778,
+   647.9033333333333,
+   650.3188888888889
+  ],
+  "brightened": 0,
+  "raw_description": "Une série de textes de remerciements défile sur un fond noir parsemé de graphiques circulaires et de lignes lumineuses bleues et orange. Les noms des contributeurs, des développeurs et des sponsors apparaissent en blanc, notamment pour les projets open source comme Blender, GIMP et Python. Les éléments graphiques incluent des schémas techniques et des formes géométriques stylisées qui s'animent ou changent de position. Des mentions comme « Special thanks to Blender developers » et « Premium sponsor Google » sont clairement lisibles.",
+  "zoom": "Inconnu.",
+  "facts": null,
+  "description": "Sur un fond noir parsemé de graphiques circulaires et de lignes lumineuses bleues et orange, des textes blancs défilent. Les remerciements mentionnent les développeurs de Blender, ainsi que divers contributeurs pour la simulation de fumée, le compositing, l'édition de nœuds, le suivi de mouvement, les collisions et la correction de bugs. Des noms de sponsors et de projets open source comme GIMP et Python apparaissent également.",
+  "budget_chars": 120,
+  "variants": [
+   "Sur un fond noir parsemé de graphiques et de lignes bleues et orange, les crédits techniques défilent en blanc.",
+   "Des graphiques et lignes bleues et orange parsèment le fond noir. Les crédits défilent en blanc.",
+   "Des graphiques et lignes colorées parsèment le fond noir. Les crédits défilent."
+  ]
+ },
+ {
+  "id": "d_0069",
+  "window": [
+   651.5266666666666,
+   661.1888888888889
+  ],
+  "frames": [
+   652.7344444444444,
+   655.15,
+   657.5655555555555,
+   659.9811111111111
+  ],
+  "brightened": 3,
+  "raw_description": "Sur un fond noir parsemé de lignes et de cercles colorés rappelant un circuit imprimé, des listes de noms s'affichent en blanc. Les textes détaillent les différents niveaux de sponsors, notamment les « Premium sponsor », « Development sponsor », « Main sponsors », « Platinum sponsor », « Gold sponsors » et « DVD PRE-SALE SPONSORS ». Les noms sont organisés en colonnes et en blocs compacts qui recouvrent une grande partie de l'écran.",
+  "zoom": null,
+  "facts": null,
+  "description": "Sur un fond noir parsemé de lignes et de cercles colorés rappelant un circuit imprimé, des listes de noms s'affichent en blanc. Les textes détaillent les différents niveaux de sponsors, notamment les « Premium sponsor », « Development sponsor », « Main sponsors », « Platinum sponsor », « Gold sponsors » et « DVD PRE-SALE SPONSORS ». Les noms sont organisés en colonnes et en blocs compacts qui couvrent une grande partie de l'écran.",
+  "budget_chars": 120,
+  "variants": [
+   "Sur un fond noir parsemé de lignes et de cercles colorés, des listes de sponsors s'affichent en blanc.",
+   "Des listes de sponsors s'affichent en blanc sur un fond noir graphique.",
+   "Des listes de sponsors s'affichent en blanc sur fond noir."
+  ]
+ },
+ {
+  "id": "d_0070",
+  "window": [
+   661.1888888888889,
+   670.8511111111111
+  ],
+  "frames": [
+   662.3966666666666,
+   664.8122222222222,
+   667.2277777777778,
+   669.6433333333333
+  ],
+  "brightened": 4,
+  "raw_description": "Il s'agit d'une série de listes de noms écrits en blanc sur des fonds noirs ou très sombres. Les noms sont organisés en colonnes et en lignes, séparés par de petits points ou des tirets. Les images sont des versions éclaircies de listes de noms sur fond noir.",
+  "zoom": null,
+  "facts": null,
+  "description": "Des listes de noms écrits en blanc sur un fond noir ou très sombre s'affichent en colonnes et en lignes, séparées par de petits points ou des tirets. Les versions éclaircies montrent les mêmes listes de noms sur un fond blanc avec un texte noir.",
+  "budget_chars": 120,
+  "variants": [
+   "Des listes de noms blancs s'affichent en colonnes sur fond noir, puis sur fond blanc.",
+   "Des noms blancs défilent en colonnes sur fond noir, puis sur fond blanc.",
+   "Des noms défilent sur fond noir, puis sur fond blanc."
+  ]
+ },
+ {
+  "id": "d_0071",
+  "window": [
+   670.8511111111111,
+   680.5133333333333
+  ],
+  "frames": [
+   672.0588888888889,
+   674.4744444444444,
+   676.89,
+   679.3055555555555
+  ],
+  "brightened": 4,
+  "raw_description": "Ces images présentent des listes de noms de personnes, disposées en colonnes sur un fond sombre. Les noms sont écrits en blanc et organisés de manière dense, occupant la quasi-totalité de l'espace. Les versions éclaircies montrent les mêmes listes de noms, mais sur un fond blanc avec un texte noir.",
+  "zoom": null,
+  "facts": null,
+  "description": "Des listes de noms écrits en blanc sur un fond noir occupent la quasi-totalité de l'espace. Les noms sont organisés en colonnes denses. Les versions éclaircies présentent les mêmes listes de noms, mais en noir sur un fond blanc.",
+  "budget_chars": 120,
+  "variants": [
+   "Des listes de noms blancs s'affichent en colonnes denses sur fond noir, puis sur fond blanc.",
+   "Des colonnes de noms blancs défilent sur fond noir, puis sur fond blanc.",
+   "Des noms blancs s'affichent sur fond noir, puis sur fond blanc."
+  ]
+ },
+ {
+  "id": "d_0072",
+  "window": [
+   680.5133333333333,
+   690.1755555555555
+  ],
+  "frames": [
+   681.7211111111111,
+   684.1366666666667,
+   686.5522222222222,
+   688.9677777777778
+  ],
+  "brightened": 4,
+  "raw_description": "Il n'y a aucune image de film, personnage ou action à décrire dans ces fichiers. Les images fournies sont uniquement des listes de noms de personnes sur des fonds de couleurs unies (noir, bleu, gris ou blanc).",
+  "zoom": null,
+  "facts": null,
+  "description": "Des listes de noms écrits en blanc occupent la quasi-totalité de l'écran sur un fond noir. Les noms sont organisés en colonnes denses.",
+  "budget_chars": 120,
+  "variants": [
+   "Des listes de noms blancs s'affichent en colonnes denses sur un fond noir.",
+   "Des colonnes de noms blancs occupent un écran noir.",
+   "Des noms blancs en colonnes sur fond noir."
+  ]
+ },
+ {
+  "id": "d_0073",
+  "window": [
+   690.1755555555555,
+   699.8377777777778
+  ],
+  "frames": [
+   691.3833333333333,
+   693.7988888888889,
+   696.2144444444444,
+   698.63
+  ],
+  "brightened": 2,
+  "raw_description": "Une série de listes de noms blancs défilent sur un fond noir. Les noms sont organisés en colonnes et en lignes, occupant la majeure partie de l'écran. En bas de l'image, un texte blanc indique que le film a été réalisé avec le soutien de diverses organisations, dont la Blender Foundation et le Netherlands Film Fund.",
+  "zoom": null,
+  "facts": null,
+  "description": "Des listes de noms blancs défilent sur un fond noir, organisées en colonnes et en lignes. En bas de l'image, un texte blanc indique que le film a été réalisé avec le soutien de diverses organisations, dont la Blender Foundation et le Netherlands Film Fund.",
+  "budget_chars": 120,
+  "variants": [
+   "Des noms blancs défilent en colonnes sur fond noir. En bas, un texte mentionne la Blender Foundation et le Netherlands Film Fund.",
+   "Des noms blancs défilent en colonnes sur fond noir. Un texte cite la Blender Foundation et le Netherlands Film Fund.",
+   "Des noms blancs défilent sur fond noir. Un texte cite la Blender Foundation."
+  ]
+ },
+ {
+  "id": "d_0074",
+  "window": [
+   699.8377777777778,
+   709.5
+  ],
+  "frames": [
+   701.0455555555556,
+   703.4611111111111,
+   705.8766666666667,
+   708.2922222222222
+  ],
+  "brightened": 0,
+  "raw_description": "Sur un fond noir, des textes blancs et des logos apparaissent successivement. Les premières images affichent une liste de soutiens, dont la Blender Foundation et le Netherlands Film Fund, ainsi que l'adresse du site www.tearsofsteel.org. Les images suivantes simplifient la composition en ne conservant que l'adresse du site, la mention de licence Creative Commons et une rangée de logos, dont ceux de Blender et de la Blender Foundation. La dernière image est un écran noir uni.",
+  "zoom": null,
+  "facts": null,
+  "description": "Sur un fond noir, des textes blancs et des logos apparaissent successivement. Une liste de soutiens s'affiche, incluant la Blender Foundation et le Netherlands Film Fund, suivie de l'adresse www.tearsofsteel.org. La composition se simplifie pour ne montrer que l'adresse du site, la mention de licence Creative Commons Attribution 3.0 et une rangée de logos, dont ceux de Blender et de la Blender Foundation, avant de passer à un écran noir uni.",
+  "budget_chars": 120,
+  "variants": [
+   "Sur fond noir, des logos et des noms de soutiens défilent, puis l'adresse du site et une licence s'affichent.",
+   "Des logos et des noms de soutiens s'affichent sur fond noir, suivis de l'adresse du site.",
+   "Des logos et l'adresse du site s'affichent sur fond noir."
+  ]
+ },
+ {
+  "id": "d_0075",
+  "window": [
+   709.5,
+   716.4444443333333
+  ],
+  "frames": [
+   710.3680555416666,
+   712.104166625,
+   713.8402777083334,
+   715.5763887916667
+  ],
+  "brightened": 0,
+  "raw_description": "Un amas de débris métalliques et de pièces mécaniques rouillées s'étend sur tout l'écran. Les morceaux de métal, aux formes anguleuses et aux surfaces usées, sont entassés de manière désordonnée. La lumière, provenant de la gauche, souligne les textures rugueuses et les taches de rouille orangée sur les surfaces sombres. L'ensemble forme une masse complexe de composants mécaniques imbriqués.",
+  "zoom": "Inconnu.",
+  "facts": null,
+  "description": "Un amas de débris métalliques et de pièces mécaniques rouillées s'étend sur tout l'écran. Les composants, aux formes anguleuses et aux surfaces usées, sont entassés de manière désordonnée. La lumière, provenant de la gauche, souligne les textures rugueuses et les taches de rouille orangée sur les surfaces sombres.",
+  "budget_chars": 85,
+  "variants": [
+   "Un amas de débris métalliques rouillés s'étend sur l'écran sous une lumière latérale.",
+   "Des pièces mécaniques rouillées et désordonnées occupent l'écran.",
+   "Débris métalliques et rouille recouvrent l'écran."
+  ]
+ },
+ {
+  "id": "d_0076",
+  "window": [
+   716.4444443333333,
+   723.3888886666667
+  ],
+  "frames": [
+   717.312499875,
+   719.0486109583334,
+   720.7847220416667,
+   722.5208331250001
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme est assis au milieu d'un immense tas de débris métalliques et de pièces de machines usées. Il porte une veste bleue et un pantalon sombre, et il tient un objet noir dans sa main droite. Son regard est dirigé vers le bas, vers l'objet qu'il tient. L'arrière-plan est composé de structures mécaniques indistinctes et de débris empilés.",
+  "zoom": "Le personnage tient une arme à feu de type fusil d'assaut. On reconnaît également des débris métalliques, des pièces de machines et des pneus.",
+  "facts": null,
+  "description": "Un homme en veste bleue et pantalon sombre est assis au milieu d'un immense tas de débris métalliques, de pièces de machines et de pneus. Il tient un fusil d'assaut noir de la main droite, le bras gauche posé sur l'arme. Son regard est dirigé vers le bas, vers l'objet qu'il tient.",
+  "budget_chars": 85,
+  "variants": [
+   "Un homme en veste bleue est assis parmi des débris, un fusil à la main.",
+   "Un homme en veste bleue est assis au milieu de débris.",
+   "Un homme est assis parmi des débris."
+  ]
+ },
+ {
+  "id": "d_0077",
+  "window": [
+   723.3888886666667,
+   730.333333
+  ],
+  "frames": [
+   724.2569442083334,
+   725.9930552916667,
+   727.7291663750001,
+   729.4652774583334
+  ],
+  "brightened": 0,
+  "raw_description": "Un homme est assis au milieu d'un immense tas de débris métalliques et de pièces de robots usées. Il porte une veste bleue et un pantalon sombre, et il tient un petit objet blanc dans sa main droite tout en regardant vers la gauche. Il repose son bras gauche sur une arme imposante posée verticalement devant lui. L'arrière-plan est composé de piles de débris indistincts sous une lumière diffuse.",
+  "zoom": "Le personnage tient un petit objet blanc rectangulaire, qui ressemble à un téléphone ou un appareil de communication. Il est entouré de nombreux débris métalliques et de pièces de machines robotiques.",
+  "facts": null,
+  "description": "L'homme en veste bleue et pantalon sombre est assis au milieu d'un immense tas de débris métalliques et de pièces de machines robotiques usées. Il tient un petit objet blanc rectangulaire dans sa main droite et regarde vers la gauche. Son bras gauche repose sur une arme imposante posée verticalement devant lui.",
+  "budget_chars": 85,
+  "variants": [
+   "L'homme tient un petit objet blanc et regarde vers la gauche.",
+   "Il tient un objet blanc et regarde à gauche.",
+   "Il regarde à gauche avec un objet blanc."
+  ]
+ },
+ {
+  "id": "d_0078",
+  "window": [
+   730.333333,
+   734.0930625
+  ],
+  "frames": [
+   730.8032991875,
+   731.7432315625,
+   732.6831639375,
+   733.6230963125
+  ],
+  "brightened": 0,
+  "raw_description": "L'image est entièrement noire. Aucun personnage, objet, lieu ou texte n'est visible.",
+  "zoom": "inconnu",
+  "facts": null,
+  "description": "L'image est entièrement noire. Aucun personnage, objet, lieu ou texte n'est visible.",
+  "budget_chars": 43,
+  "variants": [
+   "L'écran est noir.",
+   "Noir total.",
+   "Écran noir."
+  ]
+ }
+]

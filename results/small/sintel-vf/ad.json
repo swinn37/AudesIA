@@ -1,0 +1,848 @@
+[
+ {
+  "id": "d_0000",
+  "start": 0.2,
+  "end": 6.677,
+  "text": "Sur fond gris, le texte blanc « THE BLENDER FOUNDATION PRESENTS » apparaît au centre.",
+  "speedup": 1.0,
+  "chars_per_s": 13.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0001",
+  "start": 8.033,
+  "end": 14.111,
+  "text": "Montagnes enneigées sous un ciel gris. Texte : \"THE DURIAN OPEN MOVIE PROJECT\".",
+  "speedup": 1.0,
+  "chars_per_s": 13.0,
+  "reviewed": false
+ },
+ {
+  "id": "d_0003",
+  "start": 23.7,
+  "end": 29.613,
+  "text": "Un personnage marche sur un sentier de pierres dans la neige vers deux blocs sombres.",
+  "speedup": 1.0,
+  "chars_per_s": 14.4,
+  "reviewed": false
+ },
+ {
+  "id": "d_0004",
+  "start": 31.533,
+  "end": 35.605,
+  "text": "Un homme aux cheveux bruns tient un bâton face à lui.",
+  "speedup": 1.0,
+  "chars_per_s": 13.0,
+  "reviewed": false
+ },
+ {
+  "id": "d_0005",
+  "start": 36.967,
+  "end": 41.365,
+  "text": "Une femme rousse inquiète regarde vers le ciel.",
+  "speedup": 1.0,
+  "chars_per_s": 10.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0006",
+  "start": 50.22,
+  "end": 51.334,
+  "text": "L'homme l'arme.",
+  "speedup": 1.0,
+  "chars_per_s": 13.4,
+  "reviewed": false
+ },
+ {
+  "id": "d_0007",
+  "start": 58.46,
+  "end": 60.446,
+  "text": "La femme rousse est au sol.",
+  "speedup": 1.0,
+  "chars_per_s": 13.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0008",
+  "start": 61.68,
+  "end": 62.877,
+  "text": "L'homme menace.",
+  "speedup": 1.0,
+  "chars_per_s": 12.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0009",
+  "start": 65.84,
+  "end": 73.272,
+  "text": "L'homme chauve et barbu se penche vers la femme rousse allongée dans la neige. Une lance passe au-dessus d'elle.",
+  "speedup": 1.0,
+  "chars_per_s": 15.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0010",
+  "start": 74.242,
+  "end": 79.839,
+  "text": "Allongée sur le dos, la femme rousse ouvre les yeux vers le haut.",
+  "speedup": 1.0,
+  "chars_per_s": 11.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0011",
+  "start": 81.658,
+  "end": 86.691,
+  "text": "Montagnes brumeuses. Une main gantée saisit un bâton métallique.",
+  "speedup": 1.0,
+  "chars_per_s": 12.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0012",
+  "start": 88.742,
+  "end": 94.4,
+  "text": "Un personnage en rouge marche avec un bâton. Le titre SINTEL s'affiche.",
+  "speedup": 1.0,
+  "chars_per_s": 12.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0013",
+  "start": 95.075,
+  "end": 98.425,
+  "text": "Le titre SINTEL s'affiche sur des montagnes.",
+  "speedup": 1.0,
+  "chars_per_s": 13.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0014",
+  "start": 101.408,
+  "end": 106.046,
+  "text": "Un petit feu brûle dans un cercle au sol d'une pièce sombre.",
+  "speedup": 1.0,
+  "chars_per_s": 12.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0015",
+  "start": 114.5,
+  "end": 116.017,
+  "text": "L'homme la regarde.",
+  "speedup": 1.0,
+  "chars_per_s": 12.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0016",
+  "start": 153.2,
+  "end": 157.025,
+  "text": "Une ville dense aux toits sombres derrière un haut mur.",
+  "speedup": 1.0,
+  "chars_per_s": 14.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0017",
+  "start": 160.4,
+  "end": 166.236,
+  "text": "La femme rousse, en haut blanc, s'appuie contre un mur de pierre, le regard sérieux.",
+  "speedup": 1.0,
+  "chars_per_s": 14.4,
+  "reviewed": false
+ },
+ {
+  "id": "d_0018",
+  "start": 168.508,
+  "end": 174.107,
+  "text": "Devant des maisons à colombages, elle regarde une sphère rouge épineuse.",
+  "speedup": 1.0,
+  "chars_per_s": 12.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0019",
+  "start": 176.617,
+  "end": 181.573,
+  "text": "La femme rousse grimpe sur un toit de tuiles, un couteau à la main.",
+  "speedup": 1.0,
+  "chars_per_s": 13.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0020",
+  "start": 182.2,
+  "end": 189.475,
+  "text": "Une petite créature ailée et ensanglantée est allongée sur les tuiles. La femme rousse la regarde.",
+  "speedup": 1.0,
+  "chars_per_s": 13.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0021",
+  "start": 189.992,
+  "end": 195.107,
+  "text": "La femme rousse observe la créature ailée au sol.",
+  "speedup": 1.0,
+  "chars_per_s": 9.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0022",
+  "start": 196.617,
+  "end": 201.893,
+  "text": "La femme rousse, surprise, approche une main gantée de la créature.",
+  "speedup": 1.0,
+  "chars_per_s": 12.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0023",
+  "start": 203.325,
+  "end": 205.56,
+  "text": "Elle sourit au reptile.",
+  "speedup": 1.0,
+  "chars_per_s": 10.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0024",
+  "start": 213.1,
+  "end": 217.655,
+  "text": "Elle tient le reptile brun entre ses mains gantées de gris.",
+  "speedup": 1.0,
+  "chars_per_s": 12.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0025",
+  "start": 219.658,
+  "end": 227.415,
+  "text": "Deux mains gantées de bleu soutiennent un bol en pierre sombre au-dessus d'un tissu noir plissé, dans une pièce encombrée.",
+  "speedup": 1.0,
+  "chars_per_s": 15.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0026",
+  "start": 229.572,
+  "end": 237.957,
+  "text": "La femme aux cheveux courts repose sur un lit de tissus roses et blancs. Un personnage est au sol.",
+  "speedup": 1.0,
+  "chars_per_s": 11.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0027",
+  "start": 239.486,
+  "end": 248.033,
+  "text": "La femme rousse, en débardeur blanc et corset lacé, tient un petit dragon écailleux sur un tissu jaune sous des taches de lumière.",
+  "speedup": 1.0,
+  "chars_per_s": 15.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0028",
+  "start": 252.52,
+  "end": 254.351,
+  "text": "Une rousse saute en ruelle.",
+  "speedup": 1.0,
+  "chars_per_s": 14.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0029",
+  "start": 255.78,
+  "end": 257.056,
+  "text": "La rousse s'enfuit.",
+  "speedup": 1.0,
+  "chars_per_s": 14.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0030",
+  "start": 258.16,
+  "end": 262.637,
+  "text": "Elle se tient debout sur une caisse dans une ruelle.",
+  "speedup": 1.0,
+  "chars_per_s": 11.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0031",
+  "start": 263.45,
+  "end": 270.242,
+  "text": "La rousse, en débardeur gris, regarde vers la gauche dans une ruelle étroite bordée de cabanes en bois.",
+  "speedup": 1.0,
+  "chars_per_s": 15.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0032",
+  "start": 271.825,
+  "end": 277.898,
+  "text": "La rousse regarde en haut, surprise. Un petit reptile ailé gris survole une structure en bois.",
+  "speedup": 1.0,
+  "chars_per_s": 15.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0033",
+  "start": 278.992,
+  "end": 285.944,
+  "text": "Un reptile brun observe des oiseaux. La rousse monte un escalier de pierre sous un ciel orangé.",
+  "speedup": 1.0,
+  "chars_per_s": 13.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0034",
+  "start": 287.7,
+  "end": 294.644,
+  "text": "La rousse regarde en haut, bouche ouverte. Vue plongeante sur une ville en ruines sous un ciel orangé.",
+  "speedup": 1.0,
+  "chars_per_s": 14.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0035",
+  "start": 297.45,
+  "end": 299.206,
+  "text": "Elle s'incline en souriant.",
+  "speedup": 1.0,
+  "chars_per_s": 15.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0036",
+  "start": 329.7,
+  "end": 332.097,
+  "text": "Une créature ailée survole la rousse.",
+  "speedup": 1.0,
+  "chars_per_s": 15.4,
+  "reviewed": false
+ },
+ {
+  "id": "d_0037",
+  "start": 339.06,
+  "end": 343.128,
+  "text": "La rousse contemple une cité sous un ciel orangé.",
+  "speedup": 1.0,
+  "chars_per_s": 12.0,
+  "reviewed": false
+ },
+ {
+  "id": "d_0038",
+  "start": 344.505,
+  "end": 347.621,
+  "text": "La rousse regarde droit, les sourcils froncés.",
+  "speedup": 1.0,
+  "chars_per_s": 14.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0039",
+  "start": 349.95,
+  "end": 355.306,
+  "text": "Elle court. Son visage se superpose à un paysage de souches.",
+  "speedup": 1.0,
+  "chars_per_s": 11.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0040",
+  "start": 357.648,
+  "end": 364.186,
+  "text": "Un visage brun en transparence surplombe une silhouette marchant sous une lune.",
+  "speedup": 1.0,
+  "chars_per_s": 12.0,
+  "reviewed": false
+ },
+ {
+  "id": "d_0041",
+  "start": 365.346,
+  "end": 371.417,
+  "text": "Un croissant de lune brille. Un désert de dunes s'étend. Une silhouette marche avec un bâton.",
+  "speedup": 1.0,
+  "chars_per_s": 15.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0042",
+  "start": 373.044,
+  "end": 380.338,
+  "text": "Une femme en transparence sur des dunes. Une personne marche avec un bâton.",
+  "speedup": 1.074,
+  "chars_per_s": 9.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0043",
+  "start": 380.742,
+  "end": 385.539,
+  "text": "La jeune femme grimpe et saute entre des bambous, puis se tient dans un désert.",
+  "speedup": 1.0,
+  "chars_per_s": 16.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0044",
+  "start": 390.64,
+  "end": 394.637,
+  "text": "La jeune femme regarde vers la droite sous un ciel orangé.",
+  "speedup": 1.0,
+  "chars_per_s": 14.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0045",
+  "start": 398.854,
+  "end": 405.65,
+  "text": "Dans un paysage montagneux et brumeux, la jeune femme tient un bâton sculpté. L'image devient floue.",
+  "speedup": 1.0,
+  "chars_per_s": 14.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0046",
+  "start": 407.069,
+  "end": 413.945,
+  "text": "Une silhouette escalade une paroi rocheuse et enneigée. Des sommets brumeux apparaissent.",
+  "speedup": 1.0,
+  "chars_per_s": 12.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0047",
+  "start": 415.283,
+  "end": 419.335,
+  "text": "Une personne aux cheveux bruns est ensevelie sous la neige.",
+  "speedup": 1.0,
+  "chars_per_s": 14.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0048",
+  "start": 420.658,
+  "end": 424.492,
+  "text": "Une silhouette marche dans un paysage enneigé.",
+  "speedup": 1.0,
+  "chars_per_s": 12.0,
+  "reviewed": false
+ },
+ {
+  "id": "d_0049",
+  "start": 426.033,
+  "end": 430.185,
+  "text": "Une silhouette sombre s'éloigne dans la neige vers la gauche.",
+  "speedup": 1.0,
+  "chars_per_s": 14.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0050",
+  "start": 431.783,
+  "end": 434.58,
+  "text": "La femme rousse court dans la neige.",
+  "speedup": 1.0,
+  "chars_per_s": 12.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0051",
+  "start": 435.34,
+  "end": 440.042,
+  "text": "La femme rousse, terrifiée, regarde vers la droite dans l'obscurité.",
+  "speedup": 1.0,
+  "chars_per_s": 14.4,
+  "reviewed": false
+ },
+ {
+  "id": "d_0052",
+  "start": 442.575,
+  "end": 445.211,
+  "text": "L'homme fume. Elle baisse les yeux.",
+  "speedup": 1.0,
+  "chars_per_s": 13.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0053",
+  "start": 464.4,
+  "end": 472.71,
+  "text": "Elle observe un médaillon gravé d'une créature ailée et de runes. Il s'ouvre sur un arbre devant une paroi rocheuse.",
+  "speedup": 1.0,
+  "chars_per_s": 13.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0054",
+  "start": 474.154,
+  "end": 483.187,
+  "text": "Sintel regarde vers le haut, les yeux écarquillés et la bouche ouverte. Elle porte une tenue grise et une protection tatouée.",
+  "speedup": 1.0,
+  "chars_per_s": 13.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0055",
+  "start": 483.908,
+  "end": 489.502,
+  "text": "Une silhouette se tient au bord d'un lac sous la lune. Une botte bouge au sol.",
+  "speedup": 1.0,
+  "chars_per_s": 13.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0056",
+  "start": 491.158,
+  "end": 496.115,
+  "text": "Une main tient une dague incurvée dans la grotte bleue.",
+  "speedup": 1.0,
+  "chars_per_s": 11.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0057",
+  "start": 496.908,
+  "end": 502.103,
+  "text": "Sintel observe un animal à la gueule ouverte parmi des cristaux bleus.",
+  "speedup": 1.0,
+  "chars_per_s": 13.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0058",
+  "start": 502.658,
+  "end": 504.097,
+  "text": "Elle lèche la viande.",
+  "speedup": 1.0,
+  "chars_per_s": 14.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0059",
+  "start": 529.7,
+  "end": 535.374,
+  "text": "Sintel se penche vers une cavité rocheuse, le visage sérieux.",
+  "speedup": 1.0,
+  "chars_per_s": 10.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0060",
+  "start": 536.533,
+  "end": 538.206,
+  "text": "Le dragon lève la tête.",
+  "speedup": 1.0,
+  "chars_per_s": 13.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0061",
+  "start": 543.74,
+  "end": 549.178,
+  "text": "Sintel s'agrippe à une paroi rocheuse parsemée de cristaux bleus.",
+  "speedup": 1.0,
+  "chars_per_s": 11.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0062",
+  "start": 553.62,
+  "end": 555.691,
+  "text": "Sintel fait face au dragon.",
+  "speedup": 1.0,
+  "chars_per_s": 13.0,
+  "reviewed": false
+ },
+ {
+  "id": "d_0063",
+  "start": 559.6,
+  "end": 561.518,
+  "text": "Sintel brandit sa lance.",
+  "speedup": 1.0,
+  "chars_per_s": 12.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0064",
+  "start": 571.06,
+  "end": 578.331,
+  "text": "Sintel est allongée sur le sol rocheux. Derrière elle, le dragon déploie ses ailes sombres.",
+  "speedup": 1.0,
+  "chars_per_s": 12.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0065",
+  "start": 582.02,
+  "end": 588.643,
+  "text": "Sintel est penchée sur le sol rocheux face au dragon de dos. L'image devient floue.",
+  "speedup": 1.0,
+  "chars_per_s": 12.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0066",
+  "start": 589.96,
+  "end": 595.31,
+  "text": "Le dragon ailé se penche vers Sintel, allongée au sol dans l'obscurité.",
+  "speedup": 1.0,
+  "chars_per_s": 13.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0067",
+  "start": 604.52,
+  "end": 609.317,
+  "text": "Une créature écailleuse s'approche de Sintel effrayée.",
+  "speedup": 1.0,
+  "chars_per_s": 11.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0068",
+  "start": 610.617,
+  "end": 615.167,
+  "text": "Gros plan sur la tête écailleuse d'une créature à l'œil orangé.",
+  "speedup": 1.0,
+  "chars_per_s": 13.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0069",
+  "start": 616.95,
+  "end": 621.025,
+  "text": "Sintel, les mains levées, fait face à la créature.",
+  "speedup": 1.0,
+  "chars_per_s": 12.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0070",
+  "start": 621.95,
+  "end": 630.586,
+  "text": "De profil dans une grotte sombre, une créature écailleuse aux cornes incurvées montre un œil rouge et une mâchoire dentée.",
+  "speedup": 1.0,
+  "chars_per_s": 14.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0071",
+  "start": 631.575,
+  "end": 637.403,
+  "text": "Sintel regarde vers le haut, la bouche entrouverte, une main gantée vers son visage.",
+  "speedup": 1.0,
+  "chars_per_s": 14.4,
+  "reviewed": false
+ },
+ {
+  "id": "d_0072",
+  "start": 641.2,
+  "end": 646.07,
+  "text": "Sintel tend une main gantée vers l'avant, la bouche entrouverte.",
+  "speedup": 1.0,
+  "chars_per_s": 13.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0073",
+  "start": 647.658,
+  "end": 653.893,
+  "text": "Dans une grotte sombre, Sintel fait face à une créature massive et écailleuse.",
+  "speedup": 1.0,
+  "chars_per_s": 12.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0074",
+  "start": 655.158,
+  "end": 660.592,
+  "text": "Sintel lève les yeux, craintive, parmi des cristaux bleus.",
+  "speedup": 1.0,
+  "chars_per_s": 10.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0075",
+  "start": 661.325,
+  "end": 665.722,
+  "text": "Sintel, effrayée, fait face à un œil rouge géant.",
+  "speedup": 1.0,
+  "chars_per_s": 11.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0076",
+  "start": 666.408,
+  "end": 668.407,
+  "text": "Sintel face au reptile.",
+  "speedup": 1.0,
+  "chars_per_s": 11.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0077",
+  "start": 671.408,
+  "end": 674.445,
+  "text": "Elle court vers l'ouverture et les rochers flottants.",
+  "speedup": 1.0,
+  "chars_per_s": 17.4,
+  "reviewed": false
+ },
+ {
+  "id": "d_0078",
+  "start": 677.2,
+  "end": 681.916,
+  "text": "La grotte est sombre et rocheuse, avec de grosses racines à droite.",
+  "speedup": 1.0,
+  "chars_per_s": 14.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0079",
+  "start": 684.617,
+  "end": 689.318,
+  "text": "Une silhouette est assise sur une colline rocheuse face aux montagnes.",
+  "speedup": 1.0,
+  "chars_per_s": 14.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0080",
+  "start": 692.554,
+  "end": 695.432,
+  "text": "Elle est assise face aux montagnes brumeuses.",
+  "speedup": 1.0,
+  "chars_per_s": 15.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0081",
+  "start": 700.492,
+  "end": 707.925,
+  "text": "Devant un tronc massif, une femme aux cheveux roux et gris baisse la tête, puis lève un regard inquiet.",
+  "speedup": 1.0,
+  "chars_per_s": 13.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0082",
+  "start": 710.242,
+  "end": 717.428,
+  "text": "Une ceinture en cuir est sur la roche. Des pieds marchent, puis une silhouette fait face aux montagnes brumeuses.",
+  "speedup": 1.0,
+  "chars_per_s": 15.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0083",
+  "start": 718.752,
+  "end": 725.061,
+  "text": "Elle contemple des montagnes enneigées et des fleurs blanches sous un soleil éclatant.",
+  "speedup": 1.0,
+  "chars_per_s": 13.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0084",
+  "start": 727.263,
+  "end": 734.447,
+  "text": "La silhouette fait face à des montagnes brumeuses sous une lumière dorée. Un couteau repose sur le sol.",
+  "speedup": 1.0,
+  "chars_per_s": 14.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0085",
+  "start": 735.773,
+  "end": 741.525,
+  "text": "Des fleurs blanches pendent à droite. Un reptile est allongé sur le chemin rocheux.",
+  "speedup": 1.0,
+  "chars_per_s": 14.4,
+  "reviewed": false
+ },
+ {
+  "id": "d_0086",
+  "start": 744.283,
+  "end": 746.747,
+  "text": "DIRECTED BY COLIN LEVY.",
+  "speedup": 1.0,
+  "chars_per_s": 9.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0087",
+  "start": 806.1,
+  "end": 814.416,
+  "text": "Sur un fond de bois sombre, des noms s'affichent en blanc. Des pommes et une illustration sont posées en bas.",
+  "speedup": 1.0,
+  "chars_per_s": 13.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0088",
+  "start": 815.0,
+  "end": 821.476,
+  "text": "Des crédits blancs et des croquis de paysages et de créatures sont posés sur du bois sombre.",
+  "speedup": 1.0,
+  "chars_per_s": 14.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0089",
+  "start": 823.9,
+  "end": 830.056,
+  "text": "Sur un fond de bois sombre, une liste de sponsors s'affiche en blanc en colonnes.",
+  "speedup": 1.0,
+  "chars_per_s": 13.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0090",
+  "start": 832.8,
+  "end": 839.598,
+  "text": "Des listes de noms blancs défilent en colonnes sur fond noir, puis sur fond gris clair.",
+  "speedup": 1.0,
+  "chars_per_s": 12.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0092",
+  "start": 857.8,
+  "end": 859.155,
+  "text": "Noms blancs défilant.",
+  "speedup": 1.0,
+  "chars_per_s": 15.4,
+  "reviewed": false
+ },
+ {
+  "id": "d_0093",
+  "start": 861.88,
+  "end": 867.477,
+  "text": "Des listes de noms blancs défilent en colonnes sur fond noir et gris.",
+  "speedup": 1.0,
+  "chars_per_s": 12.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0094",
+  "start": 869.36,
+  "end": 871.426,
+  "text": "Noms blancs sur fond noir.",
+  "speedup": 1.0,
+  "chars_per_s": 12.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0095",
+  "start": 873.94,
+  "end": 878.496,
+  "text": "Des croquis sur papier jauni sont posés sur des planches de bois sombre.",
+  "speedup": 1.0,
+  "chars_per_s": 15.8,
+  "reviewed": false
+ }
+]

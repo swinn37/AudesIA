@@ -1,0 +1,2199 @@
+$ C:\Users\swinn\.venvs\audesia\Scripts\python.exe audesia_p0.py corpus\media\Sintel.2010.1080p.mkv --profile small --out out\corpus\small\sintel-vo
+[parole] 0.0 s
+[voix isolée] 0.0 s
+[plans] 0.0 s
+  1/115     0.0–   7.8 s  décrit (4 images, 0 éclaircies)
+  2/115     7.8–  15.7 s  décrit (4 images, 0 éclaircies)
+  3/115    15.7–  23.5 s  décrit (4 images, 0 éclaircies)
+  4/115    23.5–  31.3 s  décrit (4 images, 0 éclaircies)
+  5/115    31.3–  37.1 s  décrit (4 images, 0 éclaircies)
+  6/115    37.1–  43.0 s  décrit (4 images, 0 éclaircies)
+  7/115    49.8–  52.3 s  décrit (4 images, 1 éclaircies)
+  8/115    53.2–  55.5 s  décrit (3 images, 1 éclaircies)
+  9/115    59.2–  64.9 s  décrit (4 images, 0 éclaircies)
+  10/115    66.1–  74.0 s  décrit (4 images, 0 éclaircies)
+  11/115    74.0–  81.5 s  décrit (4 images, 0 éclaircies)
+  12/115    81.5–  88.5 s  décrit (4 images, 0 éclaircies)
+  13/115    88.5–  94.9 s  décrit (4 images, 0 éclaircies)
+  14/115    94.9– 101.2 s  décrit (4 images, 0 éclaircies)
+  15/115   101.2– 106.8 s  décrit (4 images, 0 éclaircies)
+  16/115   109.5– 111.6 s  décrit (3 images, 0 éclaircies)
+  17/115   113.9– 117.6 s  décrit (4 images, 0 éclaircies)
+  18/115   131.7– 135.0 s  décrit (4 images, 0 éclaircies)
+  19/115   141.0– 143.1 s  décrit (3 images, 0 éclaircies)
+  20/115   144.3– 148.5 s  décrit (4 images, 0 éclaircies)
+  21/115   155.3– 159.3 s  décrit (4 images, 0 éclaircies)
+  22/115   160.5– 168.5 s  décrit (4 images, 4 éclaircies)
+  23/115   168.5– 176.4 s  décrit (4 images, 0 éclaircies)
+  24/115   176.4– 182.0 s  décrit (4 images, 0 éclaircies)
+  25/115   182.0– 189.8 s  décrit (4 images, 0 éclaircies)
+  26/115   189.8– 196.4 s  décrit (4 images, 0 éclaircies)
+  27/115   196.4– 203.1 s  décrit (4 images, 0 éclaircies)
+  28/115   203.1– 206.2 s  décrit (4 images, 2 éclaircies)
+  29/115   212.1– 219.5 s  décrit (4 images, 0 éclaircies)
+  30/115   219.5– 229.0 s  décrit (4 images, 0 éclaircies)
+  31/115   229.0– 238.6 s  décrit (4 images, 0 éclaircies)
+  32/115   238.6– 248.2 s  décrit (4 images, 4 éclaircies)
+  33/115   248.2– 250.5 s  décrit (3 images, 1 éclaircies)
+  34/115   251.8– 254.1 s  décrit (3 images, 2 éclaircies)
+  35/115   257.9– 264.9 s  décrit (4 images, 1 éclaircies)
+  36/115   265.2– 271.6 s  décrit (4 images, 0 éclaircies)
+  37/115   271.6– 278.8 s  décrit (4 images, 0 éclaircies)
+  38/115   278.8– 287.5 s  décrit (4 images, 1 éclaircies)
+  39/115   287.5– 293.2 s  décrit (4 images, 2 éclaircies)
+  40/115   293.2– 299.0 s  décrit (4 images, 2 éclaircies)
+  41/115   311.3– 313.9 s  décrit (4 images, 0 éclaircies)
+  42/115   314.3– 322.2 s  décrit (4 images, 0 éclaircies)
+  43/115   322.2– 328.2 s  décrit (4 images, 0 éclaircies)
+  44/115   328.2– 332.8 s  décrit (4 images, 0 éclaircies)
+  45/115   336.1– 338.6 s  décrit (4 images, 0 éclaircies)
+  46/115   339.1– 344.4 s  décrit (4 images, 0 éclaircies)
+  47/115   344.4– 349.8 s  décrit (4 images, 0 éclaircies)
+  48/115   349.8– 357.4 s  décrit (4 images, 0 éclaircies)
+  49/115   357.4– 365.1 s  décrit (4 images, 0 éclaircies)
+  50/115   365.1– 372.8 s  décrit (4 images, 0 éclaircies)
+  51/115   372.8– 380.5 s  décrit (4 images, 0 éclaircies)
+  52/115   380.5– 386.8 s  décrit (4 images, 0 éclaircies)
+  53/115   390.4– 396.9 s  décrit (4 images, 0 éclaircies)
+  54/115   396.9– 402.5 s  décrit (4 images, 0 éclaircies)
+  55/115   402.8– 408.9 s  décrit (4 images, 0 éclaircies)
+  56/115   408.9– 415.1 s  décrit (4 images, 0 éclaircies)
+  57/115   415.1– 420.5 s  décrit (4 images, 0 éclaircies)
+  58/115   420.5– 425.8 s  décrit (4 images, 0 éclaircies)
+  59/115   425.8– 431.6 s  décrit (4 images, 0 éclaircies)
+  60/115   431.6– 435.0 s  décrit (4 images, 0 éclaircies)
+  61/115   435.3– 442.4 s  décrit (4 images, 0 éclaircies)
+  62/115   442.4– 445.5 s  décrit (4 images, 0 éclaircies)
+  63/115   446.7– 452.9 s  décrit (4 images, 0 éclaircies)
+  64/115   454.4– 457.5 s  décrit (4 images, 0 éclaircies)
+  65/115   461.8– 470.2 s  décrit (4 images, 0 éclaircies)
+  66/115   470.2– 478.6 s  décrit (4 images, 0 éclaircies)
+  67/115   478.6– 483.7 s  décrit (4 images, 0 éclaircies)
+  68/115   483.7– 491.0 s  décrit (4 images, 0 éclaircies)
+  69/115   491.0– 496.7 s  décrit (4 images, 0 éclaircies)
+  70/115   496.7– 502.5 s  décrit (4 images, 0 éclaircies)
+  71/115   502.5– 508.8 s  décrit (4 images, 0 éclaircies)
+  72/115   508.8– 516.5 s  décrit (4 images, 0 éclaircies)
+  73/115   516.5– 523.4 s  décrit (4 images, 0 éclaircies)
+  74/115   523.4– 528.5 s  décrit (4 images, 0 éclaircies)
+  75/115   528.5– 533.6 s  décrit (4 images, 0 éclaircies)
+  76/115   533.6– 539.1 s  décrit (4 images, 0 éclaircies)
+  77/115   543.4– 550.4 s  décrit (4 images, 0 éclaircies)
+  78/115   551.4– 557.5 s  décrit (4 images, 0 éclaircies)
+  79/115   559.2– 563.9 s  décrit (4 images, 1 éclaircies)
+  80/115   567.5– 569.9 s  décrit (3 images, 0 éclaircies)
+  81/115   571.2– 578.4 s  décrit (4 images, 0 éclaircies)
+  82/115   581.8– 588.4 s  décrit (4 images, 0 éclaircies)
+  83/115   589.5– 596.9 s  décrit (4 images, 0 éclaircies)
+  84/115   597.1– 600.7 s  décrit (4 images, 0 éclaircies)
+  85/115   607.6– 613.8 s  décrit (4 images, 0 éclaircies)
+  86/115   613.8– 619.8 s  décrit (4 images, 0 éclaircies)
+  87/115   619.8– 626.9 s  décrit (4 images, 0 éclaircies)
+  88/115   626.9– 633.9 s  décrit (4 images, 0 éclaircies)
+  89/115   633.9– 641.0 s  décrit (4 images, 0 éclaircies)
+  90/115   641.0– 647.5 s  décrit (4 images, 0 éclaircies)
+  91/115   647.5– 655.0 s  décrit (4 images, 0 éclaircies)
+  92/115   655.0– 661.1 s  décrit (4 images, 0 éclaircies)
+  93/115   661.1– 666.2 s  décrit (4 images, 0 éclaircies)
+  94/115   666.2– 671.2 s  décrit (4 images, 0 éclaircies)
+  95/115   671.2– 677.0 s  décrit (4 images, 1 éclaircies)
+  96/115   677.0– 684.4 s  décrit (4 images, 0 éclaircies)
+  97/115   684.4– 693.2 s  décrit (4 images, 2 éclaircies)
+  98/115   693.2– 702.0 s  décrit (4 images, 1 éclaircies)
+  99/115   702.8– 710.0 s  décrit (4 images, 4 éclaircies)
+  100/115   710.0– 715.5 s  décrit (4 images, 1 éclaircies)
+  101/115   715.5– 721.0 s  décrit (4 images, 0 éclaircies)
+  102/115   721.8– 729.2 s  décrit (4 images, 0 éclaircies)
+  103/115   729.2– 736.7 s  décrit (4 images, 0 éclaircies)
+  104/115   736.7– 744.1 s  décrit (4 images, 0 éclaircies)
+  105/115   744.1– 747.5 s  décrit (4 images, 0 éclaircies)
+  106/115   805.9– 811.3 s  décrit (4 images, 0 éclaircies)
+  107/115   811.3– 816.7 s  décrit (4 images, 2 éclaircies)
+  108/115   817.7– 826.2 s  décrit (4 images, 1 éclaircies)
+  109/115   826.2– 834.8 s  décrit (4 images, 4 éclaircies)
+  110/115   834.8– 843.3 s  décrit (4 images, 4 éclaircies)
+  111/115   843.3– 851.8 s  décrit (4 images, 4 éclaircies)
+  112/115   852.5– 861.3 s  décrit (4 images, 4 éclaircies)
+  113/115   861.6– 867.4 s  décrit (4 images, 4 éclaircies)
+  114/115   873.7– 880.9 s  décrit (4 images, 4 éclaircies)
+  115/115   880.9– 888.0 s  décrit (4 images, 1 éclaircies)
+  registre : ['la jeune femme aux cheveux rouges']
+     0.0–   7.8 s  ["Sur fond gris, le texte blanc « THE BLENDER FOUNDATION PRESENTS » s'affiche devant des montagnes enneigées."]
+     7.8–  15.7 s  ["Des montagnes rocheuses et enneigées s'étendent sous un ciel gris. Texte : THE DURIAN OPEN MOVIE PROJECT. A BLENDER INSTITUTE PRODUCTION."]
+    15.7–  23.5 s  ["Des montagnes rocheuses et enneigées s'étendent sous un ciel brumeux. Texte : THIS FILM WAS SUPPORTED BY THE NETHERLANDS FILM FUND."]
+    23.5–  31.3 s  ['La jeune femme aux cheveux rouges marche sur un sentier de pierres dans un paysage de glace.']
+    31.3–  37.1 s  ["Elle tient un bâton vertical, puis le tourne à l'horizontale."]
+    37.1–  43.0 s  [zoom : inconnu.] ['Inquiète, la jeune femme aux cheveux rouges regarde vers le ciel.']
+    49.8–  52.3 s  ["L'homme l'étrangle."]
+    53.2–  55.5 s  ['Elle brandit un bâton.']
+    59.2–  64.9 s  ["L'homme aux cheveux rouges est au sol face à un homme chauve."]
+    66.1–  74.0 s  ["L'homme chauve pointe une lance vers le cou de la jeune femme aux cheveux rouges, qui lève les mains, effrayée."]
+    74.0–  81.5 s  ['Allongée sur le dos, la jeune femme aux cheveux rouges a la bouche entrouverte. Une lame sombre passe derrière sa tête.']
+    81.5–  88.5 s  ['Montagnes enneigées sous un ciel brumeux. Une main gantée de gris saisit un bâton sculpté.']
+    88.5–  94.9 s  ["Dans les montagnes brumeuses, elle marche avec un bâton. Le titre SINTEL s'affiche."]
+    94.9– 101.2 s  ["Le titre SINTEL s'affiche sur un paysage montagneux brumeux. La jeune femme aux cheveux rouges marche dans la neige avec un bâton."]
+   101.2– 106.8 s  [zoom : Inconnu.] ["Un feu brûle au centre d'un cercle de silhouettes assises."]
+   109.5– 111.6 s  ["L'homme baisse la tête."]
+   113.9– 117.6 s  ["Dans une tente, elle fixe l'homme."]
+   131.7– 135.0 s  ['Elle tient un bol rouge.']
+   141.0– 143.1 s  ['Elle baisse les yeux.']
+   144.3– 148.5 s  ["Gros plan sur son visage sombre. L'écran s'obscurcit."]
+   155.3– 159.3 s  ['Elle marche dans une ruelle pavée.']
+   160.5– 168.5 s  ['Elle écarte un tissu sombre de la main droite. Son visage est inquiet. La ruelle est étroite.']
+   168.5– 176.4 s  [zoom : La jeune femme tient un objet sphérique couvert de pointes. ] ['Elle regarde vers le bas, tenant une sphère épineuse devant des maisons anciennes.']
+   176.4– 182.0 s  [zoom : Les personnages ne tiennent ni ne manipulent aucun objet. Le] ['Elle grimpe une façade en bois et se hisse sur un toit.']
+   182.0– 189.8 s  ['Sur les tuiles sombres, une petite créature ailée beige et aux yeux orange est blessée. Du sang coule de son aile.']
+   189.8– 196.4 s  ["Elle s'agenouille sur les pavés et tend la main vers la créature."]
+   196.4– 203.1 s  ["La jeune femme aux cheveux rouges regarde vers la droite. Une main gantée s'approche de la créature."]
+   203.1– 206.2 s  ['Elle sourit. Un reptile ouvre la gueule.']
+   212.1– 219.5 s  ['Elle tient le reptile beige à deux mains gantées de gris. Il a la gueule ouverte.']
+   219.5– 229.0 s  ['Des mains manipulent un bol en pierre grise. La jeune femme aux cheveux rouges est allongée dans un lit, en robe rose et noire.']
+   229.0– 238.6 s  [zoom : La femme est allongée sur un lit avec un oreiller et une cou] ['Dans une pièce sombre, elle repose la tête sur un oreiller gris, sous une couverture rose et noire.']
+   238.6– 248.2 s  ['Dans un lieu sombre traversé de rayons de lumière, la jeune femme aux cheveux rouges tient un petit reptile sur un tissu clair.']
+   248.2– 250.5 s  ['Une poule court.']
+   251.8– 254.1 s  ['Elle court dans une ruelle.']
+   257.9– 264.9 s  ['Elle se tient sur une caisse dans une ruelle en bois, entourée de fruits.']
+   265.2– 271.6 s  ['La jeune femme aux cheveux rouges regarde une silhouette sombre de profil.']
+   271.6– 278.8 s  ['Elle lève les yeux, surprise, face à une petite chauve-souris ailée.']
+   278.8– 287.5 s  [zoom : Les personnages ne tiennent ni ne manipulent aucun objet. On] ['Une créature caméléon sur une poutre observe des oiseaux en V dans un ciel nuageux. La jeune femme court sur des marches de pierre.']
+   287.5– 293.2 s  ['Elle se tient au milieu de ruines sous un ciel doré.']
+   293.2– 299.0 s  ["Vue en plongée, elle contemple l'horizon sous un ciel orangé."]
+   311.3– 313.9 s  ['Elle sourit vers le ciel.']
+   314.3– 322.2 s  ['Elle regarde vers le haut, bouche bée. Un petit animal ailé grandit en un dragon massif.']
+   322.2– 328.2 s  ['Une patte écailleuse et griffue descend du ciel face à elle.']
+   328.2– 332.8 s  ['Un petit dragon descend vers la main gantée.']
+   336.1– 338.6 s  ['La ville est en ruines.']
+   339.1– 344.4 s  ['La jeune femme aux cheveux rouges contemple la ville au couchant.']
+   344.4– 349.8 s  ['Gros plan sur son visage inquiet sous un ciel orangé.']
+   349.8– 357.4 s  ['La jeune femme aux cheveux rouges court sur un sol sombre, puis son visage sérieux se superpose à un désert de souches.']
+   357.4– 365.1 s  ['Son visage aux cheveux bruns est superposé à un paysage nocturne avec une silhouette grimpant sur un rocher.']
+   365.1– 372.8 s  ["Une lune pâle domine un ciel étoilé. Un désert de dunes s'étend. La jeune femme aux cheveux rouges marche sur une dune."]
+   372.8– 380.5 s  ['La silhouette de la jeune femme aux cheveux rouges se superpose à des dunes dorées sous un ciel clair.']
+   380.5– 386.8 s  ['Elle grimpe une tige de bambou, un bâton à la main, puis se tient de profil dans un canyon rocheux.']
+   390.4– 396.9 s  ['Elle se tient de profil dans un paysage rocheux sous un ciel orangé.']
+   396.9– 402.5 s  ["De dos, elle lève la main gauche face à l'objectif."]
+   402.8– 408.9 s  ['Elle tient un bâton dans la brume face à des montagnes enneigées.']
+   408.9– 415.1 s  ['Un paysage de montagnes enneigées sous un ciel blanc et brumeux.']
+   415.1– 420.5 s  [zoom : Les personnages ne tiennent ni ne manipulent aucun objet ide] ['La jeune femme aux cheveux rouges est ensevelie sous la neige.']
+   420.5– 425.8 s  ['La jeune femme aux cheveux rouges marche vers la droite.']
+   425.8– 431.6 s  ['Elle marche seule dans la neige avec un long bâton.']
+   431.6– 435.0 s  ['Elle regarde vers le haut.']
+   435.3– 442.4 s  ['Elle regarde vers le bas, la bouche ouverte et effrayée. Un tatouage est sur son épaule.']
+   442.4– 445.5 s  ["L'homme à la pipe regarde la femme."]
+   446.7– 452.9 s  ["L'homme barbu aux cicatrices regarde vers le bas. La femme est debout."]
+   454.4– 457.5 s  [zoom : inconnu.] ["Elle fixe l'horizon, bouche ouverte."]
+   461.8– 470.2 s  [zoom : Un personnage manipule un médaillon circulaire orné de gravu] ['La jeune femme aux cheveux rouges regarde vers le bas, sérieuse. Elle tient un médaillon sombre sculpté.']
+   470.2– 478.6 s  ['Le médaillon doré montre un arbre vert sur un sol rocheux. La jeune femme aux cheveux rouges regarde vers le haut, étonnée.']
+   478.6– 483.7 s  ['Une silhouette racinaire noire surplombe la jeune femme.']
+   483.7– 491.0 s  ["Devant une grotte sombre, une silhouette se tient au bord de l'eau sous la pleine lune. Des particules bleues flottent sur le sol granuleux."]
+   491.0– 496.7 s  ['Dans une grotte, une main brandit une dague face à elle.']
+   496.7– 502.5 s  ['La jeune femme aux cheveux rouges observe une grotte cristalline.']
+   502.5– 508.8 s  ['Une créature grise aux cornes sombres lèche une viande rouge. La jeune femme aux cheveux rouges est effrayée derrière un rocher.']
+   508.8– 516.5 s  ["Sous une lueur bleue, la jeune femme aux cheveux rouges regarde avec effroi une roche sombre. L'image zoome sur l'arrière de sa tête."]
+   516.5– 523.4 s  ['Dans une grotte sombre, une créature écailleuse surgit derrière des rochers. La jeune femme marche sur une arche.']
+   523.4– 528.5 s  ['La jeune femme aux cheveux rouges est accroupie face à une lueur.']
+   528.5– 533.6 s  ['De dos, elle contemple le fond de la grotte sombre.']
+   533.6– 539.1 s  ['Elle regarde vers le bas, inquiète. Un petit être gris est étendu.']
+   543.4– 550.4 s  ['Elle pose sa main sur une paroi de cristaux brillants. Un tatouage orne son épaule.']
+   551.4– 557.5 s  ['Elle brandit une lame face à une créature ailée aux yeux rouges.']
+   559.2– 563.9 s  ['La jeune femme aux cheveux rouges vise la créature.']
+   567.5– 569.9 s  ['Elle lance sa lance.']
+   571.2– 578.4 s  ['Allongée sur le sol rocheux, la jeune femme aux cheveux rouges regarde la créature ailée.']
+   581.8– 588.4 s  ['De profil, elle repose sur le sol rocheux. Une créature ailée survole sa lance.']
+   589.5– 596.9 s  ['Une créature reptilienne massive aux cornes recourbées examine la jeune femme au sol.']
+   597.1– 600.7 s  [zoom : Inconnu.] ["Elle lève les yeux vers l'œil de la créature."]
+   607.6– 613.8 s  ['La jeune femme aux cheveux rouges tient un bâton, effrayée. Une créature émerge.']
+   613.8– 619.8 s  ['Dans une grotte sombre, elle fait face à une créature immobile.']
+   619.8– 626.9 s  ['La jeune femme aux cheveux rouges, terrifiée, fait face à une créature noire cornue.']
+   626.9– 633.9 s  ["Une flaque rouge s'étale sur le sol rocheux. La jeune femme est allongée, terrifiée."]
+   633.9– 641.0 s  [zoom : Les personnages ne tiennent aucun objet. On peut seulement v] ["Elle regarde l'horizon rocheux, terrifiée, une main gantée de sang vers son visage."]
+   641.0– 647.5 s  ["De profil dans l'obscurité, elle lève une main gantée de noir."]
+   647.5– 655.0 s  ['Dans une grotte, une créature écailleuse fait face à la jeune femme aux cheveux rouges.']
+   655.0– 661.1 s  ['Gros plan. La jeune femme aux cheveux rouges, effrayée, regarde en haut.']
+   661.1– 666.2 s  ['La jeune femme aux cheveux rouges lève les bras. Un reptile cornu surgit.']
+   666.2– 671.2 s  ['Elle fixe le cadavre blanc au sol. Des particules flottent.']
+   671.2– 677.0 s  ['Elle court vers une caverne lumineuse aux rochers flottants.']
+   677.0– 684.4 s  ["L'intérieur de la grotte est sombre et rocheux. Un tronc d'arbre s'enfonce à droite."]
+   684.4– 693.2 s  ["Un tronc massif s'élève à gauche dans un paysage montagneux brumeux. Une silhouette et la jeune femme sont assises sur les rochers."]
+   693.2– 702.0 s  ["Assise au bord d'une falaise, elle regarde vers le bas. Une marque rouge marque son épaule droite."]
+   702.8– 710.0 s  ['La jeune femme aux cheveux rouges a le regard fixe et la bouche entrouverte.']
+   710.0– 715.5 s  ['Une ceinture en cuir et une boucle reposent sur le sol rocheux.']
+   715.5– 721.0 s  [zoom : La femme tient une hache dans sa main droite. On peut égalem] ['De dos, elle contemple les montagnes, une hache à la main.']
+   721.8– 729.2 s  [zoom : Les personnages ne tiennent ni ne manipulent aucun objet. On] ['Elle se tient de dos sur un sol rocheux face à des montagnes brumeuses.']
+   729.2– 736.7 s  [zoom : Les personnages ne tiennent ni ne manipulent aucun objet. On] ['Une petite créature ailée repose sur le sol à droite. Des fleurs blanches pendent au premier plan.']
+   736.7– 744.1 s  [zoom : Inconnu.] ['Trois fleurs blanches en cloche pendent au premier plan à droite.']
+   744.1– 747.5 s  [zoom : inconnu] ['Écran noir.']
+   805.9– 811.3 s  [zoom : Les personnages ne tiennent rien dans leurs mains. On peut r] ['Crédits à gauche. Pommes et figurines sur le bois.']
+   811.3– 816.7 s  ['Des illustrations médiévales et des crédits blancs sur du bois.']
+   817.7– 826.2 s  ["Des croquis et des titres blancs s'affichent en éventail sur des planches de bois verticales."]
+   826.2– 834.8 s  ["Une liste de sponsors s'affiche en blanc sur un fond noir, organisée en plusieurs colonnes."]
+   834.8– 843.3 s  [zoom : inconnu] ["Une liste de noms blancs s'affiche en colonnes sur un fond noir."]
+   843.3– 851.8 s  [zoom : inconnu.] ["Une liste de noms blancs s'affiche en colonnes sur un fond noir."]
+   852.5– 861.3 s  ['Des gros plans montrent des listes de noms noirs sur fond blanc ou beige, organisées en colonnes.']
+   861.6– 867.4 s  [zoom : inconnu.] ["Des noms blancs s'affichent en colonnes denses sur fond noir."]
+   873.7– 880.9 s  ['Des croquis de la jeune femme aux cheveux rouges et de créatures jonchent une table en bois.']
+   880.9– 888.0 s  ['Des dessins sur des planches de bois. En haut, des textes blancs. À droite, une petite fille face à une créature ailée.']
+[description] 5717.4 s
+
+********
+Warning: flash-attn is not installed. Will only run the manual PyTorch version. Please install flash-attn for faster inference.
+********
+ 
+'sox' n'est pas reconnu en tant que commande interne
+ou externe, un programme ex�cutable ou un fichier de commandes.
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]
+Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 2647.50it/s]
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Device set to use cuda:0
+`return_token_timestamps` is deprecated for WhisperFeatureExtractor and will be removed in Transformers v5. Use `return_attention_mask` instead, as the number of frames can be inferred from it.
+  voix incomplète (manque : presents), essai 1/3 : Sur fond gris, le texte blanc « THE BLENDER FOUNDATION PRESENTS » s'affiche devant des montagnes enneigées.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : presents), essai 2/3 : Sur fond gris, le texte blanc « THE BLENDER FOUNDATION PRESENTS » s'affiche devant des montagnes enneigées.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (18.2 car./s), essai 1/3 : L'homme aux cheveux rouges est au sol face à un homme chauve.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : paysage), essai 1/3 : Paysage de montagnes brumeuses. Une main gantée saisit un bâton.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : sintel), essai 1/3 : Le titre SINTEL s'affiche sur un paysage montagneux brumeux. La jeune femme aux cheveux rouges marche dans la neige avec un bâton.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.5 car./s), essai 1/3 : Un feu brûle au centre d'un cercle de silhouettes assises.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.3 car./s), essai 1/3 : Dans une tente, elle fixe l'homme.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (18.8 car./s), essai 1/3 : Elle baisse les yeux.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.1 car./s), essai 1/3 : Elle marche dans la ruelle.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (21.1 car./s), essai 2/3 : Elle marche dans la ruelle.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.9 car./s), essai 3/3 : Elle marche dans la ruelle.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.2 car./s), essai 1/3 : La jeune femme aux cheveux rouges regarde vers la droite. Une main gantée s'approche de la créature.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.7 car./s), essai 1/3 : Ville en ruines.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : grimpe, tige), essai 1/3 : Elle grimpe une tige de bambou, un bâton à la main, puis se tient de profil dans un canyon rocheux.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (17.9 car./s), essai 2/3 : Elle grimpe une tige de bambou, un bâton à la main, puis se tient de profil dans un canyon rocheux.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (17.7 car./s), essai 3/3 : Elle grimpe une tige de bambou, un bâton à la main, puis se tient de profil dans un canyon rocheux.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (17.5 car./s), essai 1/3 : Elle grimpe un bambou, puis observe une silhouette au loin dans un canyon.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : bambou), essai 2/3 : Elle grimpe un bambou, puis observe une silhouette au loin dans un canyon.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.2 car./s), essai 1/3 : Elle regarde vers le haut.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.2 car./s), essai 2/3 : Elle regarde vers le haut.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (17.1 car./s), essai 3/3 : Elle regarde vers le haut.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.2 car./s), essai 1/3 : Elle regarde droit devant.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : elle), essai 2/3 : Elle regarde droit devant.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : main, brandit), essai 1/3 : Dans une grotte, une main brandit une dague face à elle.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.9 car./s), essai 1/3 : La jeune femme aux cheveux rouges observe une grotte cristalline.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (17.3 car./s), essai 1/3 : Elle est accroupie face à une lueur.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (18.2 car./s), essai 1/3 : De dos, elle contemple le fond de la grotte sombre.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : elle), essai 1/3 : Elle lance sa lance.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (18.1 car./s), essai 1/3 : Elle attaque.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.2 car./s), essai 2/3 : Elle attaque.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.2 car./s), essai 1/3 : De profil, elle repose sur le sol rocheux. Une créature ailée survole sa lance.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.8 car./s), essai 1/3 : Dans une grotte sombre, elle fait face à une créature immobile.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (17.2 car./s), essai 1/3 : Un tronc s'élève à gauche. Deux silhouettes sont assises sur les rochers.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.1 car./s), essai 1/3 : De dos, elle contemple les montagnes, une hache à la main.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.9 car./s), essai 2/3 : De dos, elle contemple les montagnes, une hache à la main.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.2 car./s), essai 1/3 : Trois fleurs blanches en cloche pendent au premier plan à droite.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : ecran), essai 1/3 : Écran noir.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.4 car./s), essai 1/3 : Des illustrations médiévales et des crédits blancs sur du bois.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (18.2 car./s), essai 1/3 : Des croquis et des titres blancs s'affichent en éventail sur des planches de bois verticales.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.4 car./s), essai 1/3 : Une liste de noms s'affiche sur fond noir.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (20.2 car./s), essai 1/3 : Des croquis de la jeune femme aux cheveux rouges et de créatures jonchent une table en bois.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.2 car./s), essai 2/3 : Des croquis de la jeune femme aux cheveux rouges et de créatures jonchent une table en bois.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (17.8 car./s), essai 1/3 : Dessins sur des planches de bois. En haut, des textes blancs. Une petite fille fait face à une créature.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : dessins), essai 2/3 : Dessins sur des planches de bois. En haut, des textes blancs. Une petite fille fait face à une créature.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : dessins), essai 3/3 : Dessins sur des planches de bois. En haut, des textes blancs. Une petite fille fait face à une créature.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (17.4 car./s), essai 1/3 : Dessins sur des planches de bois. Une petite fille face à une créature.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[voix] 2428.6 s
+[mixage] 45.7 s
+{
+ "timings_s": {
+  "parole": 0.0,
+  "voix isolée": 0.0,
+  "plans": 0.0,
+  "description": 5717.4,
+  "voix": 2428.6,
+  "mixage": 45.7
+ },
+ "duration_s": 888.0,
+ "usable_silence_s": 710.0,
+ "windows": 115,
+ "placed": 113,
+ "dropped": [
+  "d_0002",
+  "d_0027"
+ ],
+ "sped_up": 2,
+ "reviewed": 0,
+ "tts_retries": 42,
+ "facts_checked": 0,
+ "facts_rejected": 0,
+ "profile": "small",
+ "models": {
+  "vlm": "gemma4:26b-a4b-it-qat",
+  "writer": "gemma4:26b-a4b-it-qat"
+ },
+ "parallel_requests": 1,
+ "llm_usage": {
+  "vlm": {
+   "requests": 136,
+   "prompt_tokens": 150748,
+   "completion_tokens": 9988
+  },
+  "writer": {
+   "requests": 230,
+   "prompt_tokens": 242483,
+   "completion_tokens": 14118
+  }
+ },
+ "outbound_network": true,
+ "coverage": 0.73,
+ "measured_chars_per_s": 13.3,
+ "peak_gpu_gib_this_process": 8.0
+}
+Sans AD : out\corpus\small\sintel-vo\clip.mp4
+Avec AD : out\corpus\small\sintel-vo\clip_ad.mp4
+MKV deux pistes : out\corpus\small\sintel-vo\clip_ad.mkv
+Relecture (facultative) : ouvrir out\corpus\small\sintel-vo\relecture.html dans un navigateur, ou écrire les textes à changer dans out\corpus\small\sintel-vo\corrections.json, puis relancer la même commande
+$ C:\Users\swinn\.venvs\audesia\Scripts\python.exe eval/overlap.py out\corpus\small\sintel-vo --video corpus\media\Sintel.2010.1080p.mkv --me corpus\media\sintel-m+e-st.flac --end 888.032
+Traceback (most recent call last):
+  File "F:\git\AudesIA\eval\overlap.py", line 104, in <module>
+    main()
+  File "F:\git\AudesIA\eval\overlap.py", line 63, in main
+    res, lag, gain = residual(film, pcm(a.me, start - SEARCH, dur + 2 * SEARCH))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\git\AudesIA\eval\overlap.py", line 40, in residual
+    g = float(np.dot(film, me) / np.dot(me, me))
+              ^^^^^^^^^^^^^^^^
+ValueError: shapes (14208512,) and (14208000,) not aligned: 14208512 (dim 0) != 14208000 (dim 0)
+$ C:\Users\swinn\.venvs\audesia\Scripts\python.exe audesia_p0.py corpus\media\Sintel.fr.touhoppai.1080p.mp4 --profile small --out out\corpus\small\sintel-vf
+[parole] 0.0 s
+[voix isolée] 0.0 s
+[plans] 0.0 s
+  1/110     0.0–   7.8 s  décrit (4 images, 0 éclaircies)
+  2/110     7.8–  15.7 s  décrit (4 images, 0 éclaircies)
+  3/110    15.7–  23.5 s  décrit (4 images, 0 éclaircies)
+  4/110    23.5–  31.3 s  décrit (4 images, 0 éclaircies)
+  5/110    31.3–  36.8 s  décrit (4 images, 0 éclaircies)
+  6/110    36.8–  42.2 s  décrit (4 images, 0 éclaircies)
+  7/110    50.0–  52.2 s  décrit (3 images, 1 éclaircies)
+  8/110    58.3–  61.2 s  décrit (4 images, 1 éclaircies)
+  9/110    61.5–  63.6 s  décrit (3 images, 0 éclaircies)
+  10/110    65.6–  74.0 s  décrit (4 images, 0 éclaircies)
+  11/110    74.0–  81.5 s  décrit (4 images, 0 éclaircies)
+  12/110    81.5–  88.5 s  décrit (4 images, 0 éclaircies)
+  13/110    88.5–  94.9 s  décrit (4 images, 0 éclaircies)
+  14/110    94.9– 101.2 s  décrit (4 images, 0 éclaircies)
+  15/110   101.2– 107.4 s  décrit (4 images, 0 éclaircies)
+  16/110   114.3– 116.8 s  décrit (4 images, 0 éclaircies)
+  17/110   153.0– 159.3 s  décrit (4 images, 0 éclaircies)
+  18/110   160.2– 168.3 s  décrit (4 images, 4 éclaircies)
+  19/110   168.3– 176.4 s  décrit (4 images, 0 éclaircies)
+  20/110   176.4– 182.0 s  décrit (4 images, 0 éclaircies)
+  21/110   182.0– 189.8 s  décrit (4 images, 0 éclaircies)
+  22/110   189.8– 196.4 s  décrit (4 images, 0 éclaircies)
+  23/110   196.4– 203.1 s  décrit (4 images, 0 éclaircies)
+  24/110   203.1– 206.0 s  décrit (4 images, 1 éclaircies)
+  25/110   212.9– 219.5 s  décrit (4 images, 0 éclaircies)
+  26/110   219.5– 229.4 s  décrit (4 images, 0 éclaircies)
+  27/110   229.4– 239.3 s  décrit (4 images, 1 éclaircies)
+  28/110   239.3– 249.2 s  décrit (4 images, 3 éclaircies)
+  29/110   252.3– 255.2 s  décrit (4 images, 1 éclaircies)
+  30/110   255.6– 257.7 s  décrit (3 images, 2 éclaircies)
+  31/110   258.0– 263.2 s  décrit (4 images, 0 éclaircies)
+  32/110   263.2– 271.6 s  décrit (4 images, 0 éclaircies)
+  33/110   271.6– 278.8 s  décrit (4 images, 0 éclaircies)
+  34/110   278.8– 287.5 s  décrit (4 images, 1 éclaircies)
+  35/110   287.5– 297.2 s  décrit (4 images, 2 éclaircies)
+  36/110   297.2– 301.4 s  décrit (4 images, 0 éclaircies)
+  37/110   329.5– 333.5 s  décrit (4 images, 1 éclaircies)
+  38/110   338.9– 344.3 s  décrit (4 images, 0 éclaircies)
+  39/110   344.3– 349.8 s  décrit (4 images, 0 éclaircies)
+  40/110   349.8– 357.4 s  décrit (4 images, 0 éclaircies)
+  41/110   357.4– 365.1 s  décrit (4 images, 0 éclaircies)
+  42/110   365.1– 372.8 s  décrit (4 images, 0 éclaircies)
+  43/110   372.8– 380.5 s  décrit (4 images, 0 éclaircies)
+  44/110   380.5– 386.9 s  décrit (4 images, 0 éclaircies)
+  45/110   390.4– 398.7 s  décrit (4 images, 0 éclaircies)
+  46/110   398.7– 406.9 s  décrit (4 images, 0 éclaircies)
+  47/110   406.9– 415.1 s  décrit (4 images, 0 éclaircies)
+  48/110   415.1– 420.5 s  décrit (4 images, 0 éclaircies)
+  49/110   420.5– 425.8 s  décrit (4 images, 0 éclaircies)
+  50/110   425.8– 431.6 s  décrit (4 images, 0 éclaircies)
+  51/110   431.6– 434.9 s  décrit (4 images, 0 éclaircies)
+  52/110   435.1– 442.4 s  décrit (4 images, 0 éclaircies)
+  53/110   442.4– 445.9 s  décrit (4 images, 0 éclaircies)
+  54/110   464.2– 474.0 s  décrit (4 images, 0 éclaircies)
+  55/110   474.0– 483.7 s  décrit (4 images, 0 éclaircies)
+  56/110   483.7– 491.0 s  décrit (4 images, 0 éclaircies)
+  57/110   491.0– 496.7 s  décrit (4 images, 0 éclaircies)
+  58/110   496.7– 502.5 s  décrit (4 images, 0 éclaircies)
+  59/110   502.5– 504.5 s  décrit (3 images, 0 éclaircies)
+  60/110   529.5– 536.3 s  décrit (4 images, 0 éclaircies)
+  61/110   536.3– 539.2 s  décrit (4 images, 1 éclaircies)
+  62/110   543.5– 550.3 s  décrit (4 images, 1 éclaircies)
+  63/110   553.4– 557.4 s  décrit (4 images, 0 éclaircies)
+  64/110   559.4– 565.7 s  décrit (4 images, 1 éclaircies)
+  65/110   570.9– 580.1 s  décrit (4 images, 0 éclaircies)
+  66/110   581.8– 588.9 s  décrit (4 images, 0 éclaircies)
+  67/110   589.8– 596.9 s  décrit (4 images, 0 éclaircies)
+  68/110   604.3– 610.4 s  décrit (4 images, 0 éclaircies)
+  69/110   610.4– 616.8 s  décrit (4 images, 0 éclaircies)
+  70/110   616.8– 621.8 s  décrit (4 images, 0 éclaircies)
+  71/110   621.8– 631.4 s  décrit (4 images, 0 éclaircies)
+  72/110   631.4– 641.0 s  décrit (4 images, 0 éclaircies)
+  73/110   641.0– 647.5 s  décrit (4 images, 0 éclaircies)
+  74/110   647.5– 655.0 s  décrit (4 images, 0 éclaircies)
+  75/110   655.0– 661.1 s  décrit (4 images, 0 éclaircies)
+  76/110   661.1– 666.2 s  décrit (4 images, 0 éclaircies)
+  77/110   666.2– 671.2 s  décrit (4 images, 0 éclaircies)
+  78/110   671.2– 677.0 s  décrit (4 images, 1 éclaircies)
+  79/110   677.0– 684.4 s  décrit (4 images, 0 éclaircies)
+  80/110   684.4– 692.4 s  décrit (4 images, 2 éclaircies)
+  81/110   692.4– 700.3 s  décrit (4 images, 0 éclaircies)
+  82/110   700.3– 710.0 s  décrit (4 images, 4 éclaircies)
+  83/110   710.0– 718.6 s  décrit (4 images, 0 éclaircies)
+  84/110   718.6– 727.1 s  décrit (4 images, 0 éclaircies)
+  85/110   727.1– 735.6 s  décrit (4 images, 0 éclaircies)
+  86/110   735.6– 744.1 s  décrit (4 images, 0 éclaircies)
+  87/110   744.1– 747.8 s  décrit (4 images, 0 éclaircies)
+  88/110   805.9– 814.8 s  décrit (4 images, 0 éclaircies)
+  89/110   814.8– 823.7 s  décrit (4 images, 2 éclaircies)
+  90/110   823.7– 832.6 s  décrit (4 images, 3 éclaircies)
+  91/110   832.6– 841.5 s  décrit (4 images, 4 éclaircies)
+  92/110   841.5– 850.4 s  décrit (4 images, 4 éclaircies)
+  93/110   857.6– 860.6 s  décrit (4 images, 4 éclaircies)
+  94/110   861.7– 868.7 s  décrit (4 images, 4 éclaircies)
+  95/110   869.2– 872.4 s  décrit (4 images, 4 éclaircies)
+  96/110   873.7– 883.7 s  décrit (4 images, 2 éclaircies)
+ffmpeg : [mjpeg @ 000001ebd66f6f40] Non full-range YUV is non-standard, set strict_std_compliance to at most unofficial to use it.
+[mjpeg @ 000001ebd445e980] ff_frame_thread_encoder_init failed
+[vost#0:0/mjpeg @ 000001ebd445e700] [enc:mjpeg @ 000001ebd43b6e80] Error while opening encoder - maybe incorrect parameters such as bit_rate, rate, width or height.
+[vf#0:0 @ 000001ebd68eb040] Error sending frames to consumers: Invalid argument
+[vf#0:0 @ 000001ebd68eb040] Task finished with error: Invalid argument
+[vf#0:0 @ 000001ebd68eb040] Terminating thread with error: Invalid argument
+[vost#0:0/mjpeg @ 000001ebd445e700] [enc:mjpeg @ 000001ebd43b6e80] Could not open encoder before EOF
+[vost#0:0/mjpeg @ 000001ebd445e700] Task finished with error: Invalid argument
+[vost#0:0/mjpeg @ 000001ebd445e700] Terminating thread with error: Invalid argument
+[out#0/image2 @ 000001ebd43cf340] Nothing was written into output file, because at least one of its streams received no packets.
+$ C:\Users\swinn\.venvs\audesia\Scripts\python.exe audesia_p0.py corpus\media\tears_of_steel_720p.mov --profile small --out out\corpus\small\tears-of-steel
+[parole] 0.0 s
+[voix isolée] 0.0 s
+[plans] 0.0 s
+  1/79     0.0–   2.2 s  décrit (3 images, 0 éclaircies)
+  2/79    11.6–  18.4 s  décrit (4 images, 0 éclaircies)
+  3/79    18.4–  23.3 s  décrit (4 images, 0 éclaircies)
+  4/79    45.5–  49.5 s  décrit (4 images, 3 éclaircies)
+  5/79    54.0–  60.8 s  décrit (4 images, 0 éclaircies)
+  6/79    62.6–  69.9 s  décrit (4 images, 1 éclaircies)
+  7/79    69.9–  79.4 s  décrit (4 images, 0 éclaircies)
+  8/79    79.4–  84.8 s  décrit (4 images, 1 éclaircies)
+  9/79    84.8–  92.4 s  décrit (4 images, 0 éclaircies)
+  10/79    92.4–  95.9 s  décrit (4 images, 3 éclaircies)
+  11/79    97.5– 107.4 s  décrit (4 images, 4 éclaircies)
+  12/79   112.4– 117.6 s  décrit (4 images, 2 éclaircies)
+  13/79   118.9– 125.1 s  décrit (4 images, 0 éclaircies)
+  14/79   125.1– 131.3 s  décrit (4 images, 1 éclaircies)
+  15/79   133.1– 136.4 s  décrit (4 images, 0 éclaircies)
+  16/79   137.6– 143.3 s  décrit (4 images, 0 éclaircies)
+  17/79   143.3– 151.4 s  décrit (4 images, 1 éclaircies)
+  18/79   151.8– 158.7 s  décrit (4 images, 0 éclaircies)
+  19/79   159.3– 162.7 s  décrit (4 images, 0 éclaircies)
+  20/79   162.9– 172.3 s  décrit (4 images, 0 éclaircies)
+  21/79   172.3– 177.7 s  décrit (4 images, 4 éclaircies)
+  22/79   177.7– 183.1 s  décrit (4 images, 1 éclaircies)
+  23/79   183.5– 188.0 s  décrit (4 images, 0 éclaircies)
+  24/79   188.3– 191.3 s  décrit (4 images, 1 éclaircies)
+  25/79   217.3– 222.7 s  décrit (4 images, 0 éclaircies)
+  26/79   226.2– 230.7 s  décrit (4 images, 0 éclaircies)
+  27/79   248.2– 253.4 s  décrit (4 images, 0 éclaircies)
+  28/79   253.4– 261.5 s  décrit (4 images, 0 éclaircies)
+  29/79   261.5– 269.6 s  décrit (4 images, 0 éclaircies)
+  30/79   269.6– 277.6 s  décrit (4 images, 0 éclaircies)
+  31/79   277.6– 285.7 s  décrit (4 images, 0 éclaircies)
+  32/79   286.0– 292.7 s  décrit (4 images, 3 éclaircies)
+  33/79   305.9– 312.4 s  décrit (4 images, 0 éclaircies)
+  34/79   312.4– 314.9 s  décrit (4 images, 0 éclaircies)
+  35/79   329.9– 336.1 s  décrit (4 images, 3 éclaircies)
+  36/79   350.4– 356.0 s  décrit (4 images, 0 éclaircies)
+  37/79   393.5– 396.5 s  décrit (4 images, 0 éclaircies)
+  38/79   398.5– 404.0 s  décrit (4 images, 0 éclaircies)
+  39/79   404.0– 407.3 s  décrit (4 images, 0 éclaircies)
+  40/79   411.1– 416.6 s  décrit (4 images, 0 éclaircies)
+  41/79   416.6– 419.3 s  décrit (4 images, 0 éclaircies)
+  42/79   422.8– 428.5 s  décrit (4 images, 0 éclaircies)
+  43/79   437.7– 444.9 s  décrit (4 images, 1 éclaircies)
+  44/79   444.9– 453.3 s  décrit (4 images, 2 éclaircies)
+  45/79   453.3– 461.8 s  décrit (4 images, 4 éclaircies)
+  46/79   461.8– 466.9 s  décrit (4 images, 0 éclaircies)
+  47/79   467.6– 470.8 s  décrit (4 images, 0 éclaircies)
+  48/79   471.1– 479.0 s  décrit (4 images, 0 éclaircies)
+  49/79   479.0– 481.7 s  décrit (4 images, 0 éclaircies)
+  50/79   482.3– 489.7 s  décrit (4 images, 1 éclaircies)
+  51/79   490.0– 495.4 s  décrit (4 images, 0 éclaircies)
+  52/79   495.8– 500.7 s  décrit (4 images, 0 éclaircies)
+  53/79   508.8– 511.2 s  décrit (3 images, 0 éclaircies)
+  54/79   512.1– 519.1 s  décrit (4 images, 0 éclaircies)
+  55/79   520.5– 527.5 s  décrit (4 images, 0 éclaircies)
+  56/79   530.4– 535.0 s  décrit (4 images, 1 éclaircies)
+  57/79   541.9– 545.5 s  décrit (4 images, 0 éclaircies)
+  58/79   546.0– 552.8 s  décrit (4 images, 0 éclaircies)
+  59/79   552.8– 559.1 s  décrit (4 images, 0 éclaircies)
+  60/79   559.6– 561.9 s  décrit (3 images, 1 éclaircies)
+  61/79   571.2– 579.6 s  décrit (4 images, 0 éclaircies)
+  62/79   579.6– 588.0 s  décrit (4 images, 0 éclaircies)
+  63/79   588.0– 594.1 s  décrit (4 images, 3 éclaircies)
+  64/79   594.5– 598.7 s  décrit (4 images, 4 éclaircies)
+  65/79   599.0– 606.2 s  décrit (4 images, 3 éclaircies)
+  66/79   606.2– 613.3 s  décrit (4 images, 1 éclaircies)
+  67/79   622.5– 632.2 s  décrit (4 images, 1 éclaircies)
+  68/79   632.2– 641.9 s  décrit (4 images, 0 éclaircies)
+  69/79   641.9– 651.5 s  décrit (4 images, 0 éclaircies)
+  70/79   651.5– 661.2 s  décrit (4 images, 3 éclaircies)
+  71/79   661.2– 670.9 s  décrit (4 images, 4 éclaircies)
+  72/79   670.9– 680.5 s  décrit (4 images, 4 éclaircies)
+  73/79   680.5– 690.2 s  décrit (4 images, 4 éclaircies)
+  74/79   690.2– 699.8 s  décrit (4 images, 2 éclaircies)
+  75/79   699.8– 709.5 s  décrit (4 images, 0 éclaircies)
+  76/79   709.5– 716.4 s  décrit (4 images, 0 éclaircies)
+  77/79   716.4– 723.4 s  décrit (4 images, 0 éclaircies)
+  78/79   723.4– 730.3 s  décrit (4 images, 0 éclaircies)
+  79/79   730.3– 734.1 s  décrit (4 images, 0 éclaircies)
+  registre : []
+     0.0–   2.2 s  ["Blender Foundation Presents s'affiche."]
+    11.6–  18.4 s  ['En contre-plongée, des jets de lumière blanche jaillissent de tuyaux massifs.']
+    18.4–  23.3 s  ["Un paysage industriel s'élève sous un ciel brumeux."]
+    45.5–  49.5 s  [zoom : Inconnu.] ['Deux silhouettes lumineuses face à des interfaces.']
+    54.0–  60.8 s  [zoom : Les personnages ne tiennent ni ne manipulent aucun objet. Le] ["L'homme aux cheveux longs et au bandeau rouge observe un cerveau sur une assiette."]
+    62.6–  69.9 s  ["L'homme fixe un cerveau entouré de lueurs violettes. Le titre « TEARS OF STEEL » s'affiche."]
+    69.9–  79.4 s  ["Vue panoramique d'une ville industrielle sombre sous un ciel nuageux. Deux personnes gisent sur le pont d'un navire."]
+    79.4–  84.8 s  ['Une main tient un journal froissé sur les robots tueurs.']
+    84.8–  92.4 s  ['Un vaisseau steampunk survole une ville aux toits rouges dans une brume bleue.']
+    92.4–  95.9 s  ['Un personnage vise avec une arme.']
+    97.5– 107.4 s  ["Sur une terrasse aux bougies, un homme aux cheveux blancs dort sur un lit. Un tireur vise l'horizon. Un vaisseau survole une ville brumeuse."]
+   112.4– 117.6 s  ['Un vaisseau lumineux survole une ville brumeuse. Un homme vise.']
+   118.9– 125.1 s  ["Un homme aux cheveux gris est allongé sur un lit dans l'obscurité."]
+   125.1– 131.3 s  ["L'homme aux cheveux gris se tient sur un balcon, la main sur le cœur."]
+   133.1– 136.4 s  ["L'homme aux cheveux gris regarde à droite."]
+   137.6– 143.3 s  [zoom : Le personnage tient un fusil d'assaut équipé d'une lunette d] ["Sur un pont brumeux, l'homme aux cheveux gris fixe l'horizon."]
+   143.3– 151.4 s  ["L'homme aux cheveux gris tient une corde sur un balcon. Derrière, un homme noir est accroupi près d'un fusil de précision."]
+   151.8– 158.7 s  ["L'homme au visage tendu vise avec une arme entre deux piliers de pierre."]
+   159.3– 162.7 s  ["L'homme barbu tient une corde."]
+   162.9– 172.3 s  ["De dos, l'homme aux cheveux gris fait face à une machine dorée dans une pièce délabrée jonchée de débris."]
+   172.3– 177.7 s  ["L'homme barbu et une femme regardent vers la gauche."]
+   177.7– 183.1 s  ["La femme en tenue militaire et l'homme gris regardent à gauche."]
+   183.5– 188.0 s  ["L'homme barbu fait face à la caméra."]
+   188.3– 191.3 s  ["L'homme barbu est dans les ruines."]
+   217.3– 222.7 s  [zoom : Les personnages ne tiennent ni ne manipulent aucun objet. Le] ['Un homme en veste rouge lève les bras face à une structure.']
+   226.2– 230.7 s  ["L'homme barbu est inquiet. À sa droite, un homme corpulent tend le bras. Une femme regarde."]
+   248.2– 253.4 s  ["L'homme barbu est inquiet. L'homme corpulent le touche. La femme observe."]
+   253.4– 261.5 s  [zoom : inconnu] ["De dos, trois personnes font face à une rue colorée. Des lignes vertes et des graphiques numériques s'affichent."]
+   261.5– 269.6 s  ["L'homme marche sur un trottoir pavé en pente devant une balustrade verte et regarde à droite."]
+   269.6– 277.6 s  ['Un jeune homme aux cheveux noirs marche sur un pont pavé et regarde à gauche.']
+   277.6– 285.7 s  ['Le jeune homme marche sur un pont, regardant à droite. Derrière lui, des bâtiments bordent un canal.']
+   286.0– 292.7 s  [zoom : Les personnages ne tiennent ni ne manipulent aucun objet ide] ['Le jeune homme contemple une machine sur un pont. Dans un atelier, un homme surpris et un officier se tiennent debout.']
+   305.9– 312.4 s  ["L'homme en veste bleue regarde une femme de profil dans une rue arborée."]
+   312.4– 314.9 s  ["L'homme de profil regarde."]
+   329.9– 336.1 s  ['À travers un cercle, un robot massif traverse des toits brumeux.']
+   350.4– 356.0 s  ['Tom regarde une main robotique grise. Texte rose : CELIA, I LOVE YOUR ROBOT HAND.']
+   393.5– 396.5 s  ['Un masque mécanique sur son visage.']
+   398.5– 404.0 s  ["L'homme en veste marron a un dispositif sur l'œil droit."]
+   404.0– 407.3 s  ['Une main robotique touche ses lèvres.']
+   411.1– 416.6 s  ["L'homme en veste bleue et jaune regarde une silhouette blanche."]
+   416.6– 419.3 s  [zoom : Le personnage porte un sac à dos beige et semble faire face ] ["L'homme aux lunettes est tendu."]
+   422.8– 428.5 s  [zoom : inconnu] ["L'homme aux lunettes fixe des interfaces et du code bleu."]
+   437.7– 444.9 s  ["Une tour d'horloge métallique sculptée s'élève vers un ciel nuageux. Une machine dégage de la fumée blanche sous une main gantée."]
+   444.9– 453.3 s  ["L'homme aux cheveux bruns regarde avec surprise un robot cylindrique noir et blanc. Une femme est en arrière-plan."]
+   453.3– 461.8 s  ["Dans un atelier sombre, l'homme aux cheveux bruns regarde avec surprise un petit robot blanc et noir qui lévite."]
+   461.8– 466.9 s  [zoom : inconnu] ['Quatre personnes agenouillées manipulent du matériel technique.']
+   467.6– 470.8 s  ["L'homme inquiet tient un robot."]
+   471.1– 479.0 s  ['Dans un hall encombré de débris, quatre personnes en combinaisons blanches sont agenouillées, armes pointées.']
+   479.0– 481.7 s  ["L'homme noir est au sol."]
+   482.3– 489.7 s  ["L'homme noir, le regard humide, porte une veste à col en fourrure parmi des cordes et du métal."]
+   490.0– 495.4 s  ["L'homme noir tient une corde et une arme face à des orgues."]
+   495.8– 500.7 s  [zoom : Le personnage tient une corde. On reconnaît un orgue en arri] ["L'homme grimpe à la corde devant un orgue géant."]
+   508.8– 511.2 s  ["L'homme regarde en haut."]
+   512.1– 519.1 s  ["Un jeune homme en veste bleue et grise se tient sur un pont au-dessus d'un canal."]
+   520.5– 527.5 s  ["Dans un décor industriel en ruines, une machine s'active dans la fumée."]
+   530.4– 535.0 s  ["L'homme barbu regarde à droite devant une machine."]
+   541.9– 545.5 s  [zoom : L'homme manipule une partie de la structure métallique d'un ] ["L'homme tend les mains vers la machine."]
+   546.0– 552.8 s  ["L'homme barbu pose ses mains sur une structure robotique usée."]
+   552.8– 559.1 s  [zoom : Inconnu.] ["L'homme barbu, inquiet, regarde à droite. Un autre homme tend les mains."]
+   559.6– 561.9 s  [zoom : Les personnages ne tiennent ni ne manipulent aucun objet vis] ["L'homme est surpris."]
+   571.2– 579.6 s  ["L'homme aux cheveux blancs tend les mains vers une machine métallique complexe sur un sol pavé."]
+   579.6– 588.0 s  ['Dans un hangar brumeux, une femme aux cheveux blancs et un homme marchent sur une passerelle métallique.']
+   588.0– 594.1 s  [zoom : Inconnu.] ["Des formes mécaniques bleues et orange s'animent sur fond noir. Texte : « Written and Directed by IAN HUBERT »."]
+   594.5– 598.7 s  [zoom : Inconnu.] ["Des formes mécaniques s'animent sur fond noir."]
+   599.0– 606.2 s  [zoom : Inconnu.] ["Sur un fond noir géométrique, les noms de Joris Kerbosch N.S.C. et Joram Letwory défilent, puis la liste du Cast s'affiche."]
+   606.2– 613.3 s  ['À gauche, le titre « Cast » et une liste de noms. À droite, une main robotique bleue.']
+   622.5– 632.2 s  [zoom : inconnu] ["Un schéma technique bleu et blanc s'affiche sur fond noir parsemé d'orange. Le texte mentionne Blender. Le fond devient gris."]
+   632.2– 641.9 s  ['Sur un fond noir aux formes orange, les crédits techniques défilent en blanc.']
+   641.9– 651.5 s  [zoom : Inconnu.] ['Sur un fond noir parsemé de graphiques et de lignes bleues et orange, les crédits techniques défilent en blanc.']
+   651.5– 661.2 s  ["Sur un fond noir parsemé de lignes et de cercles colorés, des listes de sponsors s'affichent en blanc."]
+   661.2– 670.9 s  ["Des listes de noms blancs s'affichent en colonnes sur fond noir, puis sur fond blanc."]
+   670.9– 680.5 s  ["Des listes de noms blancs s'affichent en colonnes denses sur fond noir, puis sur fond blanc."]
+   680.5– 690.2 s  ["Des listes de noms blancs s'affichent en colonnes denses sur un fond noir."]
+   690.2– 699.8 s  ['Des noms blancs défilent en colonnes sur fond noir. En bas, un texte mentionne la Blender Foundation et le Netherlands Film Fund.']
+   699.8– 709.5 s  ["Sur fond noir, des logos et des noms de soutiens défilent, puis l'adresse du site et une licence s'affichent."]
+   709.5– 716.4 s  [zoom : Inconnu.] ["Un amas de débris métalliques rouillés s'étend sur l'écran sous une lumière latérale."]
+   716.4– 723.4 s  [zoom : Le personnage tient une arme à feu de type fusil d'assaut. O] ['Un homme en veste bleue est assis parmi des débris, un fusil à la main.']
+   723.4– 730.3 s  [zoom : Le personnage tient un petit objet blanc rectangulaire, qui ] ["L'homme tient un petit objet blanc et regarde vers la gauche."]
+   730.3– 734.1 s  [zoom : inconnu] ["L'écran est noir."]
+[description] 2490.1 s
+
+********
+Warning: flash-attn is not installed. Will only run the manual PyTorch version. Please install flash-attn for faster inference.
+********
+ 
+'sox' n'est pas reconnu en tant que commande interne
+ou externe, un programme ex�cutable ou un fichier de commandes.
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]
+Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 2655.46it/s]
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Device set to use cuda:0
+`return_token_timestamps` is deprecated for WhisperFeatureExtractor and will be removed in Transformers v5. Use `return_attention_mask` instead, as the number of frames can be inferred from it.
+  voix incomplète (manque : affiche), essai 1/3 : Blender Foundation Presents s'affiche.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : blender), essai 2/3 : Blender Foundation Presents s'affiche.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : affiche), essai 3/3 : Blender Foundation Presents s'affiche.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (18.4 car./s), essai 1/3 : Un vaisseau steampunk survole une ville aux toits rouges dans une brume bleue.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (17.3 car./s), essai 1/3 : L'homme barbu fait face à la caméra.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.0 car./s), essai 1/3 : Un homme en veste rouge lève les bras face à une structure.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.5 car./s), essai 1/3 : L'homme en veste rouge lève les bras.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (19.1 car./s), essai 1/3 : L'homme barbu est inquiet.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (18.7 car./s), essai 1/3 : De dos, trois personnes font face à une rue colorée. Des lignes vertes et des graphiques numériques s'affichent.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (17.5 car./s), essai 1/3 : L'homme en veste marron a un dispositif sur l'œil droit.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (17.7 car./s), essai 1/3 : L'homme fixe des codes numériques.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (17.8 car./s), essai 1/3 : L'homme aux cheveux bruns observe un petit robot blanc et noir en lévitation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : orgue), essai 1/3 : L'homme grimpe à la corde devant un orgue géant.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : written, directed), essai 1/3 : Des formes mécaniques bleues et orange s'animent sur fond noir. Texte : « Written and Directed by IAN HUBERT ».
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : letwory), essai 1/3 : Sur un fond noir géométrique, les noms de Joris Kerbosch N.S.C. Et Joram Letwory défilent, puis la liste du Cast s'affiche.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : letwory), essai 2/3 : Sur un fond noir géométrique, les noms de Joris Kerbosch N.S.C. Et Joram Letwory défilent, puis la liste du Cast s'affiche.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : kerbosch, letwory), essai 3/3 : Sur un fond noir géométrique, les noms de Joris Kerbosch N.S.C. Et Joram Letwory défilent, puis la liste du Cast s'affiche.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : letwory, cast), essai 1/3 : Des formes géométriques défilent. Les noms de Joris Kerbosch N.S.C. Et Joram Letwory apparaissent, puis le Cast.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : letwory, cast), essai 2/3 : Des formes géométriques défilent. Les noms de Joris Kerbosch N.S.C. Et Joram Letwory apparaissent, puis le Cast.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : joris, joram, letwory, cast), essai 3/3 : Des formes géométriques défilent. Les noms de Joris Kerbosch N.S.C. Et Joram Letwory apparaissent, puis le Cast.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : letwory), essai 1/3 : Des formes géométriques défilent. Les noms de Joris Kerbosch N.S.C., Joram Letwory et le Cast apparaissent.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : letwory), essai 2/3 : Des formes géométriques défilent. Les noms de Joris Kerbosch N.S.C., Joram Letwory et le Cast apparaissent.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : defilent, joris), essai 3/3 : Des formes géométriques défilent. Les noms de Joris Kerbosch N.S.C., Joram Letwory et le Cast apparaissent.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.3 car./s), essai 1/3 : Sur un fond noir parsemé de lignes et de cercles colorés, des listes de sponsors s'affichent en blanc.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : colonnes), essai 1/3 : Des listes de noms blancs s'affichent en colonnes sur fond noir, puis sur fond blanc.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[voix] 1350.9 s
+[mixage] 33.7 s
+{
+ "timings_s": {
+  "parole": 0.0,
+  "voix isolée": 0.0,
+  "plans": 0.0,
+  "description": 2490.1,
+  "voix": 1350.9,
+  "mixage": 33.7
+ },
+ "duration_s": 734.1,
+ "usable_silence_s": 494.9,
+ "windows": 79,
+ "placed": 75,
+ "dropped": [
+  "d_0000",
+  "d_0062",
+  "d_0064",
+  "d_0071"
+ ],
+ "sped_up": 0,
+ "reviewed": 0,
+ "tts_retries": 21,
+ "facts_checked": 0,
+ "facts_rejected": 0,
+ "profile": "small",
+ "models": {
+  "vlm": "gemma4:26b-a4b-it-qat",
+  "writer": "gemma4:26b-a4b-it-qat"
+ },
+ "parallel_requests": 1,
+ "llm_usage": {
+  "vlm": {
+   "requests": 102,
+   "prompt_tokens": 109171,
+   "completion_tokens": 7270
+  },
+  "writer": {
+   "requests": 158,
+   "prompt_tokens": 178447,
+   "completion_tokens": 10605
+  }
+ },
+ "outbound_network": true,
+ "coverage": 0.711,
+ "measured_chars_per_s": 13.1,
+ "peak_gpu_gib_this_process": 8.0
+}
+Sans AD : out\corpus\small\tears-of-steel\clip.mp4
+Avec AD : out\corpus\small\tears-of-steel\clip_ad.mp4
+MKV deux pistes : out\corpus\small\tears-of-steel\clip_ad.mkv
+Relecture (facultative) : ouvrir out\corpus\small\tears-of-steel\relecture.html dans un navigateur, ou écrire les textes à changer dans out\corpus\small\tears-of-steel\corrections.json, puis relancer la même commande
+$ C:\Users\swinn\.venvs\audesia\Scripts\python.exe eval/overlap.py out\corpus\small\tears-of-steel --video corpus\media\tears_of_steel_720p.mov --me corpus\media\TOS_MUSIC+FX_NO_DIALOGUE.aif --end 734.0930625
+  11.8–  17.2  ok               En contre-plongée, des jets de lumière blanche jaillissent de tuyaux massifs.
+  18.6–  22.9  ok               Un paysage industriel s'élève sous un ciel brumeux.
+  45.7–  49.1  ok               Deux silhouettes lumineuses face à des interfaces.
+  54.2–  60.0  ok               L'homme aux cheveux longs et au bandeau rouge observe un cerveau sur une assiette.
+  62.8–  69.3  ok               L'homme fixe un cerveau entouré de lueurs violettes. Le titre « TEARS OF STEEL » s'affiche.
+  70.1–  78.0  ok               Vue panoramique d'une ville industrielle sombre sous un ciel nuageux. Deux personnes gisent sur le pont d'un navire.
+  79.6–  83.2  ok               Une main tient un journal froissé sur les robots tueurs.
+  85.0–  90.0  ok               Un vaisseau steampunk survole une ville aux toits rouges dans une brume bleue.
+  92.6–  95.6  ok               Il vise avec une arme.
+  97.7– 105.7  ok               Un homme aux cheveux blancs dort sur une terrasse. Un tireur vise l'horizon. Un vaisseau survole une ville.
+ 112.6– 114.6  ok               Un vaisseau survole la ville.
+ 119.1– 123.9  ok               Un homme aux cheveux gris est allongé sur un lit dans l'obscurité.
+ 125.3– 129.8  ok               L'homme se tient sur un balcon.
+ 133.3– 135.0  ok               Il regarde vers la droite.
+ 137.8– 143.0  ok               Sur un pont brumeux, l'homme aux cheveux gris fixe l'horizon.
+ 143.5– 150.3  ok               L'homme aux cheveux gris tient une corde. Derrière, un homme noir est accroupi près d'un fusil.
+ 152.0– 158.2  ok               L'homme au visage tendu vise avec une arme entre deux piliers de pierre.
+ 159.5– 161.8  ok               L'homme barbu tient une corde.
+ 163.1– 170.2  ok               De dos, l'homme aux cheveux gris fait face à une machine dorée dans une pièce délabrée jonchée de débris.
+ 172.5– 175.0  ok               L'homme et la femme regardent à gauche.
+ 177.9– 182.3  ok               La femme en tenue militaire et l'homme gris regardent à gauche.
+ 183.7– 186.8  ok               L'homme barbu fait face à la caméra.
+ 188.5– 191.0  ok               L'homme est dans les ruines.
+ 217.5– 219.8  ok               L'homme en veste rouge lève les bras.
+ 226.4– 230.2  ok               L'homme barbu est inquiet. Un homme tend le bras.
+ 248.4– 250.5  ok               L'homme barbu est inquiet.
+ 253.6– 261.0  ok               De dos, trois personnes font face à une rue colorée. Des lignes vertes et des graphiques numériques s'affichent.
+ 261.7– 267.0  ok               Il marche sur un trottoir pavé et lève les yeux vers sa droite.
+ 269.8– 275.3  ok               Un jeune homme aux cheveux noirs marche sur un pont pavé et regarde à gauche.
+ 277.8– 283.0  ok               Il marche sur un pont et regarde à droite. Des bâtiments bordent un canal.
+ 286.2– 292.1  ok               Un homme surpris et un officier sont dans un atelier encombré.
+ 306.1– 311.7  ok               L'homme en veste bleue regarde une femme de profil dans une rue arborée.
+ 312.6– 314.6  ok               L'homme de profil regarde.
+ 330.1– 335.2  ok               À travers un cercle, un robot massif traverse des toits brumeux.
+ 350.6– 355.8  ok               Une main robotique grise face à Tom. Texte rose.
+ 393.7– 396.3  ok               Un masque mécanique sur son visage.
+ 398.7– 402.8  ok               L'homme en veste marron a un dispositif sur l'œil droit.
+ 404.2– 406.9  ok               Une main robotique touche ses lèvres.
+ 411.3– 414.3  ok               Une silhouette blanche s'approche de l'homme.
+ 416.8– 418.8  ok               L'homme aux lunettes est tendu.
+ 423.0– 425.2  ok               L'homme fixe des codes numériques.
+ 437.9– 444.2  ok               Une tour d'horloge sculptée s'élève. Une main gantée manipule une machine fumante.
+ 445.1– 452.6  ok               L'homme aux cheveux bruns regarde avec surprise un robot cylindrique noir et blanc. Une femme est en arrière-plan.
+ 453.5– 461.2  ok               L'homme aux cheveux bruns observe un petit robot blanc et noir en lévitation.
+ 462.0– 465.9  ok               Quatre personnes manipulent des armes au sol.
+ 467.8– 470.6  ok               L'homme inquiet tient un robot.
+ 471.3– 476.3  ok               Quatre personnes en combinaisons blanches sont agenouillées, armes au poing.
+ 479.2– 481.0  ok               L'homme est au sol.
+ 482.5– 485.5  ok               L'homme noir a le regard humide.
+ 490.2– 492.9  ok               Il tient une corde et une arme.
+ 496.0– 499.6  ok               L'homme grimpe à la corde devant un orgue géant.
+ 509.0– 510.6  ok               Il regarde en haut.
+ 512.3– 517.6  ok               Il se tient sur un pont face à une immense structure métallique.
+ 520.7– 525.7  ok               Dans un décor industriel en ruines, une machine s'active dans la fumée.
+ 530.6– 534.5  ok               L'homme barbu regarde à droite devant une machine.
+ 542.1– 545.3  ok               L'homme tend les mains vers la machine.
+ 546.2– 550.8  ok               L'homme barbu pose ses mains sur une structure robotique usée.
+ 553.0– 558.3  ok               L'homme barbu, inquiet, regarde à droite. Un autre homme tend les mains.
+ 559.8– 560.8  ok               Il est surpris.
+ 571.4– 577.7  ok               L'homme aux cheveux blancs tend les mains vers une machine métallique complexe sur un sol pavé.
+ 579.8– 586.5  ok               Dans un hangar brumeux, une femme aux cheveux blancs et un homme marchent sur une passerelle métallique.
+ 594.7– 598.0  ok               Des formes mécaniques s'animent sur fond noir.
+ 606.4– 612.1  ok               À gauche, le titre « Cast » et une liste. À droite, une main bleue.
+ 622.7– 631.6  ok               Un schéma technique bleu et blanc s'affiche sur fond noir parsemé d'orange. Le texte mentionne Blender. Le fond devient gris.
+ 632.4– 637.9  ok               Sur un fond noir aux formes orange, les crédits techniques défilent en blanc.
+ 642.1– 650.9  ok               Des graphiques et lignes bleues et orange parsèment le fond noir. Les crédits défilent en blanc.
+ 651.7– 659.2  ok               Sur un fond noir parsemé de lignes et de cercles colorés, des listes de sponsors s'affichent en blanc.
+ 661.4– 669.2  ok               Des listes de noms blancs s'affichent en colonnes sur fond noir, puis sur fond blanc.
+ 680.7– 684.4  ok               Des colonnes de noms blancs occupent un écran noir.
+ 690.4– 698.4  ok               Des noms blancs défilent en colonnes sur fond noir. En bas, un texte mentionne la Blender Foundation et le Netherlands Film Fund.
+ 700.0– 709.0  ok               Sur fond noir, des logos et des noms de soutiens défilent, puis l'adresse du site et une licence s'affichent.
+ 709.7– 715.7  ok               Un amas de débris métalliques rouillés s'étend sur l'écran sous une lumière latérale.
+ 716.6– 722.8  ok               Un homme en veste bleue est assis parmi des débris, un fusil à la main.
+ 723.6– 728.8  ok               L'homme tient un petit objet blanc et regarde vers la gauche.
+ 730.5– 732.1  ok               L'écran est noir.
+
+Calage -0.0314 s, gain 0.745, musique atténuée de 1.6 dB dans le résidu
+Parole réelle : 73.7 s ; parole détectée par audesia_p0 qui la couvre : 100%
+Sans chevauchement des paroles (Silero sur le résidu) : 75/75 (100%)
+Sans chevauchement d'aucune voix (paroles + énergie vocale) : 75/75 (100%), chevauchement maximal 0.0 s
+$ C:\Users\swinn\.venvs\audesia\Scripts\python.exe audesia_p0.py corpus\media\sprite-fright.fr.touhoppai.858p.mp4 --profile small --out out\corpus\small\sprite-fright-vf
+[parole] 0.0 s
+[voix isolée] 0.0 s
+[plans] 0.0 s
+  1/35    80.3–  85.8 s  décrit (4 images, 0 éclaircies)
+  2/35    85.8–  89.5 s  décrit (4 images, 0 éclaircies)
+  3/35   128.5– 137.1 s  décrit (4 images, 0 éclaircies)
+  4/35   137.1– 145.6 s  décrit (4 images, 0 éclaircies)
+  5/35   145.6– 151.5 s  décrit (4 images, 0 éclaircies)
+  6/35   151.5– 157.0 s  décrit (4 images, 0 éclaircies)
+  7/35   250.9– 253.3 s  décrit (3 images, 0 éclaircies)
+  8/35   278.8– 283.8 s  décrit (4 images, 0 éclaircies)
+  9/35   307.5– 314.7 s  décrit (4 images, 0 éclaircies)
+  10/35   314.7– 318.5 s  décrit (4 images, 0 éclaircies)
+  11/35   322.8– 328.8 s  décrit (4 images, 0 éclaircies)
+  12/35   328.8– 337.6 s  décrit (4 images, 0 éclaircies)
+  13/35   346.3– 354.4 s  décrit (4 images, 0 éclaircies)
+  14/35   355.1– 357.2 s  décrit (3 images, 0 éclaircies)
+  15/35   359.7– 362.4 s  décrit (4 images, 0 éclaircies)
+  16/35   363.4– 367.2 s  décrit (4 images, 0 éclaircies)
+  17/35   387.3– 393.4 s  décrit (4 images, 0 éclaircies)
+  18/35   395.6– 397.7 s  décrit (3 images, 0 éclaircies)
+  19/35   405.8– 411.7 s  décrit (4 images, 0 éclaircies)
+  20/35   411.7– 420.4 s  décrit (4 images, 0 éclaircies)
+  21/35   440.5– 447.0 s  décrit (4 images, 0 éclaircies)
+  22/35   447.0– 453.2 s  décrit (4 images, 0 éclaircies)
+  23/35   453.2– 460.7 s  décrit (4 images, 0 éclaircies)
+  24/35   460.7– 467.7 s  décrit (4 images, 0 éclaircies)
+  25/35   468.0– 476.2 s  décrit (4 images, 0 éclaircies)
+  26/35   476.2– 479.3 s  décrit (4 images, 0 éclaircies)
+  27/35   488.4– 494.2 s  décrit (4 images, 0 éclaircies)
+  28/35   494.2– 501.3 s  décrit (4 images, 0 éclaircies)
+  29/35   501.3– 508.1 s  décrit (4 images, 0 éclaircies)
+  30/35   508.1– 513.8 s  décrit (4 images, 0 éclaircies)
+  31/35   513.8– 520.5 s  décrit (4 images, 0 éclaircies)
+  32/35   520.5– 527.3 s  décrit (4 images, 0 éclaircies)
+  33/35   606.5– 613.4 s  décrit (4 images, 4 éclaircies)
+  34/35   613.4– 620.2 s  décrit (4 images, 0 éclaircies)
+  35/35   620.2– 626.4 s  décrit (4 images, 0 éclaircies)
+  registre : ["l'homme blond", 'la femme aux cheveux orange', 'le garçon au chapeau bleu', 'la petite fille aux cheveux noirs']
+    80.3–  85.8 s  [zoom : Le personnage tient une canette de boisson et un objet noir ] ["L'homme blond, bouche ouverte, tient une canette et un crochet."]
+    85.8–  89.5 s  ['La femme aux cheveux orange est en colère, une bombe bleue à la main.']
+   128.5– 137.1 s  ['La petite fille aux cheveux noirs regarde avec surprise. Un champignon rouge à points blancs est au premier plan.']
+   137.1– 145.6 s  [zoom : Les personnages ne tiennent aucun objet. On reconnaît une ca] ["Un petit champignon rouge à pois blancs marche dans l'herbe parmi des débris et d'autres champignons."]
+   145.6– 151.5 s  ['Accroupie dans la forêt, la petite fille tient un livre beige.']
+   151.5– 157.0 s  ['La petite fille rampe dans la végétation, inquiète.']
+   250.9– 253.3 s  [zoom : Le personnage dort dans un sac de couchage avec un carnet de] ['La petite fille dort.']
+   278.8– 283.8 s  ["Des champignons rouges s'agitent près d'une lueur verte."]
+   307.5– 314.7 s  ['Une cassette marquée « VEEJAY » entre dans un lecteur. Trois créatures rouges et vertes chapeautées sont dans le noir.']
+   314.7– 318.5 s  ['La petite fille est effrayée.']
+   322.8– 328.8 s  ['Une silhouette noire tombe devant une lune bleue. La femme est au sol.']
+   328.8– 337.6 s  [zoom : Le personnage agrippe un tronc d'arbre. On peut également vo] ['Trois champignons rouges entourent une bombe bleue. Le garçon au chapeau bleu court et se cache derrière un arbre.']
+   346.3– 354.4 s  ["Accroupie dans la forêt sombre, la petite fille aux boucles d'oreilles violettes regarde un couteau au manche rouge. Des champignons rouges s'éloignent d'elle."]
+   355.1– 357.2 s  ["L'homme blond regarde un champignon."]
+   359.7– 362.4 s  [zoom : Les personnages ne tiennent aucun objet et ne manipulent rie] ["Cinq champignons l'encerclent."]
+   363.4– 367.2 s  ['La femme aux cheveux orange est emprisonnée.']
+   387.3– 393.4 s  ["Le garçon au chapeau bleu est couvert d'escargots verts au sol."]
+   395.6– 397.7 s  ["L'homme tombe."]
+   405.8– 411.7 s  ['Vue plongeante sur un trou ouvrant sur un ciel nocturne lunaire.']
+   411.7– 420.4 s  ['Dans une forêt sombre, la petite fille aux cheveux noirs a la bouche ouverte et les yeux écarquillés.']
+   440.5– 447.0 s  ['Une créature verte au chapeau rouge court avec un bâton. La petite fille est inquiète.']
+   447.0– 453.2 s  ['Dans la forêt, la petite fille aux cheveux noirs regarde avec effroi.']
+   453.2– 460.7 s  [zoom : Le personnage tient un bâton sur lequel est fixé un petit êt] ['Dans la forêt sombre, elle brandit un bâton sur lequel une créature projette du liquide jaune.']
+   460.7– 467.7 s  ['Allongée au sol dans la forêt sombre, la petite fille aux cheveux noirs est inquiète. Un petit être vert au chapeau de champignon se tient sur son dos.']
+   468.0– 476.2 s  [zoom : Le personnage ne tient aucun objet et ne manipule rien. On p] ['Dans la forêt brumeuse, la petite fille aux cheveux noirs rampe au sol, les yeux écarquillés.']
+   476.2– 479.3 s  [zoom : Les personnages ne tiennent ni ne manipulent d'objets visibl] ['Un champignon armé menace la fille.']
+   488.4– 494.2 s  ["Le champignon rouge est renversé, une substance blanche s'en écoule. La petite fille est allongée, bouche ouverte."]
+   494.2– 501.3 s  [zoom : La petite fille ne tient aucun objet, mais elle porte des ch] ['Un oiseau jaune aux ailes déployées est sur une branche. La petite fille regarde en haut, surprise.']
+   501.3– 508.1 s  ['Dans une forêt sombre, la petite fille aux cheveux noirs regarde vers la gauche, inquiète.']
+   508.1– 513.8 s  [zoom : Le personnage ne tient aucun objet et semble simplement s'ag] ['Une branche porte un ruban bleu et un objet vert. Une silhouette flotte.']
+   513.8– 520.5 s  ["La petite fille aux cheveux noirs plaque ses mains contre un tronc, puis ferme les yeux. Une silhouette se tient dans l'ombre."]
+   520.5– 527.3 s  ['Un champignon rouge à points blancs au visage blanc et yeux jaunes serre ses poings verts.']
+   606.5– 613.4 s  ['Des crédits blancs défilent sur fond noir, puis sur fond gris clair.']
+   613.4– 620.2 s  ['Des crédits blancs défilent sur un fond sombre.']
+   620.2– 626.4 s  [zoom : inconnu] ["L'écran est noir."]
+[description] 1467.5 s
+
+********
+Warning: flash-attn is not installed. Will only run the manual PyTorch version. Please install flash-attn for faster inference.
+********
+ 
+'sox' n'est pas reconnu en tant que commande interne
+ou externe, un programme ex�cutable ou un fichier de commandes.
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]
+Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 3597.17it/s]
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Device set to use cuda:0
+`return_token_timestamps` is deprecated for WhisperFeatureExtractor and will be removed in Transformers v5. Use `return_attention_mask` instead, as the number of frames can be inferred from it.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : rampe), essai 1/3 : La petite fille rampe dans la végétation, inquiète.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.3 car./s), essai 2/3 : La petite fille rampe dans la végétation, inquiète.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : veejay), essai 1/3 : Une cassette marquée « VEEJAY » entre dans un lecteur. Trois créatures rouges et vertes chapeautées sont dans le noir.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : veejay), essai 2/3 : Une cassette marquée « VEEJAY » entre dans un lecteur. Trois créatures rouges et vertes chapeautées sont dans le noir.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : veejay), essai 3/3 : Une cassette marquée « VEEJAY » entre dans un lecteur. Trois créatures rouges et vertes chapeautées sont dans le noir.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : veejay), essai 1/3 : Une cassette « VEEJAY » entre dans un lecteur. Trois créatures chapeautées attendent dans l'obscurité.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : veejay), essai 2/3 : Une cassette « VEEJAY » entre dans un lecteur. Trois créatures chapeautées attendent dans l'obscurité.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : veejay), essai 3/3 : Une cassette « VEEJAY » entre dans un lecteur. Trois créatures chapeautées attendent dans l'obscurité.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : veejay), essai 1/3 : Une cassette « VEEJAY » entre dans un lecteur.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : veejay), essai 2/3 : Une cassette « VEEJAY » entre dans un lecteur.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : veejay), essai 3/3 : Une cassette « VEEJAY » entre dans un lecteur.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (17.9 car./s), essai 1/3 : L'homme regarde un champignon.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : cinq), essai 1/3 : Cinq champignons l'encerclent.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (19.0 car./s), essai 1/3 : La femme aux cheveux orange est emprisonnée.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.2 car./s), essai 2/3 : La femme aux cheveux orange est emprisonnée.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.8 car./s), essai 1/3 : Le garçon au chapeau bleu est couvert d'escargots verts au sol.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (17.6 car./s), essai 1/3 : Elle brandit un bâton sur lequel une créature projette du liquide jaune.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[voix] 655.3 s
+[mixage] 25.0 s
+{
+ "timings_s": {
+  "parole": 0.0,
+  "voix isolée": 0.0,
+  "plans": 0.0,
+  "description": 1467.5,
+  "voix": 655.3,
+  "mixage": 25.0
+ },
+ "duration_s": 626.4,
+ "usable_silence_s": 207.8,
+ "windows": 35,
+ "placed": 32,
+ "dropped": [
+  "d_0013",
+  "d_0026",
+  "d_0033"
+ ],
+ "sped_up": 1,
+ "reviewed": 0,
+ "tts_retries": 14,
+ "facts_checked": 0,
+ "facts_rejected": 0,
+ "profile": "small",
+ "models": {
+  "vlm": "gemma4:26b-a4b-it-qat",
+  "writer": "gemma4:26b-a4b-it-qat"
+ },
+ "parallel_requests": 1,
+ "llm_usage": {
+  "vlm": {
+   "requests": 47,
+   "prompt_tokens": 50996,
+   "completion_tokens": 3427
+  },
+  "writer": {
+   "requests": 70,
+   "prompt_tokens": 81418,
+   "completion_tokens": 4177
+  }
+ },
+ "outbound_network": true,
+ "coverage": 0.687,
+ "measured_chars_per_s": 13.3,
+ "peak_gpu_gib_this_process": 8.0
+}
+Sans AD : out\corpus\small\sprite-fright-vf\clip.mp4
+Avec AD : out\corpus\small\sprite-fright-vf\clip_ad.mp4
+MKV deux pistes : out\corpus\small\sprite-fright-vf\clip_ad.mkv
+Relecture (facultative) : ouvrir out\corpus\small\sprite-fright-vf\relecture.html dans un navigateur, ou écrire les textes à changer dans out\corpus\small\sprite-fright-vf\corrections.json, puis relancer la même commande
+$ C:\Users\swinn\.venvs\audesia\Scripts\python.exe audesia_p0.py corpus\media\pepper-carrot-06.fr.touhoppai.1080p.mp4 --profile small --out out\corpus\small\pepper-carrot-6-vf
+[parole] 0.0 s
+[voix isolée] 0.0 s
+[plans] 0.0 s
+  1/26     9.5–  15.7 s  décrit (4 images, 0 éclaircies)
+  2/26    15.7–  21.9 s  décrit (4 images, 0 éclaircies)
+  3/26    27.0–  29.7 s  décrit (4 images, 0 éclaircies)
+  4/26    32.0–  34.4 s  décrit (3 images, 0 éclaircies)
+  5/26    60.9–  65.1 s  décrit (4 images, 0 éclaircies)
+  6/26    84.8–  87.1 s  décrit (3 images, 0 éclaircies)
+  7/26   115.3– 120.2 s  décrit (4 images, 0 éclaircies)
+  8/26   131.0– 133.3 s  décrit (3 images, 0 éclaircies)
+  9/26   141.9– 146.4 s  décrit (4 images, 0 éclaircies)
+  10/26   167.0– 169.1 s  décrit (3 images, 0 éclaircies)
+  11/26   231.6– 234.6 s  décrit (4 images, 0 éclaircies)
+  12/26   288.6– 294.7 s  décrit (4 images, 0 éclaircies)
+  13/26   294.7– 297.9 s  décrit (4 images, 0 éclaircies)
+  14/26   303.1– 306.5 s  décrit (4 images, 1 éclaircies)
+  15/26   323.9– 326.1 s  décrit (3 images, 0 éclaircies)
+  16/26   341.6– 343.9 s  décrit (3 images, 0 éclaircies)
+  17/26   351.9– 358.7 s  décrit (4 images, 0 éclaircies)
+  18/26   358.7– 361.4 s  décrit (4 images, 0 éclaircies)
+  19/26   361.8– 367.6 s  décrit (4 images, 0 éclaircies)
+  20/26   367.6– 372.0 s  décrit (4 images, 0 éclaircies)
+  21/26   396.7– 404.9 s  décrit (4 images, 0 éclaircies)
+  22/26   404.9– 413.1 s  décrit (4 images, 0 éclaircies)
+  23/26   413.1– 421.3 s  décrit (4 images, 0 éclaircies)
+  24/26   421.3– 429.5 s  décrit (4 images, 2 éclaircies)
+  25/26   436.2– 445.6 s  décrit (4 images, 0 éclaircies)
+  26/26   445.6– 454.9 s  décrit (4 images, 0 éclaircies)
+  registre : []
+     9.5–  15.7 s  ['Une femme aux longs cheveux bruns dort sous une couverture marron.']
+    15.7–  21.9 s  ["Elle regarde l'avant, un œil ouvert et l'autre plissé. Des nuages."]
+    27.0–  29.7 s  ['Elle regarde en haut.']
+    32.0–  34.4 s  ['Île flottante et arbre.']
+    60.9–  65.1 s  ['La fillette sourit dans son lit suspendu.']
+    84.8–  87.1 s  ['La fillette regarde à droite.']
+   115.3– 120.2 s  ['Trois femmes et trois animaux devant des maisons.']
+   131.0– 133.3 s  [zoom : Le personnage tient une fiole contenant un liquide orange et] ["Le mot « Consider » s'affiche."]
+   141.9– 146.4 s  ["Le mot Saffron s'affiche sur fond rouge."]
+   167.0– 169.1 s  ["Pepper s'affiche."]
+   231.6– 234.6 s  ['Coriandre examine une fiole.']
+   288.6– 294.7 s  ['Un oiseau jaune à perruque et perles crie sous une aura verte.']
+   294.7– 297.9 s  ["Une patte d'oiseau brise le sol."]
+   303.1– 306.5 s  ["L'oiseau jaune déploie ses ailes."]
+   323.9– 326.1 s  ["L'oiseau survole la ville."]
+   341.6– 343.9 s  ['Gros plan sur un œil jaune.']
+   351.9– 358.7 s  ["L'oiseau jaune porte une perruque, des lunettes et des perles. Il survole un village."]
+   358.7– 361.4 s  ["L'oiseau vole vers le soleil."]
+   361.8– 367.6 s  ["L'oiseau jaune aux cheveux bouclés vole vers une île flottante."]
+   367.6– 372.0 s  ["L'oiseau jaune vole de profil dans un ciel vert."]
+   396.7– 404.9 s  ["Sur fond noir, les crédits défilent. Les noms des acteurs et les auteurs de l'œuvre s'affichent en blanc."]
+   404.9– 413.1 s  ['Sur fond noir, les crédits techniques et le logo de Reanimedia Ltd défilent verticalement en blanc.']
+   413.1– 421.3 s  ["Sur fond noir, une liste de titres musicaux de Grégoire Lourme s'affiche. En bas, le logo de Krita apparaît."]
+   421.3– 429.5 s  ["Sur fond noir, les titres Ultimate Countdown et Heroes Confrontation s'affichent avec leurs URL. Le logo de la Krita Foundation apparaît sous la mention Sponsored by, suivi d'une liste de donateurs. Sur fond vert, une mention cite FreeSound.org."]
+   436.2– 445.6 s  ["Sur fond noir, les logos de Krita, Blender, RenderChan et Papagayo-NG s'alignent. En dessous, les logos de CoATools, Ethic Cinema et Adamant apparaissent."]
+   445.6– 454.9 s  ["Sur fond noir, des textes blancs listent les crédits de Pepper & Carrot, l'univers de Hereva, les contributeurs et la licence Creative Commons. Gorno-Altaisk, 2017."]
+[description] 1166.1 s
+
+********
+Warning: flash-attn is not installed. Will only run the manual PyTorch version. Please install flash-attn for faster inference.
+********
+ 
+'sox' n'est pas reconnu en tant que commande interne
+ou externe, un programme ex�cutable ou un fichier de commandes.
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]
+Fetching 4 files: 100%|██████████| 4/4 [00:00<?, ?it/s]
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Device set to use cuda:0
+`return_token_timestamps` is deprecated for WhisperFeatureExtractor and will be removed in Transformers v5. Use `return_attention_mask` instead, as the number of frames can be inferred from it.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (17.1 car./s), essai 1/3 : La fillette sourit dans son lit suspendu.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : chat, roux), essai 1/3 : Un chat roux sur un balai.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.2 car./s), essai 2/3 : Un chat roux sur un balai.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : chat, roux), essai 3/3 : Un chat roux sur un balai.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : pepper), essai 1/3 : Pepper s'affiche.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : tient), essai 1/3 : Elle tient une fiole.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : gros, plan), essai 1/3 : Gros plan sur un œil jaune.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : krita), essai 1/3 : Sur fond noir, les titres Ultimate Countdown et Heroes Confrontation s'affichent avec leurs URL. Le logo de la Krita Foundation apparaît sous la mention Sponsored by, suivi d'une liste de donateurs. Sur fond vert, une mention cite FreeSound.org.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : ethic), essai 1/3 : Sur fond noir, les logos de Krita, Blender, RenderChan et Papagayo-NG s'alignent. En dessous, les logos de CoATools, Ethic Cinema et Adamant apparaissent.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : ethic), essai 2/3 : Sur fond noir, les logos de Krita, Blender, RenderChan et Papagayo-NG s'alignent. En dessous, les logos de CoATools, Ethic Cinema et Adamant apparaissent.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : ethic), essai 3/3 : Sur fond noir, les logos de Krita, Blender, RenderChan et Papagayo-NG s'alignent. En dessous, les logos de CoATools, Ethic Cinema et Adamant apparaissent.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : ethic, adamant), essai 1/3 : Les logos de Krita, Blender, RenderChan et Papagayo-NG s'affichent. En dessous, les logos de CoATools, Ethic Cinema et Adamant suivent.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : ethic), essai 1/3 : Les logos de Krita, Blender, RenderChan et Papagayo-NG s'affichent en ligne. Puis, ceux de CoATools, Ethic Cinema et Adamant.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : renderchan, puis), essai 2/3 : Les logos de Krita, Blender, RenderChan et Papagayo-NG s'affichent en ligne. Puis, ceux de CoATools, Ethic Cinema et Adamant.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : gorno), essai 1/3 : Des textes blancs sur fond noir listent les crédits de Pepper & Carrot et la licence Creative Commons. Gorno-Altaisk, 2017.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : gorno), essai 1/3 : Des textes blancs listent les crédits de Pepper & Carrot et la licence Creative Commons. Gorno-Altaisk, 2017.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : pepper, gorno), essai 2/3 : Des textes blancs listent les crédits de Pepper & Carrot et la licence Creative Commons. Gorno-Altaisk, 2017.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : gorno, altaisk), essai 3/3 : Des textes blancs listent les crédits de Pepper & Carrot et la licence Creative Commons. Gorno-Altaisk, 2017.
+[voix] 620.8 s
+[mixage] 19.6 s
+{
+ "timings_s": {
+  "parole": 0.0,
+  "voix isolée": 0.0,
+  "plans": 0.0,
+  "description": 1166.1,
+  "voix": 620.8,
+  "mixage": 19.6
+ },
+ "duration_s": 457.0,
+ "usable_silence_s": 129.3,
+ "windows": 26,
+ "placed": 26,
+ "dropped": [],
+ "sped_up": 2,
+ "reviewed": 0,
+ "tts_retries": 15,
+ "facts_checked": 0,
+ "facts_rejected": 0,
+ "profile": "small",
+ "models": {
+  "vlm": "gemma4:26b-a4b-it-qat",
+  "writer": "gemma4:26b-a4b-it-qat"
+ },
+ "parallel_requests": 1,
+ "llm_usage": {
+  "vlm": {
+   "requests": 28,
+   "prompt_tokens": 36099,
+   "completion_tokens": 3832
+  },
+  "writer": {
+   "requests": 52,
+   "prompt_tokens": 59655,
+   "completion_tokens": 3537
+  }
+ },
+ "outbound_network": true,
+ "coverage": 0.782,
+ "measured_chars_per_s": 13.2,
+ "peak_gpu_gib_this_process": 8.02
+}
+Sans AD : out\corpus\small\pepper-carrot-6-vf\clip.mp4
+Avec AD : out\corpus\small\pepper-carrot-6-vf\clip_ad.mp4
+MKV deux pistes : out\corpus\small\pepper-carrot-6-vf\clip_ad.mkv
+Relecture (facultative) : ouvrir out\corpus\small\pepper-carrot-6-vf\relecture.html dans un navigateur, ou écrire les textes à changer dans out\corpus\small\pepper-carrot-6-vf\corrections.json, puis relancer la même commande
+$ C:\Users\swinn\.venvs\audesia\Scripts\python.exe audesia_p0.py corpus\media\sidiailles.k-prod.1080p.mp4 --profile small --out out\corpus\small\sidiailles
+(description non publiée : évaluation locale seulement)
+en échec ou manquantes : sintel-vo, sintel-vf
+RUN TERMINE : ECHEC
+$ C:\Users\swinn\.venvs\audesia\Scripts\python.exe audesia_p0.py corpus\media\Sintel.fr.touhoppai.1080p.mp4 --profile small --out out\corpus\small\sintel-vf
+[parole] 0.0 s
+[voix isolée] 0.0 s
+[plans] 0.0 s
+  1/97     0.0–   7.8 s  décrit (4 images, 0 éclaircies)
+  2/97     7.8–  15.7 s  décrit (4 images, 0 éclaircies)
+  3/97    15.7–  23.5 s  décrit (4 images, 0 éclaircies)
+  4/97    23.5–  31.3 s  décrit (4 images, 0 éclaircies)
+  5/97    31.3–  36.8 s  décrit (4 images, 0 éclaircies)
+  6/97    36.8–  42.2 s  décrit (4 images, 0 éclaircies)
+  7/97    50.0–  52.2 s  décrit (3 images, 1 éclaircies)
+  8/97    58.3–  61.2 s  décrit (4 images, 1 éclaircies)
+  9/97    61.5–  63.6 s  décrit (3 images, 0 éclaircies)
+  10/97    65.6–  74.0 s  décrit (4 images, 0 éclaircies)
+  11/97    74.0–  81.5 s  décrit (4 images, 0 éclaircies)
+  12/97    81.5–  88.5 s  décrit (4 images, 0 éclaircies)
+  13/97    88.5–  94.9 s  décrit (4 images, 0 éclaircies)
+  14/97    94.9– 101.2 s  décrit (4 images, 0 éclaircies)
+  15/97   101.2– 107.4 s  décrit (4 images, 0 éclaircies)
+  16/97   114.3– 116.8 s  décrit (4 images, 0 éclaircies)
+  17/97   153.0– 159.3 s  décrit (4 images, 0 éclaircies)
+  18/97   160.2– 168.3 s  décrit (4 images, 4 éclaircies)
+  19/97   168.3– 176.4 s  décrit (4 images, 0 éclaircies)
+  20/97   176.4– 182.0 s  décrit (4 images, 0 éclaircies)
+  21/97   182.0– 189.8 s  décrit (4 images, 0 éclaircies)
+  22/97   189.8– 196.4 s  décrit (4 images, 0 éclaircies)
+  23/97   196.4– 203.1 s  décrit (4 images, 0 éclaircies)
+  24/97   203.1– 206.0 s  décrit (4 images, 1 éclaircies)
+  25/97   212.9– 219.5 s  décrit (4 images, 0 éclaircies)
+  26/97   219.5– 229.4 s  décrit (4 images, 0 éclaircies)
+  27/97   229.4– 239.3 s  décrit (4 images, 1 éclaircies)
+  28/97   239.3– 249.2 s  décrit (4 images, 3 éclaircies)
+  29/97   252.3– 255.2 s  décrit (4 images, 1 éclaircies)
+  30/97   255.6– 257.7 s  décrit (3 images, 2 éclaircies)
+  31/97   258.0– 263.2 s  décrit (4 images, 0 éclaircies)
+  32/97   263.2– 271.6 s  décrit (4 images, 0 éclaircies)
+  33/97   271.6– 278.8 s  décrit (4 images, 0 éclaircies)
+  34/97   278.8– 287.5 s  décrit (4 images, 1 éclaircies)
+  35/97   287.5– 297.2 s  décrit (4 images, 2 éclaircies)
+  36/97   297.2– 301.4 s  décrit (4 images, 0 éclaircies)
+  37/97   329.5– 333.5 s  décrit (4 images, 1 éclaircies)
+  38/97   338.9– 344.3 s  décrit (4 images, 0 éclaircies)
+  39/97   344.3– 349.8 s  décrit (4 images, 0 éclaircies)
+  40/97   349.8– 357.4 s  décrit (4 images, 0 éclaircies)
+  41/97   357.4– 365.1 s  décrit (4 images, 0 éclaircies)
+  42/97   365.1– 372.8 s  décrit (4 images, 0 éclaircies)
+  43/97   372.8– 380.5 s  décrit (4 images, 0 éclaircies)
+  44/97   380.5– 386.9 s  décrit (4 images, 0 éclaircies)
+  45/97   390.4– 398.7 s  décrit (4 images, 0 éclaircies)
+  46/97   398.7– 406.9 s  décrit (4 images, 0 éclaircies)
+  47/97   406.9– 415.1 s  décrit (4 images, 0 éclaircies)
+  48/97   415.1– 420.5 s  décrit (4 images, 0 éclaircies)
+  49/97   420.5– 425.8 s  décrit (4 images, 0 éclaircies)
+  50/97   425.8– 431.6 s  décrit (4 images, 0 éclaircies)
+  51/97   431.6– 434.9 s  décrit (4 images, 0 éclaircies)
+  52/97   435.1– 442.4 s  décrit (4 images, 0 éclaircies)
+  53/97   442.4– 445.9 s  décrit (4 images, 0 éclaircies)
+  54/97   464.2– 474.0 s  décrit (4 images, 0 éclaircies)
+  55/97   474.0– 483.7 s  décrit (4 images, 0 éclaircies)
+  56/97   483.7– 491.0 s  décrit (4 images, 0 éclaircies)
+  57/97   491.0– 496.7 s  décrit (4 images, 0 éclaircies)
+  58/97   496.7– 502.5 s  décrit (4 images, 0 éclaircies)
+  59/97   502.5– 504.5 s  décrit (3 images, 0 éclaircies)
+  60/97   529.5– 536.3 s  décrit (4 images, 0 éclaircies)
+  61/97   536.3– 539.2 s  décrit (4 images, 1 éclaircies)
+  62/97   543.5– 550.3 s  décrit (4 images, 1 éclaircies)
+  63/97   553.4– 557.4 s  décrit (4 images, 0 éclaircies)
+  64/97   559.4– 565.7 s  décrit (4 images, 1 éclaircies)
+  65/97   570.9– 580.1 s  décrit (4 images, 0 éclaircies)
+  66/97   581.8– 588.9 s  décrit (4 images, 0 éclaircies)
+  67/97   589.8– 596.9 s  décrit (4 images, 0 éclaircies)
+  68/97   604.3– 610.4 s  décrit (4 images, 0 éclaircies)
+  69/97   610.4– 616.8 s  décrit (4 images, 0 éclaircies)
+  70/97   616.8– 621.8 s  décrit (4 images, 0 éclaircies)
+  71/97   621.8– 631.4 s  décrit (4 images, 0 éclaircies)
+  72/97   631.4– 641.0 s  décrit (4 images, 0 éclaircies)
+  73/97   641.0– 647.5 s  décrit (4 images, 0 éclaircies)
+  74/97   647.5– 655.0 s  décrit (4 images, 0 éclaircies)
+  75/97   655.0– 661.1 s  décrit (4 images, 0 éclaircies)
+  76/97   661.1– 666.2 s  décrit (4 images, 0 éclaircies)
+  77/97   666.2– 671.2 s  décrit (4 images, 0 éclaircies)
+  78/97   671.2– 677.0 s  décrit (4 images, 1 éclaircies)
+  79/97   677.0– 684.4 s  décrit (4 images, 0 éclaircies)
+  80/97   684.4– 692.4 s  décrit (4 images, 2 éclaircies)
+  81/97   692.4– 700.3 s  décrit (4 images, 0 éclaircies)
+  82/97   700.3– 710.0 s  décrit (4 images, 4 éclaircies)
+  83/97   710.0– 718.6 s  décrit (4 images, 0 éclaircies)
+  84/97   718.6– 727.1 s  décrit (4 images, 0 éclaircies)
+  85/97   727.1– 735.6 s  décrit (4 images, 0 éclaircies)
+  86/97   735.6– 744.1 s  décrit (4 images, 0 éclaircies)
+  87/97   744.1– 747.8 s  décrit (4 images, 0 éclaircies)
+  88/97   805.9– 814.8 s  décrit (4 images, 0 éclaircies)
+  89/97   814.8– 823.7 s  décrit (4 images, 2 éclaircies)
+  90/97   823.7– 832.6 s  décrit (4 images, 3 éclaircies)
+  91/97   832.6– 841.5 s  décrit (4 images, 4 éclaircies)
+  92/97   841.5– 850.4 s  décrit (4 images, 4 éclaircies)
+  93/97   857.6– 860.6 s  décrit (4 images, 4 éclaircies)
+  94/97   861.7– 868.7 s  décrit (4 images, 4 éclaircies)
+  95/97   869.2– 872.4 s  décrit (4 images, 4 éclaircies)
+  96/97   873.7– 880.9 s  décrit (4 images, 3 éclaircies)
+  97/97   880.9– 888.0 s  décrit (4 images, 1 éclaircies)
+  registre : []
+     0.0–   7.8 s  [zoom : inconnu.] ["Sur fond gris, le texte blanc « THE BLENDER FOUNDATION PRESENTS » s'affiche au centre. Des formes sombres flottent autour."]
+     7.8–  15.7 s  ['Des montagnes enneigées s\'étendent sous un ciel brumeux. Texte : "THE DURIAN OPEN MOVIE PROJECT".']
+    15.7–  23.5 s  ["Des montagnes enneigées et des falaises s'étendent sous un ciel brumeux. Texte : « THIS FILM WAS SUPPORTED BY THE NETHERLANDS FILM FUND ». La lumière gagne les sommets."]
+    23.5–  31.3 s  ['Un personnage marche sur un sentier de pierres dans la neige vers deux blocs sombres.']
+    31.3–  36.8 s  ['Un homme aux cheveux bruns tient un bâton face à lui.']
+    36.8–  42.2 s  ['Une femme rousse inquiète regarde vers le ciel.']
+    50.0–  52.2 s  ["L'homme menace la femme."]
+    58.3–  61.2 s  ['La femme rousse est au sol.']
+    61.5–  63.6 s  ["L'homme brandit un couteau."]
+    65.6–  74.0 s  ["L'homme chauve et barbu se penche vers la femme rousse allongée dans la neige. Une lance passe au-dessus d'elle."]
+    74.0–  81.5 s  [zoom : Les personnages ne tiennent ni ne manipulent aucun objet. On] ['Allongée sur le dos, la femme rousse ouvre les yeux vers le haut.']
+    81.5–  88.5 s  ['Montagnes enneigées sous un ciel brumeux. Une main gantée de gris saisit un bâton sculpté.']
+    88.5–  94.9 s  ["Un personnage en rouge marche avec un bâton. Le titre SINTEL s'affiche."]
+    94.9– 101.2 s  ["Le titre SINTEL s'affiche sur des montagnes brumeuses. Un personnage en rouge marche avec un bâton."]
+   101.2– 107.4 s  [zoom : Inconnu.] ["Un petit feu brûle dans un cercle au sol d'une pièce sombre."]
+   114.3– 116.8 s  ["La femme fait face à l'homme."]
+   153.0– 159.3 s  ["Vue panoramique d'une ville fortifiée aux toits sombres et une ruelle dévastée."]
+   160.2– 168.3 s  ["La femme rousse, en haut blanc, s'appuie contre un mur de pierre, le regard sérieux."]
+   168.3– 176.4 s  [zoom : La personne tient un objet sphérique recouvert de pointes mé] ['Devant des maisons à colombages, elle observe avec surprise une sphère rouge épineuse tenue de la main gauche gantée de gris.']
+   176.4– 182.0 s  ['La femme rousse grimpe sur un toit de tuiles, un couteau à la main.']
+   182.0– 189.8 s  ["Sur un toit de tuiles sombres, une petite créature ailée et ensanglantée gît, les ailes déployées. La femme rousse l'observe."]
+   189.8– 196.4 s  ['Accroupie sur des pavés, la femme rousse regarde la créature ailée blessée.']
+   196.4– 203.1 s  ['La femme rousse, surprise, approche une main gantée de la créature.']
+   203.1– 206.0 s  ['La femme sourit face au reptile.']
+   212.9– 219.5 s  ['Elle tient le reptile brun entre ses mains gantées de gris.']
+   219.5– 229.4 s  [zoom : Inconnu.] ["Deux mains gantées de bleu soutiennent un bol en pierre sombre au-dessus d'un tissu noir plissé, dans une pièce encombrée."]
+   229.4– 239.3 s  ['Dans une pièce sombre, la femme aux cheveux courts est allongée sur un lit de tissus roses et blancs. Un personnage gît au sol.']
+   239.3– 249.2 s  [zoom : La personne porte des gants et manipule un petit dragon. On ] ['La femme rousse, en débardeur blanc et corset lacé, tient un petit dragon écailleux sur un tissu jaune sous des taches de lumière.']
+   252.3– 255.2 s  ['Une rousse saute en ruelle.']
+   255.6– 257.7 s  ["La rousse s'enfuit."]
+   258.0– 263.2 s  ['Elle se tient debout sur une caisse dans une ruelle.']
+   263.2– 271.6 s  ['La rousse, en débardeur gris, regarde vers la gauche dans une ruelle étroite bordée de cabanes en bois.']
+   271.6– 278.8 s  ['La rousse regarde en haut, surprise. Un petit reptile ailé gris survole une structure en bois.']
+   278.8– 287.5 s  ['Un reptile brun sur une poutre observe des oiseaux en V dans un ciel nuageux. La rousse monte un escalier de pierre sous un ciel orangé.']
+   287.5– 297.2 s  ['La rousse regarde vers le haut, bouche ouverte. Vue plongeante sur une ville en ruines sous un ciel orangé. Une silhouette marche sur une terrasse.']
+   297.2– 301.4 s  ["La rousse sourit et s'incline sur un rocher."]
+   329.5– 333.5 s  ['Une créature ailée survole la rousse.']
+   338.9– 344.3 s  ['La rousse contemple une cité sous un ciel orangé.']
+   344.3– 349.8 s  ['La rousse regarde droit, les sourcils froncés.']
+   349.8– 357.4 s  ['Une femme court sur un sol terreux. Son visage sérieux se superpose à un paysage de souches au crépuscule.']
+   357.4– 365.1 s  ["Un visage aux cheveux bruns s'affiche en transparence sur un paysage nocturne avec une silhouette et une lune."]
+   365.1– 372.8 s  ["Un croissant de lune brille dans le ciel. Un désert de dunes s'étend sous une lumière nocturne. Une silhouette marche avec un bâton."]
+   372.8– 380.5 s  ["La silhouette d'une femme se superpose à des dunes dorées sous un ciel clair. Une personne marche avec un bâton sur une crête."]
+   380.5– 386.9 s  ['La jeune femme grimpe et saute entre des bambous, puis se tient dans un désert.']
+   390.4– 398.7 s  ['Sous un ciel orangé, la jeune femme aux cheveux bruns regarde vers la droite dans un paysage rocheux.']
+   398.7– 406.9 s  ["Dans un paysage montagneux et brumeux, la jeune femme tient un bâton sculpté. L'image devient floue."]
+   406.9– 415.1 s  ['Une silhouette sombre escalade une paroi rocheuse enneigée. Un panorama de sommets brumeux se révèle.']
+   415.1– 420.5 s  [zoom : Inconnu.] ['Une personne aux cheveux bruns est ensevelie sous la neige.']
+   420.5– 425.8 s  ['Une silhouette marche avec un bâton dans la brume.']
+   425.8– 431.6 s  ["Une silhouette sombre s'éloigne dans la neige vers la gauche."]
+   431.6– 434.9 s  ['La femme rousse court dans la neige.']
+   435.1– 442.4 s  [zoom : Les personnages ne tiennent ni ne manipulent aucun objet. On] ["La femme rousse, terrifiée, regarde vers la droite dans l'obscurité."]
+   442.4– 445.9 s  ['Un homme barbu fume une pipe. La femme rousse baisse les yeux.']
+   464.2– 474.0 s  [zoom : Inconnu.] ["Elle observe un médaillon gravé d'une créature ailée et de runes. Il s'ouvre sur un arbre devant une paroi rocheuse."]
+   474.0– 483.7 s  [zoom : inconnu.] ['Sintel regarde vers le haut, les yeux écarquillés et la bouche ouverte. Elle porte une tenue grise et une protection tatouée.']
+   483.7– 491.0 s  ["Depuis une grotte sombre, un lac brille sous la lune. Une silhouette se tient au bord de l'eau."]
+   491.0– 496.7 s  ['Une main tient une dague incurvée dans la grotte bleue.']
+   496.7– 502.5 s  ['Sintel observe un animal à la gueule ouverte parmi des cristaux bleus.']
+   502.5– 504.5 s  ['La créature lèche la viande.']
+   529.5– 536.3 s  ['Sintel se penche vers une cavité rocheuse, le visage sérieux.']
+   536.3– 539.2 s  ['Le dragon lève la tête.']
+   543.5– 550.3 s  ["Sintel s'agrippe à une paroi rocheuse parsemée de cristaux bleus."]
+   553.4– 557.4 s  ['Sintel fait face au dragon.']
+   559.4– 565.7 s  ["Sintel brandit une lance face au dragon ailé. Des flammes envahissent l'image."]
+   570.9– 580.1 s  ['Sintel est allongée sur le sol rocheux. Derrière elle, le dragon déploie ses ailes sombres.']
+   581.8– 588.9 s  [zoom : inconnu] ["Sintel est penchée sur le sol rocheux face au dragon de dos. L'image devient floue."]
+   589.8– 596.9 s  ["Le dragon ailé se penche vers Sintel, allongée au sol dans l'obscurité."]
+   604.3– 610.4 s  ["Dans l'obscurité, une créature cornue s'approche de Sintel armée."]
+   610.4– 616.8 s  [zoom : inconnu] ["Gros plan sur la tête écailleuse d'une créature à l'œil orangé."]
+   616.8– 621.8 s  ['Sintel, les mains levées, fait face à la créature.']
+   621.8– 631.4 s  ['De profil dans une grotte sombre, une créature écailleuse aux cornes incurvées montre un œil rouge et une mâchoire dentée.']
+   631.4– 641.0 s  ["Sintel, les yeux écarquillés et la bouche ouverte, lève une main gantée vers son visage dans l'obscurité."]
+   641.0– 647.5 s  ["Sintel tend une main gantée vers l'avant, la bouche entrouverte."]
+   647.5– 655.0 s  ['Dans une grotte sombre, Sintel fait face à une créature massive et écailleuse.']
+   655.0– 661.1 s  ['Sintel regarde vers le haut, effrayée, dans une grotte aux cristaux bleus.']
+   661.1– 666.2 s  ['Sintel, effrayée, fait face à un œil rouge géant.']
+   666.2– 671.2 s  ['Sintel, terrifiée, fait face à un reptile blanc sanglant.']
+   671.2– 677.0 s  ['Sintel court dans la grotte et regarde les rochers flottants.']
+   677.0– 684.4 s  ["L'intérieur de la grotte est sombre et rocheux, avec des racines descendant le long de la paroi."]
+   684.4– 692.4 s  ['Un arbre immense domine un désert brumeux. Une silhouette est assise face à des montagnes.']
+   692.4– 700.3 s  ["La silhouette est assise au bord d'une falaise face à des montagnes brumeuses sous un ciel orangé."]
+   700.3– 710.0 s  ['Devant un tronc massif, une femme aux cheveux roux et gris baisse la tête, puis lève un regard inquiet.']
+   710.0– 718.6 s  ['Une ceinture en cuir repose sur la roche. Des pieds en bottes marchent, puis une silhouette de dos contemple des fleurs blanches et des montagnes brumeuses.']
+   718.6– 727.1 s  [zoom : Les personnages ne tiennent ni ne manipulent aucun objet. On] ['Elle se tient debout, de dos, sur un chemin rocheux face à des montagnes enneigées sous une lumière dorée.']
+   727.1– 735.6 s  [zoom : Les personnages ne tiennent ni ne manipulent aucun objet. On] ['La silhouette fait face à des montagnes brumeuses sous une lumière dorée. Un couteau repose sur le sol.']
+   735.6– 744.1 s  [zoom : Inconnu.] ['Des fleurs blanches pendent à droite. Un petit reptile est allongé sur un chemin rocheux face aux sommets enneigés.']
+   744.1– 747.8 s  ['Sur fond noir, texte : DIRECTED BY COLIN LEVY.']
+   805.9– 814.8 s  ["Sur un fond de bois sombre, des noms s'affichent en blanc. Des pommes et une illustration sont posées en bas."]
+   814.8– 823.7 s  ['Sur un fond de bois sombre, des crédits blancs et des croquis de paysages et de créatures sont éparpillés.']
+   823.7– 832.6 s  ["Sur un fond de bois sombre, une liste de sponsors s'affiche en blanc en colonnes."]
+   832.6– 841.5 s  ['Des listes de noms blancs défilent en colonnes sur fond noir, puis sur fond gris clair.']
+   841.5– 850.4 s  ['Des noms en lettres capitales blanches défilent en colonnes sur fond noir, puis sur fond gris clair.']
+   857.6– 860.6 s  ['Des noms blancs défilent.']
+   861.7– 868.7 s  [zoom : inconnu] ['Des listes de noms blancs défilent en colonnes sur fond noir et gris.']
+   869.2– 872.4 s  ['Noms blancs sur fond noir.']
+   873.7– 880.9 s  ['Des croquis sur papier jauni sont posés sur des planches de bois sombre.']
+   880.9– 888.0 s  ['Des dessins sur papier jauni sont disposés en diagonale sur des planches de bois. Un texte blanc affiche "NETHERLANDS FILM FUND" et des noms de partenaires.']
+[description] 4489.8 s
+
+********
+Warning: flash-attn is not installed. Will only run the manual PyTorch version. Please install flash-attn for faster inference.
+********
+ 
+'sox' n'est pas reconnu en tant que commande interne
+ou externe, un programme ex�cutable ou un fichier de commandes.
+SoX could not be found!
+
+    If you do not have SoX, proceed here:
+     - - - http://sox.sourceforge.net/ - - -
+
+    If you do (or think that you should) have SoX, double-check your
+    path variables.
+    
+
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]
+Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 1883.18it/s]
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.2 car./s), essai 1/3 : Sur fond gris, le texte blanc « THE BLENDER FOUNDATION PRESENTS » s'affiche au centre. Des formes sombres flottent autour.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Device set to use cuda:0
+`return_token_timestamps` is deprecated for WhisperFeatureExtractor and will be removed in Transformers v5. Use `return_attention_mask` instead, as the number of frames can be inferred from it.
+  voix incomplète (manque : presents), essai 2/3 : Sur fond gris, le texte blanc « THE BLENDER FOUNDATION PRESENTS » s'affiche au centre. Des formes sombres flottent autour.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : presents), essai 1/3 : Sur fond gris, le texte blanc « THE BLENDER FOUNDATION PRESENTS » apparaît au centre.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : enneigees), essai 1/3 : Montagnes enneigées sous un ciel gris. Texte : "THE DURIAN OPEN MOVIE PROJECT".
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : this, film, supported, netherlands, film, fund), essai 1/3 : Des montagnes enneigées et des falaises s'étendent sous un ciel brumeux. Texte : « THIS FILM WAS SUPPORTED BY THE NETHERLANDS FILM FUND ». La lumière gagne les sommets.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+You seem to be using the pipelines sequentially on GPU. In order to maximize efficiency please use a dataset
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : ailee), essai 1/3 : Accroupie sur des pavés, la femme rousse regarde la créature ailée blessée.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : ailee), essai 2/3 : Accroupie sur des pavés, la femme rousse regarde la créature ailée blessée.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : ailee), essai 3/3 : Accroupie sur des pavés, la femme rousse regarde la créature ailée blessée.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : brun), essai 1/3 : Elle tient le reptile brun entre ses mains gantées de gris.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : deux), essai 1/3 : Deux mains gantées de bleu soutiennent un bol en pierre sombre au-dessus d'un tissu noir plissé, dans une pièce encombrée.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : rousse), essai 1/3 : La femme rousse, en débardeur blanc et corset lacé, tient un petit dragon écailleux sur un tissu jaune sous des taches de lumière.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (17.8 car./s), essai 1/3 : Une rousse saute en ruelle.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : aile), essai 1/3 : La rousse regarde en haut, surprise. Un petit reptile ailé gris survole une structure en bois.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : elle), essai 1/3 : Elle court. Son visage se superpose à un paysage de souches.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (18.0 car./s), essai 1/3 : La jeune femme grimpe et saute entre des bambous, puis se tient dans un désert.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.5 car./s), essai 2/3 : La jeune femme grimpe et saute entre des bambous, puis se tient dans un désert.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.5 car./s), essai 3/3 : La jeune femme grimpe et saute entre des bambous, puis se tient dans un désert.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.4 car./s), essai 1/3 : Une personne aux cheveux bruns est ensevelie sous la neige.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (18.4 car./s), essai 2/3 : Une personne aux cheveux bruns est ensevelie sous la neige.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (17.3 car./s), essai 1/3 : La femme rousse court dans la neige.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.6 car./s), essai 1/3 : Sintel s'agrippe à une paroi rocheuse parsemée de cristaux bleus.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (17.7 car./s), essai 2/3 : Sintel s'agrippe à une paroi rocheuse parsemée de cristaux bleus.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : sintel, lance), essai 1/3 : Sintel brandit sa lance.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : sintel), essai 1/3 : Le dragon ailé se penche vers Sintel, allongée au sol dans l'obscurité.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (17.1 car./s), essai 2/3 : Le dragon ailé se penche vers Sintel, allongée au sol dans l'obscurité.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : sintel), essai 3/3 : Le dragon ailé se penche vers Sintel, allongée au sol dans l'obscurité.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : sintel), essai 1/3 : Dans l'obscurité, une créature cornue s'approche de Sintel armée.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : sintel), essai 2/3 : Dans l'obscurité, une créature cornue s'approche de Sintel armée.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : sintel), essai 3/3 : Dans l'obscurité, une créature cornue s'approche de Sintel armée.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : sintel), essai 1/3 : Une créature écailleuse s'approche de Sintel effrayée.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : sintel), essai 2/3 : Une créature écailleuse s'approche de Sintel effrayée.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : sintel), essai 3/3 : Une créature écailleuse s'approche de Sintel effrayée.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : plan), essai 1/3 : Gros plan sur la tête écailleuse d'une créature à l'œil orangé.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : sintel), essai 1/3 : Sintel regarde vers le haut, la bouche entrouverte, une main gantée vers son visage.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : sintel), essai 1/3 : Dans une grotte sombre, Sintel fait face à une créature massive et écailleuse.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : sintel), essai 2/3 : Dans une grotte sombre, Sintel fait face à une créature massive et écailleuse.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : sintel), essai 3/3 : Dans une grotte sombre, Sintel fait face à une créature massive et écailleuse.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : sintel), essai 1/3 : Sintel court dans la grotte et regarde les rochers flottants.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (17.4 car./s), essai 1/3 : Elle court vers l'ouverture et les rochers flottants.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (20.7 car./s), essai 2/3 : Elle court vers l'ouverture et les rochers flottants.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (22.1 car./s), essai 3/3 : Elle court vers l'ouverture et les rochers flottants.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix précipitée (16.4 car./s), essai 1/3 : La grotte est sombre et rocheuse, avec de grosses racines à droite.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : directed), essai 1/3 : DIRECTED BY COLIN LEVY.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : directed), essai 2/3 : DIRECTED BY COLIN LEVY.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : defilent), essai 1/3 : Des noms blancs défilent.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : listes), essai 1/3 : Des listes de noms blancs défilent en colonnes sur fond noir et gris.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : noms), essai 1/3 : Noms blancs sur fond noir.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+  voix incomplète (manque : jauni, fund), essai 1/3 : Des dessins sur papier jauni sont disposés en diagonale sur des planches de bois. Un texte blanc affiche "NETHERLANDS FILM FUND" et des noms de partenaires.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:2150 for open-end generation.
+[voix] 1799.5 s
+[mixage] 42.4 s
+{
+ "timings_s": {
+  "parole": 0.0,
+  "voix isolée": 0.0,
+  "plans": 0.0,
+  "description": 4489.8,
+  "voix": 1799.5,
+  "mixage": 42.4
+ },
+ "duration_s": 1022.8,
+ "usable_silence_s": 643.7,
+ "windows": 97,
+ "placed": 94,
+ "dropped": [
+  "d_0002",
+  "d_0091",
+  "d_0096"
+ ],
+ "sped_up": 1,
+ "reviewed": 0,
+ "tts_retries": 41,
+ "facts_checked": 0,
+ "facts_rejected": 0,
+ "profile": "small",
+ "models": {
+  "vlm": "gemma4:26b-a4b-it-qat",
+  "writer": "gemma4:26b-a4b-it-qat"
+ },
+ "parallel_requests": 1,
+ "llm_usage": {
+  "vlm": {
+   "requests": 114,
+   "prompt_tokens": 147011,
+   "completion_tokens": 10064
+  },
+  "writer": {
+   "requests": 194,
+   "prompt_tokens": 222381,
+   "completion_tokens": 12665
+  }
+ },
+ "outbound_network": true,
+ "coverage": 0.72,
+ "measured_chars_per_s": 13.3,
+ "peak_gpu_gib_this_process": 8.0
+}
+Sans AD : out\corpus\small\sintel-vf\clip.mp4
+Avec AD : out\corpus\small\sintel-vf\clip_ad.mp4
+MKV deux pistes : out\corpus\small\sintel-vf\clip_ad.mkv
+Relecture (facultative) : ouvrir out\corpus\small\sintel-vf\relecture.html dans un navigateur, ou écrire les textes à changer dans out\corpus\small\sintel-vf\corrections.json, puis relancer la même commande
+$ C:\Users\swinn\.venvs\audesia\Scripts\python.exe eval/overlap.py out\corpus\small\sintel-vf --video corpus\media\Sintel.fr.touhoppai.1080p.mp4 --me corpus\media\sintel-m+e-st.flac --end 1022.792
+   0.2–   6.7  ok               Sur fond gris, le texte blanc « THE BLENDER FOUNDATION PRESENTS » apparaît au centre.
+   8.0–  14.1  ok               Montagnes enneigées sous un ciel gris. Texte : "THE DURIAN OPEN MOVIE PROJECT".
+  23.7–  29.6  ok               Un personnage marche sur un sentier de pierres dans la neige vers deux blocs sombres.
+  31.5–  35.6  ok               Un homme aux cheveux bruns tient un bâton face à lui.
+  37.0–  41.4  ok               Une femme rousse inquiète regarde vers le ciel.
+  50.2–  51.3  ok               L'homme l'arme.
+  58.5–  60.4  CHEVAUCHE 0.32 s La femme rousse est au sol.
+  61.7–  62.9  CHEVAUCHE 0.23 s L'homme menace.
+  65.8–  73.3  CHEVAUCHE 0.32 s L'homme chauve et barbu se penche vers la femme rousse allongée dans la neige. Une lance passe au-dessus d'elle.
+  74.2–  79.8  ok               Allongée sur le dos, la femme rousse ouvre les yeux vers le haut.
+  81.7–  86.7  ok               Montagnes brumeuses. Une main gantée saisit un bâton métallique.
+  88.7–  94.4  ok               Un personnage en rouge marche avec un bâton. Le titre SINTEL s'affiche.
+  95.1–  98.4  ok               Le titre SINTEL s'affiche sur des montagnes.
+ 101.4– 106.0  ok               Un petit feu brûle dans un cercle au sol d'une pièce sombre.
+ 114.5– 116.0  ok               L'homme la regarde.
+ 153.2– 157.0  ok               Une ville dense aux toits sombres derrière un haut mur.
+ 160.4– 166.2  ok               La femme rousse, en haut blanc, s'appuie contre un mur de pierre, le regard sérieux.
+ 168.5– 174.1  ok               Devant des maisons à colombages, elle regarde une sphère rouge épineuse.
+ 176.6– 181.6  ok               La femme rousse grimpe sur un toit de tuiles, un couteau à la main.
+ 182.2– 189.5  ok               Une petite créature ailée et ensanglantée est allongée sur les tuiles. La femme rousse la regarde.
+ 190.0– 195.1  ok               La femme rousse observe la créature ailée au sol.
+ 196.6– 201.9  ok               La femme rousse, surprise, approche une main gantée de la créature.
+ 203.3– 205.6  ok               Elle sourit au reptile.
+ 213.1– 217.7  ok               Elle tient le reptile brun entre ses mains gantées de gris.
+ 219.7– 227.4  ok               Deux mains gantées de bleu soutiennent un bol en pierre sombre au-dessus d'un tissu noir plissé, dans une pièce encombrée.
+ 229.6– 238.0  ok               La femme aux cheveux courts repose sur un lit de tissus roses et blancs. Un personnage est au sol.
+ 239.5– 248.0  ok               La femme rousse, en débardeur blanc et corset lacé, tient un petit dragon écailleux sur un tissu jaune sous des taches de lumière.
+ 252.5– 254.4  CHEVAUCHE 0.9 s  Une rousse saute en ruelle.
+ 255.8– 257.1  ok               La rousse s'enfuit.
+ 258.2– 262.6  ok               Elle se tient debout sur une caisse dans une ruelle.
+ 263.4– 270.2  CHEVAUCHE 0.82 s La rousse, en débardeur gris, regarde vers la gauche dans une ruelle étroite bordée de cabanes en bois.
+ 271.8– 277.9  ok               La rousse regarde en haut, surprise. Un petit reptile ailé gris survole une structure en bois.
+ 279.0– 285.9  ok               Un reptile brun observe des oiseaux. La rousse monte un escalier de pierre sous un ciel orangé.
+ 287.7– 294.6  CHEVAUCHE 0.62 s La rousse regarde en haut, bouche ouverte. Vue plongeante sur une ville en ruines sous un ciel orangé.
+ 297.4– 299.2  CHEVAUCHE 0.26 s Elle s'incline en souriant.
+ 329.7– 332.1  ok               Une créature ailée survole la rousse.
+ 339.1– 343.1  ok               La rousse contemple une cité sous un ciel orangé.
+ 344.5– 347.6  ok               La rousse regarde droit, les sourcils froncés.
+ 349.9– 355.3  ok               Elle court. Son visage se superpose à un paysage de souches.
+ 357.6– 364.2  ok               Un visage brun en transparence surplombe une silhouette marchant sous une lune.
+ 365.3– 371.4  ok               Un croissant de lune brille. Un désert de dunes s'étend. Une silhouette marche avec un bâton.
+ 373.0– 380.3  ok               Une femme en transparence sur des dunes. Une personne marche avec un bâton.
+ 380.7– 385.5  ok               La jeune femme grimpe et saute entre des bambous, puis se tient dans un désert.
+ 390.6– 394.6  ok               La jeune femme regarde vers la droite sous un ciel orangé.
+ 398.9– 405.6  CHEVAUCHE 0.3 s  Dans un paysage montagneux et brumeux, la jeune femme tient un bâton sculpté. L'image devient floue.
+ 407.1– 413.9  ok               Une silhouette escalade une paroi rocheuse et enneigée. Des sommets brumeux apparaissent.
+ 415.3– 419.3  ok               Une personne aux cheveux bruns est ensevelie sous la neige.
+ 420.7– 424.5  ok               Une silhouette marche dans un paysage enneigé.
+ 426.0– 430.2  ok               Une silhouette sombre s'éloigne dans la neige vers la gauche.
+ 431.8– 434.6  ok               La femme rousse court dans la neige.
+ 435.3– 440.0  ok               La femme rousse, terrifiée, regarde vers la droite dans l'obscurité.
+ 442.6– 445.2  ok               L'homme fume. Elle baisse les yeux.
+ 464.4– 472.7  ok               Elle observe un médaillon gravé d'une créature ailée et de runes. Il s'ouvre sur un arbre devant une paroi rocheuse.
+ 474.2– 483.2  ok               Sintel regarde vers le haut, les yeux écarquillés et la bouche ouverte. Elle porte une tenue grise et une protection tatouée.
+ 483.9– 489.5  ok               Une silhouette se tient au bord d'un lac sous la lune. Une botte bouge au sol.
+ 491.2– 496.1  ok               Une main tient une dague incurvée dans la grotte bleue.
+ 496.9– 502.1  ok               Sintel observe un animal à la gueule ouverte parmi des cristaux bleus.
+ 502.7– 504.1  ok               Elle lèche la viande.
+ 529.7– 535.4  ok               Sintel se penche vers une cavité rocheuse, le visage sérieux.
+ 536.5– 538.2  ok               Le dragon lève la tête.
+ 543.7– 549.2  CHEVAUCHE 0.09 s Sintel s'agrippe à une paroi rocheuse parsemée de cristaux bleus.
+ 553.6– 555.7  ok               Sintel fait face au dragon.
+ 559.6– 561.5  CHEVAUCHE 0.89 s Sintel brandit sa lance.
+ 571.1– 578.3  CHEVAUCHE 0.15 s Sintel est allongée sur le sol rocheux. Derrière elle, le dragon déploie ses ailes sombres.
+ 582.0– 588.6  CHEVAUCHE 1.03 s Sintel est penchée sur le sol rocheux face au dragon de dos. L'image devient floue.
+ 590.0– 595.3  ok               Le dragon ailé se penche vers Sintel, allongée au sol dans l'obscurité.
+ 604.5– 609.3  CHEVAUCHE 0.78 s Une créature écailleuse s'approche de Sintel effrayée.
+ 610.6– 615.2  ok               Gros plan sur la tête écailleuse d'une créature à l'œil orangé.
+ 617.0– 621.0  ok               Sintel, les mains levées, fait face à la créature.
+ 622.0– 630.6  CHEVAUCHE 0.4 s  De profil dans une grotte sombre, une créature écailleuse aux cornes incurvées montre un œil rouge et une mâchoire dentée.
+ 631.6– 637.4  ok               Sintel regarde vers le haut, la bouche entrouverte, une main gantée vers son visage.
+ 641.2– 646.1  ok               Sintel tend une main gantée vers l'avant, la bouche entrouverte.
+ 647.7– 653.9  ok               Dans une grotte sombre, Sintel fait face à une créature massive et écailleuse.
+ 655.2– 660.6  ok               Sintel lève les yeux, craintive, parmi des cristaux bleus.
+ 661.3– 665.7  ok               Sintel, effrayée, fait face à un œil rouge géant.
+ 666.4– 668.4  ok               Sintel face au reptile.
+ 671.4– 674.4  ok               Elle court vers l'ouverture et les rochers flottants.
+ 677.2– 681.9  ok               La grotte est sombre et rocheuse, avec de grosses racines à droite.
+ 684.6– 689.3  ok               Une silhouette est assise sur une colline rocheuse face aux montagnes.
+ 692.6– 695.4  ok               Elle est assise face aux montagnes brumeuses.
+ 700.5– 707.9  ok               Devant un tronc massif, une femme aux cheveux roux et gris baisse la tête, puis lève un regard inquiet.
+ 710.2– 717.4  ok               Une ceinture en cuir est sur la roche. Des pieds marchent, puis une silhouette fait face aux montagnes brumeuses.
+ 718.8– 725.1  ok               Elle contemple des montagnes enneigées et des fleurs blanches sous un soleil éclatant.
+ 727.3– 734.4  ok               La silhouette fait face à des montagnes brumeuses sous une lumière dorée. Un couteau repose sur le sol.
+ 735.8– 741.5  ok               Des fleurs blanches pendent à droite. Un reptile est allongé sur le chemin rocheux.
+ 744.3– 746.7  ok               DIRECTED BY COLIN LEVY.
+ 806.1– 814.4  ok               Sur un fond de bois sombre, des noms s'affichent en blanc. Des pommes et une illustration sont posées en bas.
+ 815.0– 821.5  ok               Des crédits blancs et des croquis de paysages et de créatures sont posés sur du bois sombre.
+ 823.9– 830.1  ok               Sur un fond de bois sombre, une liste de sponsors s'affiche en blanc en colonnes.
+ 832.8– 839.6  ok               Des listes de noms blancs défilent en colonnes sur fond noir, puis sur fond gris clair.
+ 857.8– 859.2  ok               Noms blancs défilant.
+ 861.9– 867.5  ok               Des listes de noms blancs défilent en colonnes sur fond noir et gris.
+ 869.4– 871.4  ok               Noms blancs sur fond noir.
+ 873.9– 878.5  ok               Des croquis sur papier jauni sont posés sur des planches de bois sombre.
+
+Calage -0.0282 s, gain 0.864, musique atténuée de 20.0 dB dans le résidu
+Parole réelle : 70.0 s ; parole détectée par audesia_p0 qui la couvre : 74%
+Sans chevauchement des paroles (Silero sur le résidu) : 92/94 (98%)
+Sans chevauchement d'aucune voix (paroles + énergie vocale) : 80/94 (85%), chevauchement maximal 1.03 s
+RUN COMPLET

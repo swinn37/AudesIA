@@ -1,0 +1,1019 @@
+[
+ {
+  "id": "d_0000",
+  "start": 0.2,
+  "end": 6.277,
+  "text": "Le texte blanc « THE BLENDER FOUNDATION PRESENTS » s'affiche sur des montagnes.",
+  "speedup": 1.0,
+  "chars_per_s": 13.0,
+  "reviewed": false
+ },
+ {
+  "id": "d_0001",
+  "start": 8.033,
+  "end": 14.74,
+  "text": "Des montagnes enneigées sous un ciel brumeux. Texte : THE DURIAN OPEN MOVIE PROJECT.",
+  "speedup": 1.0,
+  "chars_per_s": 12.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0003",
+  "start": 23.7,
+  "end": 29.513,
+  "text": "La jeune femme aux cheveux rouges marche sur un sentier de pierres dans un paysage de glace.",
+  "speedup": 1.0,
+  "chars_per_s": 15.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0004",
+  "start": 31.533,
+  "end": 34.33,
+  "text": "Elle tourne son bâton devant ses yeux.",
+  "speedup": 1.0,
+  "chars_per_s": 13.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0005",
+  "start": 37.347,
+  "end": 41.265,
+  "text": "Inquiète, la jeune femme regarde vers le ciel.",
+  "speedup": 1.0,
+  "chars_per_s": 11.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0006",
+  "start": 50.0,
+  "end": 50.85,
+  "text": "Il l'étrangle.",
+  "speedup": 1.0,
+  "chars_per_s": 15.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0007",
+  "start": 53.4,
+  "end": 55.226,
+  "text": "Elle brandit un bâton.",
+  "speedup": 1.0,
+  "chars_per_s": 12.0,
+  "reviewed": false
+ },
+ {
+  "id": "d_0008",
+  "start": 59.38,
+  "end": 64.309,
+  "text": "L'homme aux cheveux rouges est au sol face à un homme chauve.",
+  "speedup": 1.0,
+  "chars_per_s": 12.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0009",
+  "start": 66.32,
+  "end": 73.519,
+  "text": "L'homme chauve pointe une lance vers le cou de la jeune femme aux cheveux rouges, qui lève les mains, effrayée.",
+  "speedup": 1.0,
+  "chars_per_s": 15.4,
+  "reviewed": false
+ },
+ {
+  "id": "d_0010",
+  "start": 74.242,
+  "end": 78.64,
+  "text": "Elle est allongée sur le dos. Une lame traverse l'image.",
+  "speedup": 1.0,
+  "chars_per_s": 12.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0011",
+  "start": 81.658,
+  "end": 86.93,
+  "text": "Paysage de montagnes brumeuses. Une main gantée saisit un bâton.",
+  "speedup": 1.0,
+  "chars_per_s": 12.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0012",
+  "start": 88.742,
+  "end": 93.295,
+  "text": "Elle marche dans la brume. Le titre SINTEL apparaît.",
+  "speedup": 1.0,
+  "chars_per_s": 11.4,
+  "reviewed": false
+ },
+ {
+  "id": "d_0013",
+  "start": 95.075,
+  "end": 100.015,
+  "text": "Le titre SINTEL s'affiche. La jeune femme marche dans la neige.",
+  "speedup": 1.0,
+  "chars_per_s": 12.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0014",
+  "start": 101.408,
+  "end": 105.723,
+  "text": "Un feu brûle au centre d'un cercle de silhouettes assises.",
+  "speedup": 1.0,
+  "chars_per_s": 13.4,
+  "reviewed": false
+ },
+ {
+  "id": "d_0015",
+  "start": 109.7,
+  "end": 111.056,
+  "text": "Il baisse la tête.",
+  "speedup": 1.0,
+  "chars_per_s": 13.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0016",
+  "start": 114.1,
+  "end": 117.298,
+  "text": "Dans une tente, elle fixe l'homme.",
+  "speedup": 1.0,
+  "chars_per_s": 10.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0017",
+  "start": 131.9,
+  "end": 133.89,
+  "text": "Elle tient un bol.",
+  "speedup": 1.0,
+  "chars_per_s": 9.0,
+  "reviewed": false
+ },
+ {
+  "id": "d_0018",
+  "start": 141.2,
+  "end": 142.632,
+  "text": "Elle baisse les yeux.",
+  "speedup": 1.0,
+  "chars_per_s": 14.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0019",
+  "start": 144.5,
+  "end": 147.837,
+  "text": "Son visage s'assombrit. Noir total.",
+  "speedup": 1.0,
+  "chars_per_s": 10.4,
+  "reviewed": false
+ },
+ {
+  "id": "d_0020",
+  "start": 155.5,
+  "end": 157.177,
+  "text": "Elle marche dans la ruelle.",
+  "speedup": 1.0,
+  "chars_per_s": 16.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0021",
+  "start": 160.7,
+  "end": 167.244,
+  "text": "Elle écarte un tissu sombre de la main droite. Son visage est inquiet. La ruelle est étroite.",
+  "speedup": 1.0,
+  "chars_per_s": 14.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0022",
+  "start": 168.658,
+  "end": 174.643,
+  "text": "Elle regarde vers le bas, tenant une sphère épineuse devant des maisons anciennes.",
+  "speedup": 1.0,
+  "chars_per_s": 13.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0023",
+  "start": 176.617,
+  "end": 181.253,
+  "text": "Elle grimpe une façade en bois et se hisse sur un toit.",
+  "speedup": 1.0,
+  "chars_per_s": 11.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0024",
+  "start": 182.2,
+  "end": 186.195,
+  "text": "Une petite créature ailée et blessée gît sur les tuiles sombres.",
+  "speedup": 1.0,
+  "chars_per_s": 16.0,
+  "reviewed": false
+ },
+ {
+  "id": "d_0025",
+  "start": 189.992,
+  "end": 195.428,
+  "text": "Elle s'agenouille sur les pavés et tend la main vers la créature.",
+  "speedup": 1.0,
+  "chars_per_s": 11.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0026",
+  "start": 196.617,
+  "end": 201.493,
+  "text": "Elle regarde à droite. Une main gantée s'approche de la créature.",
+  "speedup": 1.0,
+  "chars_per_s": 13.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0028",
+  "start": 212.3,
+  "end": 217.735,
+  "text": "Elle tient le reptile beige à deux mains gantées de gris. Il a la gueule ouverte.",
+  "speedup": 1.0,
+  "chars_per_s": 14.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0029",
+  "start": 219.658,
+  "end": 227.094,
+  "text": "Des mains manipulent un bol en pierre. La jeune femme aux cheveux rouges est allongée dans un lit.",
+  "speedup": 1.0,
+  "chars_per_s": 13.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0030",
+  "start": 229.228,
+  "end": 238.337,
+  "text": "Dans une pièce sombre, elle repose la tête sur un oreiller gris, sous une couverture rose et noire.",
+  "speedup": 1.0,
+  "chars_per_s": 10.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0031",
+  "start": 238.797,
+  "end": 245.516,
+  "text": "Dans la pénombre, la jeune femme aux cheveux rouges tient un petit reptile sur un tissu.",
+  "speedup": 1.0,
+  "chars_per_s": 13.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0032",
+  "start": 248.367,
+  "end": 249.564,
+  "text": "Une poule.",
+  "speedup": 1.0,
+  "chars_per_s": 8.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0033",
+  "start": 252.0,
+  "end": 253.751,
+  "text": "Elle court dans une ruelle.",
+  "speedup": 1.0,
+  "chars_per_s": 15.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0034",
+  "start": 258.06,
+  "end": 263.969,
+  "text": "Elle se tient sur une caisse dans une ruelle en bois, entourée de fruits.",
+  "speedup": 1.0,
+  "chars_per_s": 12.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0035",
+  "start": 265.4,
+  "end": 270.598,
+  "text": "La jeune femme aux cheveux rouges regarde une silhouette sombre de profil.",
+  "speedup": 1.0,
+  "chars_per_s": 14.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0036",
+  "start": 271.825,
+  "end": 276.622,
+  "text": "Elle lève les yeux, surprise, face à une petite chauve-souris ailée.",
+  "speedup": 1.0,
+  "chars_per_s": 14.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0037",
+  "start": 278.992,
+  "end": 286.429,
+  "text": "Une créature caméléon observe des oiseaux. La jeune femme court sur des marches de pierre.",
+  "speedup": 1.0,
+  "chars_per_s": 12.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0038",
+  "start": 287.7,
+  "end": 291.936,
+  "text": "Elle se tient au milieu de ruines sous un ciel doré.",
+  "speedup": 1.0,
+  "chars_per_s": 12.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0039",
+  "start": 293.44,
+  "end": 298.554,
+  "text": "Vue en plongée, elle contemple l'horizon sous un ciel orangé.",
+  "speedup": 1.0,
+  "chars_per_s": 11.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0040",
+  "start": 311.46,
+  "end": 313.136,
+  "text": "Elle sourit vers le ciel.",
+  "speedup": 1.0,
+  "chars_per_s": 14.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0041",
+  "start": 314.52,
+  "end": 320.831,
+  "text": "Elle regarde vers le haut, bouche bée. Un petit animal ailé grandit en un dragon massif.",
+  "speedup": 1.0,
+  "chars_per_s": 13.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0042",
+  "start": 322.408,
+  "end": 326.565,
+  "text": "Une patte écailleuse et griffue descend du ciel face à elle.",
+  "speedup": 1.0,
+  "chars_per_s": 14.4,
+  "reviewed": false
+ },
+ {
+  "id": "d_0043",
+  "start": 328.367,
+  "end": 331.72,
+  "text": "Un petit dragon descend vers la main gantée.",
+  "speedup": 1.0,
+  "chars_per_s": 13.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0044",
+  "start": 336.3,
+  "end": 337.659,
+  "text": "Ville en ruines.",
+  "speedup": 1.0,
+  "chars_per_s": 11.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0045",
+  "start": 339.3,
+  "end": 343.451,
+  "text": "La jeune femme aux cheveux rouges contemple la ville au couchant.",
+  "speedup": 1.0,
+  "chars_per_s": 15.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0046",
+  "start": 344.625,
+  "end": 348.535,
+  "text": "Gros plan sur son visage inquiet sous un ciel orangé.",
+  "speedup": 1.0,
+  "chars_per_s": 13.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0047",
+  "start": 349.95,
+  "end": 355.223,
+  "text": "Elle court. Son visage se superpose à un désert de souches.",
+  "speedup": 1.0,
+  "chars_per_s": 11.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0048",
+  "start": 357.648,
+  "end": 364.942,
+  "text": "Son visage aux cheveux bruns se superpose à une silhouette grimpant sur un rocher sous la lune.",
+  "speedup": 1.041,
+  "chars_per_s": 12.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0049",
+  "start": 365.346,
+  "end": 371.982,
+  "text": "Une lune pâle brille dans un ciel étoilé. La jeune femme marche sur une dune de sable.",
+  "speedup": 1.0,
+  "chars_per_s": 13.0,
+  "reviewed": false
+ },
+ {
+  "id": "d_0050",
+  "start": 373.044,
+  "end": 378.398,
+  "text": "La silhouette de la jeune femme se superpose à des dunes dorées sous un ciel clair.",
+  "speedup": 1.0,
+  "chars_per_s": 15.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0051",
+  "start": 380.742,
+  "end": 385.353,
+  "text": "Elle grimpe un bambou, puis observe une silhouette au loin dans un canyon.",
+  "speedup": 1.0,
+  "chars_per_s": 15.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0052",
+  "start": 390.62,
+  "end": 394.218,
+  "text": "Une créature massive traverse un paysage brumeux.",
+  "speedup": 1.0,
+  "chars_per_s": 13.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0053",
+  "start": 397.075,
+  "end": 400.593,
+  "text": "De dos, elle lève la main gauche face à l'objectif.",
+  "speedup": 1.0,
+  "chars_per_s": 14.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0054",
+  "start": 403.0,
+  "end": 406.117,
+  "text": "Elle tient un bâton dans un paysage brumeux.",
+  "speedup": 1.0,
+  "chars_per_s": 14.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0055",
+  "start": 409.142,
+  "end": 413.201,
+  "text": "Des parois rocheuses sombres émergent de la neige.",
+  "speedup": 1.0,
+  "chars_per_s": 12.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0056",
+  "start": 415.283,
+  "end": 419.201,
+  "text": "La jeune femme aux cheveux rouges est ensevelie sous la neige.",
+  "speedup": 1.0,
+  "chars_per_s": 15.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0057",
+  "start": 420.658,
+  "end": 423.454,
+  "text": "Elle marche vers la droite dans la brume.",
+  "speedup": 1.0,
+  "chars_per_s": 14.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0058",
+  "start": 426.033,
+  "end": 430.35,
+  "text": "Elle marche seule dans la neige avec un long bâton.",
+  "speedup": 1.0,
+  "chars_per_s": 11.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0059",
+  "start": 431.783,
+  "end": 433.368,
+  "text": "Elle regarde vers le haut.",
+  "speedup": 1.0,
+  "chars_per_s": 16.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0060",
+  "start": 435.48,
+  "end": 442.173,
+  "text": "Elle regarde vers le bas, effrayée. Un tatouage est sur son épaule.",
+  "speedup": 1.087,
+  "chars_per_s": 9.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0061",
+  "start": 442.575,
+  "end": 444.971,
+  "text": "L'homme à la pipe regarde la femme.",
+  "speedup": 1.0,
+  "chars_per_s": 14.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0062",
+  "start": 446.9,
+  "end": 451.852,
+  "text": "L'homme barbu aux cicatrices regarde vers le bas. La femme est debout.",
+  "speedup": 1.0,
+  "chars_per_s": 14.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0063",
+  "start": 454.6,
+  "end": 456.426,
+  "text": "Elle regarde droit devant.",
+  "speedup": 1.0,
+  "chars_per_s": 14.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0064",
+  "start": 462.0,
+  "end": 469.272,
+  "text": "La jeune femme aux cheveux rouges regarde vers le bas, sérieuse. Elle tient un médaillon sombre sculpté.",
+  "speedup": 1.0,
+  "chars_per_s": 14.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0065",
+  "start": 470.392,
+  "end": 477.748,
+  "text": "Le médaillon doré montre un arbre vert sur un sol rocheux. Elle regarde vers le haut, étonnée.",
+  "speedup": 1.0,
+  "chars_per_s": 12.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0066",
+  "start": 478.783,
+  "end": 483.18,
+  "text": "Une silhouette racinaire noire surplombe la jeune femme.",
+  "speedup": 1.0,
+  "chars_per_s": 12.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0067",
+  "start": 483.908,
+  "end": 487.825,
+  "text": "Une silhouette se tient au bord de l'eau sous la lune.",
+  "speedup": 1.0,
+  "chars_per_s": 13.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0068",
+  "start": 491.158,
+  "end": 494.664,
+  "text": "Dans une grotte, une main brandit une dague face à elle.",
+  "speedup": 1.0,
+  "chars_per_s": 15.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0069",
+  "start": 496.908,
+  "end": 501.064,
+  "text": "La jeune femme aux cheveux rouges observe une grotte cristalline.",
+  "speedup": 1.0,
+  "chars_per_s": 15.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0070",
+  "start": 502.658,
+  "end": 508.083,
+  "text": "Une créature grise lèche une viande rouge. La jeune femme est effrayée.",
+  "speedup": 1.0,
+  "chars_per_s": 13.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0071",
+  "start": 508.95,
+  "end": 514.709,
+  "text": "Dans la brume bleue, la jeune femme est terrifiée. Gros plan sur sa nuque.",
+  "speedup": 1.0,
+  "chars_per_s": 12.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0072",
+  "start": 516.658,
+  "end": 522.176,
+  "text": "Une créature massive surgit. La jeune femme marche sur une arche.",
+  "speedup": 1.0,
+  "chars_per_s": 11.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0073",
+  "start": 523.617,
+  "end": 525.934,
+  "text": "Elle est accroupie face à une lueur.",
+  "speedup": 1.0,
+  "chars_per_s": 15.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0074",
+  "start": 528.721,
+  "end": 532.072,
+  "text": "De dos, elle contemple le fond de la grotte sombre.",
+  "speedup": 1.0,
+  "chars_per_s": 15.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0075",
+  "start": 533.825,
+  "end": 538.301,
+  "text": "Elle regarde vers le bas, inquiète. Un petit être gris est étendu.",
+  "speedup": 1.0,
+  "chars_per_s": 14.7,
+  "reviewed": false
+ },
+ {
+  "id": "d_0076",
+  "start": 543.56,
+  "end": 549.956,
+  "text": "Elle pose sa main sur une paroi de cristaux brillants. Un tatouage orne son épaule.",
+  "speedup": 1.0,
+  "chars_per_s": 13.0,
+  "reviewed": false
+ },
+ {
+  "id": "d_0077",
+  "start": 551.6,
+  "end": 557.117,
+  "text": "Elle brandit une lame face à une créature ailée aux yeux rouges.",
+  "speedup": 1.0,
+  "chars_per_s": 11.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0078",
+  "start": 559.36,
+  "end": 562.636,
+  "text": "La jeune femme aux cheveux rouges vise la créature.",
+  "speedup": 1.0,
+  "chars_per_s": 15.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0079",
+  "start": 567.66,
+  "end": 568.534,
+  "text": "Elle attaque.",
+  "speedup": 1.0,
+  "chars_per_s": 14.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0080",
+  "start": 571.44,
+  "end": 577.353,
+  "text": "Allongée sur le sol rocheux, la jeune femme regarde la créature ailée.",
+  "speedup": 1.0,
+  "chars_per_s": 11.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0081",
+  "start": 581.98,
+  "end": 587.815,
+  "text": "De profil, elle repose sur le sol rocheux. Une créature ailée survole sa lance.",
+  "speedup": 1.0,
+  "chars_per_s": 13.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0082",
+  "start": 589.74,
+  "end": 596.534,
+  "text": "Une créature reptilienne massive aux cornes recourbées examine la jeune femme au sol.",
+  "speedup": 1.0,
+  "chars_per_s": 12.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0083",
+  "start": 597.32,
+  "end": 600.277,
+  "text": "Elle lève les yeux vers l'œil de la créature.",
+  "speedup": 1.0,
+  "chars_per_s": 15.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0084",
+  "start": 607.82,
+  "end": 613.411,
+  "text": "Elle tient un bâton, effrayée. Une créature émerge.",
+  "speedup": 1.0,
+  "chars_per_s": 9.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0085",
+  "start": 613.992,
+  "end": 618.79,
+  "text": "Dans une grotte sombre, elle fait face à une créature immobile.",
+  "speedup": 1.0,
+  "chars_per_s": 13.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0086",
+  "start": 620.033,
+  "end": 624.029,
+  "text": "Une créature noire cornue déploie ses ailes face à elle.",
+  "speedup": 1.0,
+  "chars_per_s": 14.0,
+  "reviewed": false
+ },
+ {
+  "id": "d_0087",
+  "start": 627.089,
+  "end": 632.605,
+  "text": "Une flaque rouge s'étale sur le sol rocheux. La jeune femme est allongée, terrifiée.",
+  "speedup": 1.0,
+  "chars_per_s": 15.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0088",
+  "start": 634.144,
+  "end": 640.463,
+  "text": "Elle regarde l'horizon rocheux, terrifiée, une main gantée de sang vers son visage.",
+  "speedup": 1.0,
+  "chars_per_s": 13.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0089",
+  "start": 641.2,
+  "end": 645.597,
+  "text": "De profil dans l'obscurité, elle lève une main gantée de noir.",
+  "speedup": 1.0,
+  "chars_per_s": 14.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0090",
+  "start": 647.658,
+  "end": 652.77,
+  "text": "Une créature massive fait face à la jeune femme aux cheveux rouges.",
+  "speedup": 1.0,
+  "chars_per_s": 13.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0091",
+  "start": 655.158,
+  "end": 660.43,
+  "text": "Elle regarde en haut, le visage marqué, dans la grotte.",
+  "speedup": 1.0,
+  "chars_per_s": 10.4,
+  "reviewed": false
+ },
+ {
+  "id": "d_0092",
+  "start": 661.325,
+  "end": 664.511,
+  "text": "Elle lève les bras. Un reptile cornu surgit.",
+  "speedup": 1.0,
+  "chars_per_s": 13.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0093",
+  "start": 666.408,
+  "end": 670.553,
+  "text": "Elle fixe le cadavre blanc au sol. Des particules flottent.",
+  "speedup": 1.0,
+  "chars_per_s": 14.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0094",
+  "start": 671.408,
+  "end": 675.16,
+  "text": "Elle court vers une caverne lumineuse aux rochers flottants.",
+  "speedup": 1.0,
+  "chars_per_s": 16.0,
+  "reviewed": false
+ },
+ {
+  "id": "d_0095",
+  "start": 677.2,
+  "end": 683.271,
+  "text": "L'intérieur de la grotte est sombre et rocheux. Un tronc d'arbre s'enfonce à droite.",
+  "speedup": 1.0,
+  "chars_per_s": 13.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0096",
+  "start": 684.617,
+  "end": 689.733,
+  "text": "Un tronc s'élève à gauche. Deux silhouettes sont assises sur les rochers.",
+  "speedup": 1.0,
+  "chars_per_s": 14.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0097",
+  "start": 693.408,
+  "end": 701.005,
+  "text": "Assise au bord d'une falaise, elle regarde vers le bas. Une marque rouge marque son épaule droite.",
+  "speedup": 1.0,
+  "chars_per_s": 12.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0098",
+  "start": 703.0,
+  "end": 709.156,
+  "text": "La jeune femme aux cheveux rouges a le regard fixe et la bouche entrouverte.",
+  "speedup": 1.0,
+  "chars_per_s": 12.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0099",
+  "start": 710.242,
+  "end": 714.631,
+  "text": "Une ceinture en cuir et une boucle reposent sur le sol rocheux.",
+  "speedup": 1.0,
+  "chars_per_s": 14.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0100",
+  "start": 715.721,
+  "end": 719.797,
+  "text": "De dos, elle contemple les montagnes, une hache à la main.",
+  "speedup": 1.0,
+  "chars_per_s": 14.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0101",
+  "start": 722.0,
+  "end": 726.956,
+  "text": "Elle se tient de dos sur un sol rocheux face à des montagnes brumeuses.",
+  "speedup": 1.0,
+  "chars_per_s": 14.3,
+  "reviewed": false
+ },
+ {
+  "id": "d_0102",
+  "start": 729.428,
+  "end": 734.133,
+  "text": "Une créature ailée gît au sol. Des fleurs blanches pendent.",
+  "speedup": 1.0,
+  "chars_per_s": 12.5,
+  "reviewed": false
+ },
+ {
+  "id": "d_0103",
+  "start": 736.856,
+  "end": 741.012,
+  "text": "Trois fleurs blanches en cloche pendent au premier plan à droite.",
+  "speedup": 1.0,
+  "chars_per_s": 15.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0104",
+  "start": 744.283,
+  "end": 745.796,
+  "text": "Écran noir.",
+  "speedup": 1.0,
+  "chars_per_s": 7.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0105",
+  "start": 806.08,
+  "end": 809.356,
+  "text": "Crédits à gauche. Pommes et figurines sur le bois.",
+  "speedup": 1.0,
+  "chars_per_s": 15.2,
+  "reviewed": false
+ },
+ {
+  "id": "d_0106",
+  "start": 811.49,
+  "end": 815.642,
+  "text": "Des illustrations médiévales et des crédits blancs sur du bois.",
+  "speedup": 1.0,
+  "chars_per_s": 15.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0107",
+  "start": 817.9,
+  "end": 825.081,
+  "text": "Des croquis et des titres blancs s'affichent en éventail sur des planches de bois verticales.",
+  "speedup": 1.0,
+  "chars_per_s": 12.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0108",
+  "start": 826.43,
+  "end": 833.543,
+  "text": "Une liste de sponsors s'affiche en blanc sur un fond noir, organisée en plusieurs colonnes.",
+  "speedup": 1.0,
+  "chars_per_s": 12.8,
+  "reviewed": false
+ },
+ {
+  "id": "d_0109",
+  "start": 834.96,
+  "end": 840.077,
+  "text": "Des noms blancs sont organisés en colonnes sur fond noir.",
+  "speedup": 1.0,
+  "chars_per_s": 11.1,
+  "reviewed": false
+ },
+ {
+  "id": "d_0110",
+  "start": 843.49,
+  "end": 847.729,
+  "text": "Une liste de noms s'affiche sur fond noir.",
+  "speedup": 1.0,
+  "chars_per_s": 9.9,
+  "reviewed": false
+ },
+ {
+  "id": "d_0111",
+  "start": 852.72,
+  "end": 859.836,
+  "text": "Des gros plans montrent des listes de noms noirs sur fond blanc ou beige, organisées en colonnes.",
+  "speedup": 1.0,
+  "chars_per_s": 13.6,
+  "reviewed": false
+ },
+ {
+  "id": "d_0112",
+  "start": 861.84,
+  "end": 866.395,
+  "text": "Des noms blancs s'affichent en colonnes denses sur fond noir.",
+  "speedup": 1.0,
+  "chars_per_s": 13.4,
+  "reviewed": false
+ },
+ {
+  "id": "d_0113",
+  "start": 873.92,
+  "end": 879.356,
+  "text": "Des dessins de la jeune femme et de créatures sont sur une table en bois.",
+  "speedup": 1.0,
+  "chars_per_s": 13.4,
+  "reviewed": false
+ },
+ {
+  "id": "d_0114",
+  "start": 881.076,
+  "end": 886.191,
+  "text": "Dessins sur des planches de bois. Une petite fille face à une créature.",
+  "speedup": 1.0,
+  "chars_per_s": 13.9,
+  "reviewed": false
+ }
+]

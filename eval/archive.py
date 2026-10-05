@@ -63,8 +63,10 @@ def main():
             elif not hide:
                 lines.append(line)
         (DST / log.name).write_text("\n".join(lines) + "\n", encoding="utf-8")
-    if (SRC / f"juge_{profile}.log").exists():
-        shutil.copy2(SRC / f"juge_{profile}.log", DST)  # le juge n'y écrit que ses notes, sans les descriptions
+    log = SRC / f"juge_{profile}.log"
+    if log.exists():  # notes du juge, sans son résumé final, qui cite des descriptions (archivé masqué en .md)
+        text = log.read_text(encoding="utf-8", errors="replace")
+        (DST / log.name).write_text(text.split("\n## Juge ")[0] + f"\n(résumé : voir juge_{profile}.md)\n", encoding="utf-8")
     report.main(DST)
 
 

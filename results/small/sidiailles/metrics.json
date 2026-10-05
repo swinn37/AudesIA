@@ -1,0 +1,45 @@
+{
+ "timings_s": {
+  "parole": 0.0,
+  "voix isolée": 0.0,
+  "plans": 0.0,
+  "description": 3376.4,
+  "voix": 1545.7,
+  "mixage": 30.0
+ },
+ "duration_s": 716.1,
+ "usable_silence_s": 431.5,
+ "windows": 81,
+ "placed": 79,
+ "dropped": [
+  "d_0001",
+  "d_0062"
+ ],
+ "sped_up": 0,
+ "reviewed": 0,
+ "tts_retries": 43,
+ "facts_checked": 0,
+ "facts_rejected": 0,
+ "profile": "small",
+ "models": {
+  "vlm": "gemma4:26b-a4b-it-qat",
+  "writer": "gemma4:26b-a4b-it-qat"
+ },
+ "parallel_requests": 1,
+ "llm_usage": {
+  "vlm": {
+   "requests": 91,
+   "prompt_tokens": 112044,
+   "completion_tokens": 6774
+  },
+  "writer": {
+   "requests": 162,
+   "prompt_tokens": 189607,
+   "completion_tokens": 9535
+  }
+ },
+ "outbound_network": true,
+ "coverage": 0.693,
+ "measured_chars_per_s": 13.0,
+ "peak_gpu_gib_this_process": 8.02
+}

@@ -1,0 +1,837 @@
+[
+ {
+  "id": "d_0000",
+  "window": [
+   80.3,
+   85.791667
+  ],
+  "frames": [
+   80.986458375,
+   82.359375125,
+   83.732291875,
+   85.105208625
+  ],
+  "brightened": 0,
+  "raw_description": "Un personnage aux cheveux blonds et portant un gilet bleu et blanc est debout dans une forêt, la bouche grande ouverte dans une expression de surprise ou de choc. Il tient une canette dans sa main gauche et un objet sombre dans sa main droite. En arrière-plan, un personnage est suspendu à une branche d'arbre, tenant un nid contenant deux œufs blancs, tandis qu'une radio est posée sur l'herbe à proximité.",
+  "zoom": "Le personnage tient une canette de boisson et un objet noir muni d'un crochet. Il porte également une montre au poignet.",
+  "facts": null,
+  "description": "L'homme blond, la bouche grande ouverte, se tient debout dans une forêt. Il tient une canette de boisson dans sa main gauche et un objet noir muni d'un crochet dans sa main droite.",
+  "budget_chars": 66,
+  "variants": [
+   "L'homme blond, bouche ouverte, tient une canette et un crochet.",
+   "L'homme blond tient une canette et un crochet.",
+   "L'homme tient une canette et un crochet."
+  ]
+ },
+ {
+  "id": "d_0001",
+  "window": [
+   85.791667,
+   89.5
+  ],
+  "frames": [
+   86.25520862500001,
+   87.182291875,
+   88.109375125,
+   89.036458375
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune femme aux cheveux orange et jaunes volumineux, portant une robe rose et des collants résille, se tient dans une forêt. Elle a une expression de colère et tient une bombe de peinture bleue dans sa main gauche levée. À sa droite, une araignée bleue est accrochée au tronc d'un arbre. Dans l'image suivante, la femme lève le pied droit, dont la botte turquoise est en l'air, tandis qu'un petit insecte sombre se déplace sur l'herbe près de son pied gauche.",
+  "zoom": null,
+  "facts": null,
+  "description": "La femme aux cheveux orange a une expression de colère et tient une bombe de peinture bleue dans sa main gauche levée. À sa droite, une araignée bleue est accrochée au tronc d'un arbre.",
+  "budget_chars": 43,
+  "variants": [
+   "La femme aux cheveux orange est en colère, une bombe bleue à la main.",
+   "Elle tient une bombe bleue.",
+   "Elle est furieuse."
+  ]
+ },
+ {
+  "id": "d_0002",
+  "window": [
+   128.5,
+   137.0625
+  ],
+  "frames": [
+   129.5703125,
+   131.7109375,
+   133.8515625,
+   135.9921875
+  ],
+  "brightened": 0,
+  "raw_description": "Une petite fille aux cheveux noirs attachés en queue-de-cheval haute par un élastique bleu regarde avec une expression de surprise et la bouche bée. Elle porte des boucles d'oreilles roses et un haut bleu avec un foulard rouge. Au premier plan, un petit champignon rouge à points blancs se dresse dans l'herbe, tandis qu'en arrière-plan, on aperçoit les jambes d'une personne portant des sandales arc-en-ciel et un barbecue rouge.",
+  "zoom": null,
+  "facts": null,
+  "description": "La petite fille aux cheveux noirs a la bouche bée et un regard surpris. Au premier plan, un petit champignon rouge à points blancs se dresse dans l'herbe. En arrière-plan, on aperçoit les jambes d'une personne portant des sandales arc-en-ciel et un barbecue rouge.",
+  "budget_chars": 106,
+  "variants": [
+   "La petite fille aux cheveux noirs regarde avec surprise. Un champignon rouge à points blancs est au premier plan.",
+   "La petite fille aux cheveux noirs est surprise. Un champignon rouge est au premier plan.",
+   "La petite fille est surprise. Un champignon rouge est au premier plan."
+  ]
+ },
+ {
+  "id": "d_0003",
+  "window": [
+   137.0625,
+   145.625
+  ],
+  "frames": [
+   138.1328125,
+   140.2734375,
+   142.4140625,
+   144.5546875
+  ],
+  "brightened": 0,
+  "raw_description": "Un petit personnage en forme de champignon rouge à pois blancs marche dans une zone herbeuse parsemée de débris. Il passe devant une canette de soda écrasée et un emballage de snack rouge et jaune. Plusieurs autres champignons rouges identiques sont dispersés dans l'herbe et sous un feuillage dense.",
+  "zoom": "Les personnages ne tiennent aucun objet. On reconnaît une canette de soda écrasée au sol.",
+  "facts": null,
+  "description": "Un petit personnage en forme de champignon rouge à pois blancs marche dans une zone herbeuse parsemée de débris. Il passe devant une canette de soda écrasée et un emballage de snack rouge et jaune. Plusieurs autres champignons rouges identiques sont dispersés dans l'herbe et sous un feuillage dense.",
+  "budget_chars": 106,
+  "variants": [
+   "Un petit champignon rouge à pois blancs marche dans l'herbe parmi des débris et d'autres champignons.",
+   "Le petit champignon rouge marche dans l'herbe parmi des débris.",
+   "Le champignon rouge marche dans l'herbe."
+  ]
+ },
+ {
+  "id": "d_0004",
+  "window": [
+   145.625,
+   151.458333
+  ],
+  "frames": [
+   146.354166625,
+   147.81249987500001,
+   149.270833125,
+   150.729166375
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune fille aux cheveux noirs attachés en queue-de-cheval haute porte un haut bleu, un foulard rouge et de grandes boucles d'oreilles roses. Elle regarde vers la droite avec une expression surprise et la bouche entrouverte. Elle est accroupie dans une forêt dense, tenant un livre beige entre ses mains. Derrière elle, une autre personne est penchée, le corps partiellement caché par de grandes feuilles vertes.",
+  "zoom": null,
+  "facts": null,
+  "description": "La petite fille aux cheveux noirs est accroupie dans une forêt dense, tenant un livre beige entre ses mains. Elle regarde vers la droite avec la bouche entrouverte. Derrière elle, une silhouette est penchée, le corps partiellement caché par de grandes feuilles vertes.",
+  "budget_chars": 70,
+  "variants": [
+   "Accroupie dans la forêt, la petite fille tient un livre beige.",
+   "Elle tient un livre beige dans la forêt.",
+   "Elle tient un livre beige."
+  ]
+ },
+ {
+  "id": "d_0005",
+  "window": [
+   151.458333,
+   157.04
+  ],
+  "frames": [
+   152.156041375,
+   153.551458125,
+   154.946874875,
+   156.342291625
+  ],
+  "brightened": 0,
+  "raw_description": "Une petite fille aux cheveux noirs attachés en queue de cheval et portant des boucles d'oreilles roses rampe au sol dans une végétation dense. Elle regarde vers la droite avec une expression inquiète. Derrière elle, une forêt de grands arbres aux troncs sculptés s'ouvre sur une clairière parsemée de nombreux petits champignons rouges à pois blancs. Ces champignons sont habités par de petites créatures vertes qui se déplacent parmi eux.",
+  "zoom": null,
+  "facts": null,
+  "description": "La petite fille aux cheveux noirs rampe au sol dans une végétation dense, le regard dirigé vers la droite avec une expression inquiète. Derrière elle, une forêt de grands arbres aux troncs sculptés s'ouvre sur une clairière parsemée de nombreux petits champignons rouges à pois blancs. De petites créatures vertes se déplacent parmi les champignons.",
+  "budget_chars": 67,
+  "variants": [
+   "La petite fille rampe dans la végétation, inquiète.",
+   "Elle rampe dans la végétation dense.",
+   "Elle rampe, inquiète."
+  ]
+ },
+ {
+  "id": "d_0006",
+  "window": [
+   250.9,
+   253.3
+  ],
+  "frames": [
+   251.3,
+   252.10000000000002,
+   252.9
+  ],
+  "brightened": 0,
+  "raw_description": "Une petite fille aux cheveux noirs attachés en chignon dort paisiblement dans un sac de couchage beige. Elle repose la tête sur ses mains, les yeux clos et la bouche légèrement entrouverte. À côté d'elle, un carnet ouvert est posé sur le sol, révélant un dessin. Une paire de casques audio et un petit objet cylindrique reposent sur le sol terreux à proximité.",
+  "zoom": "Le personnage dort dans un sac de couchage avec un carnet de dessins ouvert et un crayon à côté. On aperçoit également un casque audio posé au sol.",
+  "facts": null,
+  "description": "La petite fille aux cheveux noirs dort dans un sac de couchage beige, la tête posée sur ses mains et la bouche entrouverte. À côté d'elle, un carnet ouvert affichant un dessin, un crayon et une paire de casques audio reposent sur le sol terreux.",
+  "budget_chars": 26,
+  "variants": [
+   "La petite fille dort.",
+   "Elle dort."
+  ]
+ },
+ {
+  "id": "d_0007",
+  "window": [
+   278.8,
+   283.8
+  ],
+  "frames": [
+   279.425,
+   280.675,
+   281.925,
+   283.175
+  ],
+  "brightened": 0,
+  "raw_description": "Dans une forêt sombre, plusieurs petits champignons rouges à points blancs, aux visages expressifs, se déplacent sur un sol terreux. L'un d'eux tient un tube jaune marqué « Squirt Burn » et semble s'apprêter à l'utiliser. Au centre, une lueur verte intense s'élève du sol, entourée de nombreux champignons qui l'observent. Une jeune fille aux cheveux noirs et aux boucles d'oreilles violettes regarde la scène avec une expression effrayée, dissimulée derrière de larges feuilles vertes.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans une forêt sombre, plusieurs petits champignons rouges à points blancs se déplacent sur un sol terreux. L'un d'eux tient un tube jaune marqué « Squirt Burn » et s'apprête à l'utiliser. Au centre, une lueur verte intense s'élève du sol, entourée de nombreux champignons qui l'observent. La petite fille aux cheveux noirs et aux boucles d'oreilles violettes regarde la scène avec une expression effrayée, dissimulée derrière de larges feuilles vertes.",
+  "budget_chars": 59,
+  "variants": [
+   "Des champignons rouges s'agitent près d'une lueur verte.",
+   "Des champignons rouges entourent une lueur verte.",
+   "Des champignons près d'une lueur."
+  ]
+ },
+ {
+  "id": "d_0008",
+  "window": [
+   307.5,
+   314.666667
+  ],
+  "frames": [
+   308.395833375,
+   310.187500125,
+   311.97916687500003,
+   313.770833625
+  ],
+  "brightened": 0,
+  "raw_description": "Une cassette audio marquée du texte « VEEJAY » est insérée dans un lecteur de musique. Trois petites créatures rouges et vertes, portant des chapeaux rouges, se tiennent debout dans l'obscurité. Une jeune fille aux cheveux noirs et aux boucles d'oreilles violettes éclaire la scène avec une lampe de poche. Le faisceau lumineux révèle une petite créature verte avec un chapeau rouge à pois blancs.",
+  "zoom": null,
+  "facts": null,
+  "description": "Une cassette audio marquée du texte « VEEJAY » est insérée dans un lecteur de musique. Dans l'obscurité, trois petites créatures rouges et vertes portant des chapeaux rouges se tiennent debout. La petite fille aux cheveux noirs et aux boucles d'oreilles violettes éclaire la scène avec une lampe de poche, révélant une petite créature verte avec un chapeau rouge à pois blancs.",
+  "budget_chars": 87,
+  "variants": [
+   "Une cassette marquée « VEEJAY » entre dans un lecteur. Trois créatures rouges et vertes chapeautées sont dans le noir.",
+   "Une cassette « VEEJAY » entre dans un lecteur. Trois créatures chapeautées attendent dans l'obscurité.",
+   "Une cassette « VEEJAY » entre dans un lecteur."
+  ]
+ },
+ {
+  "id": "d_0009",
+  "window": [
+   314.666667,
+   318.52
+  ],
+  "frames": [
+   315.148333625,
+   316.111666875,
+   317.075000125,
+   318.038333375
+  ],
+  "brightened": 0,
+  "raw_description": "Une main tenant un outil orange et argenté présente une coupure rouge sur le dos de la main. Une jeune fille aux cheveux noirs et aux boucles d'oreilles violettes tient l'outil à deux mains, le visage marqué par l'effroi. Elle se tient dans une forêt sombre parsemée de champignons rouges à points blancs. Au loin, une silhouette humaine marche entre les arbres et les champignons.",
+  "zoom": null,
+  "facts": null,
+  "description": "La petite fille aux cheveux noirs et aux boucles d'oreilles violettes tient un outil orange et argenté à deux mains, présentant une coupure rouge sur le dos de sa main. Son visage est marqué par l'effroi dans une forêt sombre parsemée de champignons rouges à points blancs. Au loin, une silhouette humaine marche entre les arbres et les champignons.",
+  "budget_chars": 44,
+  "variants": [
+   "La petite fille est effrayée.",
+   "Elle tient un outil.",
+   "Elle est effrayée."
+  ]
+ },
+ {
+  "id": "d_0010",
+  "window": [
+   322.8,
+   328.833333
+  ],
+  "frames": [
+   323.554166625,
+   325.062499875,
+   326.570833125,
+   328.079166375
+  ],
+  "brightened": 0,
+  "raw_description": "Une silhouette noire tombe devant une pleine lune bleue dans un ciel nocturne. Une femme aux cheveux roux et à la robe violette se tient dans une forêt sombre, tenant deux sprays bleus. Elle porte ses mains sur ses oreilles, les yeux écarquillés et la bouche ouverte. Elle s'allonge au sol, le visage marqué par la peur, tandis qu'un spray bleu repose devant elle au premier plan.",
+  "zoom": null,
+  "facts": null,
+  "description": "Une silhouette noire tombe devant une pleine lune bleue dans un ciel nocturne. La femme aux cheveux orange, en robe violette, est allongée au sol dans une forêt sombre, les yeux écarquillés et la bouche ouverte. Elle porte ses mains sur ses oreilles et deux sprays bleus sont posés près d'elle.",
+  "budget_chars": 73,
+  "variants": [
+   "Une silhouette noire tombe devant une lune bleue. La femme est au sol.",
+   "Une silhouette tombe devant la lune. La femme est au sol.",
+   "Une silhouette tombe devant la lune."
+  ]
+ },
+ {
+  "id": "d_0011",
+  "window": [
+   328.833333,
+   337.6
+  ],
+  "frames": [
+   329.92916637499997,
+   332.120833125,
+   334.312499875,
+   336.50416662500004
+  ],
+  "brightened": 0,
+  "raw_description": "Dans une forêt sombre, trois petits personnages en forme de champignons à chapeaux rouges et points blancs entourent une bombe de peinture bleue. L'un d'eux, au centre, tient le sommet de la bombe avec une expression menaçante. Un homme au chapeau clair court ensuite dans la forêt, l'air effrayé. Il s'arrête et se cache derrière un tronc d'arbre, l'air inquiet. Au loin, un autre personnage au chapeau large s'éloigne vers un gros tronc d'arbre noueux.",
+  "zoom": "Le personnage agrippe un tronc d'arbre. On peut également voir une corde jaune autour de son cou.",
+  "facts": null,
+  "description": "Dans une forêt sombre, trois créatures en forme de champignons à chapeaux rouges et points blancs entourent une bombe de peinture bleue ; l'une d'elles, au centre, agrippe le sommet de la bombe. Le garçon au chapeau bleu court dans la forêt, l'air effrayé, puis s'arrête en se cachant derrière un tronc d'arbre noueux, une corde jaune autour du cou. Au loin, une silhouette au chapeau large s'éloigne vers un gros tronc d'arbre.",
+  "budget_chars": 108,
+  "variants": [
+   "Trois champignons rouges entourent une bombe bleue. Le garçon au chapeau bleu court et se cache derrière un arbre.",
+   "Trois champignons rouges entourent une bombe bleue. Le garçon au chapeau bleu se cache derrière un arbre.",
+   "Trois champignons entourent une bombe bleue. Le garçon se cache."
+  ]
+ },
+ {
+  "id": "d_0012",
+  "window": [
+   346.3,
+   354.4
+  ],
+  "frames": [
+   347.3125,
+   349.3375,
+   351.3625,
+   353.3875
+  ],
+  "brightened": 0,
+  "raw_description": "Une petite fille aux cheveux noirs et aux boucles d'oreilles violettes est accroupie au sol, l'air effrayée, dans une forêt sombre. Devant elle, un couteau à manche rouge repose sur le sol. Plusieurs champignons rouges à points blancs se déplacent sur le sol de la forêt, s'éloignant de la jeune fille.",
+  "zoom": null,
+  "facts": null,
+  "description": "Accroupie au sol dans la forêt sombre, la petite fille aux cheveux noirs et aux boucles d'oreilles violettes a l'air effrayée. Devant elle, un couteau à manche rouge repose sur le sol. Plusieurs créatures en forme de champignons rouges à points blancs se déplacent sur le sol, s'éloignant de la jeune fille.",
+  "budget_chars": 100,
+  "variants": [
+   "Accroupie dans la forêt sombre, la petite fille aux boucles d'oreilles violettes regarde un couteau au manche rouge. Des champignons rouges s'éloignent d'elle.",
+   "La petite fille regarde un couteau au manche rouge. Des champignons rouges s'éloignent.",
+   "La petite fille regarde un couteau. Des champignons s'éloignent."
+  ]
+ },
+ {
+  "id": "d_0013",
+  "window": [
+   355.1,
+   357.2
+  ],
+  "frames": [
+   355.45000000000005,
+   356.15,
+   356.85
+  ],
+  "brightened": 0,
+  "raw_description": "Dans une forêt sombre et brumeuse, un homme blond à la peau claire porte un gilet bleu et un short à carreaux. Il lève un bâton en bois au-dessus de son épaule, l'air inquiet, les yeux fixés vers le bas. Devant lui, un petit champignon rose à pois blancs est planté dans un trou d'un tronc d'arbre couché.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans une forêt sombre et brumeuse, l'homme blond lève un bâton en bois au-dessus de son épaule, le regard dirigé vers le bas. Devant lui, un petit champignon rose à pois blancs est planté dans un trou d'un tronc d'arbre couché.",
+  "budget_chars": 22,
+  "variants": [
+   "L'homme blond regarde un champignon.",
+   "L'homme regarde un champignon.",
+   "L'homme regarde."
+  ]
+ },
+ {
+  "id": "d_0014",
+  "window": [
+   359.7,
+   362.4
+  ],
+  "frames": [
+   360.03749999999997,
+   360.7125,
+   361.3875,
+   362.0625
+  ],
+  "brightened": 0,
+  "raw_description": "Cinq petits personnages en forme de champignons rouges à pois blancs, aux visages grincheux, avancent sur un sol sombre en brandissant des bâtons ou des massues. Ils font face à une femme aux cheveux orange ébouriffés, vêtue d'une robe violette et de bas résille, qui se tient debout devant une immense toile d'araignée. La femme lève les mains et affiche une expression de peur, tandis que plusieurs champignons rouges flottent autour d'elle dans la toile.",
+  "zoom": "Les personnages ne tiennent aucun objet et ne manipulent rien. On peut seulement reconnaître des toiles d'araignée et des champignons à pois blancs.",
+  "facts": null,
+  "description": "Cinq petits personnages en forme de champignons rouges à pois blancs, aux visages grincheux, avancent sur un sol sombre. Ils font face à la femme aux cheveux orange ébouriffés, vêtue d'une robe violette et de bas résille, qui se tient debout devant une immense toile d'araignée. La femme lève les mains et affiche une expression de peur, tandis que plusieurs champignons rouges flottent autour d'elle dans la toile.",
+  "budget_chars": 29,
+  "variants": [
+   "Cinq champignons l'encerclent.",
+   "Ils l'encerclent.",
+   "Ils l'entourent."
+  ]
+ },
+ {
+  "id": "d_0015",
+  "window": [
+   363.4,
+   367.2
+  ],
+  "frames": [
+   363.875,
+   364.825,
+   365.775,
+   366.72499999999997
+  ],
+  "brightened": 0,
+  "raw_description": "Une femme aux cheveux blonds ébouriffés est emprisonnée dans une toile d'araignée épaisse et sombre. De nombreux champignons rouges à points blancs flottent autour de son visage et de son corps. La femme a les yeux écarquillés et la bouche ouverte, affichant une expression de peur. En arrière-plan, une silhouette floue se tient debout dans l'obscurité.",
+  "zoom": null,
+  "facts": null,
+  "description": "La femme aux cheveux orange ébouriffés est emprisonnée dans une épaisse toile d'araignée sombre, les mains écartées de chaque côté. De nombreux champignons rouges à points blancs flottent autour de son visage et de son corps, tandis qu'elle affiche une expression de peur, les yeux écarquillés et la bouche ouverte. En arrière-plan, une silhouette floue se tient debout dans l'obscurité.",
+  "budget_chars": 44,
+  "variants": [
+   "La femme aux cheveux orange est emprisonnée.",
+   "Elle est dans une toile.",
+   "Elle est captive."
+  ]
+ },
+ {
+  "id": "d_0016",
+  "window": [
+   387.26,
+   393.4
+  ],
+  "frames": [
+   388.0275,
+   389.5625,
+   391.09749999999997,
+   392.6325
+  ],
+  "brightened": 0,
+  "raw_description": "Un personnage masculin à la peau brune, portant un bonnet bleu et un haut blanc, est allongé sur le sol dans l'obscurité, le corps recouvert de nombreuses escargots verts. À côté de lui repose une batte de baseball. Le personnage se redresse, les mains sur les oreilles et l'expression effrayée, tandis qu'une corde jaune descend verticalement à sa droite.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un personnage masculin à la peau brune et au bonnet bleu est allongé sur le sol dans l'obscurité, le corps recouvert de nombreux escargots verts. Une batte de baseball repose à ses côtés. Le personnage se redresse, les mains sur les oreilles et l'expression effrayée, tandis qu'une corde jaune descend verticalement à sa droite.",
+  "budget_chars": 74,
+  "variants": [
+   "Le garçon au chapeau bleu est couvert d'escargots verts au sol.",
+   "Le garçon au chapeau bleu est couvert d'escargots verts.",
+   "Le garçon est couvert d'escargots verts."
+  ]
+ },
+ {
+  "id": "d_0017",
+  "window": [
+   395.6,
+   397.7
+  ],
+  "frames": [
+   395.95000000000005,
+   396.65,
+   397.35
+  ],
+  "brightened": 0,
+  "raw_description": "Un personnage masculin portant un chapeau gris et une salopette bleue tombe au fond d'un puits sombre. Il regarde vers le haut avec une expression de peur. Au fond du puits, la lune bleue brille dans un ciel nocturne, entourée de silhouettes d'arbres. De nombreuses cordes jaunes descendent le long des parois rocheuses du puits.",
+  "zoom": null,
+  "facts": null,
+  "description": "Un personnage masculin portant un chapeau gris et une salopette bleue tombe dans un puits sombre, le regard dirigé vers le haut avec une expression de peur. De nombreuses cordes jaunes descendent verticalement le long des parois rocheuses du puits. Au fond, une lune bleue brille dans un ciel nocturne entouré de silhouettes d'arbres.",
+  "budget_chars": 22,
+  "variants": [
+   "L'homme tombe.",
+   "Il tombe."
+  ]
+ },
+ {
+  "id": "d_0018",
+  "window": [
+   405.8,
+   411.708333
+  ],
+  "frames": [
+   406.538541625,
+   408.015624875,
+   409.492708125,
+   410.969791375
+  ],
+  "brightened": 0,
+  "raw_description": "Une vue plongeante montre un trou sombre et circulaire s'ouvrant sur un ciel nocturne parsemé de petites créatures rouges aux yeux jaunes. La lune bleue brille au centre du ciel. En dessous, un poste de radio gris repose dans une eau trouble et verdâtre. Des bulles remontent à la surface de l'eau autour de l'appareil.",
+  "zoom": null,
+  "facts": null,
+  "description": "Une vue plongeante montre un trou circulaire s'ouvrant sur un ciel nocturne parsemé de petites créatures rouges aux yeux jaunes, avec une lune bleue brillante au centre. Au fond, un poste de radio gris repose dans une eau trouble et verdâtre, entouré de bulles qui remontent à la surface.",
+  "budget_chars": 71,
+  "variants": [
+   "Vue plongeante sur un trou ouvrant sur un ciel nocturne lunaire.",
+   "Un trou s'ouvre sur un ciel nocturne lunaire.",
+   "Vue plongeante vers un ciel nocturne."
+  ]
+ },
+ {
+  "id": "d_0019",
+  "window": [
+   411.708333,
+   420.4
+  ],
+  "frames": [
+   412.794791375,
+   414.967708125,
+   417.14062487499996,
+   419.31354162499997
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune fille aux cheveux noirs et aux boucles d'oreilles violettes se tient dans une forêt sombre. Elle porte une chemise bleue et un foulard rouge autour du cou. Son visage exprime la surprise ou l'effroi, la bouche grande ouverte et les yeux écarquillés.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans une forêt sombre, la petite fille aux cheveux noirs a la bouche grande ouverte et les yeux écarquillés. Elle porte un haut bleu et rouge avec un foulard rouge autour du cou et des boucles d'oreilles violettes.",
+  "budget_chars": 107,
+  "variants": [
+   "Dans une forêt sombre, la petite fille aux cheveux noirs a la bouche ouverte et les yeux écarquillés.",
+   "La petite fille aux cheveux noirs a la bouche ouverte et les yeux écarquillés.",
+   "La petite fille a la bouche ouverte et les yeux écarquillés."
+  ]
+ },
+ {
+  "id": "d_0020",
+  "window": [
+   440.5,
+   447.041667
+  ],
+  "frames": [
+   441.317708375,
+   442.953125125,
+   444.58854187500003,
+   446.223958625
+  ],
+  "brightened": 0,
+  "raw_description": "Dans une forêt sombre, un petit personnage vert portant un chapeau de champignon rouge à points blancs regarde avec effroi vers la droite. Plusieurs bretzels flottent dans l'air devant lui. Une jeune fille aux cheveux sombres et aux boucles d'oreilles violettes, tenant un bouquet de branches, regarde également vers la droite avec une expression inquiète. Un autre petit personnage vert au chapeau de champignon, avec des yeux jaunes brillants, court vers la droite en brandissant un bâton.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans une forêt sombre, une petite créature verte au chapeau de champignon rouge à points blancs, aux yeux jaunes brillants, court vers la droite en brandissant un bâton. À côté d'elle, la petite fille aux cheveux noirs, portant un haut bleu et rouge et des boucles d'oreilles violettes, tient un bouquet de branches et regarde vers la droite avec une expression inquiète. Plusieurs bretzels flottent dans l'air devant elles.",
+  "budget_chars": 79,
+  "variants": [
+   "Une créature verte au chapeau rouge court avec un bâton. La petite fille est inquiète.",
+   "Une créature verte court. La petite fille regarde avec inquiétude.",
+   "La créature court. La petite fille est inquiète."
+  ]
+ },
+ {
+  "id": "d_0021",
+  "window": [
+   447.041667,
+   453.208333
+  ],
+  "frames": [
+   447.81250025,
+   449.35416675,
+   450.89583325,
+   452.43749975
+  ],
+  "brightened": 0,
+  "raw_description": "Dans une forêt sombre, une petite créature verte avec un chapeau de champignon rouge à points blancs brandit une massue à pointes. Une petite fille aux cheveux noirs et aux boucles d'oreilles violettes, portant une chemise bleue et un bandana rouge, tient un sac blanc et semble effrayée. Elle regarde vers la gauche avec une expression de peur et de surprise.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans la forêt sombre, la petite fille aux cheveux noirs, portant un haut bleu et rouge et des boucles d'oreilles violettes, tient un sac blanc et regarde vers la gauche avec une expression de peur et de surprise. À côté d'elle, une petite créature verte au chapeau de champignon rouge à points blancs brandit une massue à pointes.",
+  "budget_chars": 74,
+  "variants": [
+   "Dans la forêt, la petite fille aux cheveux noirs regarde avec effroi.",
+   "La petite fille aux cheveux noirs semble terrifiée.",
+   "La petite fille est effrayée."
+  ]
+ },
+ {
+  "id": "d_0022",
+  "window": [
+   453.208333,
+   460.708333
+  ],
+  "frames": [
+   454.145833,
+   456.020833,
+   457.895833,
+   459.770833
+  ],
+  "brightened": 0,
+  "raw_description": "Dans une forêt sombre, une petite fille aux cheveux noirs et aux yeux écarquillés brandit un bâton. Elle tient un objet rouge et vert qui projette un liquide vert en l'air. Elle semble effrayée et regarde vers la gauche de l'image.",
+  "zoom": "Le personnage tient un bâton sur lequel est fixé un petit être vert et rouge qui projette une substance visqueuse jaune. On reconnaît également un bracelet jaune au poignet du personnage.",
+  "facts": null,
+  "description": "Dans la forêt sombre, la petite fille aux cheveux noirs, portant un haut bleu et rouge et des boucles d'oreilles violettes, brandit un bâton sur lequel est fixé un petit être vert et rouge qui projette une substance visqueuse jaune en l'air. Elle a les yeux écarquillés et la bouche ouverte, affichant une expression de peur, et regarde vers la gauche de l'image. Un bracelet jaune est visible à son poignet.",
+  "budget_chars": 92,
+  "variants": [
+   "Dans la forêt sombre, elle brandit un bâton sur lequel une créature projette du liquide jaune.",
+   "Elle brandit un bâton sur lequel une créature projette du liquide jaune.",
+   "Elle brandit un bâton projetant du liquide jaune."
+  ]
+ },
+ {
+  "id": "d_0023",
+  "window": [
+   460.708333,
+   467.73999999999995
+  ],
+  "frames": [
+   461.58729137499995,
+   463.345208125,
+   465.10312487499993,
+   466.861041625
+  ],
+  "brightened": 0,
+  "raw_description": "Dans une forêt sombre, un petit personnage vert avec un chapeau de champignon rouge à points blancs se tient debout sur le dos d'une jeune fille aux cheveux sombres. La jeune fille est allongée sur le sol, le regard inquiet et la bouche entrouverte. Elle porte une tenue bleue et des accessoires violets.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans la forêt sombre, la petite fille aux cheveux noirs est allongée sur le sol, le regard inquiet et la bouche entrouverte. Un petit être vert avec un chapeau de champignon rouge à points blancs se tient debout sur son dos.",
+  "budget_chars": 86,
+  "variants": [
+   "Allongée au sol dans la forêt sombre, la petite fille aux cheveux noirs est inquiète. Un petit être vert au chapeau de champignon se tient sur son dos.",
+   "La petite fille aux cheveux noirs est allongée, inquiète. Un petit être vert au chapeau de champignon est sur son dos.",
+   "La petite fille est allongée, effrayée. Un petit être vert est sur son dos."
+  ]
+ },
+ {
+  "id": "d_0024",
+  "window": [
+   468.04,
+   476.208333
+  ],
+  "frames": [
+   469.06104162500003,
+   471.103124875,
+   473.145208125,
+   475.187291375
+  ],
+  "brightened": 0,
+  "raw_description": "Dans une forêt sombre et brumeuse, une petite fille aux cheveux noirs et aux boucles d'oreilles violettes rampe sur le sol terreux. Elle porte un haut bleu et un short court, et semble effrayée, les yeux écarquillés et la bouche entrouverte. Elle tient un objet violet et jaune dans ses mains devant elle.",
+  "zoom": "Le personnage ne tient aucun objet et ne manipule rien. On peut seulement reconnaître des boucles d'oreilles violettes et un bracelet jaune.",
+  "facts": null,
+  "description": "Dans la forêt sombre et brumeuse, la petite fille aux cheveux noirs rampe sur le sol terreux, les yeux écarquillés et la bouche entrouverte. Elle porte un haut bleu et rouge, des boucles d'oreilles violettes et un bracelet jaune.",
+  "budget_chars": 100,
+  "variants": [
+   "Dans la forêt brumeuse, la petite fille aux cheveux noirs rampe au sol, les yeux écarquillés.",
+   "La petite fille aux cheveux noirs rampe au sol, terrifiée.",
+   "Elle rampe au sol, les yeux écarquillés."
+  ]
+ },
+ {
+  "id": "d_0025",
+  "window": [
+   476.208333,
+   479.3
+  ],
+  "frames": [
+   476.594791375,
+   477.367708125,
+   478.140624875,
+   478.913541625
+  ],
+  "brightened": 0,
+  "raw_description": "Dans une forêt sombre, un petit personnage en forme de champignon rouge à points blancs émerge de derrière une branche d'arbre massive, tenant un couteau à la main. Une jeune fille aux cheveux noirs et aux boucles d'oreilles violettes est allongée au sol, le regard terrifié et la bouche ouverte. Elle semble regarder un objet ou une silhouette floue située au premier plan à gauche.",
+  "zoom": "Les personnages ne tiennent ni ne manipulent d'objets visibles sur ces images. L'environnement est composé de terre et de végétation sombre.",
+  "facts": null,
+  "description": "Derrière une branche massive, un petit personnage en forme de champignon rouge à points blancs émerge en tenant un couteau. Au sol, la petite fille aux cheveux noirs est allongée, le regard terrifié et la bouche ouverte, face à une silhouette floue au premier plan à gauche.",
+  "budget_chars": 34,
+  "variants": [
+   "Un champignon armé menace la fille.",
+   "Le champignon menace la fille.",
+   "Le champignon menace."
+  ]
+ },
+ {
+  "id": "d_0026",
+  "window": [
+   488.4,
+   494.208333
+  ],
+  "frames": [
+   489.12604162499997,
+   490.57812487499996,
+   492.030208125,
+   493.482291375
+  ],
+  "brightened": 0,
+  "raw_description": "Un personnage de champignon rouge et blanc, à l'expression menaçante, brandit un couteau vers une jeune fille. La jeune fille est allongée au sol, le regard terrifié et la bouche ouverte. À côté d'elle, le champignon est maintenant au sol, renversé, avec une substance blanche qui s'en échappe.",
+  "zoom": null,
+  "facts": null,
+  "description": "Le personnage de champignon rouge à points blancs est au sol, renversé, avec une substance blanche qui s'écoule de sa base. À côté de lui, la petite fille aux cheveux noirs est allongée sur le sol, le regard dirigé vers le haut et la bouche ouverte.",
+  "budget_chars": 70,
+  "variants": [
+   "Le champignon rouge est renversé, une substance blanche s'en écoule. La petite fille est allongée, bouche ouverte.",
+   "Le champignon rouge coule. La petite fille est allongée.",
+   "Le champignon coule. La fille est allongée."
+  ]
+ },
+ {
+  "id": "d_0027",
+  "window": [
+   494.208333,
+   501.291667
+  ],
+  "frames": [
+   495.09374975,
+   496.86458325,
+   498.63541675,
+   500.40625025
+  ],
+  "brightened": 0,
+  "raw_description": "Un petit oiseau jaune aux ailes déployées est perché sur une branche d'arbre dans une forêt sombre. Une jeune fille aux cheveux bleus et aux boucles d'oreilles violettes est allongée sur le sol, le regard dirigé vers le haut avec une expression surprise. Elle porte un haut bleu et un short beige. Dans la scène suivante, la jeune fille est au sol, les yeux écarquillés, face à une forme floue et imposante au premier plan à droite. Elle semble regarder vers cet élément massif.",
+  "zoom": "La petite fille ne tient aucun objet, mais elle porte des chaussures marron et des boucles d'oreilles violettes. On peut également voir un petit oiseau jaune perché sur une branche d'arbre.",
+  "facts": null,
+  "description": "Un petit oiseau jaune aux ailes déployées est perché sur une branche d'arbre dans une forêt sombre. La petite fille aux cheveux noirs est allongée sur le sol, le regard dirigé vers le haut avec une expression surprise. Elle porte un haut bleu et un short beige.",
+  "budget_chars": 86,
+  "variants": [
+   "Un oiseau jaune aux ailes déployées est sur une branche. La petite fille regarde en haut, surprise.",
+   "Un oiseau jaune est sur une branche. La petite fille regarde en haut, surprise.",
+   "Un oiseau jaune est sur une branche. Elle regarde en haut."
+  ]
+ },
+ {
+  "id": "d_0028",
+  "window": [
+   501.291667,
+   508.125
+  ],
+  "frames": [
+   502.145833625,
+   503.85416687500003,
+   505.562500125,
+   507.270833375
+  ],
+  "brightened": 0,
+  "raw_description": "Dans une forêt sombre et dense, une petite fille aux cheveux noirs et aux yeux écarquillés regarde vers la gauche avec un air inquiet. Elle porte un haut bleu, un short beige et un sac à dos violet. Elle tient une lanière violette dans sa main gauche.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans une forêt sombre et dense, la petite fille aux cheveux noirs, les yeux écarquillés et l'expression inquiète, regarde vers la gauche. Elle porte un haut bleu, un short beige et un sac à dos violet. Sa main gauche tient une lanière violette.",
+  "budget_chars": 83,
+  "variants": [
+   "Dans une forêt sombre, la petite fille aux cheveux noirs regarde vers la gauche, inquiète.",
+   "Inquiète, la petite fille aux cheveux noirs regarde vers la gauche.",
+   "La petite fille regarde vers la gauche, inquiète."
+  ]
+ },
+ {
+  "id": "d_0029",
+  "window": [
+   508.125,
+   513.791667
+  ],
+  "frames": [
+   508.833333375,
+   510.250000125,
+   511.666666875,
+   513.083333625
+  ],
+  "brightened": 0,
+  "raw_description": "Une branche d'arbre s'étire vers la droite, portant un ruban bleu auquel est attaché un petit objet vert. Au loin, une silhouette sombre semble flotter dans l'air entre deux arbres. Une jeune fille aux cheveux noirs, portant un haut bleu et un bracelet doré, se cache derrière un tronc d'arbre massif, l'air effrayée.",
+  "zoom": "Le personnage ne tient aucun objet et semble simplement s'agripper au tronc d'un arbre. On peut toutefois distinguer une montre au poignet de l'enfant.",
+  "facts": null,
+  "description": "Une branche d'arbre s'étire vers la droite, portant un ruban bleu auquel est attaché un petit objet vert. Au loin, une silhouette sombre semble flotter dans l'air entre deux arbres. La petite fille aux cheveux noirs, l'air effrayée, plaque ses mains contre le tronc d'un arbre massif.",
+  "budget_chars": 68,
+  "variants": [
+   "Une branche porte un ruban bleu et un objet vert. Une silhouette flotte.",
+   "Une branche porte un ruban bleu. Une silhouette flotte.",
+   "Une branche porte un ruban bleu."
+  ]
+ },
+ {
+  "id": "d_0030",
+  "window": [
+   513.791667,
+   520.5458335
+  ],
+  "frames": [
+   514.6359378125,
+   516.3244794374999,
+   518.0130210625,
+   519.7015626875
+  ],
+  "brightened": 0,
+  "raw_description": "Une jeune fille aux cheveux sombres et aux boucles d'oreilles violettes se cache derrière un large tronc d'arbre dans une forêt sombre. Elle semble effrayée, les yeux écarquillés et la bouche entrouverte. Elle plaque ses mains contre l'écorce de l'arbre, puis se plaque contre le tronc en fermant les yeux. Dans l'image suivante, elle se tient debout, le regard inquiet, face à l'arbre. Au loin, une autre silhouette humaine se tient debout près d'un arbre dans la pénombre.",
+  "zoom": null,
+  "facts": null,
+  "description": "La petite fille aux cheveux noirs, les yeux écarquillés et la bouche entrouverte, plaque ses mains contre l'écorce d'un large tronc d'arbre. Elle se plaque ensuite contre le bois en fermant les yeux. Au loin, une silhouette humaine se tient debout dans la pénombre près d'un arbre.",
+  "budget_chars": 82,
+  "variants": [
+   "La petite fille aux cheveux noirs plaque ses mains contre un tronc, puis ferme les yeux. Une silhouette se tient dans l'ombre.",
+   "La petite fille plaque ses mains contre un arbre et ferme les yeux. Une silhouette se dresse au loin.",
+   "La petite fille se plaque contre un arbre. Une silhouette se tient au loin."
+  ]
+ },
+ {
+  "id": "d_0031",
+  "window": [
+   520.5458335,
+   527.3
+  ],
+  "frames": [
+   521.3901043125,
+   523.0786459374999,
+   524.7671875625,
+   526.4557291875
+  ],
+  "brightened": 0,
+  "raw_description": "Dans une forêt sombre, un champignon rouge à points blancs occupe le premier plan. Le champignon possède un visage blanc avec des yeux jaunes et un nez vert, et il affiche une expression de colère ou de détermination en serrant les poings. L'arrière-plan montre des arbres et de la végétation dans la pénombre.",
+  "zoom": null,
+  "facts": null,
+  "description": "Dans une forêt sombre, un champignon rouge à points blancs occupe le premier plan. Ce champignon possède un visage blanc avec des yeux jaunes et un nez vert, et il serre ses poings verts. L'arrière-plan montre des arbres et de la végétation dans la pénombre.",
+  "budget_chars": 82,
+  "variants": [
+   "Un champignon rouge à points blancs au visage blanc et yeux jaunes serre ses poings verts.",
+   "Un champignon rouge à points blancs serre ses poings verts.",
+   "Un champignon rouge serre ses poings verts."
+  ]
+ },
+ {
+  "id": "d_0032",
+  "window": [
+   606.5,
+   613.375
+  ],
+  "frames": [
+   607.359375,
+   609.078125,
+   610.796875,
+   612.515625
+  ],
+  "brightened": 4,
+  "raw_description": "Il s'agit d'une série de génériques de fin de film présentés sur un fond noir. Les noms des crédits défilent en blanc, organisés en colonnes et en blocs de texte. Les versions éclaircies montrent les mêmes listes de noms, mais avec un contraste plus élevé sur un fond gris clair.",
+  "zoom": null,
+  "facts": null,
+  "description": "Sur un fond noir, des crédits de fin de film défilent en colonnes et en blocs de texte blanc. Les versions éclaircies présentent les mêmes listes de noms sur un fond gris clair avec un contraste plus élevé.",
+  "budget_chars": 84,
+  "variants": [
+   "Des crédits blancs défilent sur fond noir, puis sur fond gris clair.",
+   "Des crédits blancs défilent sur fond noir et gris clair.",
+   "Des crédits défilent sur fond noir et gris."
+  ]
+ },
+ {
+  "id": "d_0033",
+  "window": [
+   613.375,
+   620.25
+  ],
+  "frames": [
+   614.234375,
+   615.953125,
+   617.671875,
+   619.390625
+  ],
+  "brightened": 0,
+  "raw_description": "Un texte blanc sur fond sombre liste de nombreux noms de crédits. Le texte indique que « Sprite Fright is an Open Movie » et précise que les fichiers sources sont disponibles sur studio.blender.org. La mention « licensed as creative commons attribution 4.0 » et le copyright « © Blender Foundation » apparaissent en bas de l'écran.",
+  "zoom": null,
+  "facts": null,
+  "description": "Sur un fond sombre et flou, des crédits de fin de film défilent en texte blanc. Le texte indique que « Sprite Fright is an Open Movie », précise que les fichiers sources sont disponibles sur studio.blender.org, mentionne la licence « creative commons attribution 4.0 » et le copyright « © Blender Foundation » en bas de l'écran.",
+  "budget_chars": 84,
+  "variants": [
+   "Des crédits blancs défilent sur un fond sombre.",
+   "Les crédits défilent sur un fond sombre.",
+   "Les crédits défilent sur fond noir."
+  ]
+ },
+ {
+  "id": "d_0034",
+  "window": [
+   620.25,
+   626.441
+  ],
+  "frames": [
+   621.023875,
+   622.571625,
+   624.119375,
+   625.667125
+  ],
+  "brightened": 0,
+  "raw_description": "L'image est entièrement noire. Aucun personnage, objet, lieu ou texte n'est visible.",
+  "zoom": "inconnu",
+  "facts": null,
+  "description": "L'image est entièrement noire. Aucun personnage, objet, lieu ou texte n'est visible.",
+  "budget_chars": 75,
+  "variants": [
+   "L'écran est noir.",
+   "Noir total.",
+   "Écran noir."
+  ]
+ }
+]

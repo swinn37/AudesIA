@@ -305,7 +305,11 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026, puis le 4 octobre po
 - [x] Corpus et vérité terrain (§7) téléchargés ; précalcul sur la 5080 de l'extrait, de la parole et des plans (`eval/run_corpus.py --precompute`, 51 min pour les 74 min du corpus). Les images clés sont extraites à la description, en quelques secondes.
   - Sur les films entiers, Whisper hallucine pendant la musique : « I'm sorry » en boucle sur 131 s de Sintel, « DECO DECO… » et du chinois sur la VF. Ces boucles passaient le filtre de débit et auraient effacé des silences. Elles sont écartées par le critère de Whisper lui-même (texte qui se compresse plus de 2,4 fois).
   - Elles ralentissent aussi la transcription : 22 min pour les 15 min de Sintel VO. À faire : ne transcrire que les segments de parole de la VAD, ou plafonner les jetons par tranche de 30 s.
-- [ ] Run complet du corpus en profil `small` → résultats de référence archivés.
+- [x] Run complet du corpus en profil `small` (5 octobre 2026), résultats texte archivés dans `results/` par `eval/archive.py` (Sidiailles : chiffres seulement) :
+  - 419 descriptions placées sur 433, 72 % des silences couverts, 6,1 min de calcul par minute de vidéo ;
+  - contre la vérité terrain fiable (Sintel VO et VF), 98 % sans chevauchement des répliques (5 débordent de 0,4 s au plus), 87 % au critère strict ;
+  - juge (Qwen3.6 sous Ollama, notation seule) : exactitude 4,29, cohérence 4,76, concision 4,67, pertinence 3,53 sur 5 ; 11 % des descriptions à 2 ou moins en exactitude. Défauts : actions lues sur images fixes, personnages confondus, variante courte qui garde le premier de deux plans, génériques ;
+  - deux erreurs corrigées en route : chevauchement mesuré sur un film entier, fenêtres placées après la fin de l'image (VF de Sintel : 2 min 15 de son sans image).
 
 ### P2 — Pendant l'accès au GX10
 
@@ -387,7 +391,7 @@ Le corpus initial (Sintel, Tears of Steel, Spring) ne contenait qu'environ 3,5 m
 | --- | --- | --- | --- |
 | [Sintel](https://durian.blender.org/) (VO anglaise) | 14:48 | CC BY 3.0 | Film de la démo ; piste musique + effets officielle : vérité terrain exacte |
 | [Sintel, version française](https://peertube.touhoppai.moe/w/tZbHhmpfbC8vt2rw871P7A) (Touhoppai) | 17:03 | CC BY 3.0 et 4.0 | Le doublage est monté sur la même piste musique + effets (décalage de 28 ms) : vérité terrain exacte en français |
-| [Tears of Steel](https://download.blender.org/demo/movies/ToS/) (VO anglaise) | 12:14 | CC BY 3.0 | Acteurs réels ; la piste musique + effets sans dialogues donne un masque de parole exact (fichiers son BY-ND : évaluation uniquement, pas de redistribution de dérivé) |
+| [Tears of Steel](https://download.blender.org/demo/movies/ToS/) (VO anglaise) | 12:14 | CC BY 3.0 | Acteurs réels ; la piste musique + effets, bien calée, ne retire que 1,6 dB de musique du mixage final : vérité terrain non probante (fichiers son BY-ND : évaluation uniquement, pas de redistribution de dérivé) |
 | [Sprite Fright, version française](https://peertube.touhoppai.moe/w/9HXS5EWh4TNKME8tyVFCne) (Touhoppai) | 10:30 | CC BY 4.0 | Dialogues de groupe en français, 6 personnages récurrents, VTT français |
 | [Pepper&Carrot, épisode 6, VF](https://peertube.touhoppai.moe/w/rSSkd86E2C4ikCCwewZUsZ) | 7:37 | CC BY-SA 4.0 | Cas difficile : 51 % de parole, narrateur, visages 2D. La version audiodécrite sera aussi en BY-SA |
 | [Le trésor de Sidiailles](https://film.k-prod.fr/w/6k27hDT7PbR2oZNoGrsPjc) (Kintésens) | 11:56 | CC BY (métadonnées PeerTube) | Prises de vues réelles en français. Licence à faire confirmer par écrit. Enfants à l'écran : ne publier aucun recadrage de visage |
@@ -396,7 +400,7 @@ Le corpus initial (Sintel, Tears of Steel, Spring) ne contenait qu'environ 3,5 m
 - Témoin sans dialogue : Spring.
 - Référence de qualité : Elephants Dream, avec les audiodescriptions textuelles humaines de Silvia Pfeiffer (anglais, CC BY 4.0).
 - À exclure : Agent 327 (CC BY-ND).
-- Vérité terrain : masque de parole issu des pistes musique + effets pour Sintel (VO et VF) et Tears of Steel, soit 44 min sur 74. Les trois autres vidéos ont des sous-titres horodatés, trop lâches pour mesurer le chevauchement : ils restent affichés jusqu'à 2 s après la parole. Pour elles, la voix isolée par Demucs ou quelques minutes annotées à la main donneraient une vérité terrain.
+- Vérité terrain : masque de parole issu de la piste musique + effets de Sintel (VO et VF), soit 32 min sur 74 (musique retirée du résidu : 6,8 dB en VO, 20 dB en VF). Celle de Tears of Steel ne retire que 1,6 dB, 1,9 dB avec un gain par tranches : à reprendre par une soustraction fréquence par fréquence. Les trois autres vidéos ont des sous-titres horodatés, trop lâches pour mesurer le chevauchement : ils restent affichés jusqu'à 2 s après la parole. Pour elles, la voix isolée par Demucs ou quelques minutes annotées à la main donneraient une vérité terrain.
 
 ---
 

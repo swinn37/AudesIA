@@ -1,0 +1,866 @@
+{
+ "lag_s": -0.0314,
+ "gain": 0.745,
+ "music_attenuation_db": 1.6,
+ "truth_span_s": [
+  0.03,
+  734.03
+ ],
+ "outside_truth": 0,
+ "truth_speech_s": 73.7,
+ "truth": [
+  [
+   4.73,
+   6.53
+  ],
+  [
+   6.83,
+   8.13
+  ],
+  [
+   8.43,
+   9.03
+  ],
+  [
+   9.33,
+   9.93
+  ],
+  [
+   10.73,
+   11.13
+  ],
+  [
+   24.43,
+   30.23
+  ],
+  [
+   30.43,
+   32.43
+  ],
+  [
+   32.63,
+   34.53
+  ],
+  [
+   34.63,
+   36.03
+  ],
+  [
+   37.73,
+   38.53
+  ],
+  [
+   38.63,
+   43.53
+  ],
+  [
+   44.33,
+   45.23
+  ],
+  [
+   50.23,
+   51.83
+  ],
+  [
+   52.13,
+   52.73
+  ],
+  [
+   53.33,
+   53.63
+  ],
+  [
+   60.93,
+   62.43
+  ],
+  [
+   118.13,
+   118.73
+  ],
+  [
+   131.53,
+   132.93
+  ],
+  [
+   136.63,
+   137.43
+  ],
+  [
+   193.03,
+   194.73
+  ],
+  [
+   197.23,
+   198.33
+  ],
+  [
+   199.03,
+   200.63
+  ],
+  [
+   201.83,
+   202.83
+  ],
+  [
+   203.63,
+   204.63
+  ],
+  [
+   205.13,
+   207.83
+  ],
+  [
+   208.43,
+   208.73
+  ],
+  [
+   210.83,
+   211.43
+  ],
+  [
+   211.63,
+   212.43
+  ],
+  [
+   213.13,
+   214.13
+  ],
+  [
+   214.23,
+   214.83
+  ],
+  [
+   222.93,
+   223.73
+  ],
+  [
+   224.63,
+   226.03
+  ],
+  [
+   237.73,
+   238.43
+  ],
+  [
+   239.93,
+   240.53
+  ],
+  [
+   241.53,
+   242.53
+  ],
+  [
+   243.73,
+   244.23
+  ],
+  [
+   245.83,
+   246.43
+  ],
+  [
+   247.03,
+   247.63
+  ],
+  [
+   297.53,
+   298.33
+  ],
+  [
+   302.53,
+   303.13
+  ],
+  [
+   303.73,
+   304.23
+  ],
+  [
+   316.33,
+   316.83
+  ],
+  [
+   318.93,
+   320.23
+  ],
+  [
+   321.43,
+   322.83
+  ],
+  [
+   325.93,
+   327.83
+  ],
+  [
+   340.33,
+   341.43
+  ],
+  [
+   341.63,
+   342.23
+  ],
+  [
+   343.23,
+   343.93
+  ],
+  [
+   344.93,
+   346.43
+  ],
+  [
+   347.03,
+   349.93
+  ],
+  [
+   356.93,
+   357.73
+  ],
+  [
+   358.13,
+   359.03
+  ],
+  [
+   360.03,
+   360.73
+  ],
+  [
+   361.33,
+   363.13
+  ],
+  [
+   365.13,
+   365.93
+  ],
+  [
+   367.23,
+   368.53
+  ],
+  [
+   384.03,
+   385.13
+  ],
+  [
+   387.13,
+   388.73
+  ],
+  [
+   390.63,
+   392.63
+  ],
+  [
+   419.53,
+   420.13
+  ],
+  [
+   422.43,
+   422.93
+  ]
+ ],
+ "descriptions": 75,
+ "clean": 75,
+ "clean_rate": 1.0,
+ "clean_words": 75,
+ "clean_words_rate": 1.0,
+ "max_overlap_s": 0.0,
+ "detector_recall": 0.998,
+ "per_description": [
+  {
+   "id": "d_0001",
+   "start": 11.8,
+   "end": 17.232,
+   "text": "En contre-plongée, des jets de lumière blanche jaillissent de tuyaux massifs.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0002",
+   "start": 18.617,
+   "end": 22.85,
+   "text": "Un paysage industriel s'élève sous un ciel brumeux.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0003",
+   "start": 45.7,
+   "end": 49.133,
+   "text": "Deux silhouettes lumineuses face à des interfaces.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0004",
+   "start": 54.2,
+   "end": 60.03,
+   "text": "L'homme aux cheveux longs et au bandeau rouge observe un cerveau sur une assiette.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0005",
+   "start": 62.8,
+   "end": 69.268,
+   "text": "L'homme fixe un cerveau entouré de lueurs violettes. Le titre « TEARS OF STEEL » s'affiche.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0006",
+   "start": 70.117,
+   "end": 78.033,
+   "text": "Vue panoramique d'une ville industrielle sombre sous un ciel nuageux. Deux personnes gisent sur le pont d'un navire.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0007",
+   "start": 79.575,
+   "end": 83.164,
+   "text": "Une main tient un journal froissé sur les robots tueurs.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0008",
+   "start": 85.033,
+   "end": 89.972,
+   "text": "Un vaisseau steampunk survole une ville aux toits rouges dans une brume bleue.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0009",
+   "start": 92.617,
+   "end": 95.575,
+   "text": "Il vise avec une arme.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0010",
+   "start": 97.7,
+   "end": 105.685,
+   "text": "Un homme aux cheveux blancs dort sur une terrasse. Un tireur vise l'horizon. Un vaisseau survole une ville.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0011",
+   "start": 112.6,
+   "end": 114.598,
+   "text": "Un vaisseau survole la ville.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0012",
+   "start": 119.1,
+   "end": 123.895,
+   "text": "Un homme aux cheveux gris est allongé sur un lit dans l'obscurité.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0013",
+   "start": 125.28,
+   "end": 129.838,
+   "text": "L'homme se tient sur un balcon.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0014",
+   "start": 133.3,
+   "end": 134.967,
+   "text": "Il regarde vers la droite.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0015",
+   "start": 137.84,
+   "end": 142.955,
+   "text": "Sur un pont brumeux, l'homme aux cheveux gris fixe l'horizon.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0016",
+   "start": 143.492,
+   "end": 150.287,
+   "text": "L'homme aux cheveux gris tient une corde. Derrière, un homme noir est accroupi près d'un fusil.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0017",
+   "start": 151.96,
+   "end": 158.197,
+   "text": "L'homme au visage tendu vise avec une arme entre deux piliers de pierre.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0018",
+   "start": 159.5,
+   "end": 161.818,
+   "text": "L'homme barbu tient une corde.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0019",
+   "start": 163.14,
+   "end": 170.178,
+   "text": "De dos, l'homme aux cheveux gris fait face à une machine dorée dans une pièce délabrée jonchée de débris.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0020",
+   "start": 172.492,
+   "end": 175.049,
+   "text": "L'homme et la femme regardent à gauche.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0021",
+   "start": 177.906,
+   "end": 182.296,
+   "text": "La femme en tenue militaire et l'homme gris regardent à gauche.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0022",
+   "start": 183.66,
+   "end": 186.778,
+   "text": "L'homme barbu fait face à la caméra.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0023",
+   "start": 188.52,
+   "end": 190.992,
+   "text": "L'homme est dans les ruines.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0024",
+   "start": 217.48,
+   "end": 219.795,
+   "text": "L'homme en veste rouge lève les bras.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0025",
+   "start": 226.4,
+   "end": 230.156,
+   "text": "L'homme barbu est inquiet. Un homme tend le bras.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0026",
+   "start": 248.4,
+   "end": 250.477,
+   "text": "L'homme barbu est inquiet.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0027",
+   "start": 253.617,
+   "end": 260.974,
+   "text": "De dos, trois personnes font face à une rue colorée. Des lignes vertes et des graphiques numériques s'affichent.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0028",
+   "start": 261.693,
+   "end": 267.047,
+   "text": "Il marche sur un trottoir pavé et lève les yeux vers sa droite.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0029",
+   "start": 269.768,
+   "end": 275.286,
+   "text": "Un jeune homme aux cheveux noirs marche sur un pont pavé et regarde à gauche.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0030",
+   "start": 277.844,
+   "end": 283.041,
+   "text": "Il marche sur un pont et regarde à droite. Des bâtiments bordent un canal.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0031",
+   "start": 286.22,
+   "end": 292.05,
+   "text": "Un homme surpris et un officier sont dans un atelier encombré.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0032",
+   "start": 306.06,
+   "end": 311.653,
+   "text": "L'homme en veste bleue regarde une femme de profil dans une rue arborée.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0033",
+   "start": 312.575,
+   "end": 314.65,
+   "text": "L'homme de profil regarde.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0034",
+   "start": 330.12,
+   "end": 335.235,
+   "text": "À travers un cercle, un robot massif traverse des toits brumeux.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0035",
+   "start": 350.56,
+   "end": 355.756,
+   "text": "Une main robotique grise face à Tom. Texte rose.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0036",
+   "start": 393.7,
+   "end": 396.255,
+   "text": "Un masque mécanique sur son visage.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0037",
+   "start": 398.7,
+   "end": 402.768,
+   "text": "L'homme en veste marron a un dispositif sur l'œil droit.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0038",
+   "start": 404.242,
+   "end": 406.879,
+   "text": "Une main robotique touche ses lèvres.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0039",
+   "start": 411.3,
+   "end": 414.332,
+   "text": "Une silhouette blanche s'approche de l'homme.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0040",
+   "start": 416.825,
+   "end": 418.815,
+   "text": "L'homme aux lunettes est tendu.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0041",
+   "start": 423.0,
+   "end": 425.157,
+   "text": "L'homme fixe des codes numériques.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0042",
+   "start": 437.9,
+   "end": 444.206,
+   "text": "Une tour d'horloge sculptée s'élève. Une main gantée manipule une machine fumante.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0043",
+   "start": 445.075,
+   "end": 452.587,
+   "text": "L'homme aux cheveux bruns regarde avec surprise un robot cylindrique noir et blanc. Une femme est en arrière-plan.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0044",
+   "start": 453.533,
+   "end": 461.206,
+   "text": "L'homme aux cheveux bruns observe un petit robot blanc et noir en lévitation.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0045",
+   "start": 461.992,
+   "end": 465.909,
+   "text": "Quatre personnes manipulent des armes au sol.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0046",
+   "start": 467.82,
+   "end": 470.612,
+   "text": "L'homme inquiet tient un robot.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0047",
+   "start": 471.3,
+   "end": 476.325,
+   "text": "Quatre personnes en combinaisons blanches sont agenouillées, armes au poing.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0048",
+   "start": 479.158,
+   "end": 480.996,
+   "text": "L'homme est au sol.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0049",
+   "start": 482.46,
+   "end": 485.49,
+   "text": "L'homme noir a le regard humide.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0050",
+   "start": 490.22,
+   "end": 492.855,
+   "text": "Il tient une corde et une arme.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0051",
+   "start": 495.98,
+   "end": 499.576,
+   "text": "L'homme grimpe à la corde devant un orgue géant.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0052",
+   "start": 508.96,
+   "end": 510.556,
+   "text": "Il regarde en haut.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0053",
+   "start": 512.28,
+   "end": 517.636,
+   "text": "Il se tient sur un pont face à une immense structure métallique.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0054",
+   "start": 520.7,
+   "end": 525.724,
+   "text": "Dans un décor industriel en ruines, une machine s'active dans la fumée.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0055",
+   "start": 530.64,
+   "end": 534.55,
+   "text": "L'homme barbu regarde à droite devant une machine.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0056",
+   "start": 542.14,
+   "end": 545.255,
+   "text": "L'homme tend les mains vers la machine.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0057",
+   "start": 546.22,
+   "end": 550.776,
+   "text": "L'homme barbu pose ses mains sur une structure robotique usée.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0058",
+   "start": 553.033,
+   "end": 558.301,
+   "text": "L'homme barbu, inquiet, regarde à droite. Un autre homme tend les mains.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0059",
+   "start": 559.8,
+   "end": 560.756,
+   "text": "Il est surpris.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0060",
+   "start": 571.44,
+   "end": 577.744,
+   "text": "L'homme aux cheveux blancs tend les mains vers une machine métallique complexe sur un sol pavé.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0061",
+   "start": 579.82,
+   "end": 586.527,
+   "text": "Dans un hangar brumeux, une femme aux cheveux blancs et un homme marchent sur une passerelle métallique.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0063",
+   "start": 594.72,
+   "end": 597.991,
+   "text": "Des formes mécaniques s'animent sur fond noir.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0065",
+   "start": 606.38,
+   "end": 612.132,
+   "text": "À gauche, le titre « Cast » et une liste. À droite, une main bleue.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0066",
+   "start": 622.74,
+   "end": 631.614,
+   "text": "Un schéma technique bleu et blanc s'affiche sur fond noir parsemé d'orange. Le texte mentionne Blender. Le fond devient gris.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0067",
+   "start": 632.402,
+   "end": 637.917,
+   "text": "Sur un fond noir aux formes orange, les crédits techniques défilent en blanc.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0068",
+   "start": 642.064,
+   "end": 650.855,
+   "text": "Des graphiques et lignes bleues et orange parsèment le fond noir. Les crédits défilent en blanc.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0069",
+   "start": 651.727,
+   "end": 659.163,
+   "text": "Sur un fond noir parsemé de lignes et de cercles colorés, des listes de sponsors s'affichent en blanc.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0070",
+   "start": 661.389,
+   "end": 669.224,
+   "text": "Des listes de noms blancs s'affichent en colonnes sur fond noir, puis sur fond blanc.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0072",
+   "start": 680.713,
+   "end": 684.392,
+   "text": "Des colonnes de noms blancs occupent un écran noir.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0073",
+   "start": 690.376,
+   "end": 698.44,
+   "text": "Des noms blancs défilent en colonnes sur fond noir. En bas, un texte mentionne la Blender Foundation et le Netherlands Film Fund.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0074",
+   "start": 700.038,
+   "end": 708.994,
+   "text": "Sur fond noir, des logos et des noms de soutiens défilent, puis l'adresse du site et une licence s'affichent.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0075",
+   "start": 709.7,
+   "end": 715.698,
+   "text": "Un amas de débris métalliques rouillés s'étend sur l'écran sous une lumière latérale.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0076",
+   "start": 716.644,
+   "end": 722.8,
+   "text": "Un homme en veste bleue est assis parmi des débris, un fusil à la main.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0077",
+   "start": 723.589,
+   "end": 728.783,
+   "text": "L'homme tient un petit objet blanc et regarde vers la gauche.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  },
+  {
+   "id": "d_0078",
+   "start": 730.533,
+   "end": 732.129,
+   "text": "L'écran est noir.",
+   "overlap_s": 0.0,
+   "overlap_words_s": 0.0
+  }
+ ]
+}
