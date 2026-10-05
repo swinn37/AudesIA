@@ -143,6 +143,8 @@ En P1, un serveur local servira la même page, relancera lui-même la voix et le
 | `--voice` | Voix Qwen3-TTS : Vivian (par défaut), Serena, Ryan, Aiden… |
 | `--tts-model` | `Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice` si la mémoire vidéo manque |
 
+Pour comparer des rédacteurs, supprimer `descriptions.json` et relancer : la vision (descriptions brutes, détails agrandis, registre des personnages) est reprise de `vision.json`, et seules la révision, la rédaction, la voix et le mixage sont refaits. Sur *Sprite Fright*, cela ramène le run de 35 à 21 min.
+
 ### Sur le GX10 (profil `large`)
 
 Tout tourne sous Docker, sur un réseau interne sans accès sortant :
@@ -194,7 +196,7 @@ Les deux profils traitent le même corpus avec les mêmes entrées audio et visu
 
 | Mesure | Méthode | Objectif |
 | --- | --- | --- |
-| Chevauchement des dialogues | Contre la parole détectée, puis contre une vérité terrain : piste musique + effets sans dialogues de *Sintel* (celle de *Tears of Steel* ne retire presque rien du mixage) | 100 % par construction ; > 95 % contre la vérité terrain |
+| Chevauchement des dialogues | Contre la parole détectée, puis contre une vérité terrain : pistes musique + effets sans dialogues de *Sintel* et *Tears of Steel*, retranchées du mixage fréquence par fréquence | 100 % par construction ; > 95 % contre la vérité terrain |
 | Couverture | Part des silences utilisables qui reçoit une description | À mesurer |
 | Qualité | Comparaison par paires à l'aveugle, juge VLM extérieur aux deux chaînes, échantillon humain | Gain net du GX10 |
 | Hallucinations | Vérification humaine des mêmes 100 descriptions pour les deux profils | Taux comparé |
@@ -202,7 +204,7 @@ Les deux profils traitent le même corpus avec les mêmes entrées audio et visu
 | Mémoire | Relevé à 1 Hz sur l'hôte, par étape | Marge mesurée |
 | Hors ligne | Traitement complet dans un réseau Docker sans accès sortant | Réussi |
 
-Corpus (74 min, dont 64 % en français) : *Sintel* en version originale et en version française, *Tears of Steel* en version originale anglaise, *Sprite Fright* et *Pepper&Carrot* (épisode 6) en version française, *Le trésor de Sidiailles*. *Sintel*, en VO et en VF (32 min), a une piste musique + effets qui donne une vérité terrain exacte. Celle de *Tears of Steel*, bien calée, ne retire presque rien du mixage final : sa mesure n'est pas probante. Le détail est dans [corpus/corpus.toml](corpus/corpus.toml) et [AUDESIA.md](AUDESIA.md).
+Corpus (74 min, dont 64 % en français) : *Sintel* en version originale et en version française, *Tears of Steel* en version originale anglaise, *Sprite Fright* et *Pepper&Carrot* (épisode 6) en version française, *Le trésor de Sidiailles*. *Sintel* (VO et VF) et *Tears of Steel*, 44 min en tout, ont une piste musique + effets : retranchée du mixage fréquence par fréquence, elle donne une vérité terrain exacte. Le détail est dans [corpus/corpus.toml](corpus/corpus.toml) et [AUDESIA.md](AUDESIA.md).
 
 ```bash
 python corpus/download.py                    # environ 3,3 Go, dans corpus/media/
@@ -235,25 +237,34 @@ Profil `small` sur RTX 5080, sur les 6 vidéos du corpus (74 min), en une nuit :
 
 | Vidéo | Placées | Couverture | Sans chevauchement des répliques | Sans chevauchement d'aucune voix | Musique retirée du résidu | Calcul par minute de vidéo | Exactitude (juge) | Pertinence (juge) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| *Sintel*, VO | 113 sur 115 | 73 % | 110 sur 113 (97 %) | 101 sur 113 (89 %) | 6,8 dB | 9,2 min | 4,32 | 3,54 |
-| *Sintel*, VF | 94 sur 97 | 72 % | 92 sur 94 (98 %) | 80 sur 94 (85 %) | 20,0 dB | 6,2 min | 4,31 | 3,60 |
-| *Tears of Steel* | 75 sur 79 | 71 % | 75 sur 75, non probant | 75 sur 75, non probant | 1,6 dB | 5,3 min | 4,52 | 3,69 |
+| *Sintel*, VO | 113 sur 115 | 73 % | 108 sur 113 (96 %) | 88 sur 113 (78 %) | 15,1 dB | 9,2 min | 4,32 | 3,54 |
+| *Sintel*, VF | 94 sur 97 | 72 % | 92 sur 94 (98 %) | 79 sur 94 (84 %) | 21,0 dB | 6,2 min | 4,31 | 3,60 |
+| *Tears of Steel* | 75 sur 79 | 71 % | 74 sur 75 (99 %) | 72 sur 75 (96 %) | 14,0 dB | 5,3 min | 4,52 | 3,69 |
 | *Sprite Fright*, VF | 32 sur 35 | 69 % | — | — | — | 3,4 min | 3,91 | 3,28 |
 | *Pepper&Carrot* 6, VF | 26 sur 26 | 78 % | — | — | — | 4,0 min | 4,46 | 3,54 |
 | *Le trésor de Sidiailles* | 79 sur 81 | 69 % | — | — | — | 6,9 min | 4,13 | 3,35 |
-| **Total** | **419 sur 433** | **72 %** | **202 sur 207 (98 %)** | **181 sur 207 (87 %)** | | **6,1 min** | **4,29** | **3,53** |
+| **Total** | **419 sur 433** | **72 %** | **274 sur 282 (97 %)** | **239 sur 282 (85 %)** | | **6,1 min** | **4,29** | **3,53** |
 
-- **Dialogues respectés.** Contre la vérité terrain fiable (*Sintel*, VO et VF), 202 descriptions sur 207 (98 %) ne chevauchent aucune réplique : l'objectif de 95 % est atteint. Les 5 autres débordent de 0,4 s au plus. Au critère strict, cris et souffles compris, c'est 87 %, avec 1,2 s de chevauchement au plus.
-- **Vérité terrain de *Tears of Steel* : non probante.** Sa piste musique + effets est bien calée (décalage de 32 ms), mais elle ne retire que 1,6 dB de musique du mixage final, contre 20 dB pour la VF de *Sintel* : elle ne correspond pas assez à ce mixage. Un gain ajusté toutes les 2 à 10 s n'y change rien (1,9 dB). Le rapport marque donc cette mesure « non probante » et l'exclut du total. La vérité terrain exacte couvre 32 min sur 74 ; une soustraction fréquence par fréquence est la prochaine piste.
+- **Dialogues respectés.** Contre la vérité terrain (*Sintel* VO et VF, *Tears of Steel* : 44 min), 274 descriptions sur 282 (97 %) ne chevauchent aucune réplique : l'objectif de 95 % est atteint. Les 8 autres débordent de 1,2 s au plus, sauf une de 1,95 s : dans la scène du bébé dragon de *Sintel*, Silero entend une voix dans le résidu, que la détection du pipeline, faite sur le mixage complet, a manquée. Au critère strict, cris et souffles compris, c'est 85 %.
+- **Vérité terrain : soustraction fréquence par fréquence.** Les pistes musique + effets ne correspondent au mixage final qu'à une égalisation près. Retranchées avec un gain unique, elles ne retiraient que 1,7 dB de musique de *Tears of Steel* et 6,8 dB de *Sintel* VO. Avec un gain complexe par fréquence, estimé par tranches de 30 s, elles en retirent 14 et 15,1 dB.
+  - La vérité terrain de *Tears of Steel* devient exploitable : 97 % de son temps de parole tombe dans les sous-titres, et elle couvre 70 % de leur durée, contre 46 % avant.
+  - Plus propre, elle est aussi plus sévère. Au critère strict, *Sintel* VO passe de 89 à 78 % : des souffles et les cris du bébé dragon, auparavant noyés dans la musique, ressortent. Une part peut aussi venir de restes de musique dans les passages les plus forts, où le résidu dépasse d'environ 3 dB le reste attendu.
 - **Temps.** 6,1 min de calcul par minute de vidéo en moyenne, de 3,4 à 9,2 selon la densité des silences, pour un objectif de 5 sur le GX10. Le processus Python plafonne à 8 Gio de mémoire GPU pour la voix et la transcription, et Gemma 26B, qui occupe le reste de la carte, déborde sur le CPU.
 - **Qualité, selon le juge.** Qwen3.6 35B sous Ollama, absent de la chaîne `small`, note chaque description sur 6 images de sa fenêtre. Les descriptions sont justes et bien écrites : exactitude 4,29 sur 5, cohérence des personnages 4,76, concision 4,67. Mais elles omettent souvent l'action principale : pertinence 3,53. 45 descriptions sur 419 (11 %) n'ont que 1 ou 2 sur 5 en exactitude.
 - **Ce qui échoue, d'après ses raisons :**
   - les actions lues sur des images fixes : « ensevelie sous la neige » au lieu de « se relève », la même erreur en VO et en VF ; « s'éloigne » au lieu de « se rapproche » ;
   - les personnages confondus : un homme brun à la place de la jeune femme rousse, « elle » pour un homme ;
-  - les fenêtres qui enchaînent deux plans : la variante courte garde parfois le premier, très bref. Ainsi « Une cassette « VEEJAY » entre dans un lecteur » décrit une seconde de gros plan, au lieu de la jeune fille qui affronte les champignons pendant les six suivantes ;
+  - les fenêtres qui enchaînent deux plans : la variante courte garde parfois le premier, très bref. Ainsi « Une cassette « VEEJAY » entre dans un lecteur » décrit une seconde de gros plan, au lieu de la jeune fille qui affronte les champignons pendant les six suivantes. Donner au réviseur et au rédacteur la durée de chaque plan corrige ce cas, mais pas la pertinence d'ensemble : à l'aveugle sur *Sprite Fright*, l'ancienne rédaction l'emporte 8 fois contre 5 sur les 26 fenêtres à plusieurs plans, pertinence inchangée (3,42 contre 3,44). Le changement n'est pas retenu ;
   - les génériques : couleur du fond fausse, crédits omis ;
   - les descriptions trop courtes : « Une poule. », « L'homme menace. ».
-- **Le juge n'est pas infaillible.** Il qualifie parfois de « totalement fausse » une description juste sur une partie de la fenêtre, et ne voit que 6 images. Le taux d'hallucinations sera mesuré à la main, sur 100 silences tirés au sort (`results/hallucinations_small.json`).
+- **Le juge n'est pas infaillible.** Il qualifie parfois de « totalement fausse » une description juste sur une partie de la fenêtre, et ne voit que 6 images.
+- **Hallucinations, vérifiées à la main : 48 %.** Sur 100 silences tirés au sort et regardés en vidéo, à l'aveugle, 43 descriptions sur 89 jugées inventent ou se trompent (de 38 à 59 % à 95 % de confiance). Le critère est strict : une seule erreur suffit. Les notes du relecteur montrent surtout :
+  - des actions mal lues sur des images fixes : « gît sur le sol » au lieu de « suit la jeune femme », « est au sol » au lieu de « se lève » ;
+  - l'action principale manquée : « Une main tient un journal froissé » pour un homme qui dort, un journal sur le visage ; « La créature court » quand la petite fille lance des bretzels aux créatures ;
+  - des êtres et des objets mal reconnus : une « chauve-souris » pour le petit dragon, un « tissu sombre » pour une planche ;
+  - une action prêtée à une main anonyme plutôt qu'au personnage : « une main brandit une dague face à elle » quand elle s'avance, une dague à la main.
+
+  Le juge VLM n'en jugeait que 11 % grossièrement fausses (2 sur 5 ou moins en exactitude) : il sous-estime nettement les erreurs, et l'échantillon humain reste la mesure de référence. 9 réponses portent une note sans verdict et ne sont pas comptées. Réponses et comptage : `results/reponses_small.json`, `results/hallucinations_small.md`.
 - **Hors ligne.** Ce run tournait sous Windows, hors du réseau Docker sans sortie : la preuve hors ligne reste celle du run sous Docker (section [Sur le GX10](#sur-le-gx10-profil-large)).
 
 ### Extrait de *Sintel* (4 octobre 2026)

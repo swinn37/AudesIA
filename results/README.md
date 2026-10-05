@@ -12,7 +12,8 @@ Les chiffres sont dans [rapport.md](rapport.md) ; le [README du dépôt](../READ
 | --- | --- |
 | `rapport.md` | Rapport chiffré (`eval/report.py results`) : un tableau par vidéo, puis les notes du juge |
 | `juge_small.md`, `juge_small.json` | Notes du juge, description par description, avec sa raison |
-| `hallucinations_small.json` | Tirage des 100 silences à vérifier à la main ; il sert à compter les réponses |
+| `hallucinations_small.json` | Tirage des 100 silences vérifiés à la main ; il sert à compter les réponses |
+| `reponses_small.json`, `hallucinations_small.md` | Réponses du relecteur (verdict et note) et comptage : 48 % des descriptions jugées inventent ou se trompent |
 | `run_small.log`, `juge_small.log` | Journaux du run et du juge |
 | `small/<vidéo>/metrics.json` | Temps par étape, mémoire, requêtes et jetons, accès réseau |
 | `small/<vidéo>/overlap.json` | Chevauchement contre la vérité terrain (Sintel VO et VF, Tears of Steel) |
@@ -30,6 +31,8 @@ python eval/judge.py out/corpus/small --judge configs/judge-5080.toml
 python eval/hallucination_sample.py out/corpus/small
 python eval/archive.py small
 ```
+
+Les chevauchements (`overlap.json`, rapport) ont été recalculés le 5 octobre, la piste musique + effets étant désormais retranchée fréquence par fréquence ; le journal du run garde les anciens.
 
 Le journal du run garde deux erreurs corrigées en cours de route :
 - la mesure du chevauchement plantait sur un film entier (commit `c16d2fa`) ;

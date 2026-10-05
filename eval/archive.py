@@ -49,8 +49,14 @@ def main():
             for d in s["descriptions"] if s["video"] in private else []:
                 d["texte"] = d["texte"] and HIDDEN
         (DST / path.name).write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
-    for path in [*SRC.glob(f"hallucinations_{profile}*.md"), *SRC.glob(f"reponses_{profile}*.json")]:
-        shutil.copy2(path, DST / path.name)  # comptage et réponses : sans texte de description
+    for path in SRC.glob(f"hallucinations_{profile}*.md"):
+        shutil.copy2(path, DST / path.name)  # comptage : sans texte de description
+    for path in SRC.glob(f"reponses_{profile}*.json"):  # réponses : les notes décrivent parfois la scène
+        data = json.loads(path.read_text(encoding="utf-8-sig"))
+        for r in data["reponses"]:
+            if r["video"] in private and r.get("note"):
+                r["note"] = HIDDEN
+        (DST / path.name).write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
 
     log = SRC / f"run_{profile}.log"
     if log.exists():  # journal du run : la sortie des vidéos non publiables est retirée

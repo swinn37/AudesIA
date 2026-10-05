@@ -8,11 +8,11 @@ Calcul par minute de vidéo : durée des étapes de ce run, sans le précalcul (
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | pepper-carrot-6-vf | 7:37 | 26 sur 26 | 78 % | — | — | — | 4,0 min | 96 k / 7 k | 8,0 Gio | non |
 | sidiailles | 11:56 | 79 sur 81 | 69 % | — | — | — | 6,9 min | 302 k / 16 k | 8,0 Gio | non |
-| sintel-vf | 17:02 | 94 sur 97 | 72 % | 92 sur 94 (98 %) | 80 sur 94 (85 %) | 20,0 dB | 6,2 min | 369 k / 23 k | 8,0 Gio | non |
-| sintel-vo | 14:48 | 113 sur 115 | 73 % | 110 sur 113 (97 %) | 101 sur 113 (89 %) | 6,8 dB | 9,2 min | 393 k / 24 k | 8,0 Gio | non |
+| sintel-vf | 17:02 | 94 sur 97 | 72 % | 92 sur 94 (98 %) | 79 sur 94 (84 %) | 21,0 dB | 6,2 min | 369 k / 23 k | 8,0 Gio | non |
+| sintel-vo | 14:48 | 113 sur 115 | 73 % | 108 sur 113 (96 %) | 88 sur 113 (78 %) | 15,1 dB | 9,2 min | 393 k / 24 k | 8,0 Gio | non |
 | sprite-fright-vf | 10:26 | 32 sur 35 | 69 % | — | — | — | 3,4 min | 132 k / 8 k | 8,0 Gio | non |
-| tears-of-steel | 12:14 | 75 sur 79 | 71 % | 75 sur 75 (100 %) (non probant) | 75 sur 75 (100 %) (non probant) | 1,6 dB | 5,3 min | 288 k / 18 k | 8,0 Gio | non |
-| **Total** | 74:04 | 419 sur 433 | 72 % | 202 sur 207 (98 %) | 181 sur 207 (87 %) | | 6,1 min | | | |
+| tears-of-steel | 12:14 | 75 sur 79 | 71 % | 74 sur 75 (99 %) | 72 sur 75 (96 %) | 14,0 dB | 5,3 min | 288 k / 18 k | 8,0 Gio | non |
+| **Total** | 74:04 | 419 sur 433 | 72 % | 274 sur 282 (97 %) | 239 sur 282 (85 %) | | 6,1 min | | | |
 
 ## Juge qwen3.6:35b-a3b : small, notation seule
 
@@ -40,3 +40,9 @@ Descriptions les moins exactes :
 | sintel-vo | 6:36 | De dos, elle lève la main gauche face à l'objectif. | La description est totalement fausse car elle décrit une personne de dos levant la main gauche, alors que les images montrent clairement un personnage de face qui baisse et relève la tête. |
 | sprite-fright-vf | 5:07 | Une cassette « VEEJAY » entre dans un lecteur. | La description est totalement fausse et ne correspond pas aux images qui montrent une fille avec une lampe torche et des champignons verts. |
 | pepper-carrot-6-vf | 4:48 | Un oiseau jaune à perruque et perles crie sous une aura verte. | L'oiseau n'est plus vert mais jaune et l'aura verte a disparu. |
+
+## Hallucinations (vérification humaine, à l'aveugle)
+
+| Profil | Fidèles | Inventent ou se trompent | Je ne sais pas | Taux d'hallucinations |
+| --- | --- | --- | --- | --- |
+| small | 46 | 43 | 0 | 48 % |

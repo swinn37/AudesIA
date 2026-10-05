@@ -307,9 +307,14 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026, puis le 4 octobre po
   - Elles ralentissent aussi la transcription : 22 min pour les 15 min de Sintel VO. À faire : ne transcrire que les segments de parole de la VAD, ou plafonner les jetons par tranche de 30 s.
 - [x] Run complet du corpus en profil `small` (5 octobre 2026), résultats texte archivés dans `results/` par `eval/archive.py` (Sidiailles : chiffres seulement) :
   - 419 descriptions placées sur 433, 72 % des silences couverts, 6,1 min de calcul par minute de vidéo ;
-  - contre la vérité terrain fiable (Sintel VO et VF), 98 % sans chevauchement des répliques (5 débordent de 0,4 s au plus), 87 % au critère strict ;
+  - contre la vérité terrain (Sintel VO et VF, Tears of Steel), 97 % sans chevauchement des répliques (274 sur 282 ; 1,95 s au plus, dans la scène du bébé dragon), 85 % au critère strict ;
+  - pistes musique + effets retranchées fréquence par fréquence (gain complexe par tranches de 30 s), et non plus avec un gain unique : 14 dB de musique retirée de Tears of Steel au lieu de 1,7, 15,1 dB de Sintel VO au lieu de 6,8. La vérité terrain de Tears of Steel tombe à 97 % dans ses sous-titres et en couvre 70 % (46 % avant). Plus sévère, elle fait passer Sintel VO de 89 à 78 % au critère strict (souffles, cris du dragon, peut-être des restes de musique dans les passages forts) ;
   - juge (Qwen3.6 sous Ollama, notation seule) : exactitude 4,29, cohérence 4,76, concision 4,67, pertinence 3,53 sur 5 ; 11 % des descriptions à 2 ou moins en exactitude. Défauts : actions lues sur images fixes, personnages confondus, variante courte qui garde le premier de deux plans, génériques ;
+  - hallucinations vérifiées à la main, à l'aveugle, sur 100 silences tirés au sort : 43 descriptions sur 89 jugées inventent ou se trompent, soit 48 % (de 38 à 59 % à 95 % de confiance ; une seule erreur suffit). Surtout des actions mal lues sur images fixes, l'action principale manquée, des êtres et objets mal reconnus. Le juge VLM, bien plus indulgent, sous-estime ces erreurs : l'échantillon humain reste la référence pour comparer les profils ;
   - deux erreurs corrigées en route : chevauchement mesuré sur un film entier, fenêtres placées après la fin de l'image (VF de Sintel : 2 min 15 de son sans image).
+- [x] Cache de la vision (`vision.json` : descriptions brutes, détails agrandis, registre, liés au modèle de vision et au nombre d'images) : supprimer `descriptions.json` relance la révision et la rédaction seules. Sprite Fright : 21 min au lieu de 35.
+  - Premier usage, A/B de la rédaction sur Sprite Fright : donner au réviseur et au rédacteur la durée de chaque plan d'une fenêtre (la moitié des fenêtres en enchaînent plusieurs), pour que la variante courte garde l'action principale plutôt qu'un premier plan bref.
+  - Le cas visé est corrigé (la cassette « VEEJAY » d'une seconde laisse place aux lutins), mais le juge, à l'aveugle, préfère l'ancienne rédaction 8 fois contre 5 sur les 26 fenêtres à plusieurs plans, pertinence inchangée (3,42 contre 3,44). Changement non retenu : la faible pertinence vient surtout d'ailleurs (actions lues sur images fixes, personnages confondus).
 
 ### P2 — Pendant l'accès au GX10
 
@@ -317,7 +322,7 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026, puis le 4 octobre po
   - `scripts/docker.sh fetch gx10`, `build` puis `start gx10` (cache de pages vidé, serveurs démarrés un par un, relevé mémoire et garde-fou) ;
   - run complet du corpus avec la configuration principale ;
   - mesures clés : chevauchement contre vérité terrain, couverture, temps, mémoire ;
-  - A/B rapide du rédacteur sur 20 à 30 silences.
+  - A/B rapide du rédacteur sur 20 à 30 silences : supprimer `descriptions.json` et relancer avec un autre rédacteur ; la vision est reprise de `vision.json`.
 - [ ] Jour 2 : plusieurs vidéos en parallèle (débit).
 - [ ] Jour 3 : balayage de modèles de classe 120B (§5), juge VLM extérieur, ablations (sans contexte, sans personnages, avec la vérification fait par fait).
   - Juge : copier `out/corpus/small` (résultats de la 5080) sur le GX10, `scripts/docker.sh stop`, `fetch juge`, `start juge`, puis `py eval/judge.py out/corpus/small out/corpus/large`.
@@ -391,7 +396,7 @@ Le corpus initial (Sintel, Tears of Steel, Spring) ne contenait qu'environ 3,5 m
 | --- | --- | --- | --- |
 | [Sintel](https://durian.blender.org/) (VO anglaise) | 14:48 | CC BY 3.0 | Film de la démo ; piste musique + effets officielle : vérité terrain exacte |
 | [Sintel, version française](https://peertube.touhoppai.moe/w/tZbHhmpfbC8vt2rw871P7A) (Touhoppai) | 17:03 | CC BY 3.0 et 4.0 | Le doublage est monté sur la même piste musique + effets (décalage de 28 ms) : vérité terrain exacte en français |
-| [Tears of Steel](https://download.blender.org/demo/movies/ToS/) (VO anglaise) | 12:14 | CC BY 3.0 | Acteurs réels ; la piste musique + effets, bien calée, ne retire que 1,6 dB de musique du mixage final : vérité terrain non probante (fichiers son BY-ND : évaluation uniquement, pas de redistribution de dérivé) |
+| [Tears of Steel](https://download.blender.org/demo/movies/ToS/) (VO anglaise) | 12:14 | CC BY 3.0 | Acteurs réels ; la piste musique + effets, retranchée fréquence par fréquence, donne un masque de parole exact : 14 dB de musique retirée, contre 1,7 avec un gain unique (fichiers son BY-ND : évaluation uniquement, pas de redistribution de dérivé) |
 | [Sprite Fright, version française](https://peertube.touhoppai.moe/w/9HXS5EWh4TNKME8tyVFCne) (Touhoppai) | 10:30 | CC BY 4.0 | Dialogues de groupe en français, 6 personnages récurrents, VTT français |
 | [Pepper&Carrot, épisode 6, VF](https://peertube.touhoppai.moe/w/rSSkd86E2C4ikCCwewZUsZ) | 7:37 | CC BY-SA 4.0 | Cas difficile : 51 % de parole, narrateur, visages 2D. La version audiodécrite sera aussi en BY-SA |
 | [Le trésor de Sidiailles](https://film.k-prod.fr/w/6k27hDT7PbR2oZNoGrsPjc) (Kintésens) | 11:56 | CC BY (métadonnées PeerTube) | Prises de vues réelles en français. Licence à faire confirmer par écrit. Enfants à l'écran : ne publier aucun recadrage de visage |
@@ -400,7 +405,7 @@ Le corpus initial (Sintel, Tears of Steel, Spring) ne contenait qu'environ 3,5 m
 - Témoin sans dialogue : Spring.
 - Référence de qualité : Elephants Dream, avec les audiodescriptions textuelles humaines de Silvia Pfeiffer (anglais, CC BY 4.0).
 - À exclure : Agent 327 (CC BY-ND).
-- Vérité terrain : masque de parole issu de la piste musique + effets de Sintel (VO et VF), soit 32 min sur 74 (musique retirée du résidu : 6,8 dB en VO, 20 dB en VF). Celle de Tears of Steel ne retire que 1,6 dB, 1,9 dB avec un gain par tranches : à reprendre par une soustraction fréquence par fréquence. Les trois autres vidéos ont des sous-titres horodatés, trop lâches pour mesurer le chevauchement : ils restent affichés jusqu'à 2 s après la parole. Pour elles, la voix isolée par Demucs ou quelques minutes annotées à la main donneraient une vérité terrain.
+- Vérité terrain : masque de parole issu des pistes musique + effets de Sintel (VO et VF) et Tears of Steel, soit 44 min sur 74, retranchées du mixage fréquence par fréquence (musique retirée du résidu : 15,1 dB en VO, 21 dB en VF, 14 dB pour Tears of Steel). Avec un gain unique, Tears of Steel ne perdait que 1,7 dB de musique. Les trois autres vidéos ont des sous-titres horodatés, trop lâches pour mesurer le chevauchement : ils restent affichés jusqu'à 2 s après la parole. Pour elles, la voix isolée par Demucs ou quelques minutes annotées à la main donneraient une vérité terrain.
 
 ---
 

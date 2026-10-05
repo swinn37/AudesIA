@@ -1,0 +1,639 @@
+{
+ "cle": "626c32630c7d",
+ "reponses": [
+  {
+   "video": "pepper-carrot-6-vf",
+   "id": "d_0001",
+   "place": 1,
+   "note": "Elle se réveille, ouvre un oeil, dans les nuages."
+  },
+  {
+   "video": "pepper-carrot-6-vf",
+   "id": "d_0005",
+   "place": 1,
+   "note": "les yeux écarquillés"
+  },
+  {
+   "video": "pepper-carrot-6-vf",
+   "id": "d_0012",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "pepper-carrot-6-vf",
+   "id": "d_0025",
+   "place": 1,
+   "verdict": "fidele",
+   "note": ""
+  },
+  {
+   "video": "sidiailles",
+   "id": "d_0014",
+   "place": 1,
+   "verdict": "invente",
+   "note": "(description non publiée : évaluation locale seulement)"
+  },
+  {
+   "video": "sidiailles",
+   "id": "d_0016",
+   "place": 1,
+   "verdict": "invente",
+   "note": "(description non publiée : évaluation locale seulement)"
+  },
+  {
+   "video": "sidiailles",
+   "id": "d_0020",
+   "place": 1,
+   "verdict": "invente",
+   "note": "(description non publiée : évaluation locale seulement)"
+  },
+  {
+   "video": "sidiailles",
+   "id": "d_0021",
+   "place": 1,
+   "verdict": "invente",
+   "note": "(description non publiée : évaluation locale seulement)"
+  },
+  {
+   "video": "sidiailles",
+   "id": "d_0025",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sidiailles",
+   "id": "d_0027",
+   "place": 1,
+   "verdict": "invente",
+   "note": "(description non publiée : évaluation locale seulement)"
+  },
+  {
+   "video": "sidiailles",
+   "id": "d_0031",
+   "place": 1,
+   "verdict": "invente",
+   "note": "(description non publiée : évaluation locale seulement)"
+  },
+  {
+   "video": "sidiailles",
+   "id": "d_0034",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sidiailles",
+   "id": "d_0035",
+   "place": 1,
+   "verdict": "invente",
+   "note": "(description non publiée : évaluation locale seulement)"
+  },
+  {
+   "video": "sidiailles",
+   "id": "d_0037",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sidiailles",
+   "id": "d_0041",
+   "place": 1,
+   "verdict": "invente",
+   "note": "(description non publiée : évaluation locale seulement)"
+  },
+  {
+   "video": "sidiailles",
+   "id": "d_0047",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sintel-vf",
+   "id": "d_0003",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sintel-vf",
+   "id": "d_0010",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sintel-vf",
+   "id": "d_0013",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sintel-vf",
+   "id": "d_0018",
+   "place": 1,
+   "verdict": "invente",
+   "note": "Devant des maisons à colombages, elle regarde un fruit épineus."
+  },
+  {
+   "video": "sintel-vf",
+   "id": "d_0028",
+   "place": 1,
+   "verdict": "invente",
+   "note": "Une rousse saute dans la ruelle."
+  },
+  {
+   "video": "sintel-vf",
+   "id": "d_0043",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sintel-vf",
+   "id": "d_0045",
+   "place": 1,
+   "verdict": "invente",
+   "note": "Dans un paysage montagneux et brumeux, la jeune femme tient un bâton sculpté."
+  },
+  {
+   "video": "sintel-vf",
+   "id": "d_0054",
+   "place": 1,
+   "note": "Sintel regarde vers le haut, les yeux écarquillés et la bouche ouverte. Elle porte une tenue grise et une protection."
+  },
+  {
+   "video": "sintel-vf",
+   "id": "d_0056",
+   "place": 1,
+   "verdict": "invente",
+   "note": "Sintel s'avance dans la grotte une dague à la main"
+  },
+  {
+   "video": "sintel-vf",
+   "id": "d_0059",
+   "place": 1,
+   "note": "Sintel se penche vers une cavité rocheuse, intrigée."
+  },
+  {
+   "video": "sintel-vf",
+   "id": "d_0070",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sintel-vf",
+   "id": "d_0074",
+   "place": 1,
+   "verdict": "invente",
+   "note": "Sintel lève les yeux, craintive, le grotte se fissure."
+  },
+  {
+   "video": "sintel-vf",
+   "id": "d_0078",
+   "place": 1,
+   "verdict": "invente",
+   "note": "L'entrée de la grotte est bouchée, un arbre avec de grosses racines à côté."
+  },
+  {
+   "video": "sintel-vf",
+   "id": "d_0082",
+   "place": 1,
+   "verdict": "invente",
+   "note": "Une ceinture en cuir tombe par terre. Sintel marche, puis elle fait face aux montagnes brumeuses."
+  },
+  {
+   "video": "sintel-vf",
+   "id": "d_0084",
+   "place": 1,
+   "note": "Sintel s'avance face à des montagnes brumeuses sous une lumière dorée. Un couteau repose sur le sol."
+  },
+  {
+   "video": "sintel-vf",
+   "id": "d_0088",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0005",
+   "place": 1,
+   "verdict": "invente",
+   "note": "Inquiète, la jeune femme regarde autour d'elle."
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0006",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0017",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0018",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0019",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0021",
+   "place": 1,
+   "verdict": "invente",
+   "note": "Elle écarte une planche de la main droite."
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0028",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0033",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0036",
+   "place": 1,
+   "verdict": "invente",
+   "note": "Elle lève les yeux, face au petit dragon."
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0037",
+   "place": 1,
+   "verdict": "invente",
+   "note": "Une créature observe des oiseaux. La jeune femme court sur des marches de pierre."
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0039",
+   "place": 1,
+   "verdict": "fidele",
+   "note": "Vue en plongée, elle contemple l'horizon sous un ciel orangé."
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0043",
+   "place": 1,
+   "verdict": "invente",
+   "note": "Le petit dragon descend regarde Sintel effrayé"
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0048",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0049",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0054",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0058",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0060",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0062",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0065",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0068",
+   "place": 1,
+   "verdict": "invente",
+   "note": "Dans une grotte, elle s'avance avec une dague à la main."
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0070",
+   "place": 1,
+   "note": "Une créature grise mange une viande rouge. La jeune femme est effrayée."
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0071",
+   "place": 1,
+   "note": "la jeune femme observe la créature."
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0078",
+   "place": 1,
+   "verdict": "invente",
+   "note": "La jeune femme aux cheveux rouges évite le souffle enflammé de la créature"
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0082",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0083",
+   "place": 1,
+   "note": "Elle lève les yeux vers la créature.",
+   "verdict": "invente"
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0086",
+   "place": 1,
+   "verdict": "invente",
+   "note": "Une créature noire cornue gît sur le sol."
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0087",
+   "place": 1,
+   "verdict": "invente",
+   "note": "Une flaque rouge s'étale sur le sol rocheux. La jeune femme se regarde dans le reflet."
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0088",
+   "place": 1,
+   "verdict": "invente",
+   "note": "Elle regarde, terrifiée, une main gantée vers son visage."
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0089",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0091",
+   "place": 1,
+   "verdict": "invente",
+   "note": "Elle regarde en haut, le visage marqué, la grotte se fissure."
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0096",
+   "place": 1,
+   "note": "Un tronc s'élève à gauche. La femme est assises au bord d'une falaise."
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0097",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0098",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0102",
+   "place": 1,
+   "verdict": "invente",
+   "note": "Une créature ailée suit la jeune femme. Des fleurs blanches pendent."
+  },
+  {
+   "video": "sintel-vo",
+   "id": "d_0110",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sprite-fright-vf",
+   "id": "d_0002",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sprite-fright-vf",
+   "id": "d_0006",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "sprite-fright-vf",
+   "id": "d_0008",
+   "place": 1,
+   "verdict": "invente",
+   "note": "Une cassette « VEEJAY » s'allume dans un lecteur."
+  },
+  {
+   "video": "sprite-fright-vf",
+   "id": "d_0015",
+   "place": 1,
+   "verdict": "invente",
+   "note": "La femme se fait raser la tête par les champignons."
+  },
+  {
+   "video": "sprite-fright-vf",
+   "id": "d_0018",
+   "place": 1,
+   "verdict": "invente",
+   "note": "Les champignon jettent le lecteur dans le trou"
+  },
+  {
+   "video": "sprite-fright-vf",
+   "id": "d_0019",
+   "place": 1,
+   "verdict": "fidele",
+   "note": "Dans une forêt sombre, la petite fille aux cheveux noirs cours."
+  },
+  {
+   "video": "sprite-fright-vf",
+   "id": "d_0020",
+   "place": 1,
+   "verdict": "invente",
+   "note": "La petite fille lance des bretzels sur les créatures"
+  },
+  {
+   "video": "tears-of-steel",
+   "id": "d_0004",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "tears-of-steel",
+   "id": "d_0007",
+   "place": 1,
+   "verdict": "invente",
+   "note": "Un homme dort, un journal sur le visage"
+  },
+  {
+   "video": "tears-of-steel",
+   "id": "d_0017",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "tears-of-steel",
+   "id": "d_0018",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "tears-of-steel",
+   "id": "d_0023",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "tears-of-steel",
+   "id": "d_0027",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "tears-of-steel",
+   "id": "d_0031",
+   "place": 1,
+   "note": "Un homme et un officier sont dans un atelier encombré.",
+   "verdict": "invente"
+  },
+  {
+   "video": "tears-of-steel",
+   "id": "d_0034",
+   "place": 1,
+   "verdict": "invente",
+   "note": "À travers d'une longue-vue, il voit un robot massif traverse des toits."
+  },
+  {
+   "video": "tears-of-steel",
+   "id": "d_0038",
+   "place": 1,
+   "verdict": "invente",
+   "note": "Une main robotique aggripe son visage."
+  },
+  {
+   "video": "tears-of-steel",
+   "id": "d_0039",
+   "place": 1,
+   "verdict": "invente",
+   "note": "La femme se transforme en robot."
+  },
+  {
+   "video": "tears-of-steel",
+   "id": "d_0041",
+   "place": 1,
+   "verdict": "invente",
+   "note": "L'homme regarde le toit."
+  },
+  {
+   "video": "tears-of-steel",
+   "id": "d_0043",
+   "place": 1,
+   "verdict": "invente",
+   "note": "L'homme aux cheveux bruns lève sa main robotique noire et blanche. Une femme est en arrière-plan."
+  },
+  {
+   "video": "tears-of-steel",
+   "id": "d_0048",
+   "place": 1,
+   "verdict": "invente",
+   "note": "L'homme se lève."
+  },
+  {
+   "video": "tears-of-steel",
+   "id": "d_0050",
+   "place": 1,
+   "verdict": "invente",
+   "note": "Il descent à la corde et tire avec une arme."
+  },
+  {
+   "video": "tears-of-steel",
+   "id": "d_0052",
+   "place": 1,
+   "verdict": "invente",
+   "note": "Le robot lâche l'homme"
+  },
+  {
+   "video": "tears-of-steel",
+   "id": "d_0054",
+   "place": 1,
+   "verdict": "invente",
+   "note": "Le robot casse la machine"
+  },
+  {
+   "video": "tears-of-steel",
+   "id": "d_0058",
+   "place": 1,
+   "note": "L'homme barbu regarde le robot. Un autre homme les observe."
+  },
+  {
+   "video": "tears-of-steel",
+   "id": "d_0066",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "tears-of-steel",
+   "id": "d_0067",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "tears-of-steel",
+   "id": "d_0069",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "tears-of-steel",
+   "id": "d_0070",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "tears-of-steel",
+   "id": "d_0072",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "tears-of-steel",
+   "id": "d_0073",
+   "place": 1,
+   "verdict": "fidele"
+  },
+  {
+   "video": "tears-of-steel",
+   "id": "d_0075",
+   "place": 1,
+   "verdict": "fidele"
+  }
+ ]
+}

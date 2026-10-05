@@ -566,21 +566,25 @@ def describe(clip, segs, shots, profile, cps, out):
     (out / "frames").mkdir(exist_ok=True)
     wins = [w for sil in segs["silences"] for w in windows(sil, shots)]
 
+    def pictures(times):
+        """Images de la fenêtre (extraites une fois dans frames/), puis versions éclaircies des images à contre-jour."""
+        files = [out / "frames" / f"{t:08.2f}.jpg" for t in times]
+        for t, f in zip(times, files):
+            if not f.exists():
+                ff("-ss", t, "-i", clip, "-frames:v", 1, "-vf", "scale=1024:-2", "-q:v", 3, f)
+        bright = [as_image(brighten(f)) for f in files if backlit(f)]
+        return [as_image(f) for f in files], [{"type": "text", "text": "Versions éclaircies des images sombres :"},
+                                               *bright] if bright else []
+
     def look(k, w):
-        times, images, bright = frame_times(w, n_max), [], []
-        for t in times:
-            f = out / "frames" / f"{t:08.2f}.jpg"
-            ff("-ss", t, "-i", clip, "-frames:v", 1, "-vf", "scale=1024:-2", "-q:v", 3, f)
-            images.append(as_image(f))
-            if backlit(f):
-                bright.append(as_image(brighten(f)))
-        extra = [{"type": "text", "text": "Versions éclaircies des images sombres :"}, *bright] if bright else []
+        times = frame_times(w, n_max)
+        images, extra = pictures(times)
         # Images seules : en contexte, les répliques (« Cette lame… ») et les descriptions précédentes
         # amorçaient des inventions qui se propageaient d'une fenêtre à l'autre.
         raw = ask("vlm", DESCRIBE, [{"type": "text", "text": "Décris cette suite d'images."}, *images, *extra])
         print(f"  {k + 1}/{len(wins)}  {w[0]:6.1f}–{w[1]:6.1f} s  décrit ({len(images)} images, "
-              f"{len(bright)} éclaircies)", flush=True)
-        return {"id": f"d_{k:04d}", "window": w, "frames": times, "brightened": len(bright),
+              f"{max(len(extra) - 1, 0)} éclaircies)", flush=True)
+        return {"id": f"d_{k:04d}", "window": w, "frames": times, "brightened": max(len(extra) - 1, 0),
                 "raw_description": raw, "images": images, "extra": extra}
 
     def zoom(x):
@@ -593,16 +597,28 @@ def describe(clip, segs, shots, profile, cps, out):
         zoomed = [as_image(out / "frames" / f"{mid:08.2f}.jpg"), *[as_image(p) for p in tiles(clip, mid, out / "frames")]]
         return ask("vlm", ZOOM, [{"type": "text", "text": "Plan et détails agrandis :"}, *zoomed])
 
-    with ThreadPoolExecutor(max_workers=parallel) as pool:
-        items = list(pool.map(look, range(len(wins)), wins))
-        for x, z in zip(items, list(pool.map(zoom, items))):
-            x["zoom"] = z
-
-    # Une image par plan, pour que la même personne garde la même désignation tout au long de l'extrait.
-    picks = items if len(items) <= MAX_CAST else [items[int(i * len(items) / MAX_CAST)] for i in range(MAX_CAST)]
-    cast = [c for c in json_list(ask("vlm", CAST, [{"type": "text", "text": "Images, dans l'ordre :"},
-                                                  *[x["images"][len(x["images"]) // 2] for x in picks]],
-                                     json_mode=True), "personnages") if isinstance(c, dict)]
+    # Vision (descriptions brutes, détails agrandis, registre) gardée dans vision.json : supprimer descriptions.json
+    # relance la révision et la rédaction seules, pour comparer des rédacteurs sur les mêmes descriptions brutes.
+    cache, key = out / "vision.json", {"vlm": profile["vlm"]["model"], "max_images": n_max}  # autre vision : à refaire
+    saved = json.loads(cache.read_text(encoding="utf-8")) if cache.exists() else None
+    if saved and saved.get("key") == key and [x["window"] for x in saved["items"]] == wins:
+        items, cast = saved["items"], saved["cast"]
+        for x in items:
+            x["images"], x["extra"] = pictures(x["frames"])
+        print(f"  vision reprise de {cache.name} : {len(items)} fenêtres", flush=True)
+    else:
+        with ThreadPoolExecutor(max_workers=parallel) as pool:
+            items = list(pool.map(look, range(len(wins)), wins))
+            for x, z in zip(items, list(pool.map(zoom, items))):
+                x["zoom"] = z
+        # Une image par plan, pour que la même personne garde la même désignation tout au long de l'extrait.
+        picks = items if len(items) <= MAX_CAST else [items[int(i * len(items) / MAX_CAST)] for i in range(MAX_CAST)]
+        cast = [c for c in json_list(ask("vlm", CAST, [{"type": "text", "text": "Images, dans l'ordre :"},
+                                                      *[x["images"][len(x["images"]) // 2] for x in picks]],
+                                         json_mode=True), "personnages") if isinstance(c, dict)]
+        cache.write_text(json.dumps({"key": key, "items": [{k: v for k, v in x.items() if k not in ("images", "extra")}
+                                                           for x in items], "cast": cast}, ensure_ascii=False, indent=1),
+                         encoding="utf-8")
     registry = "\n".join(f"- {c.get('designation', '')} : {c.get('traits', '')}" for c in cast) or "aucun"
     (out / "personnages.json").write_text(json.dumps(cast, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"  registre : {[c.get('designation') for c in cast]}", flush=True)

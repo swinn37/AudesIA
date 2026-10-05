@@ -29,7 +29,7 @@ def mmss(seconds):
     return f"{int(seconds // 60)}:{int(seconds % 60):02d}"
 
 
-RELIABLE_DB = 3.0  # en dessous, le résidu garde presque toute la musique : vérité terrain non probante (Tears of Steel)
+RELIABLE_DB = 3.0  # en dessous, le résidu garde presque toute la musique : vérité terrain non probante
 
 
 def table(folder):

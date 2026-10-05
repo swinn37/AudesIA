@@ -2,7 +2,7 @@
 """Taux de descriptions sans chevauchement des dialogues réels (AUDESIA.md, §7).
 
 Vérité terrain : mixage original − piste musique + effets officielle, calée par corrélation croisée
-et ajustée en gain. Compte comme parole ce que Silero VAD détecte dans ce résidu, plus toute énergie
+puis retranchée fréquence par fréquence. Compte comme parole ce que Silero VAD détecte dans ce résidu, plus toute énergie
 de la bande vocale (300–3400 Hz) à plus de VOCAL_DB au-dessus de la fuite de musique : ce second
 critère attrape les chuchotements et les vocalises, au prix de quelques bruitages mal annulés.
 
@@ -23,6 +23,8 @@ from audesia_p0 import energy_speech, merge, plausible_segments, secs  # noqa: E
 
 SR = 16000
 SEARCH = 2.0      # s : décalage maximal cherché entre le film et la piste musique + effets
+NFFT, HOP = 1024, 256
+BLOCK = 30.0      # s : tranche sur laquelle le gain complexe de chaque fréquence est estimé
 
 
 def pcm(path, start, dur):
@@ -33,15 +35,26 @@ def pcm(path, start, dur):
 
 def residual(film, me, pad=0.0):
     """Cale me sur film (me lu avec SEARCH s de marge de chaque côté, dont pad s de zéros quand la marge tombe avant le
-    début de la piste), ajuste le gain, renvoie film − g·me, le décalage, le gain et les échantillons du film que la
-    piste couvre : elle peut finir avant le film (générique ajouté au doublage)."""
+    début de la piste), puis retranche du film, fréquence par fréquence et par tranches de BLOCK s, la part que me
+    explique. Renvoie le résidu, le décalage, le gain global et les échantillons du film que la piste couvre : elle peut
+    finir avant le film (générique ajouté au doublage)."""
+    from scipy.signal import istft, stft
     size = 2 * len(me)
     corr = np.fft.irfft(np.fft.rfft(me, size) * np.conj(np.fft.rfft(film, size)))[: int(2 * SEARCH * SR) + 1]
     lag = int(np.argmax(np.abs(corr)))
     covered = max(0, int(pad * SR) - lag), min(len(film), len(me) - lag)
     me = np.pad(me, (0, max(0, lag + len(film) - len(me))))[lag: lag + len(film)]
     g = float(np.dot(film, me) / np.dot(me, me))
-    return film - g * me, lag / SR - SEARCH, g, covered
+    # La piste fournie ne correspond au mixage qu'à une égalisation près : un gain unique ne retirait que 1,7 dB de
+    # musique de Tears of Steel (6,8 dB de Sintel VO) ; un gain complexe par fréquence en retire 12 (14).
+    _, _, F = stft(film, SR, nperseg=NFFT, noverlap=NFFT - HOP)
+    _, _, M = stft(me, SR, nperseg=NFFT, noverlap=NFFT - HOP)
+    n = int(BLOCK * SR / HOP)
+    for i in range(0, F.shape[1], n):
+        Fb, Mb = F[:, i:i + n], M[:, i:i + n]  # vues : F est modifié en place
+        Fb -= ((Fb * Mb.conj()).sum(axis=1) / ((np.abs(Mb) ** 2).sum(axis=1) + 1e-12))[:, None] * Mb
+    res = istft(F, SR, nperseg=NFFT, noverlap=NFFT - HOP)[1].astype(np.float32)
+    return np.pad(res, (0, max(0, len(film) - len(res))))[: len(film)], lag / SR - SEARCH, g, covered
 
 
 def overlap(a, b):
