@@ -7,7 +7,7 @@ des hallucinations s'ils existent, écrit dans out/corpus/rapport.md.
 """
 import json
 import sys
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 
 CORPUS = Path(__file__).resolve().parent.parent / "out" / "corpus"
@@ -74,6 +74,26 @@ def table(folder):
     return lines, models
 
 
+def memory(folder, corpus):
+    """Mémoire de l'hôte au plus haut et disponible au plus bas pendant chaque étape (relevé à 1 Hz de
+    scripts/bench_memory.sh, rattaché aux étapes horodatées de metrics.json) ; rien sans relevé."""
+    csv = next((p for p in (corpus / f"memoire_{folder.name}.csv", corpus.parent / "memoire.csv") if p.exists()), None)
+    if not csv:
+        return []
+    rows = [(datetime.fromisoformat(t).timestamp(), float(used), float(free)) for t, used, free, *_ in
+            (line.split(",") for line in csv.read_text(encoding="utf-8").splitlines()[1:] if line.strip())]
+    peaks = {}
+    for d in sorted(p for p in folder.iterdir() if (p / "metrics.json").exists()):
+        for s in load(d / "metrics.json").get("stages", []):
+            a, b = (datetime.fromisoformat(s[k]).timestamp() for k in ("debut", "fin"))
+            seen = [(u, f) for t, u, f in rows if a <= t <= b]
+            if seen:
+                p = peaks.setdefault(s["etape"], [0.0, float("inf")])
+                p[:] = max(p[0], max(u for u, _ in seen)), min(p[1], min(f for _, f in seen))
+    return ["| Étape | Mémoire utilisée au plus haut | Mémoire disponible au plus bas |", "| --- | --- | --- |",
+            *[f"| {k} | {num(u)} Gio | {num(f)} Gio |" for k, (u, f) in peaks.items()]] if peaks else []
+
+
 def main(corpus=CORPUS):
     out = [f"# Rapport du corpus ({date.today():%d/%m/%Y})", "",
            "Calcul par minute de vidéo : durée des étapes de ce run, sans le précalcul (extrait, parole, plans) "
@@ -85,6 +105,9 @@ def main(corpus=CORPUS):
         lines, models = table(folder)
         if len(lines) > 2:
             out += [f"## Profil {folder.name} : {', '.join(sorted(models))}", "", *lines, ""]
+        if mem := memory(folder, corpus):
+            out += ["Mémoire de l'hôte, relevée chaque seconde par scripts/bench_memory.sh, étape par étape (toutes "
+                    "vidéos confondues ; serveurs de modèles compris) :", "", *mem, ""]
     # Qualité : tableaux écrits par eval/judge.py et eval/hallucination_sample.py --score, s'ils existent.
     for extra in [*sorted(corpus.glob("juge_*.md")), *sorted(corpus.glob("hallucinations*.md"))] if corpus.exists() else []:
         out += [extra.read_text(encoding="utf-8").strip(), ""]

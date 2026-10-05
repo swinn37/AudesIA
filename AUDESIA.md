@@ -48,7 +48,7 @@ Source : règlement du challenge (Conditions Générales Gleam / ASUS). Ces moda
    - Les deux profils partagent la même partie audio (VAD, transcription, voix) et les mêmes entrées précalculées. Seuls le modèle de vision, le rédacteur et le contexte changent.
 3. **ARM64 dès le départ** (vérifié le 3 octobre 2026) :
    - Serveurs de modèles : image officielle `vllm/vllm-openai:v0.30.0` (arm64, CUDA 13.0), épinglée par digest, avec la v0.29.0 en repli. Les images NGC vLLM à partir de 26.04 ne démarrent pas sur le pilote R580 du GX10 ; NGC 26.02 en secours.
-   - Pipeline : image construite sur l'image vLLM (`docker/Dockerfile`), qui apporte CUDA 13 et PyTorch pour arm64 comme pour amd64. Elle est construite sur place sur le GX10 (`scripts/docker.sh build`), où ses couches sont déjà présentes pour les serveurs. Pas de test sous QEMU : l'émulation n'a pas de GPU.
+   - Pipeline : image construite sur l'image vLLM (`docker/Dockerfile`), qui apporte CUDA 13 et PyTorch pour arm64 comme pour amd64. Elle ne contient que les dépendances : le code est monté depuis le dépôt (une copie figée dans l'image a fait tourner un ancien pipeline sans prévenir, repéré le 5 octobre). Elle est construite sur place sur le GX10 (`scripts/docker.sh build`), où ses couches sont déjà présentes pour les serveurs. Pas de test sous QEMU : l'émulation n'a pas de GPU.
    - Vérifier les roues aarch64 avant l'accès : `pip download -r requirements.txt --only-binary=:all: --platform manylinux_2_28_aarch64 --python-version 3.12`. Fait le 4 octobre : les 23 paquets ajoutés à l'image vLLM ont une roue aarch64, sauf `sox`, du Python pur distribué en source.
    - Éviter toute dépendance sans roue aarch64. CTranslate2 (faster-whisper, WhisperX) n'a pas de roue CUDA pour aarch64 : sur le GX10, il tourne sur le CPU sans prévenir.
 4. **Tout mesurer.** Mémoire unifiée par étape, durée par étape, nombre de requêtes, tailles de batch. Logs JSON horodatés. Sur GB10, `nvidia-smi` affiche « Memory-Usage: Not Supported » et `docker stats` ne voit pas la mémoire CUDA : relever `/proc/meminfo`, `nvidia-smi --query-compute-apps` et les métriques vLLM (voir `scripts/bench_memory.sh`).
@@ -294,7 +294,8 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026, puis le 4 octobre po
   - Le modèle de 2B est trop petit pour la tâche : il invente un nom et ignore les longueurs, si bien que le calage n'a placé aucune de ses descriptions. Le test valide le chemin, pas la qualité.
 - [x] Image du pipeline (`docker/Dockerfile`) sur l'image vLLM, pour arm64 et amd64 : construite et testée sur la 5080 (amd64), roues aarch64 vérifiées. Sur le GX10, elle se construit sur place.
 - [x] `scripts/bench_memory.sh` : relevé mémoire à 1 Hz sur l'hôte et garde-fou qui tue les serveurs vLLM sous 8 Gio disponibles.
-- [ ] Marqueurs d'étape dans le relevé mémoire, pour attribuer la mémoire à chaque étape du pipeline.
+- [x] Marqueurs d'étape dans le relevé mémoire : chaque étape du pipeline est horodatée dans `metrics.json` (`stages`) ; `eval/report.py` y rattache le relevé de `bench_memory.sh` (mémoire au plus haut et disponible au plus bas, étape par étape), et `eval/archive.py` garde ce relevé, limité à la durée des runs.
+- [x] Jour 1 d'une traite : `scripts/jour1.sh` (modèles, image, serveurs, corpus en profil large, juge small contre large, échantillon d'hallucinations, rapport, archive), relançable étape par étape ; démarrages idempotents dans `scripts/docker.sh`. Vidéos en parallèle : `run_corpus.py --jobs N`, un journal par vidéo. Chemin `run_corpus --docker` testé de bout en bout sur la 5080 (profil test-vllm, Tears of Steel : étapes horodatées, `outbound_network: false`, chevauchement mesuré dans le conteneur). Ce test a révélé quatre défauts, corrigés : chemins Windows passés à Docker, bash de WSL lancé à la place de celui de Git, code figé dans l'image du pipeline (désormais monté depuis le dépôt), clip de plus de 30 s qui faisait planter la retranscription de contrôle.
 - [x] Preuve hors ligne : serveurs et pipeline sur un réseau Docker interne, vérification de l'accès sortant dans `metrics.json`. Run complet testé sur la 5080 le 4 octobre : 2 min 37 s pour 25 s de vidéo, `outbound_network: false`.
 - [x] `eval/run_corpus.py` (tout le corpus avec un profil, précalcul partagé, reprise après arrêt, chevauchement mesuré) et `eval/report.py` (un tableau par profil).
 - [x] Juge VLM extérieur (`eval/judge.py`) et échantillon de 100 silences pour la vérification humaine des hallucinations (`eval/hallucination_sample.py`).
@@ -318,12 +319,12 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026, puis le 4 octobre po
 
 ### P2 — Pendant l'accès au GX10
 
-- [ ] Jour 1 (doit suffire à lui seul) :
+- [ ] Jour 1 (doit suffire à lui seul), d'une traite par `scripts/jour1.sh` après avoir copié depuis la 5080 `corpus/media`, `out/corpus/commun` et les JSON de `out/corpus/small` (~7 Go) :
   - `scripts/docker.sh fetch gx10`, `build` puis `start gx10` (cache de pages vidé, serveurs démarrés un par un, relevé mémoire et garde-fou) ;
   - run complet du corpus avec la configuration principale ;
   - mesures clés : chevauchement contre vérité terrain, couverture, temps, mémoire ;
   - A/B rapide du rédacteur sur 20 à 30 silences : supprimer `descriptions.json` et relancer avec un autre rédacteur ; la vision est reprise de `vision.json`.
-- [ ] Jour 2 : plusieurs vidéos en parallèle (débit).
+- [ ] Jour 2 : plusieurs vidéos en parallèle (débit) : `cp configs/large.toml configs/large-x2.toml`, puis `run_corpus.py --profile large-x2 --docker --jobs 2` ; chaque pipeline en plus ajoute 6 à 8 Gio.
 - [ ] Jour 3 : balayage de modèles de classe 120B (§5), juge VLM extérieur, ablations (sans contexte, sans personnages, avec la vérification fait par fait).
   - Juge : copier `out/corpus/small` (résultats de la 5080) sur le GX10, `scripts/docker.sh stop`, `fetch juge`, `start juge`, puis `py eval/judge.py out/corpus/small out/corpus/large`.
   - La vérification humaine des hallucinations se fait ensuite sur la 5080, avec les résultats `large` rapatriés.

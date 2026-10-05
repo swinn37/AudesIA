@@ -151,7 +151,8 @@ Réponds uniquement en JSON : {"variantes": ["...", "...", "..."]}, trois varian
 décroissante, la première sans dépasser la longueur maximale indiquée."""
 
 TIMINGS = {}
-USAGE = {r: {"requests": 0, "prompt_tokens": 0, "completion_tokens": 0} for r in ("vlm", "writer")}  # metrics.json
+STAGES = []  # étapes horodatées (metrics.json) : la mémoire de l'hôte se rattache à chacune
+USAGE ={r: {"requests": 0, "prompt_tokens": 0, "completion_tokens": 0} for r in ("vlm", "writer")}  # metrics.json
 MAX_TOKENS = 1500   # par réponse : une description fait 3 à 5 phrases, un registre quelques lignes de JSON
 CONFIGS = Path(__file__).with_name("configs")  # profils small (RTX 5080) et large (GX10)
 
@@ -398,15 +399,21 @@ def video_length(path):
         return float("inf")
 
 
+def now():
+    return time.strftime("%Y-%m-%dT%H:%M:%S%z")  # avec le fuseau, comme le relevé mémoire de l'hôte (date -Iseconds)
+
+
 def step(name, fn, cache=None):
-    """Lance une étape, la chronomètre, et la met en cache dans un JSON si cache est donné."""
-    t0 = time.perf_counter()
+    """Lance une étape, la chronomètre, et la met en cache dans un JSON si cache est donné. Début et fin vont dans
+    STAGES : eval/report.py y rattache le relevé mémoire de scripts/bench_memory.sh, étape par étape."""
+    t0, start = time.perf_counter(), now()
     if cache and cache.exists():
         data = json.loads(cache.read_text(encoding="utf-8"))
     else:
         data = fn()
         if cache:
             cache.write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
+    STAGES.append({"etape": name, "debut": start, "fin": now()})
     TIMINGS[name] = round(time.perf_counter() - t0, 1)
     print(f"[{name}] {TIMINGS[name]} s", flush=True)
     return data
@@ -718,7 +725,10 @@ def voice(descs, segs, a, out):
             from transformers import pipeline
             asr = pipeline("automatic-speech-recognition", model=ASR_MODEL, dtype=torch.float16, device="cuda:0")
         audio = torchaudio.functional.resample(torch.from_numpy(wav), sr, 16000).numpy()
-        heard = asr({"raw": audio, "sampling_rate": 16000}, generate_kwargs={"language": "french", "task": "transcribe"})
+        # Au-delà de 30 s (voix emballée, ou variante qui ignore sa longueur), Whisper exige ses horodatages ; sans
+        # eux, la vidéo entière plantait. Un tel clip ne tient de toute façon dans aucune fenêtre.
+        heard = asr({"raw": audio, "sampling_rate": 16000}, return_timestamps=len(audio) > 30 * 16000,
+                    generate_kwargs={"language": "french", "task": "transcribe"})
         return missing_words(text, heard["text"])
 
     def synth(text):
@@ -983,6 +993,7 @@ def main():
     usable = sum(e - s for s, e in segs["silences"])
     metrics = {
         "timings_s": TIMINGS,
+        "stages": STAGES,
         "duration_s": round(segs["duration"], 1),
         "usable_silence_s": round(usable, 1),
         "windows": len(descs),

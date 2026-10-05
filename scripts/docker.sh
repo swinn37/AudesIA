@@ -40,6 +40,18 @@ drop_caches() {  # GB10 : jusqu'à ~28 Gio de cache de pages à rendre avant cha
   sudo -n sh -c 'sync; echo 3 > /proc/sys/vm/drop_caches' 2>/dev/null || echo "sans sudo : cache de pages non vidé" >&2
 }
 
+up() {  # $1 conteneur : vrai s'il tourne déjà (relance de scripts/jour1.sh) ; arrêté, il est retiré pour repartir
+  [ "$(docker inspect -f '{{.State.Running}}' "$1" 2>/dev/null)" = true ] && { echo "$1 tourne déjà"; return 0; }
+  docker rm -f "$1" >/dev/null 2>&1 || true
+  return 1
+}
+
+watch_memory() {  # relevé mémoire à 1 Hz et garde-fou : un seul à la fois
+  pgrep -f bench_memory.sh >/dev/null 2>&1 && return
+  mkdir -p out
+  nohup "$(dirname "$0")/bench_memory.sh" out/memoire.csv >> out/memoire.log 2>&1 &
+}
+
 wait_ready() {  # $1 conteneur, $2 port. Santé lue depuis le conteneur : le réseau interne n'est pas joignable de l'hôte.
   for _ in $(seq 360); do  # 30 min au plus
     docker exec "$1" curl -sf "http://127.0.0.1:$2/health" >/dev/null 2>&1 && { echo "$1 prêt"; return; }
@@ -73,28 +85,25 @@ case "${1:-} ${2:-}" in
     # distance, une machine gelée ne se redémarre pas. Donc 0,40 + 0,25 de la mémoire au plus, démarrages l'un
     # après l'autre, et garde-fou qui arrête les serveurs si la mémoire disponible passe sous 8 Gio.
     network
-    mkdir -p out
-    nohup "$(dirname "$0")/bench_memory.sh" out/memoire.csv >> out/memoire.log 2>&1 &
-    drop_caches
+    watch_memory
     # DeepGEMM dégrade la précision de Qwen3.6 sur Blackwell (vLLM #50332) : MoE en Triton.
-    docker run -d --name audesia-vision "${SERVER[@]}" -e VLLM_USE_DEEP_GEMM=0 "$IMG" \
+    up audesia-vision || { drop_caches; docker run -d --name audesia-vision "${SERVER[@]}" -e VLLM_USE_DEEP_GEMM=0 "$IMG" \
       Qwen/Qwen3.6-35B-A3B-FP8 --host 0.0.0.0 --port 8000 \
       --gpu-memory-utilization 0.40 --max-model-len 65536 --max-num-seqs 8 --max-num-batched-tokens 8192 \
       --limit-mm-per-prompt '{"image": 16, "video": 0}' --mm-processor-cache-gb 0 --moe-backend triton \
-      --reasoning-parser qwen3 --default-chat-template-kwargs '{"enable_thinking": false}'
+      --reasoning-parser qwen3 --default-chat-template-kwargs '{"enable_thinking": false}'; }
     wait_ready audesia-vision 8000
-    drop_caches
-    docker run -d --name audesia-writer "${SERVER[@]}" "$IMG" \
+    up audesia-writer || { drop_caches; docker run -d --name audesia-writer "${SERVER[@]}" "$IMG" \
       nvidia/Gemma-4-26B-A4B-NVFP4 --host 0.0.0.0 --port 8001 \
       --gpu-memory-utilization 0.25 --max-model-len 32768 --max-num-seqs 8 --max-num-batched-tokens 8192 \
       --limit-mm-per-prompt '{"image": 16, "audio": 0, "video": 0}' --mm-processor-kwargs '{"max_soft_tokens": 560}' \
       --mm-processor-cache-gb 0 --chat-template "$TEMPLATE/chat_template.jinja" \
-      --reasoning-parser gemma4 --default-chat-template-kwargs '{"enable_thinking": false}'
+      --reasoning-parser gemma4 --default-chat-template-kwargs '{"enable_thinking": false}'; }
     wait_ready audesia-writer 8001 ;;
   "start 5080")
     # 0,45 de 16 Go (~7 Gio) : Windows en occupe ~3, et le pipeline doit encore y charger la transcription puis la voix.
     network
-    docker run -d --name audesia-vision "${SERVER[@]}" "$IMG" \
+    up audesia-vision || docker run -d --name audesia-vision "${SERVER[@]}" "$IMG" \
       Qwen/Qwen3.5-2B --host 0.0.0.0 --port 8000 \
       --gpu-memory-utilization 0.45 --max-model-len 32768 --max-num-seqs 4 \
       --limit-mm-per-prompt '{"image": 10, "video": 0}' --mm-processor-cache-gb 0 \
@@ -108,22 +117,21 @@ case "${1:-} ${2:-}" in
       echo "arrêter d'abord les serveurs du pipeline : scripts/docker.sh stop" >&2; exit 1
     fi
     network
-    mkdir -p out
-    nohup "$(dirname "$0")/bench_memory.sh" out/memoire.csv >> out/memoire.log 2>&1 &
-    drop_caches
-    docker run -d --name audesia-judge "${SERVER[@]}" "$IMG" \
+    watch_memory
+    up audesia-judge || { drop_caches; docker run -d --name audesia-judge "${SERVER[@]}" "$IMG" \
       nvidia/Qwen3.5-122B-A10B-NVFP4 --host 0.0.0.0 --port 8000 \
       --gpu-memory-utilization 0.80 --max-model-len 16384 --max-num-seqs 4 \
       --limit-mm-per-prompt '{"image": 6, "video": 0}' --mm-processor-cache-gb 0 \
-      --reasoning-parser qwen3 --default-chat-template-kwargs '{"enable_thinking": false}'
+      --reasoning-parser qwen3 --default-chat-template-kwargs '{"enable_thinking": false}'; }
     wait_ready audesia-judge 8000 ;;
   "run "*)
     shift
     network
     writer=http://audesia-writer:8001/v1
     docker inspect audesia-writer >/dev/null 2>&1 || writer=http://audesia-vision:8000/v1  # 5080 : un seul serveur
+    # Le code du dépôt monté, pas la copie de l'image : figée à sa construction, elle tournerait sans prévenir.
     docker run "${WORKER[@]}" -e AUDESIA_VLM_URL=http://audesia-vision:8000/v1 -e AUDESIA_WRITER_URL="$writer" \
-      audesia-worker "$@" ;;
+      --entrypoint python3 audesia-worker audesia_p0.py "$@" ;;
   "py "*)  # un script Python du dépôt dans l'image du pipeline, par exemple : py eval/overlap.py ...
     shift
     network

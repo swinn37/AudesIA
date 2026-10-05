@@ -1,7 +1,3 @@
-# Liste blanche : l'image du pipeline n'a besoin que du code (pas des vidéos de out/).
+# Liste blanche : l'image du pipeline n'a besoin que de ses dépendances (ni du code, monté, ni des vidéos de out/).
 *
-!audesia_p0.py
-!relecture.html
-!configs/
-!eval/
 !docker/requirements.txt

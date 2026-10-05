@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Archive dans results/ les résultats texte d'un profil du corpus : métriques, chevauchement, descriptions, notes du
-juge, tirage de l'échantillon d'hallucinations et journaux, puis le rapport (eval/report.py results). Ni vidéo, ni
+juge, tirage de l'échantillon d'hallucinations, journaux et relevé mémoire de l'hôte (memoire_<profil>.csv, limité à la
+durée des runs), puis le rapport (eval/report.py results), mémoire par étape comprise. Ni vidéo, ni
 audio, ni image. Pour les vidéos marquées publish = false dans corpus/corpus.toml (enfants à l'écran), seuls les
 chiffres restent : leurs descriptions sont masquées partout.
 
@@ -10,6 +11,7 @@ import json
 import shutil
 import sys
 import tomllib
+from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -26,12 +28,25 @@ def main():
     profile = sys.argv[1]
     private = {v["id"] for v in tomllib.loads((ROOT / "corpus" / "corpus.toml").read_text(encoding="utf-8"))["video"]
                if v.get("publish") is False}
+    times = []
     for run in sorted(p for p in (SRC / profile).iterdir() if (p / "metrics.json").exists()):
         out = DST / profile / run.name
         out.mkdir(parents=True, exist_ok=True)
         for f in ("metrics.json",) if run.name in private else FILES:
             if (run / f).exists():
                 shutil.copy2(run / f, out / f)
+        log = SRC / profile / f"{run.name}.log"  # journal de la vidéo quand elles tournent en parallèle (--jobs)
+        if log.exists() and run.name not in private:
+            shutil.copy2(log, out / "journal.log")
+        times += [datetime.fromisoformat(s[k]).timestamp() for s in json.loads((run / "metrics.json").read_text(
+            encoding="utf-8")).get("stages", []) for k in ("debut", "fin")]
+
+    mem = ROOT / "out" / "memoire.csv"  # relevé de scripts/bench_memory.sh, réduit à la durée des runs du profil
+    if mem.exists() and times:
+        lines = mem.read_text(encoding="utf-8").splitlines()
+        keep = [x for x in lines[1:] if x.strip() and min(times) - 60 <= datetime.fromisoformat(x.split(",")[0]).timestamp()
+                <= max(times) + 60]
+        (DST / f"memoire_{profile}.csv").write_text("\n".join([lines[0], *keep]) + "\n", encoding="utf-8")
 
     for path in SRC.glob(f"juge_{profile}*.json"):  # notes du juge : les chiffres restent, les textes sont masqués
         data = json.loads(path.read_text(encoding="utf-8"))

@@ -150,7 +150,7 @@ Pour comparer des rédacteurs, supprimer `descriptions.json` et relancer : la vi
 Tout tourne sous Docker, sur un réseau interne sans accès sortant :
 
 - deux serveurs vLLM : Qwen3.6-35B-A3B (FP8) décrit les plans, Gemma 4 26B-A4B (NVFP4) relit chaque description sur les images puis rédige ;
-- l'image du pipeline (transcription, voix, mixage), construite sur l'image vLLM. Elle en hérite CUDA 13 et PyTorch, pour arm64 comme pour amd64, et partage ses couches avec elle.
+- l'image du pipeline (transcription, voix, mixage), construite sur l'image vLLM. Elle en hérite CUDA 13 et PyTorch, pour arm64 comme pour amd64, et partage ses couches avec elle. Elle n'apporte que les dépendances : le code vient du dépôt, monté dans le conteneur, et le modifier ne demande pas de reconstruire l'image.
 
 Les descriptions partent en parallèle, 8 requêtes à la fois, et vLLM les regroupe en lots.
 
@@ -160,6 +160,28 @@ scripts/docker.sh build        # image du pipeline, construite sur place en arm6
 scripts/docker.sh start gx10   # vision puis rédacteur, l'un après l'autre
 scripts/docker.sh run Sintel.2010.1080p.mkv --start 1:35 --end 3:35 --profile large
 scripts/docker.sh stop
+```
+
+**Le jour 1 en une commande.** `scripts/jour1.sh` enchaîne tout :
+- les modèles et l'image du pipeline, une seule fois ;
+- les serveurs, puis le corpus en profil `large` ;
+- le juge `small` contre `large` (Qwen3.5-122B, seul sur la machine) et l'échantillon d'hallucinations ;
+- le rapport, puis l'archive.
+
+Il se relance après un arrêt : chaque étape faite est sautée, et un juge qui ne démarre pas n'empêche ni le rapport ni l'archive. La chronologie de la journée va dans `out/jour1.log`. Avant, copier sur le GX10 le corpus, le précalcul de la 5080 et les résultats `small`, soit environ 7 Go :
+
+```bash
+tar cf gx10.tar corpus/media out/corpus/commun $(find out/corpus/small -name "*.json")  # sur la 5080
+tar xf gx10.tar && scripts/jour1.sh                                                       # sur le GX10, dans le dépôt
+```
+
+Le rapport donne alors la mémoire de l'hôte au plus haut, étape par étape : chaque étape du pipeline est horodatée dans `metrics.json`, et `eval/report.py` y rattache le relevé de `out/memoire.csv`.
+
+Pour mesurer le débit, `--jobs 2` traite deux vidéos à la fois, chacune avec son journal (`out/corpus/<profil>/<vidéo>.log`). Chaque pipeline en plus ajoute 6 à 8 Gio. Pour ne pas reprendre le run du jour 1, il faut lui donner un autre nom de profil :
+
+```bash
+cp configs/large.toml configs/large-x2.toml
+python3 eval/run_corpus.py --profile large-x2 --docker --jobs 2
 ```
 
 Chaque run vérifie qu'aucune connexion sortante n'aboutit, et le note dans `metrics.json` (`"outbound_network": false`) : c'est la preuve du 100 % local. Ce réseau fermé a déjà servi. Il a révélé un appel caché à l'API de Hugging Face, que transformers faisait à chaque chargement de la voix ; cet appel est désormais neutralisé.
