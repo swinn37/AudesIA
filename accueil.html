@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Audesia</title>
+<!-- Accueil de la page web locale (serveur.py) : dépôt d'une vidéo, traitements, avancement, exports. -->
+<style>
+  :root {
+    color-scheme: light dark;
+    --fond: #f5f4f0; --surface: #fff; --texte: #1c1b19; --doux: #5b5953; --ligne: #d8d4cb;
+    --accent: #1d5bb8; --sur-accent: #fff; --erreur: #b3261e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --fond: #151513; --surface: #1f1e1c; --texte: #ecebe7; --doux: #a9a69f; --ligne: #3b3a36;
+      --accent: #8db6ff; --sur-accent: #0b1a33; --erreur: #ff8f85;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fond); color: var(--texte); font: 16px/1.5 system-ui, "Segoe UI", sans-serif; }
+  header, main { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
+  header { padding-top: 20px; }
+  h1 { font-size: 1.5rem; margin: 0 0 4px; }
+  h2 { font-size: 1.1rem; margin: 0 0 12px; }
+  header p { margin: 0; color: var(--doux); }
+  main { display: grid; gap: 20px; padding-top: 16px; padding-bottom: 32px; }
+  section { background: var(--surface); border: 1px solid var(--ligne); border-radius: 10px; padding: 16px; min-width: 0; }
+  form { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; align-items: end; }
+  label { display: grid; gap: 4px; font-weight: 600; }
+  input, select { font: inherit; color: inherit; background: var(--fond); border: 1px solid var(--ligne);
+                  border-radius: 6px; padding: 6px 8px; min-width: 0; }
+  button, .bouton { font: inherit; color: var(--texte); background: var(--surface); border: 1px solid var(--ligne);
+                    border-radius: 6px; padding: 4px 10px; cursor: pointer; text-decoration: none; display: inline-block; }
+  button:hover, .bouton:hover { border-color: var(--doux); }
+  button.principal { background: var(--accent); color: var(--sur-accent); border-color: var(--accent); font-weight: 600;
+                     padding: 8px 16px; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  .aide { color: var(--doux); margin: 10px 0 0; }
+  progress { width: 100%; margin-top: 12px; }
+  #message { min-height: 1.5em; margin: 10px 0 0; font-weight: 600; }
+  .erreur { color: var(--erreur); }
+  .defile { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; }
+  th, td { text-align: left; vertical-align: top; padding: 10px 8px; border-top: 1px solid var(--ligne); }
+  thead th { border-top: 0; font-size: .85rem; color: var(--doux); font-weight: 600; }
+  .actions { display: flex; flex-wrap: wrap; gap: 6px; }
+  pre { font-family: ui-monospace, Consolas, monospace; font-size: .8rem; color: var(--doux); background: var(--fond);
+        border: 1px solid var(--ligne); border-radius: 6px; padding: 8px; white-space: pre-wrap; margin: 8px 0 0; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Audesia</h1>
+  <p>Audiodescription automatique en français, 100 % locale.</p>
+</header>
+<main>
+  <section aria-labelledby="t-depot">
+    <h2 id="t-depot">Nouvelle vidéo</h2>
+    <form id="depot">
+      <label>Vidéo <input id="fichier" type="file" accept="video/*" required></label>
+      <label>Nom <input id="nom" type="text" placeholder="d'après le fichier"></label>
+      <label>Début <input id="debut" type="text" inputmode="decimal" value="0" aria-describedby="aide-temps"></label>
+      <label>Fin <input id="fin" type="text" inputmode="decimal" placeholder="fin de la vidéo" aria-describedby="aide-temps"></label>
+      <label>Voix <select id="voix"><option>Vivian</option><option>Serena</option><option>Ryan</option><option>Aiden</option></select></label>
+      <button class="principal" type="submit">Déposer et lancer</button>
+    </form>
+    <p id="aide-temps" class="aide">Début et fin en secondes (95) ou en minutes:secondes (1:35). Sans fin : jusqu'au bout
+      de la vidéo.</p>
+    <progress id="envoi" max="1" value="0" hidden aria-label="Envoi de la vidéo"></progress>
+    <p id="message" role="status"></p>
+  </section>
+  <section aria-labelledby="t-liste">
+    <h2 id="t-liste">Traitements</h2>
+    <div class="defile">
+      <table>
+        <thead><tr><th scope="col">Nom</th><th scope="col">État</th><th scope="col">Actions</th></tr></thead>
+        <tbody id="liste"></tbody>
+      </table>
+    </div>
+    <p id="vide" class="aide">Aucun traitement pour l'instant.</p>
+  </section>
+</main>
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  const dire = (texte, erreur = false) => { $("#message").textContent = texte; $("#message").className = erreur ? "erreur" : ""; };
+  const ETATS = {en_cours: "en cours", fini: "fini", echec: "en échec", interrompu: "interrompu", en_attente: "en attente"};
+  const EXPORTS = [["mp4", "Vidéo MP4"], ["mkv", "MKV à deux pistes"], ["mp3", "Piste audiodécrite (MP3)"],
+                   ["vtt", "Descriptions (WebVTT)"], ["txt", "Script"]];
+  const lien = (href, texte, telecharger = false) => {
+    const a = Object.assign(document.createElement("a"), {href, textContent: texte, className: "bouton"});
+    if (telecharger) a.download = "";
+    return a;
+  };
+  const detail = async (r) => { try { return (await r.json()).detail; } catch { return `Erreur ${r.status}`; } };
+  let minuterie = null;
+
+  const ligne = (t) => {
+    const tr = document.createElement("tr"), nom = document.createElement("th");
+    const etat = document.createElement("td"), actions = document.createElement("td"), boutons = document.createElement("div");
+    nom.scope = "row";
+    nom.textContent = t.nom;
+    etat.textContent = ETATS[t.etat] ?? t.etat;
+    if (t.etat === "en_cours") etat.textContent += ` : étape ${t.rang} sur ${t.total}, ${t.etape}${t.detail ? `, ${t.detail}` : ""}`;
+    if (t.etat === "echec" || t.etat === "interrompu") {
+      const pre = document.createElement("pre");
+      pre.textContent = t.journal.slice(-8).join("\n");
+      etat.append(pre);
+    }
+    boutons.className = "actions";
+    if (t.relecture && t.etat !== "en_cours") boutons.append(lien(`/t/${t.nom}/relecture.html`, "Relire"));
+    if (t.etat === "fini") for (const [f, texte] of EXPORTS) boutons.append(lien(`/api/traitements/${t.nom}/export/${f}`, texte, true));
+    if (["echec", "interrompu", "en_attente"].includes(t.etat)) {
+      const b = Object.assign(document.createElement("button"), {type: "button", textContent: "Relancer"});
+      b.addEventListener("click", async () => {
+        const r = await fetch(`/api/traitements/${t.nom}/relancer`, {method: "POST"});
+        if (!r.ok) dire(await detail(r), true);
+        charger();
+      });
+      boutons.append(b);
+    }
+    actions.append(boutons);
+    tr.append(nom, etat, actions);
+    return tr;
+  };
+
+  const charger = async () => {
+    clearTimeout(minuterie);
+    const liste = await (await fetch("/api/traitements")).json();
+    $("#liste").replaceChildren(...liste.map(ligne));
+    $("#vide").hidden = liste.length > 0;
+    if (liste.some((t) => t.etat === "en_cours")) minuterie = setTimeout(charger, 2000);
+  };
+
+  $("#depot").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    // Refus demandé avant l'envoi : refusée pendant l'envoi, une grosse vidéo couperait la connexion sans message.
+    const pret = await fetch("/api/pret");
+    if (!pret.ok) return dire(await detail(pret), true);
+    const f = $("#fichier").files[0];
+    const q = new URLSearchParams({fichier: f.name, nom: $("#nom").value, debut: $("#debut").value,
+                                   fin: $("#fin").value, voix: $("#voix").value});
+    const x = new XMLHttpRequest();  // et non fetch : seul XMLHttpRequest suit l'avancement d'un envoi
+    x.open("POST", `/api/traitements?${q}`);
+    x.upload.onprogress = (p) => { if (p.lengthComputable) { $("#envoi").hidden = false; $("#envoi").value = p.loaded / p.total; } };
+    x.onload = () => {
+      $("#envoi").hidden = true;
+      let r;
+      try { r = JSON.parse(x.responseText); } catch { r = {detail: `Erreur ${x.status}`}; }
+      if (x.status === 200) { dire(`« ${r.nom} » est lancé.`); $("#depot").reset(); }
+      else dire(r.detail, true);
+      charger();
+    };
+    x.onerror = () => { $("#envoi").hidden = true; dire("Envoi interrompu.", true); };
+    dire("Envoi de la vidéo…");
+    x.send(f);
+  });
+
+  charger();
+})();
+</script>
+</body>
+</html>
