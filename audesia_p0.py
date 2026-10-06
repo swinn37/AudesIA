@@ -662,11 +662,12 @@ def describe(clip, segs, shots, profile, cps, out, redo=frozenset()):
     (out / "personnages.json").write_text(json.dumps(cast, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"  registre : {[c.get('designation') for c in cast]}", flush=True)
 
-    kept = {d["id"]: d for d in json.loads((out / "descriptions.json").read_text(encoding="utf-8"))} if redo else {}
+    # former, et non kept : kept désigne plus bas les faits retenus par la vérification.
+    former = {d["id"]: d for d in json.loads((out / "descriptions.json").read_text(encoding="utf-8"))} if redo else {}
     said, previous = [], "aucun"
     for k, x in enumerate(items):
         if redo and x["id"] not in redo:  # régénération : les autres fenêtres restent telles quelles
-            items[k] = kept[x["id"]]
+            items[k] = former[x["id"]]
             previous, said = items[k]["description"], said + items[k]["variants"][:1]
             continue
         w = x["window"]
@@ -980,6 +981,35 @@ def selftest():
         short = Path(tmp) / "court.mp4"
         ff("-f", "lavfi", "-i", "color=black:s=64x64:d=1", "-f", "lavfi", "-i", "anullsrc=d=2", "-c:v", "libx264", short)
         assert abs(video_length(short) - 1) < 0.1 and video_length(Path(tmp) / "absent.mp4") == float("inf")
+    # Régénération avec la vérification fait par fait (profil test-vllm), contre un serveur factice : seule d_0000 est
+    # refaite, d_0001 reprise telle quelle de descriptions.json.
+    replies = {VERIFY: '{"faits": [{"fait": "Une femme marche.", "visible": true}]}',
+               WRITE: '{"variantes": ["Une femme marche dans la rue.", "Une femme marche."]}'}
+    fakes = {"chat": lambda llm, cfg, system, content, json_mode=False, temperature=0: (
+                 replies.get(system, "Une femme marche."), None),
+             "ff": lambda *args: None, "as_image": lambda path: {"type": "text", "text": str(path)},
+             "backlit": lambda path: False}
+    real = {name: globals()[name] for name in fakes}
+    segs, shots = {"silences": [[0, 4], [6, 10]], "dialogues": []}, [[0, 10]]
+    wins = [w for s in segs["silences"] for w in windows(s, shots)]
+    profile = {role: {"base_url": "http://127.0.0.1:9/v1", "model": "m"} for role in ("vlm", "writer")}
+    profile["run"] = {"max_images": 4, "parallel": 1, "verify": True}
+    seen = [{"id": f"d_{k:04d}", "window": w, "frames": frame_times(w, 4), "brightened": 0,
+             "raw_description": "Une femme marche.", "zoom": None} for k, w in enumerate(wins)]
+    old = [{**x, "description": "Une femme marche.", "budget_chars": 40, "variants": ["Une femme marche, seule."],
+            "facts": None} for x in seen]
+    with tempfile.TemporaryDirectory() as tmp:
+        out = Path(tmp)
+        (out / "vision.json").write_text(json.dumps({"key": {"vlm": "m", "max_images": 4}, "items": seen, "cast": []}),
+                                         encoding="utf-8")
+        (out / "descriptions.json").write_text(json.dumps(old), encoding="utf-8")
+        globals().update(fakes)
+        try:
+            with contextlib.redirect_stdout(io.StringIO()):
+                new = describe(out / "clip.mp4", segs, shots, profile, 13.0, out, {"d_0000"})
+        finally:
+            globals().update(real)
+        assert new[1] == old[1] and new[0]["facts"] and new[0]["variants"][0] == "Une femme marche dans la rue."
     print("selftest OK")
 
 
