@@ -181,6 +181,15 @@
   const nom = location.protocol.startsWith("http") && location.pathname.match(/^\/t\/([a-z0-9-]+)\//)?.[1];
   const api = nom ? `/api/traitements/${nom}` : null;
   let serveur = false, suivi = false;
+  // Appel au serveur : {ok, donnees}, avec un message lisible s'il ne répond plus (arrêté entre-temps).
+  const appel = async (url, options) => {
+    try {
+      const r = await fetch(url, options);
+      return {ok: r.ok, donnees: await r.json().catch(() => ({detail: `Erreur ${r.status} du serveur.`}))};
+    } catch {
+      return {ok: false, donnees: {detail: "Le serveur ne répond pas : relancez python serveur.py, puis rechargez la page."}};
+    }
+  };
   const suivre = (t) => {
     const p = $("#progression");
     if (t.etat === "en_cours") {
@@ -301,10 +310,13 @@
     $(".regenerer", l.tr).addEventListener("click", async () => {
       if (!serveur) return annonce("Régénérer fonctionne depuis la page web locale : lancez python serveur.py.");
       if (JSON.stringify(corrections()) !== enregistre) return annonce("Enregistrez d'abord vos corrections : la régénération relance le traitement.");
-      const r = await fetch(`${api}/regenerer/${l.r.id}`, {method: "POST"}), t = await r.json();
-      if (!r.ok) return annonce(t.detail);
+      // Une correction écartée ne se rétablit plus : on la remplace seulement après confirmation.
+      if (l.r.id in D.corrections && !confirm(`${l.r.horaire} : la régénération remplace votre correction par une nouvelle description. Continuer ?`))
+        return annonce("Régénération annulée : votre correction est gardée.");
+      const {ok, donnees} = await appel(`${api}/regenerer/${l.r.id}`, {method: "POST"});
+      if (!ok) return annonce(donnees.detail);
       annonce(`${l.r.horaire} : nouvelle description en cours, la page se rechargera à la fin.`);
-      suivre(t);
+      suivre(donnees);
     });
     maj(l);
   }
@@ -333,14 +345,13 @@
   const enregistrer = async () => {
     const c = corrections(), texte = JSON.stringify(c, null, 1) + "\n";
     if (serveur) {  // le serveur écrit corrections.json et relance la voix et le mixage
-      const r = await fetch(`${api}/corrections`, {method: "POST", headers: {"Content-Type": "application/json"},
-                                                   body: JSON.stringify(c)});
-      const t = await r.json();
-      if (!r.ok) return annonce(t.detail);  // refusé (traitement en cours…) : les modifications restent à enregistrer
+      const {ok, donnees} = await appel(`${api}/corrections`, {method: "POST", headers: {"Content-Type": "application/json"},
+                                                               body: JSON.stringify(c)});
+      if (!ok) return annonce(donnees.detail);  // refusé (traitement en cours, serveur arrêté…) : modifications à enregistrer
       enregistre = JSON.stringify(c);
       rafraichir();
       annonce("Corrections enregistrées : la voix et le mixage sont relancés, la page se rechargera à la fin.");
-      return suivre(t);
+      return suivre(donnees);
     }
     let ou = "dans le dossier choisi";
     try {

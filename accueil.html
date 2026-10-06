@@ -93,8 +93,16 @@
     if (telecharger) a.download = "";
     return a;
   };
-  const detail = async (r) => { try { return (await r.json()).detail; } catch { return `Erreur ${r.status}`; } };
-  let minuterie = null;
+  // Appel au serveur : {ok, donnees}, avec un message lisible s'il ne répond plus (arrêté entre-temps).
+  const appel = async (url, options) => {
+    try {
+      const r = await fetch(url, options);
+      return {ok: r.ok, donnees: await r.json().catch(() => ({detail: `Erreur ${r.status} du serveur.`}))};
+    } catch {
+      return {ok: false, donnees: {detail: "Le serveur ne répond pas : relancez python serveur.py, puis rechargez la page."}};
+    }
+  };
+  let minuterie = null, envoi = false;
 
   const ligne = (t) => {
     const tr = document.createElement("tr"), nom = document.createElement("th");
@@ -114,8 +122,8 @@
     if (["echec", "interrompu", "en_attente"].includes(t.etat)) {
       const b = Object.assign(document.createElement("button"), {type: "button", textContent: "Relancer"});
       b.addEventListener("click", async () => {
-        const r = await fetch(`/api/traitements/${t.nom}/relancer`, {method: "POST"});
-        if (!r.ok) dire(await detail(r), true);
+        const {ok, donnees} = await appel(`/api/traitements/${t.nom}/relancer`, {method: "POST"});
+        if (!ok) dire(donnees.detail, true);
         charger();
       });
       boutons.append(b);
@@ -127,7 +135,8 @@
 
   const charger = async () => {
     clearTimeout(minuterie);
-    const liste = await (await fetch("/api/traitements")).json();
+    const {ok, donnees: liste} = await appel("/api/traitements");
+    if (!ok) return dire(liste.detail, true);
     $("#liste").replaceChildren(...liste.map(ligne));
     $("#vide").hidden = liste.length > 0;
     if (liste.some((t) => t.etat === "en_cours")) minuterie = setTimeout(charger, 2000);
@@ -135,9 +144,11 @@
 
   $("#depot").addEventListener("submit", async (e) => {
     e.preventDefault();
+    if (envoi) return;  // double clic : la vidéo ne part qu'une fois
+    envoi = true;
     // Refus demandé avant l'envoi : refusée pendant l'envoi, une grosse vidéo couperait la connexion sans message.
-    const pret = await fetch("/api/pret");
-    if (!pret.ok) return dire(await detail(pret), true);
+    const pret = await appel("/api/pret");
+    if (!pret.ok) { envoi = false; return dire(pret.donnees.detail, true); }
     const f = $("#fichier").files[0];
     const q = new URLSearchParams({fichier: f.name, nom: $("#nom").value, debut: $("#debut").value,
                                    fin: $("#fin").value, voix: $("#voix").value});
@@ -145,6 +156,7 @@
     x.open("POST", `/api/traitements?${q}`);
     x.upload.onprogress = (p) => { if (p.lengthComputable) { $("#envoi").hidden = false; $("#envoi").value = p.loaded / p.total; } };
     x.onload = () => {
+      envoi = false;
       $("#envoi").hidden = true;
       let r;
       try { r = JSON.parse(x.responseText); } catch { r = {detail: `Erreur ${x.status}`}; }
@@ -152,7 +164,7 @@
       else dire(r.detail, true);
       charger();
     };
-    x.onerror = () => { $("#envoi").hidden = true; dire("Envoi interrompu.", true); };
+    x.onerror = () => { envoi = false; $("#envoi").hidden = true; dire("Envoi interrompu.", true); };
     dire("Envoi de la vidéo…");
     x.send(f);
   });
