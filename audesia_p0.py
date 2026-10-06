@@ -344,6 +344,20 @@ def candidates(d, corrections, names, recent, gap, last_text):
     return variants, False
 
 
+def regen_ids(arg, known):
+    """Fenêtres de --regenerer (« d_0003,d_0007 »), toutes connues de descriptions.json ; sinon arrêt clair."""
+    ids = {x.strip() for x in arg.split(",") if x.strip()}
+    unknown = sorted(ids - set(known))
+    if unknown or not ids:
+        sys.exit(f"--regenerer : fenêtre inconnue {', '.join(unknown) or repr(arg)} (voir descriptions.json)")
+    return ids
+
+
+def drop_corrections(fixes, ids):
+    """Corrections sans celles des fenêtres régénérées : le texte relu masquerait sinon la nouvelle description."""
+    return {k: v for k, v in fixes.items() if k not in ids}
+
+
 def duck_envelope(n, sr, spans):
     """Gain de la bande-son : DUCK pendant chaque description, rampes de RAMP s, 1 ailleurs."""
     import numpy as np
@@ -539,30 +553,33 @@ def load_profile(name):
     return profile
 
 
-def chat(llm, cfg, system, content, json_mode=False):
-    """Une requête au serveur d'un rôle, à température 0, avec l'extra_body du profil. Rend le texte et l'usage."""
+def chat(llm, cfg, system, content, json_mode=False, temperature=0):
+    """Une requête au serveur d'un rôle, avec l'extra_body du profil ; à température 0, sauf pour régénérer une
+    description. Rend le texte et l'usage."""
     extra = {"response_format": {"type": "json_object"}} if json_mode else {}
     # extra_body coupe la « réflexion » : sans elle, Gemma 4 sous Ollama réfléchit 2 à 3 min et rend un contenu vide.
     # max_tokens : à température 0, une boucle de répétition irait sinon jusqu'au bout du contexte.
-    r = llm.chat.completions.create(model=cfg["model"], temperature=0, max_tokens=MAX_TOKENS,
+    r = llm.chat.completions.create(model=cfg["model"], temperature=temperature, max_tokens=MAX_TOKENS,
                                     extra_body=cfg.get("extra_body", {}),
                                     messages=[{"role": "system", "content": system}, {"role": "user", "content": content}],
                                     **extra)
     return (r.choices[0].message.content or "").strip(), r.usage
 
 
-def describe(clip, segs, shots, profile, cps, out):
+def describe(clip, segs, shots, profile, cps, out, redo=frozenset()):
     """1. Par fenêtre, en parallèle : description de la suite d'images seule (vlm), puis détails agrandis si un objet
     reste vague. 2. Sur l'ensemble : registre des personnages (vlm). 3. Par fenêtre, dans l'ordre : révision sur les
-    mêmes images avec le registre et les plans voisins, puis 3 variantes calées (writer)."""
+    mêmes images avec le registre et les plans voisins, puis 3 variantes calées (writer). Avec redo (--regenerer),
+    seules ces fenêtres sont relues sur les images, puis révisées et rédigées ; les autres sont reprises telles quelles
+    de descriptions.json."""
     # ponytail: révision et rédaction en série, car chacune reprend la précédente ; le parallèle porte sur les
     # descriptions, les requêtes les plus lourdes (jusqu'à 16 images), et sur plusieurs vidéos à la fois.
     from openai import OpenAI
     clients = {role: OpenAI(base_url=profile[role]["base_url"], api_key="local") for role in ("vlm", "writer")}
     lock = threading.Lock()
 
-    def ask(role, system, content, json_mode=False):
-        text, usage = chat(clients[role], profile[role], system, content, json_mode)
+    def ask(role, system, content, json_mode=False, temperature=0):
+        text, usage = chat(clients[role], profile[role], system, content, json_mode, temperature)
         with lock:  # jetons envoyés et générés : débit du rapport, et preuve que les images comptent bien
             USAGE[role]["requests"] += 1
             USAGE[role]["prompt_tokens"] += getattr(usage, "prompt_tokens", 0) or 0
@@ -583,18 +600,19 @@ def describe(clip, segs, shots, profile, cps, out):
         return [as_image(f) for f in files], [{"type": "text", "text": "Versions éclaircies des images sombres :"},
                                                *bright] if bright else []
 
-    def look(k, w):
+    def look(k, w, temperature=0):
         times = frame_times(w, n_max)
         images, extra = pictures(times)
         # Images seules : en contexte, les répliques (« Cette lame… ») et les descriptions précédentes
         # amorçaient des inventions qui se propageaient d'une fenêtre à l'autre.
-        raw = ask("vlm", DESCRIBE, [{"type": "text", "text": "Décris cette suite d'images."}, *images, *extra])
+        raw = ask("vlm", DESCRIBE, [{"type": "text", "text": "Décris cette suite d'images."}, *images, *extra],
+                  temperature=temperature)
         print(f"  {k + 1}/{len(wins)}  {w[0]:6.1f}–{w[1]:6.1f} s  décrit ({len(images)} images, "
               f"{max(len(extra) - 1, 0)} éclaircies)", flush=True)
         return {"id": f"d_{k:04d}", "window": w, "frames": times, "brightened": max(len(extra) - 1, 0),
                 "raw_description": raw, "images": images, "extra": extra}
 
-    def zoom(x):
+    def zoom(x, temperature=0):
         # Objet nommé vaguement : question directe sur des détails agrandis de l'image centrale, sans la
         # description (elle ancrait la réponse sur « objet sphérique »). Envoyés en vrac dans la révision,
         # ces détails ne suffisaient pas à la faire sortir de « objet ».
@@ -602,17 +620,33 @@ def describe(clip, segs, shots, profile, cps, out):
             return None
         mid = x["frames"][len(x["frames"]) // 2]
         zoomed = [as_image(out / "frames" / f"{mid:08.2f}.jpg"), *[as_image(p) for p in tiles(clip, mid, out / "frames")]]
-        return ask("vlm", ZOOM, [{"type": "text", "text": "Plan et détails agrandis :"}, *zoomed])
+        return ask("vlm", ZOOM, [{"type": "text", "text": "Plan et détails agrandis :"}, *zoomed],
+                   temperature=temperature)
 
     # Vision (descriptions brutes, détails agrandis, registre) gardée dans vision.json : supprimer descriptions.json
     # relance la révision et la rédaction seules, pour comparer des rédacteurs sur les mêmes descriptions brutes.
     cache, key = out / "vision.json", {"vlm": profile["vlm"]["model"], "max_images": n_max}  # autre vision : à refaire
     saved = json.loads(cache.read_text(encoding="utf-8")) if cache.exists() else None
+
+    def save_vision():
+        cache.write_text(json.dumps({"key": key, "items": [{k: v for k, v in x.items() if k not in ("images", "extra")}
+                                                           for x in items], "cast": cast}, ensure_ascii=False, indent=1),
+                         encoding="utf-8")
+
     if saved and saved.get("key") == key and [x["window"] for x in saved["items"]] == wins:
         items, cast = saved["items"], saved["cast"]
-        for x in items:
-            x["images"], x["extra"] = pictures(x["frames"])
+        for k, x in enumerate(items):
+            if x["id"] in redo:  # nouvelle lecture des images : à température 0, ce serait la même, mot pour mot
+                items[k] = look(k, x["window"], temperature=0.7)
+                items[k]["zoom"] = zoom(items[k], temperature=0.7)
+            elif not redo:
+                x["images"], x["extra"] = pictures(x["frames"])
+        if redo:
+            save_vision()
         print(f"  vision reprise de {cache.name} : {len(items)} fenêtres", flush=True)
+    elif redo:
+        sys.exit("--regenerer : vision.json manque ou ne correspond plus à ces fenêtres (autre modèle de vision, autre "
+                 "découpage) : relancer le traitement complet")
     else:
         with ThreadPoolExecutor(max_workers=parallel) as pool:
             items = list(pool.map(look, range(len(wins)), wins))
@@ -623,15 +657,18 @@ def describe(clip, segs, shots, profile, cps, out):
         cast = [c for c in json_list(ask("vlm", CAST, [{"type": "text", "text": "Images, dans l'ordre :"},
                                                       *[x["images"][len(x["images"]) // 2] for x in picks]],
                                          json_mode=True), "personnages") if isinstance(c, dict)]
-        cache.write_text(json.dumps({"key": key, "items": [{k: v for k, v in x.items() if k not in ("images", "extra")}
-                                                           for x in items], "cast": cast}, ensure_ascii=False, indent=1),
-                         encoding="utf-8")
+        save_vision()
     registry = "\n".join(f"- {c.get('designation', '')} : {c.get('traits', '')}" for c in cast) or "aucun"
     (out / "personnages.json").write_text(json.dumps(cast, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"  registre : {[c.get('designation') for c in cast]}", flush=True)
 
+    kept = {d["id"]: d for d in json.loads((out / "descriptions.json").read_text(encoding="utf-8"))} if redo else {}
     said, previous = [], "aucun"
     for k, x in enumerate(items):
+        if redo and x["id"] not in redo:  # régénération : les autres fenêtres restent telles quelles
+            items[k] = kept[x["id"]]
+            previous, said = items[k]["description"], said + items[k]["variants"][:1]
+            continue
         w = x["window"]
         visuals = x.pop("images") + x.pop("extra")  # pas de base64 dans le cache JSON
         note = (f"\nPrécision sur l'objet, d'après des détails agrandis : {x['zoom']}"
@@ -931,6 +968,13 @@ def selftest():
     assert vtt([{"start": 3725.5, "end": 3727.25, "text": "Elle sourit."}]) \
         == "WEBVTT\n\n01:02:05.500 --> 01:02:07.250\nElle sourit.\n\n"
     assert not PAGE.exists() or PAGE.read_text(encoding="utf-8").count(PAGE_DATA) == 1  # emplacement des données
+    assert regen_ids("d_0001, d_0003", ["d_0001", "d_0002", "d_0003"]) == {"d_0001", "d_0003"}
+    try:
+        regen_ids("d_0009", ["d_0001"])
+        raise AssertionError("fenêtre inconnue acceptée")
+    except SystemExit as e:
+        assert "fenêtre inconnue d_0009 (" in str(e), e
+    assert drop_corrections({"d_0001": "Elle court.", "d_0002": ""}, {"d_0001"}) == {"d_0002": ""}  # le texte relu cède
     import tempfile
     with tempfile.TemporaryDirectory() as tmp:                     # image de 1 s, son de 2 s : la vidéo fait foi
         short = Path(tmp) / "court.mp4"
@@ -950,6 +994,8 @@ def main():
     p.add_argument("--cps", type=float, default=13.0, help="débit de la voix en caractères/s (mesuré : 13 pour Vivian)")
     p.add_argument("--tts-model", default="Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice", help="…-0.6B-CustomVoice si la VRAM manque")
     p.add_argument("--voice", default="Vivian", help="Vivian, Serena, Uncle_Fu, Dylan, Eric, Ryan, Aiden, Ono_Anna, Sohee")
+    p.add_argument("--regenerer", metavar="ID[,ID]",
+                   help="refait la description de ces fenêtres (d_0007), lecture des images comprise, puis la voix")
     p.add_argument("--precompute", action="store_true",
                    help="extrait, parole et plans seulement : à calculer sur la 5080, le GX10 n'a plus qu'à décrire")
     p.add_argument("--selftest", action="store_true", help="vérifie la logique de calage, sans GPU")
@@ -962,6 +1008,16 @@ def main():
 
     out = Path(a.out or Path("out") / f"{Path(a.video).stem}_{a.start}-{a.end or 'fin'}".replace(":", "."))
     out.mkdir(parents=True, exist_ok=True)
+    redo = set()
+    if a.regenerer:  # avant les étapes longues : une fenêtre inconnue arrête tout de suite
+        old = out / "descriptions.json"
+        if not old.exists():
+            sys.exit("--regenerer : pas encore de descriptions dans ce dossier ; lancer d'abord le traitement complet")
+        redo = regen_ids(a.regenerer, [d["id"] for d in json.loads(old.read_text(encoding="utf-8"))])
+        fixes = out / "corrections.json"
+        if fixes.exists():  # sinon le texte relu masquerait la nouvelle description
+            fixes.write_text(json.dumps(drop_corrections(json.loads(fixes.read_text(encoding="utf-8-sig")), redo),
+                                        ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     clip, a16, a48 = out / "clip.mp4", out / "audio16k.wav", out / "audio48k.wav"
     if not clip.exists():  # extrait réencodé en H.264/AAC : c'est aussi la version « sans AD »
         length = ["-t", secs(a.end) - secs(a.start)] if a.end else []
@@ -983,7 +1039,10 @@ def main():
     if a.precompute:
         print(f"Précalcul prêt : {out}")
         return
-    descs = step("description", lambda: describe(clip, segs, shots, profile, a.cps, out), out / "descriptions.json")
+    descs = step("description", lambda: describe(clip, segs, shots, profile, a.cps, out, redo),
+                 None if redo else out / "descriptions.json")
+    if redo:  # sans cache donné, step() refait la description mais ne l'écrit pas
+        (out / "descriptions.json").write_text(json.dumps(descs, ensure_ascii=False, indent=1), encoding="utf-8")
     for base_url, model in {(profile[r]["base_url"], profile[r]["model"]) for r in ("vlm", "writer")}:
         unload_ollama(base_url, model)
     placed, dropped, retries = step("voix", lambda: voice(descs, segs, a, out))
