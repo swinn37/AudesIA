@@ -171,8 +171,151 @@ def stop():
         RUN["proc"].terminate()
 
 
+def tracks(path):
+    """Types des pistes du fichier (video, audio…) ; vide si ce n'est pas un média lisible."""
+    r = subprocess.run(["ffprobe", "-v", "error", "-show_entries", "stream=codec_type", "-of", "csv=p=0", str(path)],
+                       capture_output=True, text=True)
+    return set(r.stdout.split())
+
+
+def window_ids(nom):
+    """Fenêtres de la relecture (relecture.json, écrite à la fin du premier traitement)."""
+    p = WEB / nom / "relecture.json"
+    if not p.exists():
+        raise Refus(409, "Pas encore de relecture : attendez la fin du traitement.")
+    return {r["id"] for r in json.loads(p.read_text(encoding="utf-8"))}
+
+
+def valid_corrections(nom, data):
+    """{fenêtre: texte} pour des fenêtres de la relecture, textes nettoyés de leurs espaces ; sinon refus 400."""
+    if not isinstance(data, dict) or not all(isinstance(v, str) for v in data.values()):
+        raise Refus(400, "Corrections illisibles : un objet {fenêtre: texte} est attendu.")
+    inconnues = sorted(set(data) - window_ids(nom))
+    if inconnues:
+        raise Refus(400, f"Fenêtre inconnue : {', '.join(inconnues)}.")
+    return {k: v.strip() for k, v in sorted(data.items())}
+
+
+def make_app():
+    from fastapi import FastAPI, Request
+    from fastapi.responses import FileResponse, JSONResponse, PlainTextResponse
+    from fastapi.staticfiles import StaticFiles
+
+    app = FastAPI(title="Audesia")
+
+    @app.exception_handler(Refus)
+    async def refus(_, e):
+        return JSONResponse({"detail": str(e)}, status_code=e.code)
+
+    @app.middleware("http")
+    async def sans_cache(request, call_next):  # voix et vidéos réécrites sous le même nom à chaque relance
+        response = await call_next(request)
+        response.headers["Cache-Control"] = "no-cache"
+        return response
+
+    def job(nom):
+        if not re.fullmatch(r"[a-z0-9-]+", nom) or not (WEB / nom / "etat.json").exists():
+            raise Refus(404, f"Traitement inconnu : {nom}.")
+        return nom
+
+    @app.get("/")
+    def accueil():
+        return FileResponse(ROOT / "accueil.html")
+
+    @app.get("/api/pret")
+    def pret():
+        ready()  # demandé par la page avant l'envoi : refusée pendant l'envoi, une grosse vidéo couperait la connexion
+        return {"pret": True}
+
+    @app.get("/api/traitements")
+    def liste():
+        return [status(p.parent.name) for p in sorted(WEB.glob("*/etat.json"))]
+
+    @app.post("/api/traitements")
+    async def deposer(request: Request, fichier: str, nom: str = "", debut: str = "0", fin: str = "",
+                      voix: str = "Vivian"):
+        ext = Path(fichier).suffix.lower()
+        debut, fin = debut.strip().replace(",", ".") or "0", fin.strip().replace(",", ".")
+        if ext not in VIDEOS:
+            raise Refus(400, f"Format non pris en charge : {ext or 'sans extension'} (MP4, MKV, MOV, WebM…).")
+        if not TEMPS.fullmatch(debut) or (fin and not TEMPS.fullmatch(fin)):
+            raise Refus(400, "Début ou fin illisible : en secondes (95) ou en minutes:secondes (1:35).")
+        if fin and secs(fin) <= secs(debut):
+            raise Refus(400, "La fin doit venir après le début.")
+        if voix not in VOIX:
+            raise Refus(400, f"Voix inconnue : {voix}.")
+        ready()
+        n = unique(slug(nom or Path(fichier).stem))
+        (WEB / n).mkdir(parents=True)
+        src = WEB / n / f"{n}{ext}"  # la page de relecture prend son titre du nom de la vidéo
+        try:
+            with open(src, "wb") as f:
+                async for chunk in request.stream():
+                    f.write(chunk)
+            if not {"video", "audio"} <= tracks(src):
+                raise Refus(400, "Ce fichier n'est pas une vidéo avec du son : il faut une piste vidéo et une piste audio.")
+        except BaseException:
+            shutil.rmtree(WEB / n, ignore_errors=True)  # envoi refusé ou interrompu : rien de laissé à moitié
+            raise
+        write_etat(n, source=src.name, debut=debut, fin=fin, voix=voix, profil=PROFIL["nom"], en_cours=False, code=None)
+        launch(n)  # refus possible si un traitement a démarré entre-temps : le dossier reste « en attente », à relancer
+        return status(n)
+
+    @app.get("/api/traitements/{nom}")
+    def etat(nom: str):
+        return status(job(nom))
+
+    @app.post("/api/traitements/{nom}/relancer")
+    def relancer(nom: str):
+        launch(job(nom))
+        return status(nom)
+
+    @app.post("/api/traitements/{nom}/corrections")
+    async def corriger(nom: str, request: Request):
+        job(nom)
+        try:
+            data = await request.json()
+        except ValueError:
+            raise Refus(400, "Corrections illisibles : JSON attendu.")
+        fixes = valid_corrections(nom, data)
+        ready()  # refus avant d'écrire : la page garde ses modifications non enregistrées
+        (WEB / nom / "corrections.json").write_text(json.dumps(fixes, ensure_ascii=False, indent=1) + "\n",
+                                                    encoding="utf-8")
+        launch(nom)
+        return status(nom)
+
+    @app.post("/api/traitements/{nom}/regenerer/{fenetre}")
+    def regenerer(nom: str, fenetre: str):
+        if fenetre not in window_ids(job(nom)):
+            raise Refus(400, f"Fenêtre inconnue : {fenetre}.")
+        launch(nom, ["--regenerer", fenetre])
+        return status(nom)
+
+    @app.get("/api/traitements/{nom}/export/{fmt}")
+    def exporter(nom: str, fmt: str):
+        d = WEB / job(nom)
+        sources = {"mkv": "clip_ad.mkv", "mp4": "clip_ad.mp4", "vtt": "ad.vtt", "mp3": "ad_mix.wav", "txt": "ad.json"}
+        if fmt not in sources:
+            raise Refus(404, f"Format inconnu : {fmt}.")
+        if not (d / sources[fmt]).exists():
+            raise Refus(404, "Pas encore d'export : le traitement n'est pas fini.")
+        if fmt == "txt":
+            return PlainTextResponse(script(json.loads((d / "ad.json").read_text(encoding="utf-8"))),
+                                     headers={"Content-Disposition": f'attachment; filename="{nom}.txt"'})
+        p = d / sources[fmt]
+        if fmt == "mp3":  # bande-son atténuée et voix : la piste d'audiodescription que YouTube attend
+            p = d / "ad.mp3"
+            if not p.exists() or p.stat().st_mtime < (d / "ad_mix.wav").stat().st_mtime:
+                subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(d / "ad_mix.wav"), "-b:a", "192k",
+                                str(p)], check=True)
+        return FileResponse(p, filename=f"{nom}{p.suffix}")
+
+    app.mount("/t", StaticFiles(directory=WEB, check_dir=False), name="t")
+    return app
+
+
 def selftest():
-    global WEB
+    global WEB, command, ollama_ok
     base = Path(tempfile.mkdtemp())
     WEB = base / "web"
     WEB.mkdir()
@@ -195,6 +338,58 @@ def selftest():
     write_etat("sintel", source="sintel.mp4", debut="1:35", fin="3:35", voix="Vivian", profil="small")
     assert command("sintel", ["--regenerer", "d_0001"])[-6:] == ["--profile", "small", "--out", str(WEB / "sintel"),
                                                               "--regenerer", "d_0001"]
+    from fastapi.testclient import TestClient
+    command = lambda nom, extra=(): [sys.executable, "-c", "import time; print('[parole] 0.0 s'); time.sleep(1)"]  # noqa: E731
+    ollama_ok = lambda profil: True  # noqa: E731
+    c = TestClient(make_app())
+
+    def attendre(nom):  # fin du traitement lancé (commande factice : 1 s)
+        for _ in range(100):
+            etat = c.get(f"/api/traitements/{nom}").json()["etat"]
+            if etat != "en_cours":
+                return etat
+            time.sleep(0.1)
+
+    video = base / "essai.mp4"
+    subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "lavfi", "-i", "color=black:s=64x64:d=1", "-f", "lavfi",
+                    "-i", "anullsrc=d=1", "-c:v", "libx264", "-c:a", "aac", "-shortest", str(video)], check=True)
+    assert c.get("/api/pret").status_code == 200
+    r = c.post("/api/traitements?fichier=Essai%20VF.mp4&debut=0&voix=Vivian", content=video.read_bytes())
+    assert r.status_code == 200 and r.json()["nom"] == "essai-vf", r.text
+    assert c.get("/api/pret").status_code == 409  # la page ne lance pas l'envoi
+    assert c.post("/api/traitements?fichier=b.mp4", content=video.read_bytes()).status_code == 409  # un à la fois
+    assert attendre("essai-vf") == "fini" and (WEB / "essai-vf" / "essai-vf.mp4").exists()
+    r = c.post("/api/traitements?fichier=faux.mp4", content=b"pas une video")
+    assert r.status_code == 400 and not (WEB / "faux").exists()  # rien de laissé à moitié
+    assert c.post("/api/traitements?fichier=a.txt", content=b"x").status_code == 400
+    assert c.post("/api/traitements?fichier=a.mp4&debut=demain", content=b"x").status_code == 400
+    assert c.post("/api/traitements?fichier=a.mp4&debut=1:35&fin=1:00", content=b"x").status_code == 400
+    r = c.get("/t/essai-vf/essai-vf.mp4", headers={"Range": "bytes=0-9"})
+    assert r.status_code == 206 and len(r.content) == 10  # déplacement dans la vidéo
+    assert r.headers["cache-control"] == "no-cache"  # voix et vidéos refaites sous le même nom à chaque relance
+    (base / "secret.txt").write_text("x")
+    assert c.get("/t/%2e%2e/secret.txt").status_code == 404 and c.get("/api/traitements/%2e%2e").status_code == 404
+    assert c.post("/api/traitements/essai-vf/regenerer/d_0000").status_code == 409  # pas encore de relecture
+    (WEB / "essai-vf" / "relecture.json").write_text('[{"id": "d_0000"}]', encoding="utf-8")
+    assert c.post("/api/traitements/essai-vf/corrections", json={"d_0042": "x"}).status_code == 400
+    assert c.post("/api/traitements/essai-vf/corrections", json={"d_0000": 3}).status_code == 400
+    assert c.post("/api/traitements/essai-vf/regenerer/d_0042").status_code == 400
+    assert c.post("/api/traitements/essai-vf/corrections", json={"d_0000": " Elle court. "}).status_code == 200
+    fixes = WEB / "essai-vf" / "corrections.json"
+    assert json.loads(fixes.read_text(encoding="utf-8")) == {"d_0000": "Elle court."}
+    assert c.post("/api/traitements/essai-vf/corrections", json={"d_0000": "y"}).status_code == 409  # en cours
+    assert json.loads(fixes.read_text(encoding="utf-8")) == {"d_0000": "Elle court."}  # rien d'écrit
+    assert attendre("essai-vf") == "fini"
+    (WEB / "essai-vf" / "ad.json").write_text('[{"start": 1, "end": 2.5, "text": "Elle court."}]', encoding="utf-8")
+    assert c.get("/api/traitements/essai-vf/export/txt").text == "0:01,0 – 0:02,5  Elle court.\n"
+    assert c.get("/api/traitements/essai-vf/export/mkv").status_code == 404  # pas encore d'export
+    assert c.get("/api/traitements/essai-vf/export/zip").status_code == 404
+    launch("essai-vf")
+    stop()  # arrêt du serveur : le traitement en cours s'arrête aussi
+    assert RUN["proc"].wait(5) != 0
+    ollama_ok = lambda profil: False  # noqa: E731
+    assert c.post("/api/traitements/essai-vf/relancer").status_code == 503
+    assert c.get("/api/pret").status_code == 503
     print("selftest OK")
 
 
@@ -206,6 +401,14 @@ def main():
     a = p.parse_args()
     if a.selftest:
         return selftest()
+    load_profile(a.profile)  # un profil invalide arrête tout de suite
+    PROFIL["nom"] = a.profile
+    WEB.mkdir(parents=True, exist_ok=True)
+    mark_interrupted()
+    atexit.register(stop)
+    import uvicorn
+    print(f"Audesia : http://127.0.0.1:{a.port}", flush=True)
+    uvicorn.run(make_app(), host="127.0.0.1", port=a.port, log_level="warning")
 
 
 if __name__ == "__main__":
