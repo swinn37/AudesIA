@@ -142,9 +142,10 @@ Sans navigateur, `relecture.json` donne les mêmes informations, et l'on écrit 
 - exporter : vidéo MP4, MKV à deux pistes, piste audiodécrite en MP3 (téléversable comme piste d'audiodescription sur
   YouTube), descriptions WebVTT, script texte.
 
-Le serveur n'écoute que la machine elle-même et traite une vidéo à la fois, dans `out/web/<nom>/`. Régénérer relit les
-images de la seule fenêtre choisie, avec un peu de hasard, puis refait sa révision, sa rédaction et sa voix ; en ligne
-de commande : `--regenerer d_0007`.
+Lancez-le avec le Python de l'environnement virtuel du pipeline : chaque traitement est lancé avec ce même interpréteur.
+Le serveur n'écoute que la machine elle-même, refuse les requêtes venues d'autres sites, et traite une vidéo à la fois,
+dans `out/web/<nom>/`. Régénérer relit les images de la seule fenêtre choisie, avec un peu de hasard, puis refait sa
+révision, sa rédaction et sa voix ; en ligne de commande : `--regenerer d_0007`.
 
 ### Options utiles
 

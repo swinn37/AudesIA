@@ -121,6 +121,8 @@ audesia/
     └── requirements.txt       # paquets ajoutés, aux versions validées sur la 5080
 ```
 
+Aujourd'hui, le pipeline tient encore en un fichier, à la racine : `audesia_p0.py`, avec `relecture.html` (page de relecture), `serveur.py` et `accueil.html` (page web locale) ; `docs/specs/` garde les spécifications et les plans d'implémentation.
+
 ---
 
 ## 4. Pipeline
