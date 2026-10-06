@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Relecture de l'audiodescription</title>
-<!-- Maquette de la page de relecture (P0). audesia_p0.py en écrit une copie remplie, relecture.html, dans chaque
-     dossier de sortie : elle s'ouvre hors ligne, à côté de clip.mp4, clip_ad.mp4 et tts/. En P1, la même page est
-     servie par FastAPI, qui relance la voix et le mixage et régénère une description. -->
+<!-- Page de relecture. audesia_p0.py en écrit une copie remplie, relecture.html, dans chaque dossier de sortie : elle
+     s'ouvre hors ligne, à côté de clip.mp4, clip_ad.mp4 et tts/. Servie par serveur.py (/t/<nom>/relecture.html), elle
+     envoie les corrections au serveur, qui relance la voix et le mixage, et régénère une description. -->
 <style>
   :root {
     color-scheme: light dark;
@@ -47,6 +47,8 @@
   :focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
   #annonce { min-height: 1.5em; margin: 10px 0; font-weight: 600; }
   #non-enregistre { margin-left: 8px; color: var(--alerte); }
+  #progression { margin: 10px 0; font-weight: 600; color: var(--accent); }
+  #progression:empty { display: none; }
   code, pre, kbd { font-family: ui-monospace, Consolas, monospace; font-size: .85rem; }
   code { background: var(--fond); border: 1px solid var(--ligne); border-radius: 4px; padding: 2px 6px; word-break: break-all; }
   pre { background: var(--fond); border: 1px solid var(--ligne); border-radius: 6px; padding: 8px; white-space: pre-wrap; margin: 8px 0 0; }
@@ -83,6 +85,7 @@
 <header>
   <h1>Relecture de l'audiodescription</h1>
   <p id="resume"></p>
+  <p id="retour" hidden><a href="/">Retour aux traitements</a></p>
 </header>
 <p id="sans-donnees" hidden>Cette page est le modèle : <code>audesia_p0.py</code> en écrit une copie remplie,
   <code>relecture.html</code>, dans chaque dossier de sortie. Ouvrez celle-ci.</p>
@@ -102,9 +105,10 @@
       <button id="enregistrer" class="principal" type="button">Enregistrer les corrections</button>
       <span id="non-enregistre" hidden>Modifications non enregistrées</span>
       <p id="annonce" role="status"></p>
-      <p>Enregistrez <code>corrections.json</code> dans le dossier de cette page, puis relancez la commande
+      <p id="progression" role="status"></p>
+      <p class="hors-serveur">Enregistrez <code>corrections.json</code> dans le dossier de cette page, puis relancez la commande
         ci-dessous : seules les phrases modifiées sont resynthétisées. Rechargez ensuite la page.</p>
-      <p><code id="commande"></code></p>
+      <p class="hors-serveur"><code id="commande"></code></p>
       <details><summary>Contenu de corrections.json (<span id="nombre">0</span>)</summary><pre id="apercu"></pre></details>
     </section>
   </div>
@@ -152,7 +156,7 @@
       <button class="ecouter" type="button">Écouter</button>
       <button class="supprimer" type="button">Supprimer</button>
       <button class="retablir" type="button">Rétablir</button>
-      <button class="regenerer" type="button" aria-disabled="true" title="Avec le serveur local, en P1">Régénérer</button>
+      <button class="regenerer" type="button" aria-disabled="true" title="Depuis la page web locale (python serveur.py)">Régénérer</button>
     </div></td>
   </tr>
 </template>
@@ -172,6 +176,34 @@
   const dit = (h) => h.split(" – ").map((x) => { const [m, s] = x.split(":"); return `${+m ? m + " min " : ""}${s.replace(/^0(?=\d)/, "")} s`; }).join(" à ");
   const annonce = (m) => { $("#annonce").textContent = m; };
   let courante = null;
+  // Servie par serveur.py (/t/<nom>/relecture.html) : les corrections partent au serveur, qui relance la voix et le
+  // mixage, et Régénérer refait une description. Ouverte depuis le disque, rien ne change.
+  const nom = location.protocol.startsWith("http") && location.pathname.match(/^\/t\/([a-z0-9-]+)\//)?.[1];
+  const api = nom ? `/api/traitements/${nom}` : null;
+  let serveur = false, suivi = false;
+  const suivre = (t) => {
+    const p = $("#progression");
+    if (t.etat === "en_cours") {
+      suivi = true;
+      p.textContent = `Traitement en cours : étape ${t.rang} sur ${t.total}, ${t.etape}${t.detail ? `, ${t.detail}` : ""}.`;
+      setTimeout(() => fetch(api).then((r) => r.json()).then(suivre).catch(() => {
+        p.textContent = "Le serveur ne répond plus : relancez python serveur.py, puis rechargez la page.";
+      }), 2000);
+    } else if (t.etat === "fini") {
+      if (suivi) location.reload();  // nouvelles voix, nouveau mixage
+    } else {
+      p.textContent = `Le dernier traitement ne s'est pas terminé (${t.journal.at(-1) ?? "sans message"}) : ` +
+        "relancez-le depuis la page d'accueil.";
+    }
+  };
+  const activer = (t) => {
+    serveur = true;
+    $("#enregistrer").textContent = "Enregistrer et relancer";
+    for (const e of document.querySelectorAll(".hors-serveur")) e.hidden = true;
+    $("#retour").hidden = false;
+    for (const b of document.querySelectorAll(".regenerer")) { b.removeAttribute("aria-disabled"); b.removeAttribute("title"); }
+    suivre(t);
+  };
 
   document.title = `Relecture — ${D.titre}`;
   $("#commande").textContent = D.commande;
@@ -266,12 +298,19 @@
     $(".ecouter", l.tr).addEventListener("click", () => ecouter(l));
     $(".supprimer", l.tr).addEventListener("click", () => changer("", `${l.r.horaire} : sera supprimée à la relance.`));
     $(".retablir", l.tr).addEventListener("click", () => changer(l.initial, `${l.r.horaire} : texte rétabli.`));
-    $(".regenerer", l.tr).addEventListener("click", () =>
-      annonce("Régénérer demandera le serveur local prévu en P1 : pour l'instant, écrivez le texte ou supprimez la description."));
+    $(".regenerer", l.tr).addEventListener("click", async () => {
+      if (!serveur) return annonce("Régénérer fonctionne depuis la page web locale : lancez python serveur.py.");
+      if (JSON.stringify(corrections()) !== enregistre) return annonce("Enregistrez d'abord vos corrections : la régénération relance le traitement.");
+      const r = await fetch(`${api}/regenerer/${l.r.id}`, {method: "POST"}), t = await r.json();
+      if (!r.ok) return annonce(t.detail);
+      annonce(`${l.r.horaire} : nouvelle description en cours, la page se rechargera à la fin.`);
+      suivre(t);
+    });
     maj(l);
   }
   enregistre = JSON.stringify(corrections());
   rafraichir();
+  if (api) fetch(api).then((r) => r.ok ? r.json() : null).then((t) => t && activer(t)).catch(() => {});
 
   // Les navigateurs ne savent pas changer de piste audio : on bascule entre les deux MP4 en gardant la position.
   bascule.addEventListener("click", () => {
@@ -293,6 +332,16 @@
   // Enregistrement direct dans le dossier choisi (Chrome, Edge) ; sinon, téléchargement.
   const enregistrer = async () => {
     const c = corrections(), texte = JSON.stringify(c, null, 1) + "\n";
+    if (serveur) {  // le serveur écrit corrections.json et relance la voix et le mixage
+      const r = await fetch(`${api}/corrections`, {method: "POST", headers: {"Content-Type": "application/json"},
+                                                   body: JSON.stringify(c)});
+      const t = await r.json();
+      if (!r.ok) return annonce(t.detail);  // refusé (traitement en cours…) : les modifications restent à enregistrer
+      enregistre = JSON.stringify(c);
+      rafraichir();
+      annonce("Corrections enregistrées : la voix et le mixage sont relancés, la page se rechargera à la fin.");
+      return suivre(t);
+    }
     let ou = "dans le dossier choisi";
     try {
       const h = await window.showSaveFilePicker({suggestedName: "corrections.json",
