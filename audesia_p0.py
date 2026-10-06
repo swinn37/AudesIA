@@ -628,9 +628,9 @@ def describe(clip, segs, shots, profile, cps, out, redo=frozenset()):
     cache, key = out / "vision.json", {"vlm": profile["vlm"]["model"], "max_images": n_max}  # autre vision : à refaire
     saved = json.loads(cache.read_text(encoding="utf-8")) if cache.exists() else None
 
-    def save_vision():
+    def save_vision(vision):
         cache.write_text(json.dumps({"key": key, "items": [{k: v for k, v in x.items() if k not in ("images", "extra")}
-                                                           for x in items], "cast": cast}, ensure_ascii=False, indent=1),
+                                                           for x in vision], "cast": cast}, ensure_ascii=False, indent=1),
                          encoding="utf-8")
 
     if saved and saved.get("key") == key and [x["window"] for x in saved["items"]] == wins:
@@ -641,8 +641,9 @@ def describe(clip, segs, shots, profile, cps, out, redo=frozenset()):
                 items[k]["zoom"] = zoom(items[k], temperature=0.7)
             elif not redo:
                 x["images"], x["extra"] = pictures(x["frames"])
-        if redo:
-            save_vision()
+        # Régénération : la nouvelle lecture n'est écrite qu'après la rédaction, pour que vision.json et descriptions.json
+        # restent d'accord si celle-ci échoue.
+        vision = [dict(x) for x in items] if redo else None
         print(f"  vision reprise de {cache.name} : {len(items)} fenêtres", flush=True)
     elif redo:
         sys.exit("--regenerer : vision.json manque ou ne correspond plus à ces fenêtres (autre modèle de vision, autre "
@@ -657,7 +658,7 @@ def describe(clip, segs, shots, profile, cps, out, redo=frozenset()):
         cast = [c for c in json_list(ask("vlm", CAST, [{"type": "text", "text": "Images, dans l'ordre :"},
                                                       *[x["images"][len(x["images"]) // 2] for x in picks]],
                                          json_mode=True), "personnages") if isinstance(c, dict)]
-        save_vision()
+        save_vision(items)
     registry = "\n".join(f"- {c.get('designation', '')} : {c.get('traits', '')}" for c in cast) or "aucun"
     (out / "personnages.json").write_text(json.dumps(cast, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"  registre : {[c.get('designation') for c in cast]}", flush=True)
@@ -702,6 +703,8 @@ def describe(clip, segs, shots, profile, cps, out, redo=frozenset()):
         said += variants[:1]
         print(f"  {w[0]:6.1f}–{w[1]:6.1f} s  {'[zoom : ' + x['zoom'][:60] + '] ' if x['zoom'] else ''}{variants[:1]}",
               flush=True)
+    if redo:
+        save_vision(vision)
     return items
 
 
@@ -870,7 +873,8 @@ def review_page(out, a, metrics):
     data = {"titre": Path(a.video).stem, "cps": metrics["measured_chars_per_s"] or a.cps, "accel_max": MAX_SPEEDUP,
             "couverture": metrics["coverage"],
             "commande": f'python audesia_p0.py "{Path(a.video).as_posix()}" --start {a.start}'
-                        + (f" --end {a.end}" if a.end else "") + f' --out "{out.as_posix()}"',
+                        + (f" --end {a.end}" if a.end else "")
+                        + f' --voice {a.voice} --profile {a.profile} --out "{out.as_posix()}"',  # même voix : cache gardé
             "corrections": json.loads(fixes.read_text(encoding="utf-8-sig")) if fixes.exists() else {},
             "lignes": json.loads((out / "relecture.json").read_text(encoding="utf-8"))}
     blob = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")  # un « </script> » dans un texte fermerait la balise
@@ -982,12 +986,16 @@ def selftest():
         ff("-f", "lavfi", "-i", "color=black:s=64x64:d=1", "-f", "lavfi", "-i", "anullsrc=d=2", "-c:v", "libx264", short)
         assert abs(video_length(short) - 1) < 0.1 and video_length(Path(tmp) / "absent.mp4") == float("inf")
     # Régénération avec la vérification fait par fait (profil test-vllm), contre un serveur factice : seule d_0000 est
-    # refaite, d_0001 reprise telle quelle de descriptions.json.
-    replies = {VERIFY: '{"faits": [{"fait": "Une femme marche.", "visible": true}]}',
-               WRITE: '{"variantes": ["Une femme marche dans la rue.", "Une femme marche."]}'}
-    fakes = {"chat": lambda llm, cfg, system, content, json_mode=False, temperature=0: (
-                 replies.get(system, "Une femme marche."), None),
-             "ff": lambda *args: None, "as_image": lambda path: {"type": "text", "text": str(path)},
+    # relue (« court » au lieu de « marche »), d_0001 reprise telle quelle de descriptions.json.
+    panne = {"rédaction": False}
+
+    def fake_chat(llm, cfg, system, content, json_mode=False, temperature=0):
+        if system == WRITE and panne["rédaction"]:
+            raise RuntimeError("rédacteur injoignable")
+        return {DESCRIBE: "Une femme court.", VERIFY: '{"faits": [{"fait": "Une femme court.", "visible": true}]}',
+                WRITE: '{"variantes": ["Une femme court dans la rue.", "Une femme court."]}'}.get(system, "Une femme court."), None
+
+    fakes = {"chat": fake_chat, "ff": lambda *args: None, "as_image": lambda path: {"type": "text", "text": str(path)},
              "backlit": lambda path: False}
     real = {name: globals()[name] for name in fakes}
     segs, shots = {"silences": [[0, 4], [6, 10]], "dialogues": []}, [[0, 10]]
@@ -1003,13 +1011,56 @@ def selftest():
         (out / "vision.json").write_text(json.dumps({"key": {"vlm": "m", "max_images": 4}, "items": seen, "cast": []}),
                                          encoding="utf-8")
         (out / "descriptions.json").write_text(json.dumps(old), encoding="utf-8")
+        vision = lambda: json.loads((out / "vision.json").read_text(encoding="utf-8"))["items"]  # noqa: E731
         globals().update(fakes)
         try:
             with contextlib.redirect_stdout(io.StringIO()):
+                panne["rédaction"] = True
+                try:
+                    describe(out / "clip.mp4", segs, shots, profile, 13.0, out, {"d_0000"})
+                    raise AssertionError("la panne du rédacteur n'a pas arrêté la régénération")
+                except RuntimeError:
+                    pass
+                assert vision() == seen  # rédaction en échec : l'ancienne lecture, d'accord avec descriptions.json
+                panne["rédaction"] = False
                 new = describe(out / "clip.mp4", segs, shots, profile, 13.0, out, {"d_0000"})
         finally:
             globals().update(real)
-        assert new[1] == old[1] and new[0]["facts"] and new[0]["variants"][0] == "Une femme marche dans la rue."
+        assert new[1] == old[1] and new[0]["facts"] and new[0]["variants"][0] == "Une femme court dans la rue."
+        assert vision()[0]["raw_description"] == "Une femme court." and "variants" not in vision()[0]
+        assert vision()[1] == seen[1]
+    # --regenerer : la correction de la fenêtre n'est retirée qu'une fois la description refaite.
+    with tempfile.TemporaryDirectory() as tmp:
+        out = Path(tmp)
+        ff("-f", "lavfi", "-i", "color=black:s=64x64:d=1", "-f", "lavfi", "-i", "anullsrc=d=1", "-c:v", "libx264",
+           out / "clip.mp4")
+        (out / "audio48k.wav").touch()
+        for name, data in (("segments.json", {"speech": [], "dialogues": [], "duration": 1.0}), ("vocal.json", []),
+                           ("shots.json", [[0, 1]]), ("descriptions.json", [{"id": "d_0000"}]),
+                           ("corrections.json", {"d_0000": "Texte relu."})):
+            (out / name).write_text(json.dumps(data), encoding="utf-8")
+
+        def broken(*args):
+            raise RuntimeError("description en échec")
+
+        argv, real_describe = sys.argv, describe
+        sys.argv = ["audesia_p0.py", str(out / "clip.mp4"), "--out", str(out), "--regenerer", "d_0000"]
+        globals()["describe"] = broken
+        try:
+            with contextlib.redirect_stdout(io.StringIO()):
+                main()
+            raise AssertionError("l'échec de la description n'a pas arrêté le pipeline")
+        except RuntimeError:
+            pass
+        finally:
+            sys.argv, globals()["describe"] = argv, real_describe
+        assert json.loads((out / "corrections.json").read_text(encoding="utf-8")) == {"d_0000": "Texte relu."}
+    with tempfile.TemporaryDirectory() as tmp:  # commande de la page hors ligne : la même voix et le même profil
+        out = Path(tmp)
+        (out / "relecture.json").write_text("[]", encoding="utf-8")
+        review_page(out, argparse.Namespace(video="x.mp4", start="0", end=None, voice="Serena", profile="large"),
+                    {"measured_chars_per_s": 12.0, "coverage": 0})
+        assert "--voice Serena --profile large" in (out / "relecture.html").read_text(encoding="utf-8")
     print("selftest OK")
 
 
@@ -1044,10 +1095,6 @@ def main():
         if not old.exists():
             sys.exit("--regenerer : pas encore de descriptions dans ce dossier ; lancer d'abord le traitement complet")
         redo = regen_ids(a.regenerer, [d["id"] for d in json.loads(old.read_text(encoding="utf-8"))])
-        fixes = out / "corrections.json"
-        if fixes.exists():  # sinon le texte relu masquerait la nouvelle description
-            fixes.write_text(json.dumps(drop_corrections(json.loads(fixes.read_text(encoding="utf-8-sig")), redo),
-                                        ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     clip, a16, a48 = out / "clip.mp4", out / "audio16k.wav", out / "audio48k.wav"
     if not clip.exists():  # extrait réencodé en H.264/AAC : c'est aussi la version « sans AD »
         length = ["-t", secs(a.end) - secs(a.start)] if a.end else []
@@ -1073,6 +1120,10 @@ def main():
                  None if redo else out / "descriptions.json")
     if redo:  # sans cache donné, step() refait la description mais ne l'écrit pas
         (out / "descriptions.json").write_text(json.dumps(descs, ensure_ascii=False, indent=1), encoding="utf-8")
+        fixes = out / "corrections.json"
+        if fixes.exists():  # régénération faite : le texte relu masquerait sinon la nouvelle description
+            fixes.write_text(json.dumps(drop_corrections(json.loads(fixes.read_text(encoding="utf-8-sig")), redo),
+                                        ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     for base_url, model in {(profile[r]["base_url"], profile[r]["model"]) for r in ("vlm", "writer")}:
         unload_ollama(base_url, model)
     placed, dropped, retries = step("voix", lambda: voice(descs, segs, a, out))
