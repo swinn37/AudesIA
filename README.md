@@ -60,6 +60,7 @@ Les commandes ci-dessous sont pour Linux. Sous Windows, installez ffmpeg (winget
 sudo apt install ffmpeg sox
 pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu128
 pip install qwen-tts silero-vad scenedetect openai
+pip install fastapi uvicorn httpx  # page web (serveur.py) ; httpx pour son --selftest
 curl -fsSL https://ollama.com/install.sh | sh
 ```
 
