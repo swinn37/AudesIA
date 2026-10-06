@@ -280,11 +280,11 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026, puis le 4 octobre po
   - critères : erreur de retranscription, écoute, vitesse ;
   - Chatterbox 0.1.7 est à éviter : torch 2.6 sans support RTX 50xx, plantage sur les textes ≤ 5 tokens.
 - [ ] Personnages, au-delà du registre fait en P0 (désignations stables, attribution d'une main) : YuNet + SFace sur les prises de vues réelles, marquage visuel (un cercle de couleur par personnage) pour l'animation, personnages secondaires que le registre oublie, noms saisis dans l'éditeur.
-- [ ] Une page web pour tout faire sans ligne de commande, à partir de la maquette `relecture.html` du P0, servie par FastAPI :
-  - dépôt de la vidéo (voix, niveau de détail), puis avancement étape par étape ;
-  - relecture : tableau accessible (horodatage, texte modifiable, place disponible en secondes et en caractères, statut, description factuelle, Écouter, Supprimer, Régénérer) ;
-  - lecteur avec/sans AD qui bascule entre deux MP4, puis export ;
-  - le serveur écrit le même `corrections.json` que la maquette et relance lui-même la voix et le mixage : un seul mécanisme, testé dès le P0 ; il ajoute Régénérer et l'écoute d'un texte modifié.
+- [x] Une page web pour tout faire sans ligne de commande : `python serveur.py` (FastAPI, http://127.0.0.1:8000, local seulement) :
+  - dépôt de la vidéo (début, fin, voix), puis avancement étape par étape ;
+  - relecture : la page `relecture.html` du P0, qui envoie les corrections au serveur (même `corrections.json`, voix et mixage relancés) et régénère une description (`audesia_p0.py --regenerer` : lecture des images de la seule fenêtre choisie, à température 0,7, puis révision, rédaction et voix) ;
+  - export : MP4, MKV à deux pistes, piste audiodécrite en MP3, WebVTT, script texte ;
+  - spécification et plan dans `docs/specs/`.
 - [x] Profils `small`, `large` et `test-vllm` (`configs/*.toml`) : deux rôles, réflexion coupée, requêtes en parallèle, requêtes et jetons par modèle dans `metrics.json`. Serveurs vLLM lancés par `scripts/docker.sh` (image v0.30.0 épinglée par digest).
   - Chemin vLLM testé le 4 octobre sur la 5080 (image v0.30.0, Qwen3.5-2B) :
     - l'image démarre sur sm_120 et hors ligne ;

@@ -116,7 +116,7 @@ Elle réunit :
 - les boutons Écouter, Supprimer et Rétablir ; pendant la saisie, la durée de la voix est estimée, et un texte trop long est signalé avec le nombre de caractères à retirer ;
 - l'accès au clavier et au lecteur d'écran, avec des raccourcis affichés sur la page.
 
-« Enregistrer les corrections » écrit `corrections.json` : directement dans le dossier choisi sous Chrome et Edge, sinon dans les téléchargements. Il reste à relancer la commande affichée sur la page. « Régénérer » attend le serveur local du P1.
+« Enregistrer les corrections » écrit `corrections.json` : directement dans le dossier choisi sous Chrome et Edge, sinon dans les téléchargements. Il reste à relancer la commande affichée sur la page. Depuis la page web (ci-dessous), le serveur relance tout lui-même, et « Régénérer » refait une description.
 
 Sans navigateur, `relecture.json` donne les mêmes informations, et l'on écrit soi-même dans `corrections.json` les seuls textes à changer, avant de relancer la même commande :
 
@@ -131,7 +131,19 @@ Sans navigateur, `relecture.json` donne les mêmes informations, et l'on écrit 
 - Un texte qui ne tient pas dans son silence (accélération de 10 % comprise) n'est pas placé. `relecture.json` indique alors combien de caractères retirer.
 - Seules les phrases modifiées sont synthétisées, car les autres sont en cache. Tout est ensuite remixé. Sur la 5080, une relance prend 10 s sans changement, et environ 1 min 15 s pour quatre phrases corrigées, chargement du modèle de voix compris.
 
-En P1, un serveur local servira la même page, relancera lui-même la voix et le mixage, et régénérera une description à la demande.
+### Page web
+
+`python serveur.py` ouvre une page locale, http://127.0.0.1:8000, pour tout faire sans ligne de commande :
+
+- déposer une vidéo, avec le début et la fin de l'extrait et la voix, puis suivre le traitement étape par étape ;
+- relire : la même page de relecture, où « Enregistrer et relancer » envoie les corrections au serveur, qui relance
+  lui-même la voix et le mixage, et où « Régénérer » refait une description ;
+- exporter : vidéo MP4, MKV à deux pistes, piste audiodécrite en MP3 (téléversable comme piste d'audiodescription sur
+  YouTube), descriptions WebVTT, script texte.
+
+Le serveur n'écoute que la machine elle-même et traite une vidéo à la fois, dans `out/web/<nom>/`. Régénérer relit les
+images de la seule fenêtre choisie, avec un peu de hasard, puis refait sa révision, sa rédaction et sa voix ; en ligne
+de commande : `--regenerer d_0007`.
 
 ### Options utiles
 
@@ -141,6 +153,7 @@ En P1, un serveur local servira la même page, relancera lui-même la voix et le
 | `--profile` | `small` par défaut (RTX 5080 : un modèle servi par Ollama), `large` (GX10 : deux serveurs vLLM) ou chemin d'un fichier TOML ; voir [configs/](configs/) |
 | `--cps` | Débit de la voix en caractères par seconde ; reprendre `measured_chars_per_s` de `metrics.json` |
 | `--voice` | Voix Qwen3-TTS : Vivian (par défaut), Serena, Ryan, Aiden… |
+| `--regenerer` | Refait la description de ces fenêtres (`d_0007,d_0012`), lecture des images comprise, puis la voix et le mixage |
 | `--tts-model` | `Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice` si la mémoire vidéo manque |
 
 Pour comparer des rédacteurs, supprimer `descriptions.json` et relancer : la vision (descriptions brutes, détails agrandis, registre des personnages) est reprise de `vision.json`, et seules la révision, la rédaction, la voix et le mixage sont refaits. Sur *Sprite Fright*, cela ramène le run de 35 à 21 min.
@@ -357,7 +370,7 @@ Ces défauts sont les cibles des modèles plus grands du GX10, où le modèle ti
 
 ## Feuille de route
 
-- **P1** : pipeline modulaire avec reprise, vérification de chaque fait sur l'image, comparatif de voix, une page web pour tout faire sans ligne de commande (dépôt, suivi, relecture, export), à partir de la page de relecture du P0, déploiement Docker ARM64.
+- **P1** : pipeline modulaire avec reprise, vérification de chaque fait sur l'image, comparatif de voix, déploiement Docker ARM64.
 - **P2**, sur le GX10 : mesures de mémoire et de débit, comparaison de modèles de classe 120B.
 - **Ensuite** : tests avec des utilisateurs aveugles et malvoyants, mode étendu où la vidéo se met en pause (WCAG 1.2.7), autres langues.
 
