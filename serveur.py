@@ -33,7 +33,8 @@ VIDEOS = {".mp4", ".mkv", ".mov", ".webm", ".m4v", ".avi"}
 VOIX = ("Vivian", "Serena", "Uncle_Fu", "Dylan", "Eric", "Ryan", "Aiden", "Ono_Anna", "Sohee")
 TEMPS = re.compile(r"\d+(:\d{1,2}){0,2}(\.\d+)?")  # 95, 1:35, 0:01:35.5
 PROFIL = {"nom": "small"}    # choisi au lancement (--profile)
-RUN = {"proc": None}         # le traitement en cours : un seul à la fois
+RUN = {"proc": None, "arret": False}  # le traitement en cours (un seul à la fois), et s'il a été arrêté par stop()
+CTRL_C = (0xC000013A, -2)    # code de sortie d'un Python arrêté par Ctrl+C : Windows, puis ailleurs (SIGINT)
 LOCK = threading.Lock()      # lancement
 FICHIERS = threading.Lock()  # etat.json, lu par les pages pendant que le fil d'attente l'écrit
 
@@ -67,12 +68,14 @@ def progress(journal):
     run = journal.rsplit("\n$ ", 1)[-1]  # launch() fait précéder chaque lancement de « \n$ commande »
     faites = [ETAPES.index(e) for e in re.findall(r"^\[([^\]]+)\] [\d.]+ s$", run, re.M) if e in ETAPES]
     rang = max(faites, default=-1) + 1
-    if rang == len(ETAPES):
-        return {"rang": rang, "total": rang, "etape": "fini", "detail": ""}
+    if rang == len(ETAPES):  # étapes faites : le pipeline écrit encore ses mesures et la page de relecture
+        return {"rang": rang, "total": rang, "etape": "finalisation", "detail": ""}
     vues = re.findall(r"^\s*\d+/(\d+)\s.*décrit", run, re.M)
     ecrites = len(re.findall(r"^\s+[\d.]+–\s*[\d.]+ s\s+\[", run, re.M))
+    regen = re.search(r"--regenerer (\S+)", run.split("\n", 1)[0])  # régénération : seules ces fenêtres sont refaites
+    total = len(regen.group(1).split(",")) if regen else vues[-1] if vues else ""
     detail = ("" if ETAPES[rang] != "description" or not vues
-              else f"rédaction {ecrites} sur {vues[-1]}" if ecrites else f"vision {len(vues)} sur {vues[-1]}")
+              else f"rédaction {ecrites} sur {total}" if ecrites else f"vision {len(vues)} sur {total}")
     return {"rang": rang + 1, "total": len(ETAPES), "etape": ETAPES[rang], "detail": detail}
 
 
@@ -154,13 +157,15 @@ def launch(nom, extra=()):
         log = open(WEB / nom / "journal.log", "a", encoding="utf-8")
         log.write("\n$ " + " ".join(cmd) + "\n")  # en début de ligne, même après une sortie coupée net
         log.flush()
+        RUN["arret"] = False
         RUN["proc"] = proc = subprocess.Popen(cmd, stdout=log, stderr=subprocess.STDOUT, cwd=ROOT)
         write_etat(nom, en_cours=True, code=None, commande=" ".join(cmd))
 
     def wait():
         code = proc.wait()
         log.close()
-        write_etat(nom, en_cours=False, code=code)
+        # Ctrl+C dans la console (il atteint aussi le pipeline) ou arrêt du serveur : interrompu, pas en échec.
+        write_etat(nom, en_cours=False, code="interrompu" if RUN["arret"] or code in CTRL_C else code)
 
     threading.Thread(target=wait, daemon=True).start()
 
@@ -168,6 +173,7 @@ def launch(nom, extra=()):
 def stop():
     """À l'arrêt du serveur, le traitement en cours s'arrête aussi : il continuerait sinon sans suivi."""
     if RUN["proc"] is not None and RUN["proc"].poll() is None:
+        RUN["arret"] = True  # terminate() sort avec le code 1, comme un vrai échec
         RUN["proc"].terminate()
 
 
@@ -208,9 +214,14 @@ def make_app():
         return JSONResponse({"detail": str(e)}, status_code=e.code)
 
     @app.middleware("http")
-    async def sans_cache(request, call_next):  # voix et vidéos réécrites sous le même nom à chaque relance
+    async def garde(request, call_next):
+        # La page locale seulement : pas d'autre nom d'hôte (« DNS rebinding »), pas de POST venu d'un autre site.
+        hote, origine = request.headers.get("host", ""), request.headers.get("origin")
+        if hote.rsplit(":", 1)[0] not in ("127.0.0.1", "localhost") or (
+                request.method == "POST" and origine not in (None, f"http://{hote}")):
+            return JSONResponse({"detail": "Requête refusée : seule la page locale pilote le serveur."}, status_code=403)
         response = await call_next(request)
-        response.headers["Cache-Control"] = "no-cache"
+        response.headers["Cache-Control"] = "no-cache"  # voix et vidéos réécrites sous le même nom à chaque relance
         return response
 
     def job(nom):
@@ -306,8 +317,12 @@ def make_app():
         if fmt == "mp3":  # bande-son atténuée et voix : la piste d'audiodescription que YouTube attend
             p = d / "ad.mp3"
             if not p.exists() or p.stat().st_mtime < (d / "ad_mix.wav").stat().st_mtime:
-                subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(d / "ad_mix.wav"), "-b:a", "192k",
-                                str(p)], check=True)
+                r = subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(d / "ad_mix.wav"), "-b:a", "192k",
+                                    str(p)], capture_output=True, text=True, encoding="utf-8", errors="replace")
+                if r.returncode:
+                    p.unlink(missing_ok=True)  # un fichier partiel passerait ensuite pour à jour
+                    raise Refus(500, "Conversion en MP3 impossible : "
+                                     + (r.stderr.strip().splitlines() or ["ffmpeg a échoué."])[-1])
         return FileResponse(p, filename=f"{nom}{p.suffix}")
 
     app.mount("/t", StaticFiles(directory=WEB, check_dir=False), name="t")
@@ -329,8 +344,12 @@ def selftest():
     journal += "  registre : ['la jeune femme']\n     0.0–   2.2 s  [zoom : un fruit] ['Elle court.']\n"
     assert progress(journal)["detail"] == "rédaction 1 sur 79"
     assert progress(journal + "[description] 12.0 s\n")["etape"] == "voix"
-    assert progress(journal + "[description] 1.0 s\n[voix] 2.0 s\n[mixage] 3.0 s\n")["etape"] == "fini"
+    assert progress(journal + "[description] 1.0 s\n[voix] 2.0 s\n[mixage] 3.0 s\n")["etape"] == "finalisation"
     assert progress(journal + "[voix] 2.0 s\n\n$ relance\n[parole] 0.0 s\n")["etape"] == "voix isolée"  # dernier lancement
+    regen = ("\n$ python audesia_p0.py a.mp4 --regenerer d_0002\n[parole] 0.0 s\n[voix isolée] 0.0 s\n[plans] 0.0 s\n"
+             "  3/3    19.6–  22.4 s  décrit (4 images, 0 éclaircies)\n")
+    assert progress(regen)["detail"] == "vision 1 sur 1"  # une seule fenêtre relue, pas 1 sur 3
+    assert progress(regen + "    19.6–  22.4 s  ['Elle court.']\n")["detail"] == "rédaction 1 sur 1"
     assert script([{"start": 75.5, "end": 79.3, "text": "Elle court."}]) == "1:15,5 – 1:19,3  Elle court.\n"
     (WEB / "sintel" / "etat.json").write_text('{"en_cours": true}', encoding="utf-8")
     mark_interrupted()  # serveur arrêté pendant un traitement
@@ -341,7 +360,11 @@ def selftest():
     from fastapi.testclient import TestClient
     command = lambda nom, extra=(): [sys.executable, "-c", "import time; print('[parole] 0.0 s'); time.sleep(1)"]  # noqa: E731
     ollama_ok = lambda profil: True  # noqa: E731
-    c = TestClient(make_app())
+    c = TestClient(make_app(), base_url="http://127.0.0.1:8000")
+    assert c.post("/api/traitements/x/relancer", headers={"Origin": "https://exemple.net"}).status_code == 403  # autre site
+    assert c.get("/api/traitements", headers={"Host": "exemple.net:8000"}).status_code == 403  # « DNS rebinding »
+    assert c.post("/api/traitements?fichier=a.txt", content=b"x",
+                  headers={"Origin": "http://127.0.0.1:8000"}).status_code == 400  # la page elle-même passe
 
     def attendre(nom):  # fin du traitement lancé (commande factice : 1 s)
         for _ in range(100):
@@ -384,12 +407,20 @@ def selftest():
     assert c.get("/api/traitements/essai-vf/export/txt").text == "0:01,0 – 0:02,5  Elle court.\n"
     assert c.get("/api/traitements/essai-vf/export/mkv").status_code == 404  # pas encore d'export
     assert c.get("/api/traitements/essai-vf/export/zip").status_code == 404
+    (WEB / "essai-vf" / "ad_mix.wav").write_bytes(b"pas du son")
+    r = c.get("/api/traitements/essai-vf/export/mp3")
+    assert r.status_code == 500 and "Conversion en MP3 impossible" in r.json()["detail"], r.text
+    assert not (WEB / "essai-vf" / "ad.mp3").exists()  # pas de fichier partiel qui passerait ensuite pour à jour
     launch("essai-vf")
     stop()  # arrêt du serveur : le traitement en cours s'arrête aussi
-    assert RUN["proc"].wait(5) != 0
+    assert RUN["proc"].wait(5) != 0 and attendre("essai-vf") == "interrompu"
+    command = lambda nom, extra=(): [sys.executable, "-c", "raise KeyboardInterrupt"]  # noqa: E731  Ctrl+C dans la console
+    launch("essai-vf")
+    assert attendre("essai-vf") == "interrompu"
     ollama_ok = lambda profil: False  # noqa: E731
     assert c.post("/api/traitements/essai-vf/relancer").status_code == 503
     assert c.get("/api/pret").status_code == 503
+    shutil.rmtree(base, ignore_errors=True)
     print("selftest OK")
 
 
