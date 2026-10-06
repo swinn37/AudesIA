@@ -67,7 +67,7 @@ Source : règlement du challenge (Conditions Générales Gleam / ASUS). Ces moda
 - Docker avec support GPU sous WSL2 (NVIDIA Container Toolkit). Sur la 5080 (sm_120) : torch compilé pour CUDA 12.8 ou plus ; CTranslate2 en float16 (INT8 désactivé sur sm_120).
 - Cible : GX10 accessible à distance (modalités communiquées par l'organisateur après sélection). Déploiement par `scripts/docker.sh` (fetch, build, start, run) plutôt que par compose : compose ne sait pas vider le cache de pages entre les démarrages des deux serveurs, que le risque de gel impose.
 - Python 3.12. Pas de Node : la page de relecture est en HTML natif.
-- **À demander aux organisateurs dès la sélection :** sortie de `nvidia-smi`, `/etc/dgx-release` et `df -h` ; accès sudo (nécessaire pour vider le cache de pages) ; accès internet pour télécharger les modèles ; durée de l'accès.
+- **À vérifier à l'ouverture de l'accès** (l'organisateur en communiquera les modalités, sans qu'il faille les demander) : sortie de `nvidia-smi`, `/etc/dgx-release` et `df -h` ; accès sudo (nécessaire pour vider le cache de pages) ; accès internet pour télécharger les modèles ; durée de l'accès.
 
 ---
 
@@ -261,7 +261,6 @@ Identifiants vérifiés sur Hugging Face le 3 octobre 2026, puis le 4 octobre po
 
 ### P1 — Après la sélection, avant l'accès au GX10
 
-- [ ] Envoyer aux organisateurs les questions du §2 (pilote, sudo, internet, disque, durée).
 - [ ] Pipeline modulaire (`pipeline/*`) : un fichier JSON par étape, reprise sur erreur (une étape est sautée si sa sortie existe).
 - [ ] Parole = VAD seule, seuil et marge réglés contre la vérité terrain ; même ASR sur les deux profils pour le texte, sans compiler CTranslate2 (Whisper large-v3 via transformers, ou Qwen3-ASR-1.7B).
 - [x] Détecter les sons vocaux brefs (cris, gémissements, souffles) que ni la VAD ni Whisper ne repèrent : énergie de la voix isolée par Hybrid Demucs (torchaudio, pas de nouvelle dépendance). Mesuré sur l'extrait VF de bout en bout :
